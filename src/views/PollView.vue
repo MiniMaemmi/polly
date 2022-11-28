@@ -1,10 +1,18 @@
+<!-- Kopplat till pollvyn som deltagare ser -->
+
 <template>
   <div>
-    {{pollId}}
+    PollID: {{pollId}}
+    <br />
+    Username: {{username}}
+    <br />
+    <br />
+    Question:
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
 
               <span>{{submittedAnswers}}</span>
+
   </div>
 </template>
 
@@ -26,7 +34,8 @@ export default {
         a: []
       },
       pollId: "inactive poll",
-      submittedAnswers: {}
+      submittedAnswers: {},
+      username: ""
     }
   },
   created: function () {

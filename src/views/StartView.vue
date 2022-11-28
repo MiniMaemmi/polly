@@ -3,7 +3,7 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo"><img src="/img/logo.png">Polly polling tool</div>
+    <div class="logo"><img src="/img/logo.png">Quiztime polling tool</div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
@@ -17,7 +17,15 @@
     Write poll id: 
     <input type="text" v-model="id">
   </label>
-  <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  <br />
+  <label>
+    Write your username:
+      <input type="text" v-model="username">
+  </label>
+  <br />
+  <button v-on:click="createUser">
+    <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  </button>
 </template>
 
 <script>
@@ -35,7 +43,8 @@ export default {
       uiLabels: {},
       id: "",
       lang: "en",
-      hideNav: true
+      hideNav: true,
+      username: ""
     }
   },
   created: function () {
@@ -53,6 +62,11 @@ export default {
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
+    },
+    //this one, createUser is added
+    createUser: function() {
+      console.log("Username: ", this.username)
+      socket.emit("createUser", this.username)
     }
   }
 }

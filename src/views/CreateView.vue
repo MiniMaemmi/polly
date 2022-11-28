@@ -21,10 +21,14 @@
     <button v-on:click="addQuestion">
       Add question
     </button>
+    <br />
+    Question number:
     <input type="number" v-model="questionNumber">
+    <br />
     <button v-on:click="runQuestion">
       Run question
     </button>
+    <br />
     {{data}}
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
