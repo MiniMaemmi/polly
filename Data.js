@@ -59,11 +59,11 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
 }
 
 //egenskrivet
-//Data.prototype.createUser = function(username) {
-  //const username = this.polls[username];
-  //console.log("----- i Data.js createUser -------", username)
-  //console.log("Användarnamn: ", username)
-//}
+Data.prototype.createUser = function(pollId, username) {
+  console.log("----- i Data.js createUser -------", username)
+  console.log("Användarnamn: ", username)
+  console.log("pollId ", pollId)
+}
 
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];

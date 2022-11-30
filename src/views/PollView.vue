@@ -12,6 +12,9 @@
               v-on:answer="submitAnswer($event)"/>
 
               <span>{{submittedAnswers}}</span>
+              <br />
+              <br />
+    <!-- <button v-on:click="updateData">Update data button </button>   -->        
 
   </div>
 </template>
@@ -21,6 +24,7 @@
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
+//const appDivId = 'app'
 
 export default {
   name: 'PollView',
@@ -36,21 +40,46 @@ export default {
       pollId: "inactive poll",
       submittedAnswers: {},
       username: ""
+      //username: document.getElementById(appDivId).__vue__,
+
+      //answers = [ {user: this.username, question: this.question.q, answer: this.question.a}]
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
+    this.username = this.$route.params.username
+    console.log("------ in PollView created function ------ ")
+    console.log("username in pollview created func: ", this.username)
     socket.emit('joinPoll', this.pollId)
     socket.on("newQuestion", q =>
       this.question = q
     )
-    socket.on("dataUpdate", answers =>
-      this.submittedAnswers = answers
+    socket.on("dataUpdate", data  =>
+      this.submittedAnswers = data.answers,
+
+      //egenskrivet
+      //this.username = data.username
+      
+    )
+    
+    //egenskrivet
+    socket.on("createdUser", username => 
+      this.username = username
     )
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },
+
+    updateData: function () {
+      console.log("----- i pollView updateData() ------")
+      console.log("username: ", this. username)
+      console.log("pollID: ", this.pollId)
+
+      socket.emit('dataUpdate', {pollId: this.pollId, username: this.username} )
+
+
     }
   }
 }

@@ -15,14 +15,13 @@ function sockets(io, socket, data) {
 
   //this is for user creation
   socket.on('createUser', function(username) {
-    console.log("------- i socket createUser ------ ") 
-    //socket.emit('userCreated', data.createUser(d.pollId, d.lang, d.username))
-   console.log("This is my username:", username);
-   //console.log("This is my data: ", d)
-   //data.createUser(username);
-   //socket.emit('createUser', data.createUser(username));
-   //data.createUser(d.pollId, username);
-   //socket.emit("added user in createUser from sockets.js", data.createUser(d.pollId, username));
+  console.log("------- i socket createUser ------ ") 
+  console.log("This is my username:", username);
+  socket.emit('dataUpdate', {answers: data.getAnswers(data.pollId), username: username});
+  data.createUser(data.pollId, username);
+   
+  socket.emit("createdUser", username);
+
   });
 
   socket.on('addQuestion', function(d) {
