@@ -8,7 +8,7 @@ const routes = [
     component: StartView
   },
     {
-    path: '/poll/:id',
+    path: '/poll/:id/:username',
     name: 'PollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
   },
