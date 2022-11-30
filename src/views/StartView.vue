@@ -12,19 +12,33 @@
     <a href="">About</a>
     <a href="">FAQ</a>
   </ResponsiveNav>
-  <h1>Welcome!</h1>
-  <label>
-    Write poll id: 
-    <input type="text" v-model="id">
-  </label>
+
+  <h1>QuizTime!</h1>
+  <button><router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link></button>
   <br />
-  <label>
-    Write your username:
-      <input type="text" v-model="username">
-      <br />
-      {{username}}
-  </label>
   <br />
+  <!--Knapp som ska leda till desktop 3 på figma-->
+  <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>
+  
+
+
+
+
+  <div id="Sakersomejskavahar">
+    <label>
+      Write poll id: 
+      <input type="text" v-model="id">
+    </label>
+    <br />
+    <label>
+      Write your username:
+        <input type="text" v-model="username">
+        <br />
+        {{username}}
+    </label>
+    <br />
+</div>
+
   <button v-on:click="createUser">
     <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
   </button>
@@ -105,6 +119,10 @@ export default {
     height: 2rem;
     cursor: pointer;
     font-size: 1.5rem;
+  }
+  /*Dessa knappar skall ju förlitas till en annan sida så småningom, vi väntar med de så att vi kan använda dom som test */
+  #Sakersomejskavahar{
+    margin-top:100px;
   }
 
 @media screen and (max-width:50em) {
