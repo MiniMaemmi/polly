@@ -58,6 +58,13 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
   return []
 }
 
+//egenskrivet
+//Data.prototype.createUser = function(username) {
+  //const username = this.polls[username];
+  //console.log("----- i Data.js createUser -------", username)
+  //console.log("Användarnamn: ", username)
+//}
+
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);

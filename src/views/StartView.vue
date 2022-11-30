@@ -21,6 +21,8 @@
   <label>
     Write your username:
       <input type="text" v-model="username">
+      <br />
+      {{username}}
   </label>
   <br />
   <button v-on:click="createUser">
@@ -65,6 +67,7 @@ export default {
     },
     //this one, createUser is added
     createUser: function() {
+      console.log("------- i createUser StartView.vue ------ ") 
       console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
     }
