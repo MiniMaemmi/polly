@@ -15,9 +15,11 @@
             {{username}}
         </label>
         <br />
-            <button v-on:click="createUser">
-            <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
-            </button>
+            <button v-on:click="createUser"><router-link v-bind:to="'/waiting/'">Connect to quizz</router-link></button>
+
+            
+
+
 </div>
 
 

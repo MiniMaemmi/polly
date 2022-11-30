@@ -33,8 +33,12 @@ const routes = [
     name: 'ConnectView',
     component: () => import(/* webpackChunkName: "about" */ '../views/ConnectView.vue')
     // ska leda till pollView så smånignom. Är mellansteget
-  }
-
+  },
+  {
+    path: '/waiting/',
+    name: 'WaitingView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
+  },
 ]
 
 const router = createRouter({

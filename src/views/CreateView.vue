@@ -60,6 +60,9 @@ const socket = io();
 
 export default {
   name: 'CreateView',
+
+
+  
   data: function () {
     return {
       lang: "",
