@@ -68,9 +68,20 @@ export default {
     )
   },
   methods: {
+
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      console.log("------in PollView submitAnswer() -----")
+      //console.log("Question?: ", this.question.q)
+      socket.emit("submitAnswer", {pollId: this.pollId, question: this.question.q, answer: answer, username: this.username})
     },
+
+    //mikaels orginal
+    /*submitAnswer: function (answer) {
+      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },*/
+
+
+
 
     updateData: function () {
       console.log("----- i pollView updateData() ------")

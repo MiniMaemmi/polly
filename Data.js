@@ -5,6 +5,7 @@ const languages = ["en", "se"];
 // Store data in an object to keep the global namespace clean
 function Data() {
   this.polls = {};
+  this.answers_for_statistics = [];
 }
 
 /***********************************************
@@ -65,6 +66,43 @@ Data.prototype.createUser = function(pollId, username) {
   console.log("pollId ", pollId)
 }
 
+//egenmodifierad
+Data.prototype.submitAnswer = function(pollId, question, answer, username) {
+  console.log("--------- Data.js submitAnswer()---------")
+  const poll = this.polls[pollId];
+
+  var data_for_statistics = [{pollId: pollId, question: question, answer: answer, username: username}]
+
+  //this.data_for_statistics.push({pollId: pollId, question: question, answer: answer, username: username});
+  console.log("Added data_for_statistics object: ", data_for_statistics);
+  //this only works for one object at once right now
+
+
+
+  const dataaArrayForStatistics = this.answers_for_statistics.push({pollId, answer, username})
+  console.log("answer submitted for ", pollId, answer, username);
+  
+  /*
+  if (typeof poll !== 'undefined') {
+    let answers = poll.answers[poll.currentQuestion];
+    if (typeof answers !== 'object') {
+      answers = {};
+      answers[answer] = 1;
+      poll.answers.push(answers);
+    }
+    else if (typeof answers[answer] === 'undefined')
+      answers[answer] = 1;
+    else
+      answers[answer] += 1
+    console.log("answers looks like ", answers, typeof answers);
+
+  }*/
+}
+
+
+//mikaels orginal
+
+/*
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
@@ -82,6 +120,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
+*/
 
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];

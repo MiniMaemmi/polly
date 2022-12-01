@@ -13,7 +13,7 @@ function sockets(io, socket, data) {
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang));
   });
 
-  //this is for user creation
+  //this is for user creation egenskrivet
   socket.on('createUser', function(username) {
   console.log("------- i socket createUser ------ ") 
   console.log("This is my username:", username);
@@ -45,10 +45,22 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
 
+
+  //egenskriven
+  socket.on('submitAnswer', function(d) {
+    console.log("-----sockets.js in submitAnswer()-------");
+    console.log("Variables:", d.pollId, d.question, d.answer, d.username);
+    data.submitAnswer(d.pollId, d.question, d.answer, d.username);
+    //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+  });
+
+  //mikaels orginal
+  /*
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
+  */
 
   socket.on('resetAll', () => {
     data = new Data();
