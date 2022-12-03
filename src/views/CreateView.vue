@@ -3,35 +3,29 @@
   </head>
   <body>
     <div class="quizbody">
-      
-        <h1> Create your poll </h1>
         <div class="nameQuizSectionWrapper">  
           <div id="Quizzname">
             <input placeholder="Namn på ditt quiz" type="text" v-model="pollId">
-            <button>Inställningar
-              <img src="settings.png" width="20px">
+            <button>
+              <img src="../../img/settings.png"/>
             </button>
           </div>
       </div>
     
-      
-
-      <div id="questionAnswer">
-        Question number:
+      <div class="questionAnswer">
+        <br />
+        <p> {{uiLabels.questionNumber}} </p>
         <input type="number" v-model="questionNumber">
         <br />
-        {{uiLabels.question}}:
+        <p> {{uiLabels.question}}:</p>
         <input type="text" v-model="question">
         
         <br />      
         
         
-        
-        <div class="ANSWER">
-          Answers:
+        <div class="answer">
+          <p> Answers:</p>
           <br />
-
-
           <!-- mikaels
           <input placeholder="One answer" v-for="(_, i) in answers" 
                  v-model="answers[i]" 
@@ -39,15 +33,14 @@
 
           <br />  
 
-         
         <span v-for="item in items" v-bind:key="'test'+item" >
-          <span v-html="item[0]"></span> 
-          <span v-html="item[1]"></span>
-          <span v-html="item[2]"></span>
+          <span class="answerAlt" v-html="item[0]"></span> 
+          <span class="answerAlt" v-html="item[1]"></span>
+          <span class="answerAlt" v-html="item[2]"></span>
+          <span class="answerAlt" v-html="item[3]"></span>
+          <span class="answerAlt" v-html="item[4]"></span>
+          <span class="answerAlt" v-html="item[5]"></span>
         </span>
-          
-
-
 
           <br />
 
@@ -61,19 +54,18 @@
 
           <br />
 
-
-
-
         </div>
 
       </div>
 
-      <div id="addQuestion">
-      <button v-on:click="addQuestion">
-        Add question
-      </button>
-      <br />
-    </div>
+      <div class="questionAnswer">
+        <div id="addQuestion">
+          <button v-on:click="addQuestion">
+            Add question
+          </button>
+          <br />
+        </div>
+      </div>
       
       <button v-on:click="createPoll">
         Create/Save Quizz
@@ -84,7 +76,11 @@
       </button>
       <br />
       {{data}}
-      <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+      <br />
+      <br />
+      <button> 
+        <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+      </button> 
 
     </div>
   </body>
@@ -111,7 +107,7 @@ export default {
       //answers: ["", ""],
 
             //egenskrivet
-      right_answer: ['<button class="rightAnswer">Right answer</button>', '<input placeholder="One answer"  type="text"/>', '</br>'],
+      right_answer: ['<button class="rightAnswer">✔</button>', '<input placeholder="One answer"  type="text"/>', '</br>'],
 
       items: [],
       questionNumber: 0,
@@ -154,7 +150,8 @@ export default {
 
     //egenskriven
     addAnswer: function () {
-      this.right_answer = ['<button class="rightAnswer">Right answer</button>', '<input placeholder="One answer"  type="text"/>', '</br>'];
+      this.right_answer = ['<div class="rightAnswerAndInput">', '<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>',
+      '</div>', '</br>'];
       this.items.push(this.right_answer);
       //this.answerGroup = ['<input placeholder="One answer">'];
       //this.answers.push(this.answerGroup);
@@ -194,9 +191,7 @@ export default {
 .quizbody {
   width: 50em;
   height: 100%;
-  margin: 0em 0em 20em 20em;
-  border: 4px solid;
-  /* padding: 3em; */
+  margin-left: 20em;
   background: #CBE896;
 
 }
@@ -208,26 +203,40 @@ export default {
 
 }
 
-#questionAnswer{
-  margin:30px;
+.questionAnswer{
+  background: #ECECEC;
 }
 
-.ANSWER{
-  margin:30px;
+.answer{
+  /*margin:30px;*/
+  background: #ECECEC;
+
 }
 #addQuestion{
-  margin:30px;
+  /*margin:30px;*/
 }
 
 .rightAnswer {
-  width: 5em;
-  height: 5em;
-  background: coral;
+  /* width: 5em;
+  height: 5em;*/
+  width: 10%;
+
+}
+
+.answerAlt {
+  background: #ECECEC;
+
+}
+
+p {
+  display:inline;
+  background: #ECECEC;
+  font: 16px Inter;
 }
 
 input[type=text] {
   width: 50%;
-  height: 90%;
+  height: 5em;
   /* padding: 12px 20px;
   margin: 8px 0;*/
   font: Inter 44;
@@ -237,12 +246,28 @@ input[type=text] {
 }
 
 .nameQuizSectionWrapper {
-  background: #ECECEC;
-  height: 5em;
-  margin: 0 auto;
-
+  height: 100%;
+  width: 100%;
 
 }
+
+button {
+  border-radius: 1em;
+  margin: 0px 10px 0px 10px;
+  width: 10em;
+  height: 6em;
+  font: 16px Inter;
+
+  background: #D7D7D7;
+}  
+
+answerAlt {
+  font: 24px Inter;
+
+}
+
+
+
 
 
 
@@ -250,9 +275,10 @@ input[type=text] {
 {
   color:black;
   font: 24px Inter;
+  /* position: relative; */
   background: #ECECEC;
-  position: relative;
-  height: 100%;
+  margin-bottom: 1em;
+
   
 }
 
@@ -260,9 +286,21 @@ input[type=text] {
 {
   color:black;
   font: 24px Inter;
-  height: 100%;
   background: #ECECEC;
   text-align: center;
+  margin: 1em;
+}
+
+#Quizzname > button
+{
+  width: 6em;
+  height: 6em;
+  margin: 1em;
+}
+
+#Quizzname > button > img {
+  background: #D7D7D7;
+  height: 4em;
 }
 
 
