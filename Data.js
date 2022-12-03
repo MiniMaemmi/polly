@@ -71,16 +71,16 @@ Data.prototype.submitAnswer = function(pollId, question, answer, username) {
   console.log("--------- Data.js submitAnswer()---------")
   const poll = this.polls[pollId];
 
-  var data_for_statistics = [{pollId: pollId, question: question, answer: answer, username: username}]
+  console.log("This should be inside data_for_statistics array: ", {pollId: pollId, question: question, answer: answer, username: username})
+  
+  this.answers_for_statistics.push({pollId: pollId, question: question, answer: answer, username: username});
 
-  //this.data_for_statistics.push({pollId: pollId, question: question, answer: answer, username: username});
-  console.log("Added data_for_statistics object: ", data_for_statistics);
-  //this only works for one object at once right now
+  console.log("Data_for_statistics object after added data: ", this.answers_for_statistics);
 
 
 
-  const dataaArrayForStatistics = this.answers_for_statistics.push({pollId, answer, username})
-  console.log("answer submitted for ", pollId, answer, username);
+  //const dataaArrayForStatistics = this.answers_for_statistics.push({pollId, answer, username})
+  //console.log("answer submitted for ", pollId, answer, username);
   
   /*
   if (typeof poll !== 'undefined') {
