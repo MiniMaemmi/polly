@@ -26,21 +26,34 @@
         <div class="answer">
           <p> Answers:</p>
           <br />
-          <!-- mikaels
+
+          <!-- 
+           mikaels
           <input placeholder="One answer" v-for="(_, i) in answers" 
                  v-model="answers[i]" 
-                 v-bind:key="'answer'+i">-->
+                 v-bind:key="'answer'+i"> 
 
           <br />  
 
-        <span v-for="item in items" v-bind:key="'test'+item" >
-          <span class="answerAlt" v-html="item[0]"></span> 
+
+           <input placeholder="My new answer" v-for="(_,i) in answers" v-model="answers[i]" v-bind:key="'answer'+i"> -->
+
+           <div v-for="(_, i) in answers"  :key="i">
+             <input v-model="answers[i]" placeholder="Works now?" type="text"/>
+             <button>mybutton</button> <span>{{ answers[i] }}</span>
+           </div>
+
+        <!--
+        <span v-for="item in items" v-bind:key="'test'+item">
+         <span class="answerAlt" v-html="item[0]"></span> 
           <span class="answerAlt" v-html="item[1]"></span>
           <span class="answerAlt" v-html="item[2]"></span>
-          <span class="answerAlt" v-html="item[3]"></span>
+          
+            <span class="answerAlt" v-html="item[3]"></span>
           <span class="answerAlt" v-html="item[4]"></span>
-          <span class="answerAlt" v-html="item[5]"></span>
-        </span>
+          <span class="answerAlt" v-html="item[5]"></span> 
+        </span>-->
+        
 
           <br />
 
@@ -104,10 +117,10 @@ export default {
 
 
       //mikaels
-      //answers: ["", ""],
+      answers: ["", ""],
 
-            //egenskrivet
-      right_answer: ['<button class="rightAnswer">✔</button>', '<input placeholder="One answer"  type="text"/>', '</br>'],
+      //egenskrivet
+      //right_answer: ['<button class="rightAnswer">✔</button>', '<input v-model="answers[i]" placeholder="One answer" type="text"/>', '</br>'],
 
       items: [],
       questionNumber: 0,
@@ -133,6 +146,7 @@ export default {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
+
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
@@ -149,20 +163,21 @@ export default {
     },
 
     //egenskriven
+    /* 
     addAnswer: function () {
-      this.right_answer = ['<div class="rightAnswerAndInput">', '<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>',
+      //this.right_answer = ['<div class="rightAnswerAndInput">', '<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>',
       '</div>', '</br>'];
+      this.right_answer = ['<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>', '<br />'];
       this.items.push(this.right_answer);
       //this.answerGroup = ['<input placeholder="One answer">'];
       //this.answers.push(this.answerGroup);
-    },
+    },*/
 
 
     //mikaels
-    /*addAnswer: function () {
-
+    addAnswer: function () {
       this.answers.push("");
-    },*/
+    },
 
     //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
     removeAnswer: function(){

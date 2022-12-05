@@ -12,6 +12,9 @@
               v-on:answer="submitAnswer($event)"/>
 
               <span>{{submittedAnswers}}</span>
+
+              Answers:
+              {{question.answers}}
               <br />
               <br />
     <!-- <button v-on:click="updateData">Update data button </button>   -->        

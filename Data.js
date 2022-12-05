@@ -122,6 +122,13 @@ Data.prototype.submitAnswer = function(pollId, answer) {
 }
 */
 
+
+
+
+
+
+
+
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
@@ -133,6 +140,7 @@ Data.prototype.getAnswers = function(pollId) {
   return {}
 }
 module.exports = Data;
+
 
 
 
