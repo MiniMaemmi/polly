@@ -12,9 +12,6 @@
               v-on:answer="submitAnswer($event)"/>
 
               <span>{{submittedAnswers}}</span>
-
-              Answers:
-              {{question.answers}}
               <br />
               <br />
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
@@ -72,6 +69,7 @@ export default {
   },
   methods: {
 
+    //egenskriven
     submitAnswer: function (answer) {
       console.log("------in PollView submitAnswer() -----")
       //console.log("Question?: ", this.question.q)
