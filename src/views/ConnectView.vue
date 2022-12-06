@@ -34,7 +34,9 @@
         </label>
         <br />
 
-        <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>
+        <button><router-link v-bind:to="'//'">Tillbaka Till Framsida</router-link></button>
+
+        
 
             <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->
             
