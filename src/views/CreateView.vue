@@ -5,8 +5,8 @@
   <body>
     <div class="quizbody">
         <div class="nameQuizSectionWrapper">  
-          <div id="Quizzname">
-            <input placeholder="Namn på ditt quiz" type="text" v-model="pollId">
+          <div id="Quizname">
+            <input placeholder="Name of quiz" type="text" v-model="pollId">
             <button>
               <img src="../../img/settings.png"/>
             </button>
@@ -73,11 +73,11 @@
       </div>
       
       <button v-on:click="createPoll">
-        Create/Save Quizz
+        Create/Save Quiz
       </button>
       
       <button v-on:click="runQuestion">
-        Start quizz
+        Start quiz
       </button>
       <br />
       {{data}}
@@ -301,7 +301,7 @@ background-color: #ECECEC;
 }
 
 
-#Quizzname
+#Quizname
 {
   color:black;
   font: 3vw Inter;
@@ -312,7 +312,7 @@ background-color: #ECECEC;
   
 }
 
-#Quizzname > input
+#Quizname > input
 {
   color:black;
   font: 3vw Inter;
@@ -321,14 +321,14 @@ background-color: #ECECEC;
   margin: 3 vh;
 }
 
-#Quizzname > button
+#Quizname > button
 {
   width: 6em;
   height: 6em;
   margin: 1em;
 }
 
-#Quizzname > button > img {
+#Quizname > button > img {
   background: #D7D7D7;
   height: 4vh;
   width: 4vh;
