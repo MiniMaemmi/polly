@@ -35,10 +35,11 @@ const routes = [
     // ska leda till pollView så smånignom. Är mellansteget
   },
   {
-    path: '/waiting/:username',
+    path: '/waiting/:id',
     name: 'WaitingView',
     component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
   },
+  
 ]
 
 const router = createRouter({

@@ -8,7 +8,7 @@
     <h1>Väntrum</h1>
     <h2>Matchen börjar strax</h2>
     <!--Här ska de ju va en wordlcloudsdaw-->
-    {{this.username}}
+    {{username}}
 </div>
 
 
