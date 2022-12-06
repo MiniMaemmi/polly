@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+//På något sätt måste vi kunna ta in språkvalet
 
 const routes = [
   {
+    //path '/'Start/:lang ish borde vara startviewns url tänker
     path: '/',
     name: 'Start',
     component: StartView

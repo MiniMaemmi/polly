@@ -19,15 +19,46 @@
     -->
   <div >
     <h1>QuizTime!</h1>
-    <button><router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link></button>
+  
+     
+    <div>
+              <router-link
+                v-bind:to="'/create/'+lang"
+                custom
+                v-slot="{ navigate }">
+              <button  
+            
+              @click="navigate"
+              role="link"
+               >
+               {{uiLabels.createPoll}}
+          </button>
+              </router-link>
+    </div>
+    
+    
+
+    <div>
+              <router-link
+                v-bind:to="'/connect/'"
+                custom
+                v-slot="{ navigate }">
+              <button  
+            
+              @click="navigate"
+              role="link"
+               >
+            Connect to Quizz
+          </button>
+              </router-link>
+    </div>
+
+
     <br />
     <br />
     <!--Knapp som ska leda till desktop 3 på figma-->
-    <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>
-  
-
-
-
+    <!---
+    <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>-->
 
     <div id="Sakersomejskavahar">
       <label>
@@ -112,7 +143,7 @@ export default {
   
   /*Dessa knappar skall ju förlitas till en annan sida så småningom, vi väntar med de så att vi kan använda dom som test */
   #Sakersomejskavahar{
-    margin-top:100px;
+    margin-top:50px;
   }
   
   
