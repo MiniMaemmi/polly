@@ -1,5 +1,6 @@
 <template>
   <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
   <body>
     <div class="quizbody">
@@ -32,27 +33,21 @@
           <input placeholder="One answer" v-for="(_, i) in answers" 
                  v-model="answers[i]" 
                  v-bind:key="'answer'+i"> 
+          <br />  -->
 
-          <br />  
+           <div class="Answerbox" v-for="(_, i) in answers"  :key="i">
+            <button>✔</button>
+             <input class="answerAlt" v-model="answers[i]" placeholder="Works now?" type="text"/>
 
-
-           <input placeholder="My new answer" v-for="(_,i) in answers" v-model="answers[i]" v-bind:key="'answer'+i"> -->
-
-           <div v-for="(_, i) in answers"  :key="i">
-             <input v-model="answers[i]" placeholder="Works now?" type="text"/>
-             <button>mybutton</button> <span>{{ answers[i] }}</span>
+             <button class="Xbutton" v-on:click="removeAnswer(i)">X</button>
+             <button>
+                <img class="answerSettings" src="../../img/settings.png"/>
+             </button>
+             <br /> 
+             <br />
            </div>
 
-        <!--
-        <span v-for="item in items" v-bind:key="'test'+item">
-         <span class="answerAlt" v-html="item[0]"></span> 
-          <span class="answerAlt" v-html="item[1]"></span>
-          <span class="answerAlt" v-html="item[2]"></span>
-          
-            <span class="answerAlt" v-html="item[3]"></span>
-          <span class="answerAlt" v-html="item[4]"></span>
-          <span class="answerAlt" v-html="item[5]"></span> 
-        </span>-->
+     
         
 
           <br />
@@ -61,9 +56,6 @@
             Add answer alternative
           </button>
 
-          <button v-on:click="removeAnswer">
-            Remove an answer alternative
-          </button>
 
           <br />
 
@@ -140,7 +132,7 @@ export default {
     socket.on("pollCreated", (data) =>
       this.data = data)
 
-    this.items.push(this.right_answer);
+    /*this.items.push(this.right_answer);*/
   },
   methods: {
     createPoll: function () {
@@ -162,16 +154,6 @@ export default {
 
     },
 
-    //egenskriven
-    /* 
-    addAnswer: function () {
-      //this.right_answer = ['<div class="rightAnswerAndInput">', '<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>',
-      '</div>', '</br>'];
-      this.right_answer = ['<button class="rightAnswer">✔</button>', '<input placeholder="One answer" type="text"/>', '<br />'];
-      this.items.push(this.right_answer);
-      //this.answerGroup = ['<input placeholder="One answer">'];
-      //this.answers.push(this.answerGroup);
-    },*/
 
 
     //mikaels
@@ -180,7 +162,19 @@ export default {
     },
 
     //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
-    removeAnswer: function(){
+    removeAnswer: function(i){
+      if (this.answers.length > 1){
+        this.answers.splice(i,1);
+        console.log("jag pop")
+      }
+      else {
+        console.log("nejnej aja baja")
+      }
+    },
+
+
+//Miakel
+ /*removeAnswer: function(){
       if (this.answers.length > 1){
         this.answers.pop("");
         console.log("jag pop")
@@ -188,8 +182,13 @@ export default {
       else {
         console.log("nejnej aja baja")
       }
-
     },
+*/
+
+
+
+
+
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     }
@@ -204,9 +203,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
 .quizbody {
-  width: 50em;
+  width: 50vw;
   height: 100%;
-  margin-left: 20em;
+  margin-left: 25%;
   background: #CBE896;
 
 }
@@ -231,12 +230,7 @@ export default {
   /*margin:30px;*/
 }
 
-.rightAnswer {
-  /* width: 5em;
-  height: 5em;*/
-  width: 10%;
 
-}
 
 .answerAlt {
   background: #ECECEC;
@@ -246,15 +240,15 @@ export default {
 p {
   display:inline;
   background: #ECECEC;
-  font: 16px Inter;
+  font: 2vw Inter;
 }
 
 input[type=text] {
   width: 50%;
-  height: 5em;
+  height: 8vh;
   /* padding: 12px 20px;
   margin: 8px 0;*/
-  font: Inter 44;
+  font: 1.5vw Inter;
   border: 0px;
   /* box-sizing: border-box;*/
   background: white;
@@ -269,30 +263,51 @@ input[type=text] {
 button {
   border-radius: 1em;
   margin: 0px 10px 0px 10px;
-  width: 10em;
-  height: 6em;
-  font: 16px Inter;
+  width: 10vw;
+  height: 60px;
+  max-width: 70px;
+  min-width: 40px; 
+
+
+
+
+  /* padding-bottom: 10%;
+  padding-right: 10%;*/
+  font: 1vw Inter;
+  
 
   background: #D7D7D7;
 }  
 
 answerAlt {
-  font: 24px Inter;
+  font: 2em Inter;
 
+}
+
+.Xbutton{
+width: 30px;
+height: 30px;
+position: absolute;
+margin-left: -3.15%;
+margin-top: 0.25%;
+padding-bottom: 0;
+  padding-right: 0;
 }
 
 
 
-
+.Answerbox{
+background-color: #ECECEC;  
+}
 
 
 #Quizzname
 {
   color:black;
-  font: 24px Inter;
+  font: 3vw Inter;
   /* position: relative; */
   background: #ECECEC;
-  margin-bottom: 1em;
+  margin-bottom: 3vh;
 
   
 }
@@ -300,10 +315,10 @@ answerAlt {
 #Quizzname > input
 {
   color:black;
-  font: 24px Inter;
+  font: 3vw Inter;
   background: #ECECEC;
   text-align: center;
-  margin: 1em;
+  margin: 3 vh;
 }
 
 #Quizzname > button
@@ -315,7 +330,15 @@ answerAlt {
 
 #Quizzname > button > img {
   background: #D7D7D7;
-  height: 4em;
+  height: 4vh;
+  width: 4vh;
+}
+
+.answerSettings {
+  background: #D7D7D7;
+  height: 4vh;
+  width: 4vh;
+
 }
 
 
@@ -335,10 +358,7 @@ answerAlt {
   text-align: center;
 }
 
-h1 {
-  font: 32px Inter;
 
-} 
 
 * {background-color: #CBE896}
 
