@@ -346,7 +346,7 @@ background-color: #ECECEC;
   
 }
 
-<<<<<<< HEAD
+
 #app{
 background-color: #ECECEC;
 
@@ -358,10 +358,9 @@ background-color: #ECECEC;
 
 }
 
-#Quizzname > input
-=======
+
 #Quizname > input
->>>>>>> refs/remotes/origin/main
+ 
 {
   color:black;
   font: 3vw Inter;
@@ -411,7 +410,10 @@ background-color: #ECECEC;
 
 * {background-color: #CBE896}
 
-
+@media screen and (max-width:760px) {
+  body{background-color: black;}
+  
+  }
 
 
 </style>
