@@ -4,18 +4,42 @@
     <div id="nameAndID">
         <label>
         Write poll id: 
-        <input type="text" v-model="id">
+        <input type="text" v-model="id" placeholder="Required">
         </label>
         <br/>
         <br/>
         <label>
         Write your username:
-            <input type="text" v-model="username">
+      
+            <input  type="text" v-model="username"  placeholder="Required">
+            
+          
+            <div>
+              <router-link
+                v-bind:to="'/waiting/'+ id"
+                custom
+                v-slot="{ navigate }">
+            <button :disabled="!username.length||!id.length" 
+            
+              @click="navigate"
+              role="link"
+               >
+            Connect to Quizz
+          </button>
+              </router-link>
+            </div>
+
             <br />
             {{username}}
         </label>
         <br />
-            <button v-on:click="createUser"><router-link v-bind:to="'/waiting/'">Connect to quizz</router-link></button>
+
+        <button><router-link v-bind:to="'//'">Tillbaka Till Framsida</router-link></button>
+
+        
+
+            <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->
+            
 
             
 
@@ -57,6 +81,8 @@ export default {
       username: ""
     }
   },
+
+  
   created: function () {
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -78,8 +104,12 @@ export default {
       console.log("------- i createUser StartView.vue ------ ") 
       console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
+    },
+    isFormFilled: function(){
+      console.log("hej")
     }
   }
+  
 }
 
 </script>

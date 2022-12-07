@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
+//På något sätt måste vi kunna ta in språkvalet
 
 const routes = [
   {
+    //path '/'Start/:lang ish borde vara startviewns url tänker
     path: '/',
     name: 'Start',
     component: StartView
@@ -35,10 +37,11 @@ const routes = [
     // ska leda till pollView så smånignom. Är mellansteget
   },
   {
-    path: '/waiting/:username',
+    path: '/waiting/:id',
     name: 'WaitingView',
     component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
   },
+  
 ]
 
 const router = createRouter({
