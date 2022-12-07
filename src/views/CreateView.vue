@@ -20,7 +20,16 @@
         <br />
         <p> {{uiLabels.question}}:</p>
         <input type="text" v-model="question">
-        
+      
+        <div id="app">
+
+            <input id="fileinput" type="file" @change="onFileChange" />
+            <button v-on:click="removePicture">X</button>
+
+            <div id="preview">
+            <img v-if="url" :src="url" />
+          </div>
+        </div>
         <br />      
         
         
@@ -105,6 +114,7 @@ export default {
       lang: "",
       pollId: "",
       question: "",
+      url: null,
 
 
 
@@ -143,6 +153,11 @@ export default {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
 
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.url = URL.createObjectURL(file);
+    },
+
     //egenskrivet 
 
     addMarkAsRightAnswer: function () {
@@ -170,6 +185,11 @@ export default {
       else {
         console.log("nejnej aja baja")
       }
+    },
+    removePicture: function(){
+      this.url=null;
+
+
     },
 
 
@@ -294,6 +314,20 @@ padding-bottom: 0;
   padding-right: 0;
 }
 
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ECECEC;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 500px;
+  background-color: #ECECEC ;
+}
+
+
 
 
 .Answerbox{
@@ -310,6 +344,17 @@ background-color: #ECECEC;
   margin-bottom: 3vh;
 
   
+}
+
+#app{
+background-color: #ECECEC;
+
+}
+
+#fileinput{
+background-color: #ECECEC;
+
+
 }
 
 #Quizzname > input
