@@ -5,5 +5,7 @@
 	"participatePoll": "Participate in poll",
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
-	"questionNumber": "Question number:"
+	"questionNumber": "Question number:",
+	"addAnswer": "Add answer",
+	"displayJoinPoll": "Join poll"
 }

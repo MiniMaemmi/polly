@@ -3,100 +3,129 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
   <body>
-    <div class="quizbody">
+    <div class="quizbody" v-on:click="createPoll">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
-            <input placeholder="Name of quiz" type="text" v-model="pollId">
+            <input placeholder="Name of quiz" type="text" v-model="quizName">
             <button>
               <img src="../../img/settings.png"/>
             </button>
           </div>
       </div>
-    
-      <div class="questionAnswer">
-        <br />
-        <p> {{uiLabels.questionNumber}} </p>
-        <input type="number" v-model="questionNumber">
-        <br />
-        <p> {{uiLabels.question}}:</p>
-        <input type="text" v-model="question">
-      
-        <div id="app">
 
-            <input id="fileinput" type="file" @change="onFileChange" />
-            <button v-on:click="removePicture">X</button>
+      <div class="addNewQuestionArea" v-for="(_, i) in addNewQuestionArea" :key="i">
+        <div class="questionAnswer">
+          <br />
+          <p> {{uiLabels.questionNumber}} </p>
+          <input type="number" v-model="questionNumber">
+          <br />
+          <p> {{uiLabels.question}}:</p>
+          <input type="text" v-model="question[i]">
+        
+          <div id="app">
 
-            <div id="preview">
-            <img v-if="url" :src="url" />
+              <input id="fileinput" type="file" @change="onFileChange" />
+              <button v-on:click="removePicture">X</button>
+
+              <div id="preview">
+              <img v-if="url" :src="url" />
+            </div>
+          </div>
+          <br />      
+          
+          
+          <div class="answer">
+            <br />
+            <br />
+            <br />
+            <p> Answers:</p>
+            <br />
+
+            <!-- 
+             mikaels
+            <input placeholder="One answer" v-for="(_, i) in answers" 
+                   v-model="answers[i]" 
+                   v-bind:key="'answer'+i"> 
+            <br />  -->
+
+             <div class="Answerbox" v-for="(_, k) in answers"  :key="k">
+              
+
+              <button>✔</button>
+
+
+               <input class="answerAlt" v-model="answers[k]" placeholder="Works now?" type="text"/>
+
+               <button class="Xbutton" v-on:click="removeAnswer(k)">X</button>
+               <button>
+                  <img class="answerSettings" src="../../img/settings.png"/>
+               </button>
+               <br /> 
+               <br />
+             </div>
+            <br />
+            <button v-on:click="addAnswer">
+              {{uiLabels.addAnswer}}
+            </button>
+            <br />
           </div>
         </div>
-        <br />      
-        
-        
-        <div class="answer">
-          <p> Answers:</p>
-          <br />
-
-          <!-- 
-           mikaels
-          <input placeholder="One answer" v-for="(_, i) in answers" 
-                 v-model="answers[i]" 
-                 v-bind:key="'answer'+i"> 
-          <br />  -->
-
-           <div class="Answerbox" v-for="(_, i) in answers"  :key="i">
-            <button>✔</button>
-             <input class="answerAlt" v-model="answers[i]" placeholder="Works now?" type="text"/>
-
-             <button class="Xbutton" v-on:click="removeAnswer(i)">X</button>
-             <button>
-                <img class="answerSettings" src="../../img/settings.png"/>
-             </button>
-             <br /> 
-             <br />
-           </div>
-
-     
-        
-
-          <br />
-
-          <button v-on:click="addAnswer">
-            Add answer alternative
-          </button>
-
-
-          <br />
-
-        </div>
-
-      </div>
-
-      <div class="questionAnswer">
+      </div>  
+    
         <div id="addQuestion">
-          <button v-on:click="addQuestion">
+          <button id="addQuestionButton" v-on:click="addQuestion">
             Add question
           </button>
           <br />
+
+          {{data}}
+          <br />
+
+
+          <button id="addQuestionButton" v-on:click="saveQuestion">
+            Save question
+          </button>
+          <br />
         </div>
-      </div>
-      
+    </div>
+
+    <div class = "endOfQuizBody">
+
+      <!-- 
       <button v-on:click="createPoll">
         Create/Save Quiz
       </button>
-      
-      <button v-on:click="runQuestion">
-        Start quiz
-      </button>
+      -->
       <br />
-      {{data}}
-      <br />
-      <br />
-      <button> 
-        <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
-      </button> 
 
-    </div>
+      <button v-on:click="runQuestion">
+          STARTA & DELA POLL
+        </button>
+        <br />
+
+        <br />
+        <br />
+
+      <button> 
+          <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+        </button>
+    </div> 
+
+
+    <div>
+              <router-link
+                v-bind:to="'/quizleaderStartView/'+lang"
+                custom
+                v-slot="{ navigate }">
+              <button  
+            
+              @click="navigate"
+              role="link"
+               >
+            STARTA QUIZ
+          </button>
+              </router-link>
+    </div>   
   </body>
 </template>
 
@@ -113,25 +142,33 @@ export default {
     return {
       lang: "",
       pollId: "",
-      question: "",
+      question: [],
       url: null,
+      questionNumberCounter: "",
+      quizName: "",
 
+
+      DataQuestionBodyArray: [],
+      questionId: 0,
 
 
       //mikaels
       answers: ["", ""],
 
-      //egenskrivet
-      //right_answer: ['<button class="rightAnswer">✔</button>', '<input v-model="answers[i]" placeholder="One answer" type="text"/>', '</br>'],
+
+      addNewQuestionArea: [""],
 
       items: [],
-      questionNumber: 0,
+      questionNumber: [],
       data: {},
       uiLabels: {}
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    //this.DataQuestionBodyArray = [];
+    this.pollId = (Math.random().toFixed(5)*1000000);
+
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -149,8 +186,31 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
 
+    saveQuestion: function () { //kallades förut addQuestion
+      console.log("In Createview. Saving question")
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+
+    },
+
+    //mikaels
+    /* 
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+    },*/
+
+    addQuestion: function() {
+      this.addNewQuestionArea.push("");
+      //this.questionId = this.DataQuestionBodyArray.length+1;
+      this.questionId = this.DataQuestionBodyArray.length;
+
+      console.log("QuestionID: ", this.questionId)
+      this.DataQuestionBodyArray.push({question: this.question[this.questionId], answers: this.answers, questionId: this.questionId});
+
+      console.log(" addQuestion() DataQuestionBodyArray:", this.DataQuestionBodyArray[this.questionId]);
+
+
+
+
     },
 
     onFileChange(e) {
@@ -174,6 +234,7 @@ export default {
     //mikaels
     addAnswer: function () {
       this.answers.push("");
+      //this.answers[this.questionId].push("");
     },
 
     //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
@@ -193,7 +254,7 @@ export default {
     },
 
 
-//Miakel
+//Mikael
  /*removeAnswer: function(){
       if (this.answers.length > 1){
         this.answers.pop("");
@@ -226,7 +287,17 @@ export default {
   width: 50vw;
   height: 100%;
   margin-left: 25%;
-  background: #CBE896;
+
+}
+
+.addNewQuestionArea {
+  margin: 20px;
+}
+
+
+
+.endOfQuizBody{
+  padding-top: 10px;
 
 }
 
@@ -239,6 +310,8 @@ export default {
 
 .questionAnswer{
   background: #ECECEC;
+  padding-bottom: 5%;
+
 }
 
 .answer{
@@ -289,10 +362,6 @@ button {
   min-width: 40px; 
 
 
-
-
-  /* padding-bottom: 10%;
-  padding-right: 10%;*/
   font: 1vw Inter;
   
 
@@ -344,6 +413,11 @@ background-color: #ECECEC;
   margin-bottom: 3vh;
 
   
+}
+
+#addQuestionButton {
+    margin: 20px;
+
 }
 
 
@@ -412,8 +486,61 @@ background-color: #ECECEC;
 
 @media screen and (max-width:760px) {
   body{background-color: black;}
+
+
+  button {
+    border-radius: 1em;
+    margin: 0px 10px 0px 10px;
+    width: 20vw;
+    height: 60px;
+    max-width: 500px;
+    min-width: 40px; 
+
+
+    font: 1vw Inter;
+    
+
+    background: #D7D7D7;
+  }  
+
+  .quizbody {
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    background: #CBE896;
+  }
+
   
   }
+
+  @media screen and (max-width:450px) {
+    body{background-color: black;}
+
+
+    button {
+      border-radius: 1em;
+      margin: 0px 10px 0px 10px;
+      width: 20vw;
+      height: 60px;
+      max-width: 500px;
+      min-width: 40px; 
+
+
+      font: 1vw Inter;
+      
+
+      background: #D7D7D7;
+    }  
+
+    .quizbody {
+      width: 100%;
+      height: 100%;
+      margin: 0%;
+      background: #CBE896;
+    }
+
+    
+    }
 
 
 </style>

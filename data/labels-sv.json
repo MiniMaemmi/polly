@@ -5,5 +5,7 @@
 	"participatePoll": "Delta i röstning",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
-	"questionNumber": "Fråga nummer: "
+	"questionNumber": "Fråga nummer: ",
+	"addAnswer": "Lägg till svar",
+	"displayJoinPoll": "Join poll"
 }

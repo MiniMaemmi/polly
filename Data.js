@@ -27,14 +27,14 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.answers = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
-    console.log("poll created", pollId, poll);
+    console.log("poll created pollId: ", pollId, poll);
   }
   return this.polls[pollId];
 }
 
 Data.prototype.addQuestion = function(pollId, q) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q);
+  console.log("question added to pollId with questionId: ", pollId, q);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
   }
@@ -49,7 +49,7 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
 
 Data.prototype.getQuestion = function(pollId, qId=null) {
   const poll = this.polls[pollId];
-  console.log("question requested for ", pollId, qId);
+  console.log("question requested for pollId with questionId:", pollId, qId);
   if (typeof poll !== 'undefined') {
     if (qId !== null) {
       poll.currentQuestion = qId;

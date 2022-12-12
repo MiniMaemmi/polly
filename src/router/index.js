@@ -41,6 +41,12 @@ const routes = [
     name: 'WaitingView',
     component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
   },
+
+  {
+    path: '/quizleaderStartView/:lang',
+    name: 'quizleaderStartView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderStartView.vue')
+  },
   
 ]
 
