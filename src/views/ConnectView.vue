@@ -1,49 +1,59 @@
 <template>
 <div>
-    <h1>Anslut till Quizz!</h1>
-    <div id="nameAndID">
+    <h1 style="font-size:50px">Connect to Quiz!</h1>
+    <div>
+      <div id="nameAndID">
+        
         <label>
-        Write poll id: 
-        <input type="text" v-model="id" placeholder="Required">
+        Poll id: 
+        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Required">
         </label>
         <br/>
         <br/>
+
         <label>
-        Write your username:
-      
-            <input  type="text" v-model="username"  placeholder="Required">
-            
-          
+           Username:
+            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Required">
             <div>
-              <router-link
+                <router-link
                 v-bind:to="'/waiting/'+ id"
                 custom
                 v-slot="{ navigate }">
-            <button :disabled="!username.length||!id.length" 
+                <button :disabled="!username.length||!id.length" 
+            
+                @click="navigate"
+                role="link"
+                >
+               Connect to Quizz
+                </button>
+                </router-link>
+            </div>
+
+          </label>
+        <br />
+        
+
+        <br />
+        <div>
+              <router-link
+                v-bind:to="'//'+ id"
+                custom
+                v-slot="{ navigate }">
+                <button  
             
               @click="navigate"
               role="link"
-               >
-            Connect to Quizz
-          </button>
+                >
+              Tillbaka Till Framsida
+              </button>
               </router-link>
-            </div>
-
-            <br />
-            {{username}}
-        </label>
-        <br />
-
-        <button><router-link v-bind:to="'//'">Tillbaka Till Framsida</router-link></button>
+          </div>
+    </div>
 
         
 
             <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->
-            
-
-            
-
-
+          
 </div>
 
 
@@ -118,6 +128,10 @@ export default {
 
 #nameAndID{
     margin:50px;
+    font-size:20px;
+    display:grid;
+    
+
 }
 
 

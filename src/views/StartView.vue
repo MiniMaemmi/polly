@@ -17,73 +17,75 @@
     <a href="">FAQ</a>
   </ResponsiveNav>
     -->
-  <div >
-    <h1>QuizTime!</h1>
-  
-     
+<body>
+  <div>
+    <div id="headertext">
+      <h1 >QuizTime!</h1>
+    </div>
+    
     <div>
-              <router-link
-                v-bind:to="'/create/'+lang"
-                custom
-                v-slot="{ navigate }">
-              <button  
-            
-              @click="navigate"
-              role="link"
-               >
-               {{uiLabels.createPoll}}
-          </button>
-              </router-link>
-    </div>
-    
-    
+      <div>
+                <router-link
+                  v-bind:to="'/create/'+lang"
+                  custom
+                  v-slot="{ navigate }">
+                <button  
+              
+                @click="navigate"
+                role="link"
+                >
+                {{uiLabels.createPoll}}
+            </button>
+                </router-link>
+      </div>
 
-    <div>
-              <router-link
-                v-bind:to="'/connect/'"
-                custom
-                v-slot="{ navigate }">
-              <button  
-            
-              @click="navigate"
-              role="link"
-               >
-            Connect to Quizz
-          </button>
-              </router-link>
-    </div>
-
-
-    <br />
-    <br />
-    <!--Knapp som ska leda till desktop 3 på figma-->
-    <!---
-    <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>-->
-
-    <div id="Sakersomejskavahar">
-      <label>
-        Write poll id: 
-        <input type="text" v-model="id">
-      </label>
+      
       <br />
-      <label>
-        Write your username:
-          <input type="text" v-model="username">
-          <br />
-          {{username}}
-      </label>
-      <br />
-    </div>
+      <div>
+                <router-link
+                  v-bind:to="'/connect/'"
+                  custom
+                  v-slot="{ navigate }">
+                <button  
+              
+                @click="navigate"
+                role="link"
+                >
+              Connect to Quizz
+            </button>
+                </router-link>
+      </div>
 
-    <button v-on:click="createUser">
-      <router-link v-bind:to="'/poll/'+id+'/'+username">{{uiLabels.participatePoll}}</router-link>
-    </button>
+      <!--Knapp som ska leda till desktop 3 på figma-->
+      <!---
+      <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>-->
 
-    <!-- byta spåråk funktion-->
-    <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+      <!--<div id="Sakersomejskavahar">
+        <label>
+          Write poll id: 
+          <input type="text" v-model="id">
+        </label>
+        <br />
+        <label>
+          Write your username:
+            <input type="text" v-model="username">
+            <br />
+            {{username}}
+        </label>
+        <br />
+      </div>
+
+      <button v-on:click="createUser">
+        <router-link v-bind:to="'/poll/'+id+'/'+username">{{uiLabels.participatePoll}}</router-link>
+      </button -->
     
+      <!-- byta spåråk funktion-->
+      <br />
+      <button style="font-size:15px; position:absolute; top:0; right:0; margin:5px;"  v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
 
+    </div>
   </div>
+</body>
 </template>
 
 <script>
@@ -130,20 +132,26 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
   
   
-  .backgroundcolor{
+  
 
-    background-color:#E63462;
-
+  #parentgrid {
+    display:grid;
+      grid-template: 1fr 1fr 1fr 1fr;
+    
+    
   }
 
-  
-  
   /*Dessa knappar skall ju förlitas till en annan sida så småningom, vi väntar med de så att vi kan använda dom som test */
   #Sakersomejskavahar{
     margin-top:50px;
+  }
+  #headertext{
+    font-size:80px;
+    font-size: 4vw
+
   }
   
   
@@ -154,17 +162,12 @@ export default {
   width: 10em;
   height: 6em;
   font: 16px Inter;
+  font-size:20px;
 
   background: #D7D7D7;
 }  
 
 
-
-
-
-
-  
-  
 /*@media screen and (max-width:50em) {
   .logo {
     font-size: 5vw;
@@ -184,5 +187,8 @@ export default {
   =
 */
 
+body{
+  background-color:#CBE896  ;
+}
 
 </style>

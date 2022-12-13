@@ -65,7 +65,7 @@
              </div>
             <br />
             <button v-on:click="addAnswer">
-              {{uiLabels.addAnswer}}
+              <!--{{uiLabels.addAnswer}} -->
             </button>
             <br />
           </div>
