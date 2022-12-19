@@ -40,7 +40,7 @@
                        @click.prevent="markAsCorrect(question.id, answer.id)"
                      >✔️</button>
                     <input type="text" v-model="answer.label">
-                    <button class="Xbutton" v-on:click="removeAnswer(k)">X</button>
+                    <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
                     <button>
                       <img class="answerSettings" src="../../img/settings.png"/>
                     </button>
@@ -188,8 +188,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 0, label: '', correct: false, score:0, feedback:'', answerImage: ''},
                         { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                        { id:2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
                     ],
                 },
               
@@ -252,8 +252,8 @@ export default {
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: 0, label: '', correct: false, score:0, feedback:'', answerImage: ''},
                     { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: 2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
         },
@@ -275,14 +275,32 @@ export default {
         },
 
         //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
-        removeAnswer: function(i){
-          if (this.answerAlternative.length > 1){
-            this.answerAlternative.splice(i,1);
-            console.log("jag pop")
-          }
-          else {
-            console.log("nejnej aja baja")
-          }
+        removeAnswer: function(questionId, answerId){
+
+
+            this.questions.forEach(question => {
+                if (question.id === questionId) {
+
+                    question.answers.forEach(answer => {
+                        if (answer.id === answerId) {
+                          console.log("answerId",answerId)
+                           
+                  
+                           question.answers.splice(answerId-1,1)
+
+
+                           /*if (this.answerAlternative.length > 1){
+                            this.answerAlternative.splice(i,1);
+                            console.log("jag pop")*/
+      
+
+
+
+
+                        }
+                    })
+                  }
+                })
         },
 
         // ID:na måste ändras! Nu är de statiska!!!
@@ -291,15 +309,20 @@ export default {
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: 10, label: '', correct: false, score:0, feedback:'', answerImage: ''}
+                  { id: question.answers.length + 1, label: '', correct: false, score:0, feedback:'', answerImage: ''}
 
                 )
 
               }
           }) 
-        },         
+        },  
+       
+
   
     }
+
+
+
 }
 
 </script>
