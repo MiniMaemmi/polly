@@ -15,7 +15,16 @@
       </div>
 
     <div class="addNewQuestionArea">
+      
         <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
+          
+          <button class="upDownbutton" @click="changeQuestionIndexUp(question.id)">
+                up
+            </button>
+            <button class="upDownButton" @click.prevent="changeQuestionIndexDown(question.id)">
+                down
+            </button>
+
           {{uiLabels.question}}
             <input v-model="question.label" v-bind:key="'question-label'+question">
             <div id="app">
@@ -27,10 +36,10 @@
             </div>
             <br /> 
             <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer">
-              <div class="box2">
+              <!--<div class="box2">
                 <p> "Pop-up" box </p>
                 
-              </div>
+              </div>-->
  
                 <div>
                     <button 
@@ -194,6 +203,9 @@ export default {
                 },
               
             ],
+
+
+            /*till svar?*/
             answers: [
                 {
                     questionId: 1,
@@ -280,13 +292,14 @@ export default {
 
             this.questions.forEach(question => {
                 if (question.id === questionId) {
+                  
 
                     question.answers.forEach(answer => {
                         if (answer.id === answerId) {
-                          console.log("answerId",answerId)
-                           
-                  
-                           question.answers.splice(answerId-1,1)
+                         const index= question.answers.indexOf(answer)
+                          
+                          
+                           question.answers.splice(index,1)
 
 
                            /*if (this.answerAlternative.length > 1){
@@ -316,11 +329,56 @@ export default {
               }
           }) 
         },  
-       
+        changeQuestionIndexUp: function (questionId) {
+                 
 
-  
-    }
+                 var array=this.questions
+                 array.forEach(question => {
+              if (question.id === questionId) { 
+                const index= array.indexOf(question)
+                console.log(this.questions[index])
+                console.log("id+1",this.questions[index-1])
+                /*this.questions.splice(index, 2, this.question, this.questions[index+1]);*/
+                var tmp = this.questions[index];
+                    this.questions[index] = this.questions[index-1];
+                    this.questions[index-1] = tmp;
 
+               }
+             })
+           },
+
+
+        changeQuestionIndexDown: function (questionId){
+                 
+
+                 this.questions.forEach(question => {
+                  
+                  if (question.id === questionId) { 
+                    console.log(questionId)
+                    console.log(".id",question.id)
+
+
+                      const index= this.questions.indexOf(question);
+                      console.log("index",index);
+                      console.log("id+1",index+1);
+                      console.log("här");
+                      var tmp  = this.questions[index];
+                          this.questions[index]=this.questions[index+1];
+                          this.questions[index+1]=tmp;
+
+
+                /*this.questions.splice(index, 2, this.question, this.questions[index+1]);
+                var tmp = this.questions[index];
+                    this.questions[index] = this.questions[index+1];
+                    this.questions[index+1] = tmp;
+
+                 console.log(questionId)
+               */
+               }
+             })
+            },
+         
+}
 
 
 }
@@ -435,6 +493,63 @@ padding-bottom: 0;
   padding-right: 0;
 }
 
+@media screen and (max-width:760px) {
+  body{background-color: black;}
+
+
+  button {
+    border-radius: 1em;
+    margin: 0px 10px 0px 10px;
+    width: 20vw;
+    height: 60px;
+    max-width: 500px;
+    min-width: 40px; 
+
+
+    font: 1vw Inter;
+    
+
+    background: #D7D7D7;
+  }  
+
+  .quizbody {
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    background: #CBE896;
+  }
+
+  
+  }
+
+  @media screen and (max-width:450px) {
+    body{background-color: black;}
+
+
+    button {
+      border-radius: 1em;
+      margin: 0px 10px 0px 10px;
+      width: 20vw;
+      height: 60px;
+      max-width: 500px;
+      min-width: 40px; 
+
+
+      font: 1vw Inter;
+      
+
+      background: #D7D7D7;
+    }  
+
+    .quizbody {
+      width: 100%;
+      height: 100%;
+      margin: 0%;
+      background: #CBE896;
+    }
+
+    
+    }
 
 </style>
 
@@ -704,63 +819,7 @@ background-color: #ECECEC;
 
 * {background-color: #CBE896}
 
-@media screen and (max-width:760px) {
-  body{background-color: black;}
 
-
-  button {
-    border-radius: 1em;
-    margin: 0px 10px 0px 10px;
-    width: 20vw;
-    height: 60px;
-    max-width: 500px;
-    min-width: 40px; 
-
-
-    font: 1vw Inter;
-    
-
-    background: #D7D7D7;
-  }  
-
-  .quizbody {
-    width: 100%;
-    height: 100%;
-    margin: 0%;
-    background: #CBE896;
-  }
-
-  
-  }
-
-  @media screen and (max-width:450px) {
-    body{background-color: black;}
-
-
-    button {
-      border-radius: 1em;
-      margin: 0px 10px 0px 10px;
-      width: 20vw;
-      height: 60px;
-      max-width: 500px;
-      min-width: 40px; 
-
-
-      font: 1vw Inter;
-      
-
-      background: #D7D7D7;
-    }  
-
-    .quizbody {
-      width: 100%;
-      height: 100%;
-      margin: 0%;
-      background: #CBE896;
-    }
-
-    
-    }
 
 
 </style>
