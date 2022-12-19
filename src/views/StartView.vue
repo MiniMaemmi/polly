@@ -188,7 +188,7 @@ export default {
 */
 
 body{
-  background-color:#CBE896  ;
+  background-color:#CBE896 ;
 }
 
 </style>

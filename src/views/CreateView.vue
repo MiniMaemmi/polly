@@ -38,7 +38,7 @@
             <br />
             <br />
             <br />
-            <p> Answers:</p>
+            <p> Answer alternatives:</p>
             <br />
 
             <!-- 
@@ -48,14 +48,9 @@
                    v-bind:key="'answer'+i"> 
             <br />  -->
 
-             <div class="Answerbox" v-for="(_, k) in answers"  :key="k">
-              
-
+             <div class="Answerbox" v-for="(_, k) in answerAlternative[i]"  :key="k">
               <button>✔</button>
-
-
-               <input class="answerAlt" v-model="answers[k]" placeholder="Works now?" type="text"/>
-
+               <input class="answerAlt" v-model="answerAlternative[i][k]" placeholder="Works now?" type="text"/>
                <button class="Xbutton" v-on:click="removeAnswer(k)">X</button>
                <button>
                   <img class="answerSettings" src="../../img/settings.png"/>
@@ -65,7 +60,7 @@
              </div>
             <br />
             <button v-on:click="addAnswer">
-              <!--{{uiLabels.addAnswer}} -->
+              {{uiLabels.addAnswer}}
             </button>
             <br />
           </div>
@@ -153,7 +148,12 @@ export default {
 
 
       //mikaels
-      answers: ["", ""],
+      //answerAlternative: ["", ""],
+
+      answerAlternative: {
+        0: ["", ""],
+        1: ["", ""],
+      },
 
 
       addNewQuestionArea: [""],
@@ -161,7 +161,8 @@ export default {
       items: [],
       questionNumber: [],
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+
     }
   },
   created: function () {
@@ -188,14 +189,14 @@ export default {
 
     saveQuestion: function () { //kallades förut addQuestion
       console.log("In Createview. Saving question")
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answerAlternative } )
 
     },
 
     //mikaels
     /* 
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answerAlternative } )
     },*/
 
     addQuestion: function() {
@@ -204,7 +205,7 @@ export default {
       this.questionId = this.DataQuestionBodyArray.length;
 
       console.log("QuestionID: ", this.questionId)
-      this.DataQuestionBodyArray.push({question: this.question[this.questionId], answers: this.answers, questionId: this.questionId});
+      this.DataQuestionBodyArray.push({question: this.question[this.questionId], answerAlternative: this.answerAlternative[this.questionId], questionId: this.questionId});
 
       console.log(" addQuestion() DataQuestionBodyArray:", this.DataQuestionBodyArray[this.questionId]);
 
@@ -233,14 +234,14 @@ export default {
 
     //mikaels
     addAnswer: function () {
-      this.answers.push("");
-      //this.answers[this.questionId].push("");
+      this.answerAlternative.push("");
+      //this.answerAlternative[this.questionId].push("");
     },
 
     //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
     removeAnswer: function(i){
-      if (this.answers.length > 1){
-        this.answers.splice(i,1);
+      if (this.answerAlternative.length > 1){
+        this.answerAlternative.splice(i,1);
         console.log("jag pop")
       }
       else {
@@ -256,8 +257,8 @@ export default {
 
 //Mikael
  /*removeAnswer: function(){
-      if (this.answers.length > 1){
-        this.answers.pop("");
+      if (this.answerAlternative.length > 1){
+        this.answerAlternative.pop("");
         console.log("jag pop")
       }
       else {
