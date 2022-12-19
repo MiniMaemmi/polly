@@ -3,43 +3,79 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
   <body>
+
     <div class="quizbody" v-on:click="createPoll">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
             <input placeholder="Name of quiz" type="text" v-model="quizName">
             <button>
-              <img src="../../img/settings.png"/>
+              <img class="answerSettings" src="../../img/settings.png"/>
             </button>
           </div>
       </div>
 
+    <div class="addNewQuestionArea">
+        <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
+          {{uiLabels.question}}
+            <input v-model="question.label" v-bind:key="'question-label'+question">
+            <div id="app">
+                <input id="fileinput" type="file" @change="onFileChange" />
+                <button v-on:click="removePicture">X</button>
+                <div id="preview">
+                  <img v-if="url" :src="url" />
+                </div>
+            </div>
+            <br /> 
+            <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer">
+              <div class="box2">
+                <p> "Pop-up" box </p>
+                
+              </div>
+ 
+                <div>
+                    <button 
+                      :class="{
+                          'answerCorrect': answer.correct,
+                      }"
+                       @click.prevent="markAsCorrect(question.id, answer.id)"
+                     >✔️</button>
+                    <input type="text" v-model="answer.label">
+                    <button class="Xbutton" v-on:click="removeAnswer(k)">X</button>
+                    <button>
+                      <img class="answerSettings" src="../../img/settings.png"/>
+                    </button>
+                </div>
+            </div>
+            <button @click.prevent="addAnswer(question.id)">
+              {{uiLabels.addAnswer}}
+            </button>
+        </div>
+    
+        <div>
+            <button @click="addQuestion">
+                Add question
+            </button>
+        </div>
+    
+        <div>
+            {{ data }}
+        </div>
+        <div>
+            <button @click="loadJson">Load</button>
+        </div>
+    
+    </div>
+
+  </div>  
+
+  </body>
+
+   <!-- 
       <div class="addNewQuestionArea" v-for="(_, i) in addNewQuestionArea" :key="i">
         <div class="questionAnswer">
-          <br />
-          <p> {{uiLabels.questionNumber}} </p>
-          <input type="number" v-model="questionNumber">
-          <br />
-          <p> {{uiLabels.question}}:</p>
-          <input type="text" v-model="question[i]">
-        
-          <div id="app">
-
-              <input id="fileinput" type="file" @change="onFileChange" />
-              <button v-on:click="removePicture">X</button>
-
-              <div id="preview">
-              <img v-if="url" :src="url" />
-            </div>
-          </div>
-          <br />      
+  
           
-          
-          <div class="answer">
-            <br />
-            <br />
-            <br />
-            <p> Answer alternatives:</p>
-            <br />
+          -->
 
             <!-- 
              mikaels
@@ -47,6 +83,8 @@
                    v-model="answers[i]" 
                    v-bind:key="'answer'+i"> 
             <br />  -->
+
+            <!--
 
              <div class="Answerbox" v-for="(_, k) in answerAlternative[i]"  :key="k">
               <button>✔</button>
@@ -85,12 +123,18 @@
     </div>
 
     <div class = "endOfQuizBody">
+    -->
 
       <!-- 
       <button v-on:click="createPoll">
         Create/Save Quiz
       </button>
       -->
+
+      <!-- SLUTKOMMENTAR
+
+
+
       <br />
 
       <button v-on:click="runQuestion">
@@ -121,9 +165,257 @@
           </button>
               </router-link>
     </div>   
-  </body>
+  </body>-->
 </template>
 
+<script>
+  import io from 'socket.io-client';
+  const socket = io();
+
+export default {
+    computed: {
+        data() {
+            return JSON.stringify(this.questions)
+        }
+    },
+    data() {
+        return {
+          url: null,
+          uiLabels: {},
+          activeColor: 'green',
+            questions: [
+                {
+                    id: 1,
+                    label: '',
+                    answers: [
+                        { id: 0, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                        { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    ],
+                },
+              
+            ],
+            answers: [
+                {
+                    questionId: 1,
+                    answerId: 1,
+                },
+                {
+                    questionId: 2,
+                    answerId: 4,
+                }
+            ],
+        }
+    },
+    created: function () {
+      this.lang = this.$route.params.lang;
+      //this.DataQuestionBodyArray = [];
+      this.pollId = (Math.random().toFixed(5)*1000000);
+
+      socket.emit("pageLoaded", this.lang);
+      socket.on("init", (labels) => {
+        this.uiLabels = labels
+      })
+      socket.on("dataUpdate", (data) =>
+        this.data = data
+      )
+      socket.on("pollCreated", (data) =>
+        this.data = data)
+
+      /*this.items.push(this.right_answer);*/
+    },
+    methods: {
+
+      createPoll: function () {
+        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      },
+
+        markAsCorrect(questionId, answerId) {
+            this.questions.forEach(question => {
+                if (question.id === questionId) {
+                    question.answers.forEach(answer => {
+                        if (answer.id === answerId) {
+
+                            if (answer.correct) {
+                              answer.correct = false;
+                            } else {
+                              answer.correct = true;
+                            }   
+                        } //else {
+                           //answer.correct = false;
+                        //}
+                    });
+                }
+            })
+        },
+        addQuestion() {
+            this.questions.push({
+                id: this.questions.length + 1,
+                label: '',
+                answers: [
+                    { id: 0, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                ],
+            })
+        },
+        saveQuestionsAsJson() {
+            console.log(JSON.stringify(this.questions));
+        },
+        loadJson() {
+            let data = window.prompt('Paste JSON here');
+            
+            this.questions = JSON.parse(data);
+        },
+        onFileChange(e) {
+          const file = e.target.files[0];
+          this.url = URL.createObjectURL(file);
+        },
+        removePicture: function(){
+          this.url=null;
+
+        },
+
+        //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
+        removeAnswer: function(i){
+          if (this.answerAlternative.length > 1){
+            this.answerAlternative.splice(i,1);
+            console.log("jag pop")
+          }
+          else {
+            console.log("nejnej aja baja")
+          }
+        },
+
+        // ID:na måste ändras! Nu är de statiska!!!
+        addAnswer: function (questionId) {
+
+          this.questions.forEach(question => {
+              if (question.id === questionId) { 
+                question.answers.push(
+                  { id: 10, label: '', correct: false, score:0, feedback:'', answerImage: ''}
+
+                )
+
+              }
+          }) 
+        },         
+  
+    }
+}
+
+</script>
+
+<style>
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
+
+  button {
+  border-radius: 1em;
+  margin: 0px 10px 0px 10px;
+  width: 10vw;
+  height: 60px;
+  max-width: 70px;
+  min-width: 40px; 
+  font: 1vw Inter;
+  background: #D7D7D7;
+}
+
+  .quizbody {
+    width: 50vw;
+    height: 100%;
+    margin-left: 25%;
+  }
+
+  .answerCorrect {
+    background-color: green;
+  }
+
+  .box2 {
+    background: gray;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 120px;
+    top: 120px;
+}
+
+.addNewQuestionArea {
+  margin: 20px;
+}
+
+
+.questionAnswer{
+  background: #ECECEC;
+  padding-bottom: 5%;
+
+}
+
+input[type=text] {
+  width: 50%;
+  height: 8vh;
+  /* padding: 12px 20px;
+  margin: 8px 0;*/
+  font: 1.5vw Inter;
+  border: 0px;
+  /* box-sizing: border-box;*/
+  background: white;
+}
+
+.answerSettings {
+  background: #D7D7D7;
+  height: 4vh;
+  width: 4vh;
+
+}
+
+.nameQuizSectionWrapper {
+  height: 100%;
+  width: 100%;
+
+}
+
+#Quizname
+{
+  color:black;
+  font: 3vw Inter;
+  /* position: relative; */
+  background: #ECECEC;
+  margin-bottom: 3vh;
+
+  
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ECECEC;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 500px;
+  background-color: #ECECEC ;
+}
+
+.answerbox{
+background-color: #ECECEC;  
+}
+
+.Xbutton{
+width: 30px;
+height: 30px;
+position: absolute;
+margin-left: -3.15%;
+margin-top: 0.25%;
+padding-bottom: 0;
+  padding-right: 0;
+}
+
+
+</style>
+
+<!--
 <script>
 import io from 'socket.io-client';
 const socket = io();
@@ -248,11 +540,6 @@ export default {
         console.log("nejnej aja baja")
       }
     },
-    removePicture: function(){
-      this.url=null;
-
-
-    },
 
 
 //Mikael
@@ -282,19 +569,6 @@ export default {
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
-
-.quizbody {
-  width: 50vw;
-  height: 100%;
-  margin-left: 25%;
-
-}
-
-.addNewQuestionArea {
-  margin: 20px;
-}
-
 
 
 .endOfQuizBody{
@@ -309,17 +583,6 @@ export default {
 
 }
 
-.questionAnswer{
-  background: #ECECEC;
-  padding-bottom: 5%;
-
-}
-
-.answer{
-  /*margin:30px;*/
-  background: #ECECEC;
-
-}
 #addQuestion{
   /*margin:30px;*/
 }
@@ -337,37 +600,6 @@ p {
   font: 2vw Inter;
 }
 
-input[type=text] {
-  width: 50%;
-  height: 8vh;
-  /* padding: 12px 20px;
-  margin: 8px 0;*/
-  font: 1.5vw Inter;
-  border: 0px;
-  /* box-sizing: border-box;*/
-  background: white;
-}
-
-.nameQuizSectionWrapper {
-  height: 100%;
-  width: 100%;
-
-}
-
-button {
-  border-radius: 1em;
-  margin: 0px 10px 0px 10px;
-  width: 10vw;
-  height: 60px;
-  max-width: 70px;
-  min-width: 40px; 
-
-
-  font: 1vw Inter;
-  
-
-  background: #D7D7D7;
-}  
 
 answerAlt {
   font: 2em Inter;
@@ -384,37 +616,7 @@ padding-bottom: 0;
   padding-right: 0;
 }
 
-#preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ECECEC;
-}
 
-#preview img {
-  max-width: 100%;
-  max-height: 500px;
-  background-color: #ECECEC ;
-}
-
-
-
-
-.Answerbox{
-background-color: #ECECEC;  
-}
-
-
-#Quizname
-{
-  color:black;
-  font: 3vw Inter;
-  /* position: relative; */
-  background: #ECECEC;
-  margin-bottom: 3vh;
-
-  
-}
 
 #addQuestionButton {
     margin: 20px;
@@ -457,12 +659,6 @@ background-color: #ECECEC;
   width: 4vh;
 }
 
-.answerSettings {
-  background: #D7D7D7;
-  height: 4vh;
-  width: 4vh;
-
-}
 
 
 ::-webkit-input-placeholder-shown /* Chrome/Opera/Safari */
@@ -545,3 +741,4 @@ background-color: #ECECEC;
 
 
 </style>
+-->

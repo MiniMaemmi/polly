@@ -3,9 +3,9 @@
 	"invite": "Bjud in deltagare med den här länken:",
 	"createPoll": "Skapa röstning",
 	"participatePoll": "Delta i röstning",
-	"question": "Fråga",
+	"question": "Fråga:",
 	"changeLanguage": "Change to English",
-	"questionNumber": "Fråga nummer: ",
 	"addAnswer": "Lägg till svar",
-	"displayJoinPoll": "Join poll"
+	"displayJoinPoll": "Join poll",
+}
 }
