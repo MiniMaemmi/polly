@@ -4,7 +4,7 @@
   </head>
   <body>
 
-    <div class="quizbody" v-on:click="createPoll">
+    <div class="quizbody">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
             <input placeholder="Name of quiz" type="text" v-model="quizName">
@@ -19,10 +19,10 @@
         <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
           
           <button class="upDownbutton" @click="changeQuestionIndexUp(question.id)">
-                up
+               <img src="../../img/Up.png">
             </button>
-            <button class="upDownButton" @click.prevent="changeQuestionIndexDown(question.id)">
-                down
+            <button class="upDownButton" @click="changeQuestionIndexDown(question.id)">
+                <img src="../../img/down.png">
             </button>
 
           {{uiLabels.question}}
@@ -69,6 +69,15 @@
         <div>
             {{ data }}
         </div>
+          <button @click="saveQuiz">
+                Start Quiz
+            </button>
+
+<div>
+            <button @click="saveQuestionsAsJson">Save Quiz as Json file</button>
+        </div>
+
+              
         <div>
             <button @click="loadJson">Load</button>
         </div>
@@ -189,6 +198,8 @@ export default {
     },
     data() {
         return {
+          quizName: "",
+          iterator: 2,
           url: null,
           uiLabels: {},
           activeColor: 'green',
@@ -197,8 +208,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                        { id:2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                        { id: 0, label: '', correct: false, score:2, feedback:'du är fel', answerImage: ''},
+                        { id:1, label: '', correct: false, score:4, feedback:'rätt som en plätt', answerImage: ''},
                     ],
                 },
               
@@ -210,6 +221,7 @@ export default {
                 {
                     questionId: 1,
                     answerId: 1,
+
                 },
                 {
                     questionId: 2,
@@ -218,6 +230,8 @@ export default {
             ],
         }
     },
+
+
     created: function () {
       this.lang = this.$route.params.lang;
       //this.DataQuestionBodyArray = [];
@@ -237,14 +251,17 @@ export default {
     },
     methods: {
 
+      
+
+
       createPoll: function () {
-        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang})
       },
 
         markAsCorrect(questionId, answerId) {
             this.questions.forEach(question => {
                 if (question.id === questionId) {
-                    question.answers.forEach(answer => {
+                    this.question.answers.forEach(answer => {
                         if (answer.id === answerId) {
 
                             if (answer.correct) {
@@ -259,19 +276,54 @@ export default {
                 }
             })
         },
+
+        newQuestion: function () {
+
+         this.questions.forEach(question => {
+              var answerLabels=[]
+              console.log(question.answers.label);
+              question.answers.forEach(answer => {
+                  answerLabels.push(answer.label);
+
+              })
+                
+socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLabels } )
+                
+
+            
+          
+      })
+      
+    },
+
+
+
         addQuestion() {
             this.questions.push({
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                    { id: 2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
         },
         saveQuestionsAsJson() {
-            console.log(JSON.stringify(this.questions));
-        },
+          var filename=this.quizName;
+            var jsonData=JSON.stringify(this.questions);
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JsonData));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+    },
+
+
         loadJson() {
             let data = window.prompt('Paste JSON here');
             
@@ -301,15 +353,6 @@ export default {
                           
                            question.answers.splice(index,1)
 
-
-                           /*if (this.answerAlternative.length > 1){
-                            this.answerAlternative.splice(i,1);
-                            console.log("jag pop")*/
-      
-
-
-
-
                         }
                     })
                   }
@@ -322,7 +365,7 @@ export default {
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: question.answers.length + 1, label: '', correct: false, score:0, feedback:'', answerImage: ''}
+                  { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
 
                 )
 
@@ -349,34 +392,53 @@ export default {
 
 
         changeQuestionIndexDown: function (questionId){
-                 
+                 var array=this.questions
 
-                 this.questions.forEach(question => {
+                 array.forEach(question => {
                   
                   if (question.id === questionId) { 
-                    console.log(questionId)
-                    console.log(".id",question.id)
+                  console.log("question",question)
+                  
 
 
-                      const index= this.questions.indexOf(question);
-                      console.log("index",index);
-                      console.log("id+1",index+1);
-                      console.log("här");
-                      var tmp  = this.questions[index];
-                          this.questions[index]=this.questions[index+1];
-                          this.questions[index+1]=tmp;
+                       const index= this.questions.indexOf(question);
+                        
+                        
+                      /* git checkout -b <new-branch>
 
+                       
+                       this.questions.slice(this.question[index], this.questions[index+1])
+                this.questions.splice(index, 2, this.question[index], this.questions[index+1]);*/
+                
 
-                /*this.questions.splice(index, 2, this.question, this.questions[index+1]);
                 var tmp = this.questions[index];
                     this.questions[index] = this.questions[index+1];
                     this.questions[index+1] = tmp;
 
-                 console.log(questionId)
-               */
+               
+               
                }
              })
             },
+
+
+
+            createId: function (){
+              var id=this.iterator;
+              this.iterator+=1;
+
+              return id;
+            },
+
+            runQuestion: function () {
+            socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+            saveQuiz(){
+                this.createPoll();
+                this.newQuestion();
+      },
+
+
          
 }
 
@@ -399,6 +461,13 @@ export default {
   min-width: 40px; 
   font: 1vw Inter;
   background: #D7D7D7;
+}
+
+.upDownbutton{
+color: #C3C3C3;
+
+
+
 }
 
   .quizbody {
@@ -491,6 +560,30 @@ margin-left: -3.15%;
 margin-top: 0.25%;
 padding-bottom: 0;
   padding-right: 0;
+}
+
+
+#Quizname > input
+ 
+{
+  color:black;
+  font: 3vw Inter;
+  background: #ECECEC;
+  text-align: center;
+  margin: 3 vh;
+}
+
+#Quizname > button
+{
+  width: 6em;
+  height: 6em;
+  margin: 1em;
+}
+
+#Quizname > button > img {
+  background: #D7D7D7;
+  height: 4vh;
+  width: 4vh;
 }
 
 @media screen and (max-width:760px) {
@@ -744,15 +837,7 @@ answerAlt {
 
 }
 
-.Xbutton{
-width: 30px;
-height: 30px;
-position: absolute;
-margin-left: -3.15%;
-margin-top: 0.25%;
-padding-bottom: 0;
-  padding-right: 0;
-}
+
 
 
 
@@ -774,28 +859,7 @@ background-color: #ECECEC;
 }
 
 
-#Quizname > input
- 
-{
-  color:black;
-  font: 3vw Inter;
-  background: #ECECEC;
-  text-align: center;
-  margin: 3 vh;
-}
 
-#Quizname > button
-{
-  width: 6em;
-  height: 6em;
-  margin: 1em;
-}
-
-#Quizname > button > img {
-  background: #D7D7D7;
-  height: 4vh;
-  width: 4vh;
-}
 
 
 
