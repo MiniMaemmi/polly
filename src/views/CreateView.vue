@@ -70,8 +70,24 @@
             {{ data }}
         </div>
           <button @click="saveQuiz">
-                Start Quiz
+                Save Quiz (förut Start Quiz)
             </button>
+            <br />
+            <br />
+                <router-link
+                  v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName"
+                  custom
+                  v-slot="{ navigate }">
+                <button  
+              
+                @click="navigate"
+                role="link"
+                >
+                Start quiz!
+            </button>
+                </router-link>
+                <br />
+                <br />
 
 <div>
             <button @click="saveQuestionsAsJson">Save Quiz as Json file</button>
