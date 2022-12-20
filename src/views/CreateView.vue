@@ -310,7 +310,9 @@ socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLab
         },
         saveQuestionsAsJson() {
           var filename=this.quizName;
-            var jsonData=JSON.stringify(this.questions);
+
+            /* var jsonData=JSON.stringify(this.questions); SKREV OM TILL NEDAN*/
+            var JsonData=JSON.stringify(this.questions);
             var element = document.createElement('a');
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JsonData));
             element.setAttribute('download', filename);
