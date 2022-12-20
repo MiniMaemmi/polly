@@ -9,9 +9,19 @@ function sockets(io, socket, data) {
     socket.emit('init', data.getUILabels(lang));
   });
 
+//egenskrivet
   socket.on('createPoll', function(d) {
-    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang));
+    console.log("i sockets.js createPoll()")
+    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.questionsObjectArray));
   });
+
+
+//mikaels orginal
+/*
+  socket.on('createPoll', function(d) {
+    console.log("i sockets.js createPoll()")
+    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang));
+  });*/
 
   //this is for user creation egenskrivet
   socket.on('createUser', function(username) {
@@ -25,6 +35,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
+    console.log("Är i socket addQuestion()")
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
   });
@@ -43,6 +54,12 @@ function sockets(io, socket, data) {
   socket.on('runQuestion', function(d) {
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId, d.questionNumber));
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+  });
+
+
+  socket.on('getQuestion', function(pollId, questionId) {
+    console.log('i sockets.js getQuestion()')
+    socket.emit('getQuestion', data.getQuestion(pollId, questionId))
   });
 
 

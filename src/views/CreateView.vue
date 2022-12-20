@@ -253,10 +253,20 @@ export default {
 
       
 
+      //egenskrivet
+      createPoll: function () {
+        console.log("i CreateView createPoll()")
+        console.log("skickat till socket: ", this.pollId, this.lang, this.questions )
+        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
+      },
 
+      //mikaels orginal?
+      /*
       createPoll: function () {
         socket.emit("createPoll", {pollId: this.pollId, lang: this.lang})
-      },
+      },*/
+
+
 
         markAsCorrect(questionId, answerId) {
             this.questions.forEach(question => {
@@ -277,21 +287,28 @@ export default {
             })
         },
 
+        /*
         newQuestion: function () {
 
          this.questions.forEach(question => {
               var answerLabels=[]
-              console.log(question.answers.label);
               question.answers.forEach(answer => {
                   answerLabels.push(answer.label);
-
               })
-                
-socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLabels } )
-                
+              console.log("i CreateView newQuestion(). Pushar till socket:", this.pollId, question.label, answerLabels)
+              socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLabels } )
+                    
+      })
+      
+    },*/
 
-            
-          
+        newQuestion: function () {
+          console.log("i CreateView newQuestion(). ")
+         this.questions.forEach(question => {
+              var answerLabels=[]
+              question.answers.forEach(answer => {
+                  answerLabels.push(answer.label);
+              })              
       })
       
     },
@@ -450,8 +467,6 @@ socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLab
 </script>
 
 <style>
-
-
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
   button {
@@ -467,9 +482,6 @@ socket.emit("addQuestion", {pollId: this.pollId, q: question.label, a: answerLab
 
 .upDownbutton{
 color: #C3C3C3;
-
-
-
 }
 
   .quizbody {
