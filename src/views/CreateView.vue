@@ -19,10 +19,10 @@
         <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
           
           <button class="upDownbutton" @click="changeQuestionIndexUp(question.id)">
-                up
+               <img src="../../img/Up.png">
             </button>
-            <button class="upDownButton" @click.prevent="changeQuestionIndexDown(question.id)">
-                down
+            <button class="upDownButton" @click="changeQuestionIndexDown(question.id)">
+                <img src="../../img/down.png">
             </button>
 
           {{uiLabels.question}}
@@ -189,6 +189,8 @@ export default {
     },
     data() {
         return {
+          quizName: "",
+          iterator: 2,
           url: null,
           uiLabels: {},
           activeColor: 'green',
@@ -197,8 +199,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                        { id:2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                        { id: 0, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                        { id:1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
                     ],
                 },
               
@@ -264,8 +266,8 @@ export default {
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: 1, label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                    { id: 2, label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
         },
@@ -322,7 +324,7 @@ export default {
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: question.answers.length + 1, label: '', correct: false, score:0, feedback:'', answerImage: ''}
+                  { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
 
                 )
 
@@ -349,33 +351,41 @@ export default {
 
 
         changeQuestionIndexDown: function (questionId){
-                 
+                 var array=this.questions
 
-                 this.questions.forEach(question => {
+                 array.forEach(question => {
                   
                   if (question.id === questionId) { 
-                    console.log(questionId)
-                    console.log(".id",question.id)
+                  console.log("question",question)
+                  
 
 
-                      const index= this.questions.indexOf(question);
-                      console.log("index",index);
-                      console.log("id+1",index+1);
-                      console.log("här");
-                      var tmp  = this.questions[index];
-                          this.questions[index]=this.questions[index+1];
-                          this.questions[index+1]=tmp;
+                       const index= this.questions.indexOf(question);
+                        
+                        
+                      /*
+                       
+                       this.questions.slice(this.question[index], this.questions[index+1])
+                this.questions.splice(index, 2, this.question[index], this.questions[index+1]);*/
+                
 
-
-                /*this.questions.splice(index, 2, this.question, this.questions[index+1]);
                 var tmp = this.questions[index];
                     this.questions[index] = this.questions[index+1];
                     this.questions[index+1] = tmp;
 
-                 console.log(questionId)
-               */
+               
+               
                }
              })
+            },
+
+
+
+            createId: function (){
+              var id=this.iterator;
+              this.iterator+=1;
+
+              return id;
             },
          
 }
@@ -399,6 +409,13 @@ export default {
   min-width: 40px; 
   font: 1vw Inter;
   background: #D7D7D7;
+}
+
+.upDownbutton{
+color: #C3C3C3;
+
+
+
 }
 
   .quizbody {
