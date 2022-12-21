@@ -1,12 +1,23 @@
-{
-	"sales-pitch": "Simply. Great. Polling.",
-	"invite": "Invite participants with this link:",
+{	"StartView":"",
 	"createPoll": "Create a quiz",
+	"connectPoll": "Connect to a quiz",
+	"changeLanguage": "Byt till svenska",
+
+	"ConnectView":"",
+	"connectTitel": "Connect to Quiz!",
+	"quizid":"Quiz id",
+	"username":"Username",
+	"displayJoinPoll": "Join quiz",
+	"back":"Go back",
+
+
+	"invite": "Invite participants with this link:",
+	
 	"participatePoll": "Participate in a quiz",
 	"question": "Question:",
-	"changeLanguage": "Byt till svenska",
-	"addAnswer": "Add answer",
-	"displayJoinPoll": "Join quiz",
-	"connectPoll": "Connect to a quiz",
-	"connectTitel": "Connect to Quiz!"
+	
+	"addAnswer": "Add answer"
+	
+	
+	
 }

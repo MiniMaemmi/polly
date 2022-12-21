@@ -6,15 +6,15 @@
       <div id="nameAndID">
         
         <label>
-        Poll id: 
-        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Required">
+        {{uiLabels.quizid}}: 
+        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="123">
         </label>
         <br/>
         <br/>
 
         <label>
-           Username:
-            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Required">
+          {{uiLabels.username}}:
+            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ben Dover">
             <div>
                 <router-link
                 v-bind:to="'/waiting/'+ id"
@@ -25,7 +25,7 @@
                 @click="navigate"
                 role="link"
                 >
-               Connect to Quizz
+                {{uiLabels.displayJoinPoll}}
                 </button>
                 </router-link>
             </div>
@@ -45,7 +45,7 @@
               @click="navigate"
               role="link"
                 >
-              Tillbaka Till Framsida
+                {{uiLabels.back}}
               </button>
               </router-link>
           </div>
@@ -106,7 +106,7 @@ export default {
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
     },*/
-    
+
   methods: {
     //this one, createUser is added
     createUser: function() {
