@@ -1,19 +1,20 @@
 <template>
 <div>
-    <h1 style="font-size:50px">Connect to Quiz!</h1>
+    <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
+    
     <div>
       <div id="nameAndID">
         
         <label>
-        Poll id: 
-        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Required">
+        {{uiLabels.quizid}}: 
+        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="123">
         </label>
         <br/>
         <br/>
 
         <label>
-           Username:
-            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Required">
+          {{uiLabels.username}}:
+            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ben Dover">
             <div>
                 <router-link
                 v-bind:to="'/waiting/'+ id"
@@ -24,7 +25,7 @@
                 @click="navigate"
                 role="link"
                 >
-               Connect to Quizz
+                {{uiLabels.displayJoinPoll}}
                 </button>
                 </router-link>
             </div>
@@ -44,7 +45,7 @@
               @click="navigate"
               role="link"
                 >
-              Tillbaka Till Framsida
+                {{uiLabels.back}}
               </button>
               </router-link>
           </div>
@@ -55,15 +56,6 @@
             <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->
           
 </div>
-
-
-
-
-
-
-
-
-
 
 
 </div>
@@ -78,15 +70,12 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'StartView',
-  components: {
-    
-  },
+  name: 'ConnectView',
   data: function () {
     return {
       uiLabels: {},
       id: "",
-      lang: "en",
+      lang: "",
       hideNav: true,
       username: ""
     }
@@ -94,7 +83,15 @@ export default {
 
   
   created: function () {
-    socket.on("init", (labels) => {
+    this.lang = this.$route.params.lang;
+
+      socket.emit("pageLoaded", this.lang);
+      socket.on("init", (labels) => {
+        this.uiLabels = labels
+      })
+    },
+
+   /*socket.on("init", (labels) => {
       this.uiLabels = labels
     })
   },
@@ -108,7 +105,9 @@ export default {
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
-    },
+    },*/
+
+  methods: {
     //this one, createUser is added
     createUser: function() {
       console.log("------- i createUser StartView.vue ------ ") 
@@ -119,6 +118,7 @@ export default {
       console.log("hej")
     }
   }
+  
   
 }
 
