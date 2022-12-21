@@ -5,8 +5,14 @@
   <h1> </h1>
 
   <body>
-    <p> Joina Quiz! </p>
-    Här ska vi bygga mera där vi drar in quizname. Vi ska också ta upp med Mikael om data objektet från createView med vår scrollfunktion. 
+    <div>
+    Joina Quiz {{quizName}}
+    Här ska vi bygga mera där vi drar in quizname och quizId. 
+    Joina med pollID:
+    {{pollId}}
+    </div>
+
+
   </body>
     
     
@@ -34,6 +40,9 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     });
+
+    this.pollId = this.$route.params.pollId;
+    this.quizName = this.$route.params.quizName;
 
     console.log("i quizleaderStartView")
   },

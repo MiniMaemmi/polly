@@ -44,7 +44,7 @@ const routes = [
   },
 
   {
-    path: '/quizleaderStartView/:lang',
+    path: '/quizleaderStartView/:lang/:pollId/:quizName',
     name: 'quizleaderStartView',
     component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderStartView.vue')
   },

@@ -61,7 +61,7 @@
       <!---
       <button><router-link v-bind:to="'/connect/'">CONNECT</router-link></button>-->
 
-      <!--<div id="Sakersomejskavahar">
+      <div id="Sakersomejskavahar">
         <label>
           Write poll id: 
           <input type="text" v-model="id">
@@ -78,7 +78,7 @@
 
       <button v-on:click="createUser">
         <router-link v-bind:to="'/poll/'+id+'/'+username">{{uiLabels.participatePoll}}</router-link>
-      </button -->
+      </button>
     
       <!-- byta spåråk funktion-->
       <br />
@@ -189,7 +189,7 @@ export default {
 */
 
 body{
-  background-color:#CBE896  ;
+  background-color:#CBE896 ;
 }
 
 </style>

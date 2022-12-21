@@ -19,6 +19,25 @@ Data.prototype.getUILabels = function (lang = "en") {
   return ui;
 }
 
+//egenskrivet
+Data.prototype.createPoll = function(pollId, lang="en", questionsObjectArray) {
+  console.log("i Data.js createPoll")
+  //console.log("questionsObjectArray", questionsObjectArray)
+    let poll = {};
+    poll.lang = lang;  
+    poll.questions = questionsObjectArray;
+    poll.answers = [];
+    poll.currentQuestion = 0;              
+    this.polls[pollId] = poll;
+    //console.log("i Data.js createPoll()")
+  console.log("Skapat denna poll:", this.polls[pollId])
+  //console.log("poll created pollId: ", pollId)
+  return this.polls[pollId];
+}
+
+
+//mikaels orginal
+/*
 Data.prototype.createPoll = function(pollId, lang="en") {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
@@ -27,18 +46,33 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.answers = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
+    console.log("i Data.js createPoll()")
     console.log("poll created pollId: ", pollId, poll);
   }
   return this.polls[pollId];
+}*/
+
+Data.prototype.addQuestion = function(pollId, questionObject) {
+  console.log("i Data.js addQuestion()")
+  const poll = this.polls[pollId];
+  console.log("question added to pollId with questionId: ", pollId, questionObject);
+  if (typeof poll !== 'undefined') {
+    poll.questions.push(questionObject);
+  console.log("poll efter pushat object: ", poll)
+  }
 }
 
+//mikaels orginal
+/*
 Data.prototype.addQuestion = function(pollId, q) {
+  console.log("i Data.js addQuestion()")
   const poll = this.polls[pollId];
+  console.log("q: ", q)
   console.log("question added to pollId with questionId: ", pollId, q);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
   }
-}
+}*/
 
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   const poll = this.polls[pollId];
@@ -49,15 +83,30 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
 
 Data.prototype.getQuestion = function(pollId, qId=null) {
   const poll = this.polls[pollId];
+  console.log("i Data.js getQuestion(): question requested for pollId with questionId:", pollId, qId);
+  if (typeof poll !== 'undefined') {
+    if (qId !== null) {
+      poll.currentQuestion = qId;
+    }
+    return poll.questions[qId]
+  }
+  return []
+}
+
+//mikaels orginal
+/*
+Data.prototype.getQuestion = function(pollId, qId=null) {
+  const poll = this.polls[pollId];
   console.log("question requested for pollId with questionId:", pollId, qId);
   if (typeof poll !== 'undefined') {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
     return poll.questions[poll.currentQuestion];
+
   }
   return []
-}
+}*/
 
 //egenskrivet
 Data.prototype.createUser = function(pollId, username) {
