@@ -10,13 +10,18 @@
 	"displayJoinPoll": "Join quiz",
 	"back":"Go back",
 
+	"CreateView":"detta är en kommentar",
+	"quizName":"Name of Quiz",
+	"question":"Question",
+	"addAnswer":"Add Answer",
+	"addQuestion":"Add Question",
+	"saveQuiz":"Save Quiz",
+	"startQuiz":"Start Quiz",
 
 	"invite": "Invite participants with this link:",
 	
-	"participatePoll": "Participate in a quiz",
-	"question": "Question:",
+	"participatePoll": "Participate in a quiz"
 	
-	"addAnswer": "Add answer"
 	
 	
 	
