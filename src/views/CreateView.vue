@@ -7,7 +7,8 @@
     <div class="quizbody">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
-            <input placeholder="Name of quiz" type="text" v-model="quizName">
+            <!--uiLabels funkar inte i en input, hur löser man de?-->
+            <input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -63,7 +64,8 @@
     
         <div>
             <button @click="addQuestion">
-                Add question
+                <!--Add question-->
+                {{ uiLabels.question }}
             </button>
         </div>
     
@@ -71,7 +73,8 @@
             {{ data }}
         </div>
           <button @click="saveQuiz">
-                Save Quiz (förut Start Quiz)
+                <!--Save Quiz (förut Start Quiz)-->
+                {{uiLabels.saveQuiz }}
             </button>
             <br />
             <br />
@@ -84,7 +87,8 @@
                 @click="navigate"
                 role="link"
                 >
-                Start quiz!
+                <!--Start quiz!-->
+                {{ uiLabels.startQuiz }}
             </button>
                 </router-link>
                 <br />

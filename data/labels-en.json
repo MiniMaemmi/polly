@@ -8,5 +8,15 @@
 	"addAnswer": "Add answer",
 	"displayJoinPoll": "Join quiz",
 	"connectPoll": "Connect to a quiz",
-	"connectTitel": "Connect to Quiz!"
+	"connectTitel": "Connect to Quiz!",
+
+	"CreateView":"detta är en kommentar",
+	"quizName":"Name of Quiz",
+	"question":"Question",
+	"addAnswer":"Add Answer",
+	"addQuestion":"Add Question",
+	"saveQuiz":"Save Quiz",
+	"startQuiz":"Start Quiz"
+
+
 }

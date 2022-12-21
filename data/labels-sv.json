@@ -8,5 +8,14 @@
 	"addAnswer": "Lägg till svar",
 	"displayJoinPoll": "Join poll",
 	"connectPoll": "Anslut till ett quiz",
-	"connectTitel": "Anslut till Quiz!"
+	"connectTitel": "Anslut till Quiz!",
+
+	"CreateView":"detta är en kommentar",
+	"quizName":"Namn på Quiz",
+	"question":"Fråga",
+	"addAnswer":"Lägg till svar",
+	"addQuestion":"Lägg till fråga",
+	"saveQuiz":"Spara Quiz",
+	"startQuiz":"Starta Quiz"
+
 }
