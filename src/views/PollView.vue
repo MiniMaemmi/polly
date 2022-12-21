@@ -8,7 +8,9 @@
     <br />
     <br />
 
-    {{question}}
+    Poll:
+    {{poll}}
+    <br />
     Question:
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
@@ -24,6 +26,10 @@
       role="link"
       >
       {{ uiLabels.showResults }}
+    </button>
+
+    <button @click="getQuestionFromArray">
+      Show poll
     </button>
 </template>
 
@@ -48,7 +54,13 @@ export default {
       },
       pollId: "inactive poll",
       submittedAnswers: {},
-      username: ""
+      username: "",
+      poll: {},
+      //pollLength: this.getQuestionFromArray(this.poll),
+      pollLength: 0,
+      pollQuestionIterator:0,
+
+
       //username: document.getElementById(appDivId).__vue__,
 
       //answers = [ {user: this.username, question: this.question.q, answer: this.question.a}]
@@ -59,7 +71,18 @@ export default {
     this.username = this.$route.params.username
     console.log("------ in PollView created function ------ ")
     console.log("username in pollview created func: ", this.username)
-    socket.emit('joinPoll', this.pollId)
+
+    //socket.emit('joinPoll', this.pollId)
+    socket.emit('getPoll', this.pollId)
+    socket.on('sendQuestion', poll => 
+    {
+      this.poll = poll
+      this.pollLength = this.poll.questions.length
+      }
+    )
+
+
+
     socket.on("newQuestion", q =>
       this.question = q
     )
@@ -81,6 +104,25 @@ export default {
     )
   },
   methods: {
+
+    getQuestionFromArray: function() {
+      console.log("this.poll.questions.length:", this.poll.questions.length)
+
+
+    },
+/*getQuestionFromArray: function(poll) {
+      console.log("this.poll.questions.length:", this.poll.questions.length)
+      if (poll === {}){
+        this.pollLength=0
+
+      }
+      else {
+        this.pollLength = this.poll.questions.length
+
+      }
+
+
+    },*/
 
     //egenskriven
     submitAnswer: function (answer) {

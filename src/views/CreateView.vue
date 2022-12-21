@@ -20,10 +20,10 @@
       
         <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
           
-          <button class="upDownbutton" @click="changeQuestionIndexUp(question.id)">
+          <button :disabled="question.id === this.questions[0].id" class="upDownbutton" @click="changeQuestionOrder(question.id, true)">
                <img src="../../img/Up.png">
             </button>
-            <button class="upDownButton" @click="changeQuestionIndexDown(question.id)">
+            <button class="upDownButton" @click="changeQuestionOrder(question.id, false)">
                 <img src="../../img/down.png">
             </button>
 
@@ -309,7 +309,7 @@ export default {
             })
         },
 
-        /*
+        
         newQuestion: function () {
 
          this.questions.forEach(question => {
@@ -322,8 +322,8 @@ export default {
                     
       })
       
-    },*/
-
+    },
+        /*
         newQuestion: function () {
           console.log("i CreateView newQuestion(). ")
          this.questions.forEach(question => {
@@ -333,7 +333,7 @@ export default {
               })              
       })
       
-    },
+    },*/
 
 
 
@@ -431,12 +431,49 @@ export default {
              })
            },
 
+           changeQuestionOrder: function (questionId, orderObjectUp){
+                  var array=this.questions
+                   array.every(question => {
+                     if (question.id === questionId) { 
+                       const index= array.indexOf(question)
+                        if (orderObjectUp && index !== 0) {
+                          console.log("är i if")
+                          this.questions.splice((index-1), 2, this.questions[index], this.questions[index-1]);
+                          return false
+                        }else {
+                          this.questions.splice(index, 2, this.questions[index+1], this.questions[index]);
+                          return false
+                        }
+                       
+                      } 
+                      return true
+                    })
+                 },
+
 
         changeQuestionIndexDown: function (questionId){
                  var array=this.questions
-                 let hasRun = false;
+
+                array.every(question => {
+                  if (question.id === questionId) { 
+                    const index= array.indexOf(question)
+                    //console.log(this.questions[index])
+                    //console.log("id+1",this.questions[index-1])
+                    this.questions.splice(index, 2, this.questions[index+1], this.questions[index]);
+                    return false
+                    //var tmp = this.questions[index];
+                     //   this.questions[index] = this.questions[index-1];
+                     //   this.questions[index-1] = tmp;
+
+                   } 
+                   return true
+                 })
+
+
+                 /*let hasRun = false;
 
                 const keys = Object.keys(array);
+
                 keys.forEach((key, index) => {
                     console.log("index:", index)
 
@@ -452,58 +489,7 @@ export default {
                       hasRun = true 
 
                     }
-                });
-
-                 //for (let index in array){
-
-
-                  
-                  
-
-                 
-
-               //}
-
-
-                 //var oldQuestions = this.questions
-                 //var newQuestions = []
-
-                 //var questionIndexToPush;
-                 /*
-                 array.forEach(question => {
-
-                  if (question.id === questionId) { 
-                    console.log("question.id", question.id)
-                    console.log("questionId", questionId)
-                       const index= this.questions.indexOf(question);
-                       console.log("index:", index) */
-
-
-
-
-                        
-                        
-                      /* 
-
-                       this.questions.slice(this.question[index], this.questions[index+1])
-                this.questions.splice(index, 2, this.question[index], this.questions[index+1]);*/
-
-                
-                /*
-                var tmp = JSON.parse(JSON.stringify(this.questions[index]))
-                //var tmp = this.questions[index];
-                console.log(tmp)
-                
-                console.log("this.questions:", this.questions)
-
-                this.questions[index] = JSON.parse(JSON.stringify(this.questions[index+1]))
-                //this.questions[index] = this.questions[index+1];
-                this.questions[index+1] = tmp;
-
-               
-               
-               } 
-             })*/
+                });*/  
             },
 
 

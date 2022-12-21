@@ -80,17 +80,17 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
     poll.questions[index] = newQuestion;
   }
 }
-
-Data.prototype.getQuestion = function(pollId, qId=null) {
+//egenskrivet
+Data.prototype.getQuestion = function(pollId) {
   const poll = this.polls[pollId];
-  console.log("i Data.js getQuestion(): question requested for pollId with questionId:", pollId, qId);
-  if (typeof poll !== 'undefined') {
+  console.log("i Data.js getQuestion(): question requested for pollId:", pollId);
+  return poll
+  /* if (typeof poll !== 'undefined') {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
     return poll.questions[qId]
-  }
-  return []
+  }*/
 }
 
 //mikaels orginal

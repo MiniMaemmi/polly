@@ -45,6 +45,11 @@ function sockets(io, socket, data) {
     socket.emit('questionEdited', data.getAllQuestions(d.pollId));
   });
 
+//egenskrivet
+  socket.on('getPoll', function(pollId) {
+    socket.emit('sendQuestion', data.getQuestion(pollId))
+  });
+
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
     socket.emit('newQuestion', data.getQuestion(pollId))
