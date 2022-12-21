@@ -38,7 +38,17 @@ export default {
   created: function () {
     socket.on("init", (labels) => {
       this.uiLabels = labels
+      
     })
+    //den här funkar inte jag blir lack
+    //socket.on("createUser",(username) => {
+      //this.username=username
+      //console.log("hej")
+    //})
+
+    
+    
+    
   },
   methods: {
     switchLanguage: function() {

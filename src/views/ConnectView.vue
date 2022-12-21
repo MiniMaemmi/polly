@@ -17,10 +17,11 @@
             <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ben Dover">
             <div>
                 <router-link
+                
                 v-bind:to="'/waiting/'+ id"
                 custom
                 v-slot="{ navigate }">
-                <button :disabled="!username.length||!id.length" 
+                <button v-on:click="createUser" :disabled="!username.length||!id.length" 
             
                 @click="navigate"
                 role="link"
@@ -86,9 +87,16 @@ export default {
     this.lang = this.$route.params.lang;
 
       socket.emit("pageLoaded", this.lang);
+
       socket.on("init", (labels) => {
         this.uiLabels = labels
       })
+
+     
+
+
+
+
     },
 
    /*socket.on("init", (labels) => {
@@ -110,9 +118,10 @@ export default {
   methods: {
     //this one, createUser is added
     createUser: function() {
-      console.log("------- i createUser StartView.vue ------ ") 
-      console.log("Username: ", this.username)
+      //console.log("------- i createUser StartView.vue ------ ") 
+      //console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
+
     },
     isFormFilled: function(){
       console.log("hej")
@@ -124,7 +133,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
 #nameAndID{
     margin:50px;

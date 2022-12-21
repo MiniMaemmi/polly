@@ -108,8 +108,18 @@ export default {
     }
   },
   created: function () {
+
+    
+    this.lang=this.$route.params.lang;
+    if (this.lang==null)  {
+      this.lang="en"}
+       
+
+    socket.emit("pageLoaded" ,this.lang)
+
     socket.on("init", (labels) => {
       this.uiLabels = labels
+      
     })
   },
   methods: {
