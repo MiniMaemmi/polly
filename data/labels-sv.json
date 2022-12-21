@@ -1,10 +1,12 @@
 {
 	"sales-pitch": "Svar. Helt. Enkelt.",
 	"invite": "Bjud in deltagare med den här länken:",
-	"createPoll": "Skapa röstning",
-	"participatePoll": "Delta i röstning",
+	"createPoll": "Skapa quiz",
+	"participatePoll": "Delta i quiz",
 	"question": "Fråga:",
 	"changeLanguage": "Change to English",
 	"addAnswer": "Lägg till svar",
-	"displayJoinPoll": "Join poll"
+	"displayJoinPoll": "Join poll",
+	"connectPoll": "Anslut till ett quiz",
+	"connectTitel": "Anslut till Quiz!"
 }

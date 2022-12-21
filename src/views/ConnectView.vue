@@ -1,6 +1,7 @@
 <template>
 <div>
-    <h1 style="font-size:50px">Connect to Quiz!</h1>
+    <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
+    
     <div>
       <div id="nameAndID">
         
@@ -57,15 +58,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
 </div>
 
 
@@ -78,15 +70,12 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'StartView',
-  components: {
-    
-  },
+  name: 'ConnectView',
   data: function () {
     return {
       uiLabels: {},
       id: "",
-      lang: "en",
+      lang: "",
       hideNav: true,
       username: ""
     }
@@ -94,7 +83,15 @@ export default {
 
   
   created: function () {
-    socket.on("init", (labels) => {
+    this.lang = this.$route.params.lang;
+
+      socket.emit("pageLoaded", this.lang);
+      socket.on("init", (labels) => {
+        this.uiLabels = labels
+      })
+    },
+
+   /*socket.on("init", (labels) => {
       this.uiLabels = labels
     })
   },
@@ -108,7 +105,9 @@ export default {
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
-    },
+    },*/
+    
+  methods: {
     //this one, createUser is added
     createUser: function() {
       console.log("------- i createUser StartView.vue ------ ") 
@@ -119,6 +118,7 @@ export default {
       console.log("hej")
     }
   }
+  
   
 }
 

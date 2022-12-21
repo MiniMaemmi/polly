@@ -31,7 +31,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ResultView.vue')
   },
   {
-    path: '/connect/',
+    path: '/connect/:lang',
     name: 'ConnectView',
     component: () => import(/* webpackChunkName: "about" */ '../views/ConnectView.vue')
     // ska leda till pollView så smånignom. Är mellansteget

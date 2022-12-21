@@ -1,10 +1,12 @@
 {
 	"sales-pitch": "Simply. Great. Polling.",
 	"invite": "Invite participants with this link:",
-	"createPoll": "Create poll",
-	"participatePoll": "Participate in poll",
+	"createPoll": "Create a quiz",
+	"participatePoll": "Participate in a quiz",
 	"question": "Question:",
 	"changeLanguage": "Byt till svenska",
 	"addAnswer": "Add answer",
-	"displayJoinPoll": "Join poll"
+	"displayJoinPoll": "Join quiz",
+	"connectPoll": "Connect to a quiz",
+	"connectTitel": "Connect to Quiz!"
 }

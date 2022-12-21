@@ -43,7 +43,7 @@
       <br />
       <div>
                 <router-link
-                  v-bind:to="'/connect/'"
+                  v-bind:to="'/connect/'+lang"
                   custom
                   v-slot="{ navigate }">
                 <button  
@@ -51,7 +51,7 @@
                 @click="navigate"
                 role="link"
                 >
-              Connect to Quizz
+                {{uiLabels.connectPoll}}
             </button>
                 </router-link>
       </div>
@@ -132,10 +132,9 @@ export default {
   }
 }
 </script>
+
+
 <style>
-  
-  
-  
 
   #parentgrid {
     display:grid;
