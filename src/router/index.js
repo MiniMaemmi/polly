@@ -6,10 +6,11 @@ const routes = [
   {
     //path '/'Start/:lang',
     //fungerar om man skriver http://localhost:8080/#/en *--- 
-    path: '/:en',
+    path: '/:lang?',
     name: 'Start',
     component: StartView
   },
+  
     {
     path: '/poll/:id/:username',
     name: 'PollView',

@@ -94,7 +94,7 @@
                 <br />
                 <br />
 
-<div>
+        <div>
             <button @click="saveQuestionsAsJson">Save Quiz as Json file</button>
         </div>
 
@@ -102,6 +102,20 @@
         <div>
             <button @click="loadJson">Load</button>
         </div>
+        <div>
+              <router-link
+                v-bind:to="'/'+ lang"
+                custom
+                v-slot="{ navigate }">
+                <button  
+            
+              @click="navigate"
+              role="link"
+                >
+                {{uiLabels.back}}
+              </button>
+              </router-link>
+          </div>
     
     </div>
 
@@ -547,7 +561,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
   button {
