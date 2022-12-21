@@ -1,7 +1,7 @@
 <template>
-<p>{{question.q}}</p>
-<button v-for="a in question.a" v-on:click="answer(a)" v-bind:key="a">
-  {{ a }}
+<p>{{question.label}}</p>
+<button v-for="a in question.answers" v-on:click="answer(a)" v-bind:key="a">
+  {{ a.label }}
 </button>
 </template>
 <script>

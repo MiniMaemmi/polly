@@ -7,6 +7,8 @@
     Username: {{username}}
     <br />
     <br />
+
+    {{question}}
     Question:
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
@@ -17,6 +19,12 @@
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
 
   </div>
+      <button  
+      @click="navigate"
+      role="link"
+      >
+      {{ uiLabels.showResults }}
+    </button>
 </template>
 
 <script>
@@ -33,6 +41,7 @@ export default {
   },
   data: function () {
     return {
+      uiLabels: {},
       question: {
         q: "",
         a: []
@@ -61,6 +70,10 @@ export default {
       //this.username = data.username
       
     )
+
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
     
     //egenskrivet
     socket.on("createdUser", username => 
@@ -76,10 +89,16 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, question: this.question.q, answer: answer, username: this.username})
     },
 
+
+
     //mikaels orginal
     /*submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },*/
+
+    navigate: function() {
+      this.$router.push("'/result/'+'/'+this.pollId+'/'+lang")
+    },
 
 
 
