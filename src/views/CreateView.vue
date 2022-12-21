@@ -8,7 +8,8 @@
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
             <!--uiLabels funkar inte i en input, hur löser man de?-->
-            <input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">
+            <!--<input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">-->
+            <input placeholder= "Din fråga" type="text" v-model="quizName"> 
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -447,37 +448,21 @@ export default {
 
         changeQuestionIndexDown: function (questionId){
                  var array=this.questions
-                 //console.log("questionId:",questionId)
-                 //console.log("changeQuestionIndexDown körs")
                  let hasRun = false;
 
                 const keys = Object.keys(array);
                 keys.forEach((key, index) => {
-                    //console.log(`${key}: ${array[key]}`);
                     console.log("index:", index)
 
                     key = parseInt(key)
-                    //console.log("key: ", key)
-                    //console.log("array[index]: ", array[key])
+
                     let question = array[key];
-
-                    //console.log("------array[index].id : ----- ", array[index].id )
-
-
 
                     if (question.id === questionId && !hasRun) { 
                       let newIndex = parseInt(key)+1
-                    
-                      //console.log("newIndex:",newIndex)
-                      //console.log("är i if")
                       var tmp = JSON.parse(JSON.stringify(this.questions[key]))
-                      //console.log("this.questions: ", this.questions)
-                      //console.log("this.questions[0]:", this.questions[0])
-                      //console.log("this.questions[index]:", this.questions[key])
-                      //console.log("this.questions[newIndex]:", this.questions[newIndex])
                       this.questions[key] = JSON.parse(JSON.stringify(this.questions[newIndex]))
                       this.questions[newIndex] = tmp;
-                      //console.log(tmp)
                       hasRun = true 
 
                     }
