@@ -46,8 +46,9 @@
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
-                       @click.prevent="markAsCorrect(question.id, answer.id)"
+                       @click="markAsCorrect(question.id, answer.id)"
                      >✔️</button>
+
                     <input type="text" v-model="answer.label">
                     <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
                     <button>
@@ -287,7 +288,7 @@ export default {
         markAsCorrect(questionId, answerId) {
             this.questions.forEach(question => {
                 if (question.id === questionId) {
-                    this.question.answers.forEach(answer => {
+                    question.answers.forEach(answer => {
                         if (answer.id === answerId) {
 
                             if (answer.correct) {
@@ -470,7 +471,7 @@ export default {
     },
             saveQuiz(){
                 this.createPoll();
-                this.newQuestion();
+                /*this.newQuestion();*/
       },
 
 
