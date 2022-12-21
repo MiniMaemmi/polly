@@ -51,6 +51,7 @@
                 @click="navigate"
                 role="link"
                 >
+                {{ uiLabels.connectPoll }}
               Connect to Quizz
             </button>
                 </router-link>

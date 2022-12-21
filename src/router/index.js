@@ -4,8 +4,9 @@ import StartView from '../views/StartView.vue'
 
 const routes = [
   {
-    //path '/'Start/:lang ish borde vara startviewns url tänker
-    path: '/',
+    //path '/'Start/:lang',
+    //fungerar om man skriver http://localhost:8080/#/en *--- 
+    path: '/:en',
     name: 'Start',
     component: StartView
   },
