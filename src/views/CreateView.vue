@@ -7,7 +7,8 @@
     <div class="quizbody">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
-            <input placeholder="Name of quiz" type="text" v-model="quizName">
+            <!--uiLabels funkar inte i en input, hur löser man de?-->
+            <input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -46,8 +47,9 @@
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
-                       @click.prevent="markAsCorrect(question.id, answer.id)"
+                       @click="markAsCorrect(question.id, answer.id)"
                      >✔️</button>
+
                     <input type="text" v-model="answer.label">
                     <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
                     <button>
@@ -62,7 +64,8 @@
     
         <div>
             <button @click="addQuestion">
-                Add question
+                <!--Add question-->
+                {{ uiLabels.question }}
             </button>
         </div>
     
@@ -70,7 +73,8 @@
             {{ data }}
         </div>
           <button @click="saveQuiz">
-                Save Quiz (förut Start Quiz)
+                <!--Save Quiz (förut Start Quiz)-->
+                {{uiLabels.saveQuiz }}
             </button>
             <br />
             <br />
@@ -83,7 +87,8 @@
                 @click="navigate"
                 role="link"
                 >
-                Start quiz!
+                <!--Start quiz!-->
+                {{ uiLabels.startQuiz }}
             </button>
                 </router-link>
                 <br />
@@ -287,7 +292,7 @@ export default {
         markAsCorrect(questionId, answerId) {
             this.questions.forEach(question => {
                 if (question.id === questionId) {
-                    this.question.answers.forEach(answer => {
+                    question.answers.forEach(answer => {
                         if (answer.id === answerId) {
 
                             if (answer.correct) {
@@ -470,7 +475,7 @@ export default {
     },
             saveQuiz(){
                 this.createPoll();
-                this.newQuestion();
+                /*this.newQuestion();*/
       },
 
 
