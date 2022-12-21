@@ -37,7 +37,7 @@
         <br />
         <div>
               <router-link
-                v-bind:to="'//'+ id"
+                v-bind:to="'/'+ lang"
                 custom
                 v-slot="{ navigate }">
                 <button  
