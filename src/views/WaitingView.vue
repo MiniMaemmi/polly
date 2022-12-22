@@ -8,7 +8,7 @@
     <h1>Väntrum</h1>
     <h2>Matchen börjar strax</h2>
     <!--Här ska de ju va en wordlcloudsdaw-->
-    {{username}}
+    {{this.username}}
 </div>
 
 
@@ -41,7 +41,7 @@ export default {
       
     })
     //den här funkar inte jag blir lack
-    //socket.on("createUser",(username) => {
+    //socket.on("createUser",this.username => {
       //this.username=username
       //console.log("hej")
     //})
@@ -61,12 +61,12 @@ export default {
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
     },
-    //this one, createUser is added
-    createUser: function() {
+    //this one, createUser is added behöver nog inte
+    /*createUser: function() {
       console.log("------- i createUser StartView.vue ------ ") 
       console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
-    }
+    }*/
   }
 }
 

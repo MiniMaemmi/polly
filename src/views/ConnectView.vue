@@ -92,10 +92,6 @@ export default {
         this.uiLabels = labels
       })
 
-     
-
-
-
 
     },
 
@@ -121,10 +117,11 @@ export default {
       //console.log("------- i createUser StartView.vue ------ ") 
       //console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
+      console.log("Username: ", this.username)
 
     },
     isFormFilled: function(){
-      console.log("hej")
+      //console.log("hej")
     }
   }
   
