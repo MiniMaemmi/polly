@@ -523,11 +523,11 @@ export default {
 
             runQuestion: function () {
             socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },
+            },
             saveQuiz(){
                 this.createPoll();
                 /*this.newQuestion();*/
-      },
+            },
 
 
          

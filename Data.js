@@ -172,6 +172,19 @@ Data.prototype.submitAnswer = function(pollId, answer) {
   }
 }
 
+//mikaels orginal
+/*
+Data.prototype.getAnswers = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    const answers = poll.answers[poll.currentQuestion];
+    if (typeof poll.questions[poll.currentQuestion] !== 'undefined') {
+      return {q: poll.questions[poll.currentQuestion].q, a: answers};
+    }
+  }
+  return {}
+}*/
+
 
 
 Data.prototype.getAnswers = function(pollId) {
@@ -179,7 +192,9 @@ Data.prototype.getAnswers = function(pollId) {
   if (typeof poll !== 'undefined') {
     const answers = poll.answers[poll.currentQuestion];
     if (typeof poll.questions[poll.currentQuestion] !== 'undefined') {
-      return {q: poll.questions[poll.currentQuestion].q, a: answers};
+      console.log("-----i data.js getAnswers ------")
+      console.log("poll.questions:", poll.questions)
+      return {questionsArrayObject: poll.questions, a: answers};
     }
   }
   return {}

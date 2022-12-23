@@ -1,10 +1,14 @@
 <template>
   <div>
+    <h1> Resultat </h1>
+    QuestionObject:
+    <br />
     {{question}}
   </div>
   <BarsComponent v-bind:data="submittedAnswers"/>
 
   <span>{{submittedAnswers}}</span>
+
 </template>
 
 <script>
@@ -30,7 +34,7 @@ export default {
     socket.emit('joinPoll', this.pollId)
     socket.on("dataUpdate", (update) => {
       this.submittedAnswers = update.a;
-      this.question = update.q;
+      this.question = update.questionsArrayObject;
     });
     socket.on("newQuestion", update => {
       this.question = update.q;

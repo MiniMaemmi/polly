@@ -19,12 +19,14 @@
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
 
   </div>
-      <button  
-      @click="navigate"
-      role="link"
-      >
-      {{ uiLabels.showResults }}
-    </button>
+    <router-link
+      v-bind:to="'/result/'+this.pollId+ '/' + lang"
+      custom
+      v-slot="{ navigate }">
+      <button @click="navigate" role="link">
+        {{uiLabels.showResults}}
+      </button>
+    </router-link>
 
     <button @click="getQuestionFromArray">
       Nästa fråga
