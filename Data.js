@@ -119,6 +119,7 @@ Data.prototype.createUser = function(pollId, username) {
 }
 
 //egenmodifierad
+/*
 Data.prototype.submitAnswer = function(pollId, question, answer, username) {
   console.log("--------- Data.js submitAnswer()---------")
   const poll = this.polls[pollId];
@@ -148,13 +149,11 @@ Data.prototype.submitAnswer = function(pollId, question, answer, username) {
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
 
-  }*/
-}
+  }
+}*/
 
 
 //mikaels orginal
-
-/*
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
@@ -172,12 +171,6 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
-*/
-
-
-
-
-
 
 
 

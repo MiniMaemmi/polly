@@ -69,20 +69,22 @@ function sockets(io, socket, data) {
 
 
   //egenskriven
+  /*
   socket.on('submitAnswer', function(d) {
     console.log("-----sockets.js in submitAnswer()-------");
     console.log("Variables:", d.pollId, d.question, d.answer, d.username);
     data.submitAnswer(d.pollId, d.question, d.answer, d.username);
     //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
-  });
+  });*/
 
   //mikaels orginal
-  /*
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
+    console.log("-----d.pollId-------", d.pollId)
+    console.log("-----d.answer-------", d.answer)
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
-  */
+  
 
   socket.on('resetAll', () => {
     data = new Data();

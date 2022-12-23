@@ -9,7 +9,7 @@
           <div id="Quizname">
             <!--uiLabels funkar inte i en input, hur löser man de?-->
             <!--<input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">-->
-            <input placeholder= "Din fråga" type="text" v-model="quizName"> 
+            <input placeholder= "Quiznamn" type="text" v-model="quizName"> 
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -23,9 +23,10 @@
           <button :disabled="question.id === this.questions[0].id" class="upDownbutton" @click="changeQuestionOrder(question.id, true)">
                <img src="../../img/Up.png">
             </button>
-            <button class="upDownButton" @click="changeQuestionOrder(question.id, false)">
+            <button :disabled="question.id === this.getArrayLastElementId(this.questions)" class="upDownButton" @click="changeQuestionOrder(question.id, false)">
                 <img src="../../img/down.png">
             </button>
+
 
           {{uiLabels.question}}
             <input v-model="question.label" v-bind:key="'question-label'+question">
@@ -376,6 +377,11 @@ export default {
             element.click();
 
             document.body.removeChild(element);
+    },
+
+    getArrayLastElementId: function(array) {
+      let lastElementId = array.slice(-1)[0].id
+      return lastElementId
     },
 
 

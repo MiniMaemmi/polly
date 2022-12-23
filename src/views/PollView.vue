@@ -7,17 +7,15 @@
     Username: {{username}}
     <br />
     <br />
-
-    Poll:
-    {{poll}}
-    <br />
     Question:
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
-
-              <span>{{submittedAnswers}}</span>
+              <!--
               <br />
-              <br />
+              Submitted Answers:
+              <span>{{submittedAnswers}}</span>-->
+              <!-- <br />
+              <br />-->
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
 
   </div>
@@ -29,7 +27,7 @@
     </button>
 
     <button @click="getQuestionFromArray">
-      Show poll
+      Nästa fråga
     </button>
 </template>
 
@@ -78,6 +76,7 @@ export default {
     {
       this.poll = poll
       this.pollLength = this.poll.questions.length
+      this.getQuestionFromArray()
       }
     )
 
@@ -86,9 +85,14 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
-    socket.on("dataUpdate", data  =>
-      this.submittedAnswers = data.answers,
 
+    socket.on("dataUpdate", data  => {
+      console.log("pollview dataupdate")
+      //Vi har märkt att denna ej funkar men den behövs också inte
+      this.submittedAnswers = data.answers
+
+    }
+      
       //egenskrivet
       //this.username = data.username
       
@@ -106,9 +110,13 @@ export default {
   methods: {
 
     getQuestionFromArray: function() {
-      console.log("this.poll.questions.length:", this.poll.questions.length)
-
-
+      let questionObject = this.poll.questions[this.pollQuestionIterator]
+      this.question.q = questionObject.label
+      this.question.a = []
+      questionObject.answers.forEach(answer => {
+          this.question.a.push(answer.label);
+      })
+      this.pollQuestionIterator += 1
     },
 /*getQuestionFromArray: function(poll) {
       console.log("this.poll.questions.length:", this.poll.questions.length)
@@ -125,18 +133,20 @@ export default {
     },*/
 
     //egenskriven
+    /*
     submitAnswer: function (answer) {
       console.log("------in PollView submitAnswer() -----")
       //console.log("Question?: ", this.question.q)
       socket.emit("submitAnswer", {pollId: this.pollId, question: this.question.q, answer: answer, username: this.username})
-    },
+    },*/
 
 
 
     //mikaels orginal
-    /*submitAnswer: function (answer) {
+    submitAnswer: function (answer) {
+      console.log("i PollView submitAnswer där answer är: ", answer)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-    },*/
+    },
 
     navigate: function() {
       this.$router.push("'/result/'+'/'+this.pollId+'/'+lang")
@@ -145,7 +155,7 @@ export default {
 
 
 
-    updateData: function () {
+    /*updateData: function () {
       console.log("----- i pollView updateData() ------")
       console.log("username: ", this. username)
       console.log("pollID: ", this.pollId)
@@ -153,7 +163,8 @@ export default {
       socket.emit('dataUpdate', {pollId: this.pollId, username: this.username} )
 
 
-    }
+    }*/
+
   }
 }
 </script>
