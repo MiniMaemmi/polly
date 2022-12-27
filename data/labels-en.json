@@ -8,16 +8,23 @@
 	"connectTitel": "Connect to Quiz!",
 	"quizid":"Quiz id",
 	"username":"Username",
-	"displayJoinPoll": "Join quiz",
+	"displayJoinPoll": "Join Quiz",
 	"back":"Go back",
 
-	"CreateView":"detta är en kommentar",
+	"CreateView":"",
 	"quizName":"Name of Quiz",
 	"question":"Question",
 	"addAnswer":"Add Answer",
 	"addQuestion":"Add Question",
 	"saveQuiz":"Save Quiz",
 	"startQuiz":"Start Quiz",
+	"saveAsJson":"Save Quiz as Json file",
+	"loadAJson": "Load a Json file",
+
+	"quizleaderStartView": "",
+	"joinQuiz":"Join with the Quiz id below:",
+	"playQuiz": "Let´s play the quiz",
+	
 
 	"invite": "Invite participants with this link:",
 	

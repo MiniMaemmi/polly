@@ -8,16 +8,22 @@
 	"connectTitel": "Anslut till Quiz!",
 	"quizid":"Quiz id",
 	"username":"Användarnamn",
-	"displayJoinPoll": "Gå med i quizet",
+	"displayJoinPoll": "Gå med i Quizet",
 	"back":"Gå tillbaka",
 
-	"CreateView":"detta är en kommentar",
+	"CreateView":"",
 	"quizName":"Namn på Quiz",
 	"question":"Fråga",
 	"addAnswer":"Lägg till svar",
 	"addQuestion":"Lägg till fråga",
 	"saveQuiz":"Spara Quiz",
 	"startQuiz":"Starta Quiz",
+	"saveAsJson":"Spara  Quiz som en Json file",
+	"loadAJson": "Ladda upp en Json file",
+
+	"quizleaderStartView": "",
+	"joinQuiz":"Gå med Quiz id nedan:",
+	"playQuiz": "Låt oss spela Quizet",
 
 	"invite": "Bjud in deltagare med den här länken:",
 	

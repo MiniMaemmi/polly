@@ -7,14 +7,14 @@
         
         <label>
         {{uiLabels.quizid}}: 
-        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="123">
+        <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Ex: 123">
         </label>
         <br/>
         <br/>
 
         <label>
           {{uiLabels.username}}:
-            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ben Dover">
+            <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ex: Ben Dover">
             <div>
                 <router-link
                 
