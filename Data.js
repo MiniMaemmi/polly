@@ -155,6 +155,7 @@ Data.prototype.submitAnswer = function(pollId, question, answer, username) {
 
 //mikaels orginal
 Data.prototype.submitAnswer = function(pollId, answer) {
+  console.log("------ i Data.js submitAnswer ------")
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
   if (typeof poll !== 'undefined') {
@@ -163,6 +164,8 @@ Data.prototype.submitAnswer = function(pollId, answer) {
       answers = {};
       answers[answer] = 1;
       poll.answers.push(answers);
+      console.log("Answer: ", answers)
+
     }
     else if (typeof answers[answer] === 'undefined')
       answers[answer] = 1;

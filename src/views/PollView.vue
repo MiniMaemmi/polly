@@ -8,16 +8,18 @@
     <br />
     <br />
     Question:
-    <QuestionComponent v-bind:question="question"
-              v-on:answer="submitAnswer($event)"/>
+    <QuestionComponent v-bind:question="questionObject"
+              v-on:answer="logUserAnswer($event)"/>
               <!--
+              v-on:answer="submitAnswer($event)"/>
               <br />
               Submitted Answers:
               <span>{{submittedAnswers}}</span>-->
               <!-- <br />
               <br />-->
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
-
+    Answers:
+    {{userObject.answers}}
   </div>
     <router-link
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
@@ -28,8 +30,14 @@
       </button>
     </router-link>
 
-    <button @click="getQuestionFromArray">
+    <button v-if="this.lastQuestionReached===false" @click="submitAnswer();getQuestionFromArray()">
       Nästa fråga
+    </button>
+    <button v-else @click="submitAnswer();getQuestionFromArray()">
+      Avsluta Quiz
+    </button>
+    <button @click="submitAnswer">
+      Submit Answer
     </button>
 </template>
 
@@ -52,6 +60,9 @@ export default {
         q: "",
         a: []
       },
+
+      questionObject: {},
+      
       pollId: "inactive poll",
       submittedAnswers: {},
       username: "",
@@ -59,6 +70,17 @@ export default {
       //pollLength: this.getQuestionFromArray(this.poll),
       pollLength: 0,
       pollQuestionIterator:0,
+      lastQuestionReached: false,
+      userObject: 
+                {
+                    username: '',
+                    answers: [
+                        /* { questionID: 0, answerId: 0, score: 0}*/
+                    ],
+                },
+              
+            
+
 
 
       //username: document.getElementById(appDivId).__vue__,
@@ -71,6 +93,7 @@ export default {
     this.username = this.$route.params.username
     console.log("------ in PollView created function ------ ")
     console.log("username in pollview created func: ", this.username)
+    this.userObject.username = this.username
 
     //socket.emit('joinPoll', this.pollId)
     socket.emit('getPoll', this.pollId)
@@ -106,11 +129,42 @@ export default {
     
     //egenskrivet
     socket.on("createdUser", username => 
+    {
       this.username = username
+      this.userObject.username = username
+      console.log("------- i PollView createdUser() --------")
+      console.log("this.userObject ", this.userObject)
+    }
+      
     )
   },
   methods: {
 
+    getQuestionFromArray: function() {
+      let questionObject = this.poll.questions[this.pollQuestionIterator]
+      console.log("-----i getQuestionFromArray()----")
+      console.log("questionObject:", this.questionObject)
+      if (typeof questionObject !== 'undefined') {
+        console.log("questionObject är inte undefined")
+        this.questionObject = questionObject
+        
+        this.question.q = questionObject.label
+        this.question.a = []
+        questionObject.answers.forEach(answer => {
+            this.question.a.push(answer.label);
+        })
+        this.pollQuestionIterator += 1
+
+      }
+      else if (typeof questionObject === 'undefined'){
+        //Delete "Next fråga button"
+        this.lastQuestionReached = true
+      }
+      
+    },
+
+//gammal
+/*
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
       this.question.q = questionObject.label
@@ -119,7 +173,10 @@ export default {
           this.question.a.push(answer.label);
       })
       this.pollQuestionIterator += 1
-    },
+    },*/
+
+
+
 /*getQuestionFromArray: function(poll) {
       console.log("this.poll.questions.length:", this.poll.questions.length)
       if (poll === {}){
@@ -145,14 +202,85 @@ export default {
 
 
     //mikaels orginal
+  /*
     submitAnswer: function (answer) {
       console.log("i PollView submitAnswer där answer är: ", answer)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },*/
+
+    submitAnswer: function () {
+      console.log("------i PollView submitAnswer------")
+      //socket.emit("submitAnswer", {pollId: this.pollId, questionId: this.userObject.answers.questionID )
+
+      let lastElementOfArray = this.userObject.answers[this.userObject.answers.length - 1]  
+      console.log("lastElementOfArray: ", lastElementOfArray)
+    },
+
+    //egenskriven
+    logUserAnswer: function (answer) {
+      console.log("----i PollView logUserAnswer---- ")
+      let questionAnswered  = false
+      questionAnswered = this.checkIfQuestionIsAnswered(this.questionObject.id)
+      
+      if (questionAnswered===false) {
+        this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id})
+        console.log("Answer added")
+        //socket.emit("submitAnswer", {pollId: this.pollId, username: this.userObject.username, answers: this.userObject})
+
+      }
+      else if (questionAnswered===true){
+        console.log("Question & answer has already been added, replacing")
+        //här borde man ha så att man kollar om det är samma svar som redan blivit tillagt. Hade varit
+        //mer effektivt än att bara replace:a oavsett
+        let indexToReplace = this.replacePreviousAnswerOnQuestion(this.questionObject.id)
+        this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id}
+      }
+      
+      else {
+        console.log("Error in adding answer")
+      }
+    },
+
+    checkIfQuestionIsAnswered: function (questionId) {
+      for (let answerObject of this.userObject.answers) {
+        if (answerObject.questionID === questionId) {
+          return true
+        }
+      }
+      return false
+    },
+
+    replacePreviousAnswerOnQuestion: function (questionId ) {
+      let i = 0
+      for (let answerObject of this.userObject.answers) {
+        if (answerObject.questionID === questionId) {
+          return i
+        }
+        i += 1
+      }
+    },
+
+    /*
+
+    checkIfQuestionIsAnswered: function (answerId) {
+      console.log("---- i checkIfQuestionIsAnswered() -----")
+      console.log("answerId", answerId)
+
+      this.userObject.answers.forEach(answerObject => {
+        if (answerObject.answerId === answerId) {
+          console.log("i for-loop i if")
+          //return questionAnswered 
+          return true
+        }
+        else {
+          console.log("continue to loop")
+        }
+      })
     },
 
     navigate: function() {
       this.$router.push("'/result/'+'/'+this.pollId+'/'+lang")
-    },
+    },*/
 
 
 
