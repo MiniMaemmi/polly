@@ -109,11 +109,13 @@ export default {
   },
   created: function () {
 
-    
     this.lang=this.$route.params.lang;
-    if (this.lang==null)  {
-      this.lang="en"}
-       
+    if (this.lang=="") {
+      //console.log("lang is :", this.lang)
+      this.lang="en"
+      //console.log("uppdaterat sidan!")
+      //console.log("lang is :", this.lang)
+    }
 
     socket.emit("pageLoaded" ,this.lang)
 
