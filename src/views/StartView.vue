@@ -146,8 +146,8 @@ export default {
 </script>
 
 
-<style>
-
+<style> 
+/*Har inte scoped nu så blir konstigt på alla andra sidor behöver fixa!!! */
   #parentgrid {
     display:grid;
       grid-template: 1fr 1fr 1fr 1fr;

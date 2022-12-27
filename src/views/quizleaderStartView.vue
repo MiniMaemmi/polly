@@ -1,15 +1,44 @@
 <template>
-  <header>
-  </header>
-
-  <h1> </h1>
-
   <body>
     <div>
-    Joina Quiz {{quizName}}
-    Här ska vi bygga mera där vi drar in quizname och quizId. 
-    Joina med pollID:
-    {{pollId}}
+      <h1 style="font-size:50px">
+        {{uiLabels.displayJoinPoll}}:
+        <br/>
+        {{quizName}}
+      </h1>
+    
+      <!--Här ska vi bygga mera där vi drar in quizname och quizId. -->
+      <h1 style="font-size:50px">
+       {{uiLabels.joinQuiz}}
+        <br/>
+        {{pollId}}
+      </h1>
+      <br />
+
+      <div> <!--enkel knapp nu, men ska leda till quizleaderPollview -->
+        <!--<router-link>-->
+          <button>
+            {{ uiLabels.playQuiz }}
+          </button>
+        <!--</router-link>-->
+      </div>
+
+      <div> <!--Tillbaka knapp till StartView nu-->
+        <router-link
+         v-bind:to="'/'+ lang"
+          custom
+          v-slot="{ navigate }">
+          <button  
+            @click="navigate"
+            role="link">
+            {{uiLabels.back}}
+          </button>
+        </router-link>
+      </div>
+
+
+
+
     </div>
 
 
@@ -32,11 +61,13 @@ export default {
     return {
       uiLabels: {},
       id: "",
-      lang: "en",
+      lang: "",
       hideNav: true
     }
   },
   created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     });
@@ -47,28 +78,18 @@ export default {
     console.log("i quizleaderStartView")
   },
   methods: {
-    switchLanguage: function() {
-      if (this.lang === "en")
-        this.lang = "sv"
-      else
-        this.lang = "en"
-      socket.emit("switchLanguage", this.lang)
-    },
-    toggleNav: function () {
-      this.hideNav = ! this.hideNav;
-    }
+
 
   }
 }
 </script>
+
+
 <style scoped>
   
-  
-  .backgroundcolor{
 
-    background-color:#E63462;
 
-  }
+
 
   
 

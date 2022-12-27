@@ -74,9 +74,10 @@
         <div>
             {{ data }}
         </div>
+        
           <button @click="saveQuiz">
                 <!--Save Quiz (förut Start Quiz)-->
-                {{uiLabels.saveQuiz }}
+                {{uiLabels.saveQuiz}}
             </button>
             <br />
             <br />
@@ -90,19 +91,23 @@
                 role="link"
                 >
                 <!--Start quiz!-->
-                {{ uiLabels.startQuiz }}
+                {{uiLabels.startQuiz}}
             </button>
                 </router-link>
                 <br />
                 <br />
 
         <div>
-            <button @click="saveQuestionsAsJson">Save Quiz as Json file</button>
+            <button @click="saveQuestionsAsJson"> 
+              {{uiLabels.saveAsJson}}
+            </button>
         </div>
 
               
         <div>
-            <button @click="loadJson">Load</button>
+            <button @click="loadJson">
+              {{uiLabels.loadAJson}}
+            </button>
         </div>
         <div>
               <router-link
