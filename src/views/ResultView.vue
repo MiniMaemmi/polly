@@ -1,5 +1,6 @@
 <template>
-  <div>
+ <div class="container"> 
+  <div class="topListContainer">
     <h1> Resultat </h1>
     <topListComponent v-bind:topList="topList"/>
     <!--
@@ -17,25 +18,25 @@
     <br />
     {{pollParticipants}} -->
   </div>
- <br />
+  <div class="graphContainer">
+    Graph container
+    <div class="bellCurveContainer">
+      <h3>Bell Curve here</h3>
+    </div>
+    <div class="barChartContainer">
+      <h3>Barchart here</h3>
+      <BarsComponent v-bind:data="submittedAnswers"/>
+    </div>
+  </div>
+</div>
+<br />
+<br />
   <button @click="assignScoreValueToEachAnswer">
     Temporary Assign Score Button
   </button>  
   <button @click="getSortedTopList">
     Temporary GetTopList Button
   </button> 
-
-<br />
-  
-
-  <br />
-  <br />
-
-
-
-  <BarsComponent v-bind:data="submittedAnswers"/>
-
-  <span>{{submittedAnswers}}</span>
 
 </template>
 
@@ -164,3 +165,38 @@ export default {
   }
 }
 </script>
+
+<style>
+
+  .container {
+  display: flex; /* or inline-flex */
+}
+
+  .topListContainer {
+  width: 50vw;
+  height: 100vh;
+  align-items: center;
+  background-color: coral;
+}
+
+.graphContainer {
+  background-color: lightblue;
+  width: 50vw;
+  height: 100vh;
+
+}
+
+.bellCurveContainer{
+  width: 100%;
+  background-color: lightgoldenrodyellow;
+  height: 50%;
+}
+
+
+.barChartContainer {
+  width: 100%;
+  background-color: lightslategrey;
+  height: 50%;
+
+}
+</style>
