@@ -18,27 +18,31 @@
               <!-- <br />
               <br />-->
     <!-- <button v-on:click="updateData">Update data button </button>   -->        
-    Answers:
+    <br />
+    <br />
+    Answers given:
     {{userObject.answers}}
+    <br />
   </div>
+    
+
+    <button v-if="this.lastQuestionReached===false" @click="getQuestionFromArray()">
+      Nästa fråga
+    </button>
+    <!--<button v-else> 
+      {{uiLabels.showResults}}
+    </button>-->
     <router-link
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
       custom
-      v-slot="{ navigate }">
-      <button @click="navigate" role="link">
+      v-slot="{ navigate }" v-else>
+      <button @click="submitAnswer();getPollParticipants();navigate()" role="link">
         {{uiLabels.showResults}}
       </button>
     </router-link>
-
-    <button v-if="this.lastQuestionReached===false" @click="submitAnswer();getQuestionFromArray()">
-      Nästa fråga
-    </button>
-    <button v-else @click="submitAnswer();getQuestionFromArray()">
-      Avsluta Quiz
-    </button>
-    <button @click="submitAnswer">
+    <!--<button @click="submitAnswer">
       Submit Answer
-    </button>
+    </button>-->
 </template>
 
 <script>
@@ -78,6 +82,7 @@ export default {
                         /* { questionID: 0, answerId: 0, score: 0}*/
                     ],
                 },
+      AllPollParticipants: [],
               
             
 
@@ -138,14 +143,23 @@ export default {
       
     )
   },
+
+
   methods: {
+    //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
+    getPollParticipants: function() {
+      console.log("-----i PollView getPollParticipants()----")
+      socket.on("getPollParticipants", pollParticipantsArray =>
+        this.AllPollParticipants = pollParticipantsArray
+      )
+      console.log("this.AllPollParticipants: ", this.AllPollParticipants)
+      
+    },
 
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
       console.log("-----i getQuestionFromArray()----")
-      console.log("questionObject:", this.questionObject)
       if (typeof questionObject !== 'undefined') {
-        console.log("questionObject är inte undefined")
         this.questionObject = questionObject
         
         this.question.q = questionObject.label
@@ -212,8 +226,12 @@ export default {
       console.log("------i PollView submitAnswer------")
       //socket.emit("submitAnswer", {pollId: this.pollId, questionId: this.userObject.answers.questionID )
 
-      let lastElementOfArray = this.userObject.answers[this.userObject.answers.length - 1]  
-      console.log("lastElementOfArray: ", lastElementOfArray)
+      //let lastAnswerGiven = this.userObject.answers[this.userObject.answers.length - 1]  
+      //console.log("lastElementOfArray: ", lastAnswerGiven)
+      //min tanke är att skicka hela userobjektet, så att vi sparar det i data och sedan kan loopa igenom det
+      //en idé är att också skicka vid varje svar, så att quizleaderview vet att 18/20 har svarat på den frågan. Detta kan göras från QuestionComponent
+      console.log("answer submitted:", {pollId: this.pollId, userObject: this.userObject})
+      socket.emit("submitAnswer", {pollId: this.pollId, userObject: this.userObject} )
     },
 
     //egenskriven
@@ -225,7 +243,6 @@ export default {
       if (questionAnswered===false) {
         this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id})
         console.log("Answer added")
-        //socket.emit("submitAnswer", {pollId: this.pollId, username: this.userObject.username, answers: this.userObject})
 
       }
       else if (questionAnswered===true){

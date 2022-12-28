@@ -16,7 +16,7 @@ export default {
       console.log("----i QuestionComponent----")
       console.log("answer: ", answer)
       this.$emit("answer", answer);
-    } 
+    }
   }
 }
 </script>

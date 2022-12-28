@@ -67,16 +67,24 @@ function sockets(io, socket, data) {
     socket.emit('getQuestion', data.getQuestion(pollId, questionId))
   });
 
+  //egenskriven
+  socket.on('getPollParticipants', function(pollId) {
+    console.log('------i sockets.js getPollParticipants()---------')
+    socket.emit('getPollParticipants', data.getPollParticipants(pollId))
+  });
+
 
   //egenskriven
-  /*
+  
   socket.on('submitAnswer', function(d) {
     console.log("-----sockets.js in submitAnswer()-------");
-    console.log("Variables:", d.pollId, d.question, d.answer, d.username);
-    data.submitAnswer(d.pollId, d.question, d.answer, d.username);
+    console.log("Variables:", d.pollId, d.answerObject);
+    data.submitAnswer(d.pollId, d.userObject);
+    //data.submitAnswer(d.pollId, d.question, d.answer, d.username);
     //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
-  });*/
+  });
 
+/*
   //mikaels orginal
   socket.on('submitAnswer', function(d) {
     console.log("----- i sockets.js submitAnswer() -----")
@@ -85,7 +93,7 @@ function sockets(io, socket, data) {
     console.log("-----d.answer-------", d.answer)
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
-  });
+  });*/
   
 
   socket.on('resetAll', () => {

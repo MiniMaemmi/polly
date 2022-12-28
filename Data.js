@@ -29,6 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", questionsObjectArray) {
     let poll = {};
     poll.lang = lang;  
     poll.questions = questionsObjectArray;
+    poll.pollParticipantsObjects = [];
     poll.answers = [];
     poll.currentQuestion = 0;              
     this.polls[pollId] = poll;
@@ -112,6 +113,19 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
 }*/
 
 //egenskrivet
+Data.prototype.getPollParticipants = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("-------i Data.js getPollParticipants----");
+  return poll.pollParticipantsObjects
+  /* if (typeof poll !== 'undefined') {
+    if (qId !== null) {
+      poll.currentQuestion = qId;
+    }
+    return poll.questions[qId]
+  }*/
+}
+
+//egenskrivet
 Data.prototype.createUser = function(pollId, username) {
   console.log("----- i Data.js createUser -------", username)
   console.log("Användarnamn: ", username)
@@ -152,14 +166,31 @@ Data.prototype.submitAnswer = function(pollId, question, answer, username) {
   }
 }*/
 
+//egenskriven
+Data.prototype.submitAnswer = function(pollId, userObject) {
+  console.log("------ i Data.js submitAnswer ------")
+  const poll = this.polls[pollId];
+  console.log("answer submitted for ", pollId, userObject);
+  if (typeof poll != 'undefined') {
+    console.log("poll.pollParticipantsObjects innan push: ", poll.pollParticipantsObjects)
+    //let pollParticipantsObjects = this.poll.pollParticipantsObjects
+    poll.pollParticipantsObjects.push(userObject)
+    console.log("poll.pollParticipantsObjects efter push: ", poll.pollParticipantsObjects)
+
+  }
+  
+}
+
 
 //mikaels orginal
+/*
 Data.prototype.submitAnswer = function(pollId, answer) {
   console.log("------ i Data.js submitAnswer ------")
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
   if (typeof poll !== 'undefined') {
     let answers = poll.answers[poll.currentQuestion];
+    console.log("answers:",answers)
     if (typeof answers !== 'object') {
       answers = {};
       answers[answer] = 1;
@@ -173,7 +204,7 @@ Data.prototype.submitAnswer = function(pollId, answer) {
       answers[answer] += 1
     console.log("answers looks like ", answers, typeof answers);
   }
-}
+}*/
 
 //mikaels orginal
 /*
@@ -196,7 +227,7 @@ Data.prototype.getAnswers = function(pollId) {
     const answers = poll.answers[poll.currentQuestion];
     if (typeof poll.questions[poll.currentQuestion] !== 'undefined') {
       console.log("-----i data.js getAnswers ------")
-      console.log("poll.questions:", poll.questions)
+      //console.log("poll.questions:", poll.questions)
       return {questionsArrayObject: poll.questions, a: answers};
     }
   }
