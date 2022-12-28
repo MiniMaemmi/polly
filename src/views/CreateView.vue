@@ -362,8 +362,8 @@ export default {
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:7, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:6, feedback:'', answerImage: ''},
                 ],
             })
         },

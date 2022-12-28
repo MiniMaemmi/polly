@@ -7,6 +7,8 @@
     Username: {{username}}
     <br />
     <br />
+
+
     Question:
     <QuestionComponent v-bind:question="questionObject"
               v-on:answer="logUserAnswer($event)"/>
@@ -78,6 +80,7 @@ export default {
       userObject: 
                 {
                     username: '',
+                    totalScore: 0,
                     answers: [
                         /* { questionID: 0, answerId: 0, score: 0}*/
                     ],
