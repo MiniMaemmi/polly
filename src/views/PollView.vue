@@ -26,7 +26,16 @@
     {{userObject.answers}}
     <br />
   </div>
+  <button  v-on:click =countDown()>COUNTDOWN</button> 
+
+    <div> 
+        <div id="countdown" ></div>
     
+      </div>
+
+
+
+
 
     <button v-if="this.lastQuestionReached===false" @click="getQuestionFromArray()">
       Nästa fråga
@@ -145,10 +154,55 @@ export default {
     }
       
     )
+    
+
+
+
+
+
+
+
   },
 
 
   methods: {
+    //nedräkningsfunktion
+    countDown: function()
+    {
+
+      
+        // Nedräkning i sekunder
+        var countdownDuration = 10;
+        var intervalId;
+
+
+        intervalId = setInterval(function() 
+        {
+  
+          countdownDuration--;
+          console.log(countdownDuration)
+          // Uppdaterar div:en med id:et "countdown"
+          document.getElementById("countdown").innerHTML = countdownDuration;
+
+  
+          if (countdownDuration == 0) 
+          {
+
+            clearInterval(intervalId);
+            document.getElementById("countdown").innerHTML = "Time is up!";
+          }
+        }, 1000);//millisecind mellan ticks i setInterval
+      },
+    
+
+
+
+
+
+
+
+
+
     //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
   
 
@@ -311,3 +365,13 @@ export default {
   }
 }
 </script>
+
+
+<style>
+
+#countdown{
+  font-size:80px;
+
+}
+
+</style>
