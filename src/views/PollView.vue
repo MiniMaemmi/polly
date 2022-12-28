@@ -36,7 +36,7 @@
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
       custom
       v-slot="{ navigate }" v-else>
-      <button @click="submitAnswer();getPollParticipants();navigate()" role="link">
+      <button @click="submitAnswer();navigate()" role="link">
         {{uiLabels.showResults}}
       </button>
     </router-link>
@@ -147,14 +147,7 @@ export default {
 
   methods: {
     //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
-    getPollParticipants: function() {
-      console.log("-----i PollView getPollParticipants()----")
-      socket.on("getPollParticipants", pollParticipantsArray =>
-        this.AllPollParticipants = pollParticipantsArray
-      )
-      console.log("this.AllPollParticipants: ", this.AllPollParticipants)
-      
-    },
+  
 
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
@@ -241,7 +234,7 @@ export default {
       questionAnswered = this.checkIfQuestionIsAnswered(this.questionObject.id)
       
       if (questionAnswered===false) {
-        this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id})
+        this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id, score: 0})
         console.log("Answer added")
 
       }
@@ -250,7 +243,7 @@ export default {
         //här borde man ha så att man kollar om det är samma svar som redan blivit tillagt. Hade varit
         //mer effektivt än att bara replace:a oavsett
         let indexToReplace = this.replacePreviousAnswerOnQuestion(this.questionObject.id)
-        this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id}
+        this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id, score: 0}
       }
       
       else {

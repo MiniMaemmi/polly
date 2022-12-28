@@ -114,9 +114,10 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
 
 //egenskrivet
 Data.prototype.getPollParticipants = function(pollId) {
-  const poll = this.polls[pollId];
+  //const poll = this.polls[pollId];
   console.log("-------i Data.js getPollParticipants----");
-  return poll.pollParticipantsObjects
+  console.log("pollParticipantsObjects", this.polls[pollId].pollParticipantsObjects);
+  return this.polls[pollId].pollParticipantsObjects
   /* if (typeof poll !== 'undefined') {
     if (qId !== null) {
       poll.currentQuestion = qId;
@@ -172,11 +173,11 @@ Data.prototype.submitAnswer = function(pollId, userObject) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, userObject);
   if (typeof poll != 'undefined') {
-    console.log("poll.pollParticipantsObjects innan push: ", poll.pollParticipantsObjects)
+  
     //let pollParticipantsObjects = this.poll.pollParticipantsObjects
     poll.pollParticipantsObjects.push(userObject)
     console.log("poll.pollParticipantsObjects efter push: ", poll.pollParticipantsObjects)
-
+    console.log("this.polls[pollId].pollParticipantsObjects efter push: ", this.polls[pollId].pollParticipantsObjects)
   }
   
 }

@@ -4,7 +4,15 @@
     QuestionObject:
     <br />
     {{question}}
+    <br />
+    <br />
+    <h1> POLLPARTICIPANTS</h1>
+    <br />
+    {{pollParticipants}}
   </div>
+
+
+
   <BarsComponent v-bind:data="submittedAnswers"/>
 
   <span>{{submittedAnswers}}</span>
@@ -26,7 +34,11 @@ export default {
     return {
       question: "",
       submittedAnswers: {
-      }
+      },
+      pollParticipants:[],
+
+
+
     }
   },
   created: function () {
@@ -39,7 +51,19 @@ export default {
     socket.on("newQuestion", update => {
       this.question = update.q;
       this.data = {};
-    })
+    });
+
+    socket.emit("getPollParticipants", this.pollId) 
+      socket.on("getPollParticipants", update => {
+        console.log("getPollParticipants log")
+        this.pollParticipants = update;
+        
+      
+    });
+
+
+
+
   }
 }
 </script>
