@@ -14,6 +14,7 @@
 	"CreateView":"",
 	"quizName":"Name of Quiz",
 	"question":"Question",
+	"answer":"Answer",
 	"addAnswer":"Add Answer",
 	"addQuestion":"Add Question",
 	"saveQuiz":"Save Quiz",
@@ -24,7 +25,8 @@
 	"quizleaderStartView": "",
 	"joinQuiz":"Join with the Quiz id below:",
 	"playQuiz": "Let´s play the quiz",
-	
+
+	"nextQuestion":"Next Question",	
 
 	"invite": "Invite participants with this link:",
 	

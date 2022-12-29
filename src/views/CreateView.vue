@@ -7,9 +7,9 @@
     <div class="quizbody">
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
-            <!--uiLabels funkar inte i en input, hur löser man de?-->
+
             <input v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
-            <!-- <input placeholder= "Quiznamn" type="text" v-model="quizName"> -->
+
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -28,8 +28,10 @@
             </button>
 
 
-          {{uiLabels.question}}
-            <input v-model="question.label" v-bind:key="'question-label'+question">
+            <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
+
+            <!--<button class="Xbutton" @click.prevent="removeQuestion(questionId)">X</button>-->
+
             <div id="app">
                 <input id="fileinput" type="file" @change="onFileChange" />
                 <button v-on:click="removePicture">X</button>
@@ -38,6 +40,7 @@
                 </div>
             </div>
             <br /> 
+
             <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer">
               <!--<div class="box2">
                 <p> "Pop-up" box </p>
@@ -52,7 +55,7 @@
                        @click="markAsCorrect(question.id, answer.id)"
                      >✔️</button>
 
-                    <input type="text" v-model="answer.label">
+                    <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label">
                     <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
                     <button>
                       <img class="answerSettings" src="../../img/settings.png"/>
@@ -67,7 +70,14 @@
         <div>
             <button @click="addQuestion">
                 <!--Add question-->
-                {{ uiLabels.question }}
+                {{ uiLabels.addQuestion }}
+            </button>
+        </div>
+
+        <div>
+            <button @click="removeQuestion">
+                <!--remove question-->
+                remove last question
             </button>
         </div>
     
@@ -86,9 +96,9 @@
                   custom
                   v-slot="{ navigate }">
                 <button  
-              
                 @click="navigate"
                 role="link"
+                :disabled="!quizName.length"
                 >
                 <!--Start quiz!-->
                 {{uiLabels.startQuiz}}
@@ -348,6 +358,12 @@ export default {
       })
       
     },
+
+        removeQuestion(){
+        
+        },
+
+
         /*
         newQuestion: function () {
           console.log("i CreateView newQuestion(). ")
@@ -367,8 +383,8 @@ export default {
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
-                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
+                    //{ id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
         },
