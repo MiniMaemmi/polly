@@ -14,22 +14,25 @@
     {{poll}}
     <br />-->
     <br />
-    <h1> POLLPARTICIPANTS</h1>
-    <br />
-    {{pollParticipants}} 
   </div>
   <div class="graphContainer">
-    Graph container
     <div class="bellCurveContainer">
       <h3>Bell Curve here</h3>
       <bellCurveComponent/>
     </div>
     <div class="barChartContainer">
-      <h3>Barchart here</h3>
       <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants}"/>
     </div>
   </div>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />
 <br />
   <button @click="assignScoreValueToEachAnswer">
@@ -140,11 +143,10 @@ export default {
       this.pollParticipants.forEach(pollParticipantObject => {
         this.topList.push({username: pollParticipantObject.username, totalScore: pollParticipantObject.totalScore})
       })
-
       this.topList.sort((a, b) => (a.totalScore < b.totalScore) ? 1 : -1)
+    },
 
-
-    }
+    
 
 
   }
@@ -165,7 +167,6 @@ export default {
 }
 
 .graphContainer {
-  background-color: lightblue;
   width: 50vw;
   height: 100vh;
 
@@ -180,8 +181,8 @@ export default {
 
 .barChartContainer {
   width: 100%;
-  background-color: lightslategrey;
   height: 50%;
 
 }
+
 </style>
