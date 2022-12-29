@@ -1,5 +1,6 @@
 <template>
 <div class="wrapper">
+  <h3>Resultat per fråga</h3>
   <button @click="checkQuestions">
     Check
   </button>  
@@ -9,13 +10,13 @@
     <div class="questionBarsOnly">
     <div class="bar">
       <div v-bind:style="{height: questionResultCounter[key].correctAnswers*30 + 'px'}">
-        <span> Rätt </span>
+        <span v-if="questionResultCounter[key].correctAnswers>0"> {{questionResultCounter[key].correctAnswers}} </span>
         
       </div>
     </div>
     <div class="bar">
       <div v-bind:style="{height: questionResultCounter[key].wrongAnswers*30 + 'px'}">
-        <span> Fel </span>
+        <span v-if="questionResultCounter[key].wrongAnswers>0"> {{questionResultCounter[key].wrongAnswers}} </span>
       </div>
 
     </div>
@@ -51,7 +52,7 @@ export default {
     }
   },
   created: function () { 
-    this.checkQuestions()
+    //this.checkQuestions()
 
 
   },
@@ -119,9 +120,8 @@ span {
 
 .barArea {
   display: flex;
-  background-color: gray;
-  border-bottom: 5px black solid;
-  border: 1px yellow dashed;
+  /*background-color: gray;*/
+  /*border: 1px yellow dashed;*/
   flex-direction: row;
   font: 1.5vw Inter;
   padding: 2%;
@@ -132,15 +132,19 @@ span {
 .questionBarWrapper {
   width: 15%;
   height: 20vh;
-  border: 3px purple dotted;
+  /*border: 3px purple dotted;*/
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-direction: column;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .questionNumber {
   color: black;
+  font: Inter;
+  font-weight: 700;
 }
 
 .questionBarsOnly{

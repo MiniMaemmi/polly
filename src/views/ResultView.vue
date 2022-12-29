@@ -1,18 +1,12 @@
 <template>
- <div class="container"> 
-  <div class="topListContainer">
+
+  <div class="resultHeader">
     <h1> Resultat </h1>
+  </div>
+   <div class="container"> 
+  <div class="topListContainer">
+    
     <topListComponent v-bind:topList="topList"/>
-    <!--
-    QuestionObject:
-    <br />
-    {{question}}
-    <br />
-    <br />
-    POLLOBJECT:
-    <br />
-    {{poll}}
-    <br />-->
     <br />
   </div>
   <div class="graphContainer">
@@ -146,7 +140,7 @@ export default {
       this.topList.sort((a, b) => (a.totalScore < b.totalScore) ? 1 : -1)
     },
 
-    
+
 
 
   }
@@ -155,15 +149,41 @@ export default {
 
 <style>
 
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
+
+  body{
+    background: rgb(254,81,154);
+    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
+    font-family: 1em Inter 400 black;
+  }
+
+  h1 {
+    font: 3em Inter;
+    font-weight: 700;
+
+  }
+
+  h3 {
+    font: 1.5em Inter;
+    font-weight: 400;
+
+  }
+
   .container {
   display: flex; /* or inline-flex */
+  
+}
+
+.resultHeader {
+  border: 2px black dotted;
+  justify-content: center;
+  height: 20vh;
 }
 
   .topListContainer {
   width: 50vw;
   height: 100vh;
   align-items: center;
-  background-color: coral;
 }
 
 .graphContainer {
@@ -174,7 +194,6 @@ export default {
 
 .bellCurveContainer{
   width: 100%;
-  background-color: lightgoldenrodyellow;
   height: 50%;
 }
 
@@ -184,5 +203,6 @@ export default {
   height: 50%;
 
 }
+
 
 </style>
