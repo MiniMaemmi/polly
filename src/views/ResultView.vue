@@ -5,9 +5,15 @@
       <h1> Resultat 🎉 </h1>
     </div>
   </div>
+  <button @click="assignScoreValueToEachAnswer">
+    Temporary Assign Score Button
+  </button>  
+  <button @click="getSortedTopList">
+    Temporary GetTopList Button
+  </button>
   <div class="container"> 
   <div class="topListContainer">
-    <topListComponent v-bind:topList="topList"/>
+    <topListComponent v-bind:topListAndUsername="{topList, username}"/>
   </div>
   <div class="graphContainer">
     <div class="bellCurveContainer">
@@ -28,12 +34,6 @@
 <br />
 <br />
 <br />
-  <button @click="assignScoreValueToEachAnswer">
-    Temporary Assign Score Button
-  </button>  
-  <button @click="getSortedTopList">
-    Temporary GetTopList Button
-  </button> 
 </body>
 
 </template>
@@ -57,11 +57,12 @@ export default {
     return {
       question: "",
       lang: "",
+      username: "",
       submittedAnswers: {
       },
       pollParticipants:[],
       poll: {},
-      topList: []
+      topList: [],
 
 
 
@@ -70,6 +71,7 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id
     this.lang = this.$route.params.lang
+    this.username = this.$route.params.username
     socket.emit('joinPoll', this.pollId)
 
     socket.emit('getPoll', this.pollId)

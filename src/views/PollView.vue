@@ -349,7 +349,7 @@ export default {
 
 
     navigate: function() {
-      this.$router.push('/result/'+this.pollId+'/'+this.lang)
+      this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
     },
 
 

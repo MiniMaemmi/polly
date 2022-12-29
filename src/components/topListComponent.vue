@@ -1,27 +1,31 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <h1> Topplista </h1>
+      <h3> Topplista </h3>
     </div>
     <table>
       <div class="usernameContainer">
         <tr>
           <th>Username</th>
         </tr>
-        <div v-for="(topListObject,key) in topList" v-bind:key="topListObject">  
-        <tr>
-          <td>{{key+1}}: {{topListObject.username}}</td>
-        </tr> 
+        <div v-for="(topListObject,key) in topListAndUsername.topList" v-bind:key="topListObject"> 
+          <div v-if="(key<maxNumberInTopList) || (this.username !== '')">
+            <tr>
+              <td>{{key+1}}: {{topListObject.username}}</td>
+            </tr>
+          </div> 
         </div>
       </div>
         <div class="scoreContainer">
         <tr>
           <th>Score</th>
         </tr>
-      <div v-for="topListObject in topList" v-bind:key="topListObject">  
-        <tr>
-            <td>{{topListObject.totalScore}}</td>
-        </tr>
+      <div v-for="(topListObject,key) in topListAndUsername.topList" v-bind:key="topListObject">
+        <div v-if="key<maxNumberInTopList || (this.username !== '')">  
+          <tr>
+              <td>{{topListObject.totalScore}}</td>
+          </tr>
+        </div>   
       </div>
     </div>   
     </table>  
@@ -32,7 +36,19 @@
 export default {
   name: 'topListComponent',
   props: {
-    topList: []
+    topListAndUsername: {
+      topList: [],
+      username:"",
+    }
+    /*topList: [],
+    username:"",*/
+  },
+  data: function () {
+    return {
+      uiLabels: {},
+      maxNumberInTopList:3,
+      username: this.topListAndUsername.username,
+    }
   },
   //emits: ["answer"],
   //methods: {
@@ -53,14 +69,14 @@ table {
   width: 100%;
   display: flex;
   font-weight: 100;
+  margin-top: 10%;
 
 }  
 
-h1 {
+.header h3 {
   display: inline;
   font: 3em Inter;
   font-weight: 400;
-
 }
 
 .wrapper {
@@ -72,7 +88,7 @@ h1 {
   margin-right: 5%;
   margin-top: 5%;
   margin-bottom: 5%;
-  padding: 5%;
+  padding: 10%;
   
 
 
@@ -97,6 +113,7 @@ h1 {
   align-self: center;
   font: 2em Inter;
   font-weight: 400;
+  margin-bottom: 5%;
 
 }
 
