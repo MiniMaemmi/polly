@@ -1,31 +1,88 @@
 <template>
 <div class="wrapper">
-  POLLEN:
-  {{data.poll}}
-  <br />
-  <br />
-  DELTAGARE:
-  {{data.pollParticipants}}
 
-  <!--
-  <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px'}">
-      <span> {{item}} </span>
-    </div>
+
+  <button @click="checkQuestions">
+    check
+  </button>  
+  questionresultCounter
+  {{questionResultCounter}}
+
+  <div v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
+  <div class="bar" v-bind:style="{height: questionResultObject.correctAnswer + 'px'}">
+
+    <br />
+  
+    
     <div> 
-      {{key}}
+      {{key+1}}
     </div>
-  </div>-->
+  </div>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
   name: 'BarsComponent',
+  data: function () {
+    return {
+
+      questionResultCounter:[],
+    }
+  },
+
+
   props: {
-    data: Object
+    data: Object,
+   },
+
+    methods: {
+    checkQuestions: function () {
+      console.log("eyy")
+      console.log("this.data", this.data)
+      this.data.poll.questions.forEach(question => {
+        let correctAnswers=0;
+        let wrongAnswers=0;
+
+        this.data.pollParticipants.forEach(participant=>{
+          participant.answers.forEach(answer=>{
+            if ((question.id===answer.questionID)&&(answer.correct)){
+              correctAnswers+=1
+            }
+            else if((question.id===answer.questionID)&&(!answer.correct)){
+              wrongAnswers+=1
+            }
+            console.log(answer)
+
+
+          })
+          console.log(participant)
+
+
+        })
+      console.log(question)
+
+      this.questionResultCounter.push({questionID:question.id, correctAnswers,wrongAnswers})
+
+
+
+      })
+
+
+
+
+
+    }
+
+
+
+    },
+
+
   }
-}
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
