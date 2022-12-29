@@ -8,8 +8,8 @@
         <div class="nameQuizSectionWrapper">  
           <div id="Quizname">
             <!--uiLabels funkar inte i en input, hur löser man de?-->
-            <!--<input placeholder= "{{uiLabels.quizName}}" type="text" v-model="quizName">-->
-            <input placeholder= "Quiznamn" type="text" v-model="quizName"> 
+            <input v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
+            <!-- <input placeholder= "Quiznamn" type="text" v-model="quizName"> -->
             <button>
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
@@ -243,15 +243,17 @@ export default {
           quizName: "",
           iterator: 2,
           url: null,
+          lang: "",
           uiLabels: {},
+          baselineScore: 5,
           activeColor: 'green',
             questions: [
                 {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 0, label: '', correct: false, score:2, feedback:'du är fel', answerImage: ''},
-                        { id:1, label: '', correct: false, score:4, feedback:'rätt som en plätt', answerImage: ''},
+                        { id: 0, label: '', correct: false, score:0, feedback:'du är fel', answerImage: ''},
+                        { id:1, label: '', correct: false, score:0, feedback:'rätt som en plätt', answerImage: ''},
                     ],
                 },
               
@@ -277,7 +279,7 @@ export default {
     created: function () {
       this.lang = this.$route.params.lang;
       //this.DataQuestionBodyArray = [];
-      this.pollId = (Math.random().toFixed(5)*1000000);
+      this.pollId = Math.round((Math.random().toFixed(5)*1000000));
 
       socket.emit("pageLoaded", this.lang);
       socket.on("init", (labels) => {
@@ -318,8 +320,11 @@ export default {
 
                             if (answer.correct) {
                               answer.correct = false;
+                              answer.score=0;
+
                             } else {
                               answer.correct = true;
+                              answer.score = this.baselineScore
                             }   
                         } //else {
                            //answer.correct = false;
@@ -362,8 +367,8 @@ export default {
                 id: this.questions.length + 1,
                 label: '',
                 answers: [
-                    { id: this.createId(), label: '', correct: false, score:7, feedback:'', answerImage: ''},
-                    { id: this.createId(), label: '', correct: false, score:6, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
         },

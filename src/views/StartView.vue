@@ -76,7 +76,7 @@
       </div>
 
       <button v-on:click="createUser">
-        <router-link v-bind:to="'/poll/'+id+'/'+username">{{uiLabels.participatePoll}}</router-link>
+        <router-link v-bind:to="'/poll/'+id+'/'+ lang + '/' +username">{{uiLabels.participatePoll}}</router-link>
       </button>
     
       <!-- byta spåråk funktion-->

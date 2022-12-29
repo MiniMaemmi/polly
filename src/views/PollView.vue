@@ -43,14 +43,14 @@
     <!--<button v-else> 
       {{uiLabels.showResults}}
     </button>-->
-    <router-link
+    <!-- <router-link
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
       custom
-      v-slot="{ navigate }" v-else>
-      <button @click="submitAnswer();navigate()" role="link">
+      v-slot="{ navigate }" v-else>-->
+      <button v-else @click="submitAnswer();navigate()" role="link">
         {{uiLabels.showResults}}
       </button>
-    </router-link>
+    <!-- </router-link> -->
     <!--<button @click="submitAnswer">
       Submit Answer
     </button>-->
@@ -82,6 +82,7 @@ export default {
       submittedAnswers: {},
       username: "",
       poll: {},
+      lang: "",
       //pollLength: this.getQuestionFromArray(this.poll),
       pollLength: 0,
       pollQuestionIterator:0,
@@ -91,7 +92,7 @@ export default {
                     username: '',
                     totalScore: 0,
                     answers: [
-                        /* { questionID: 0, answerId: 0, score: 0}*/
+                        /* { questionID: 0, answerId: 0, score: 0, correct: answer.correct}*/
                     ],
                 },
       AllPollParticipants: [],
@@ -108,6 +109,7 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
+    this.lang = this.$route.params.lang
     console.log("------ in PollView created function ------ ")
     console.log("username in pollview created func: ", this.username)
     this.userObject.username = this.username
@@ -291,7 +293,7 @@ export default {
       questionAnswered = this.checkIfQuestionIsAnswered(this.questionObject.id)
       
       if (questionAnswered===false) {
-        this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id, score: 0})
+        this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id, score: answer.score, correct: answer.correct})
         console.log("Answer added")
 
       }
@@ -300,7 +302,7 @@ export default {
         //här borde man ha så att man kollar om det är samma svar som redan blivit tillagt. Hade varit
         //mer effektivt än att bara replace:a oavsett
         let indexToReplace = this.replacePreviousAnswerOnQuestion(this.questionObject.id)
-        this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id, score: 0}
+        this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id, score: answer.score, correct: answer.correct}
       }
       
       else {
@@ -343,11 +345,12 @@ export default {
           console.log("continue to loop")
         }
       })
-    },
+    },*/
+
 
     navigate: function() {
-      this.$router.push("'/result/'+'/'+this.pollId+'/'+lang")
-    },*/
+      this.$router.push('/result/'+this.pollId+'/'+this.lang)
+    },
 
 
 

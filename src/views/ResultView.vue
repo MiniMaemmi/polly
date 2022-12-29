@@ -12,20 +12,21 @@
     POLLOBJECT:
     <br />
     {{poll}}
-    <br />
+    <br />-->
     <br />
     <h1> POLLPARTICIPANTS</h1>
     <br />
-    {{pollParticipants}} -->
+    {{pollParticipants}} 
   </div>
   <div class="graphContainer">
     Graph container
     <div class="bellCurveContainer">
       <h3>Bell Curve here</h3>
+      <bellCurveComponent/>
     </div>
     <div class="barChartContainer">
       <h3>Barchart here</h3>
-      <BarsComponent v-bind:data="submittedAnswers"/>
+      <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants}"/>
     </div>
   </div>
 </div>
@@ -44,6 +45,7 @@
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
 import topListComponent from '@/components/topListComponent.vue';
+import bellCurveComponent from '@/components/bellCurveComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
 
@@ -51,11 +53,13 @@ export default {
   name: 'ResultView',
   components: {
     BarsComponent,
-    topListComponent
+    topListComponent,
+    bellCurveComponent
   },
   data: function () {
     return {
       question: "",
+      lang: "",
       submittedAnswers: {
       },
       pollParticipants:[],
@@ -68,6 +72,7 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id
+    this.lang = this.$route.params.lang
     socket.emit('joinPoll', this.pollId)
 
     socket.emit('getPoll', this.pollId)
@@ -99,17 +104,11 @@ export default {
   },
   methods: {
     assignScoreValueToEachAnswer: function() {
-      //for each answerobject, this.answerobject.score = getQuestionAnswerScore()
       console.log("----- i ResultView assignScoreValueToEachAnswer()---- ")
       this.pollParticipants.forEach(pollParticipantObject => {
-        
-        //console.log("pollParticipantObject:", pollParticipantObject)
 
         pollParticipantObject.answers.forEach(questionAnswered => {
-          //console.log("questionAnswered:", questionAnswered)
-            //questionAnswered.score = this.getQuestionAnswerScore(questionAnswered.questionID, questionAnswered.answerId)
             this.setQuestionAnswerScore(questionAnswered, pollParticipantObject)
-            //console.log("questionAnswered after score added:", questionAnswered)
         })
 
       })
@@ -119,32 +118,18 @@ export default {
 
     setQuestionAnswerScore: function(questionAnswered, pollParticipantObject) {
       console.log("----- i ResultView getQuestionAnswerScore()---- ")
-      //console.log("questionId:",questionAnswered.questionID)
-      //console.log("answerId:",questionAnswered.answerId)
 
       this.poll.questions.forEach(questionObject => {
-        //console.log("questionObject:", questionObject)
-        //console.log("questionObject.id:", questionObject.id)
 
         if (questionObject.id === questionAnswered.questionID) {
-          //console.log("same question")
 
           questionObject.answers.forEach(answerObject => {
-            //console.log("answerObject:",answerObject)
             if (answerObject.id === questionAnswered.answerId) {
-              //console.log("same question & answer! ")
-              //console.log("Updating score")
-              //let answerScore = answerObject.score
               questionAnswered.score = answerObject.score
               pollParticipantObject.totalScore += answerObject.score
-              //console.log("questionAnswered: ", questionAnswered)
-
-
             }
 
           })
-
-
         }
 
       })

@@ -12,7 +12,7 @@ const routes = [
   },
   
     {
-    path: '/poll/:id/:username',
+    path: '/poll/:id/:lang/:username',
     name: 'PollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
   },
