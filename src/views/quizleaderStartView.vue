@@ -16,11 +16,16 @@
       <br />
 
       <div> <!--enkel knapp nu, men ska leda till quizleaderPollview -->
-        <!--<router-link>-->
-          <button>
+        <router-link
+          v-bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"
+          custom
+          v-slot="{navigate}">
+          <button
+          @click="navigate"
+          role="link">
             {{ uiLabels.playQuiz }}
           </button>
-        <!--</router-link>-->
+        </router-link>
       </div>
 
       <div> <!--Tillbaka knapp till StartView nu-->
@@ -86,14 +91,6 @@ export default {
 
 
 <style scoped>
-  
-
-
-
-
-  
-
-  
   
 
   button {

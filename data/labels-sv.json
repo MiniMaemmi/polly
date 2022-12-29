@@ -14,6 +14,7 @@
 	"CreateView":"",
 	"quizName":"Namn på Quiz",
 	"question":"Fråga",
+	"answer":"Svar",
 	"addAnswer":"Lägg till svar",
 	"addQuestion":"Lägg till fråga",
 	"saveQuiz":"Spara Quiz",
@@ -24,6 +25,8 @@
 	"quizleaderStartView": "",
 	"joinQuiz":"Gå med Quiz id nedan:",
 	"playQuiz": "Låt oss spela Quizet",
+
+	"nextQuestion":"Nästa fråga",	
 
 	"invite": "Bjud in deltagare med den här länken:",
 	
