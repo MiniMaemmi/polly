@@ -10,18 +10,17 @@
 
   <div class="barArea">
 
-  <div v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
+  <div class="questionBarWrapper" v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
+    Wrapper nr: {{key+1}}
     <div class="bar">
-      <div class="barItem" v-bind:style="{height: questionResultCounter[key].correctAnswers*10 + 'px'}">
-        <span> NY </span>
+      <div v-bind:style="{height: questionResultCounter[key].correctAnswers*10 + 'px'}">
+        <span> Rätt </span>
+        
       </div>
-      <br />
-      <br />
-
     </div>
     <div class="bar">
-      <div class="barItem" v-bind:style="{height: questionResultCounter[key].wrongAnswers*10 + 'px'}">
-        <span> NY2 </span>
+      <div v-bind:style="{height: questionResultCounter[key].wrongAnswers*10 + 'px'}">
+        <span> Fel </span>
       </div>
 
     </div>
@@ -114,7 +113,18 @@ span {
   display: flex;
   background-color: gray;
   border-bottom: 5px black solid;
-  border: 10px yellow dashed;
+  border: 1px yellow dashed;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.questionBarWrapper {
+  width: 20vw;
+  height: 20vh;
+  border: 3px purple dotted;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .bar {
@@ -123,6 +133,7 @@ span {
 .bar span {
   position: relative;
   top: -1.2em;
+  font-color: black;
 }
 .bar:nth-child(1) div:nth-child(1) {
   background-color:green;
