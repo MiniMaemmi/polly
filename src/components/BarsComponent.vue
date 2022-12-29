@@ -3,22 +3,40 @@
 
 
   <button @click="checkQuestions">
-    check
+    Check
   </button>  
   questionresultCounter
   {{questionResultCounter}}
 
-  <div v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
-  <div class="bar" v-bind:style="{height: questionResultObject.correctAnswer + 'px'}">
+  <div class="barArea">
 
-    <br />
-  
-    
-    <div> 
-      {{key+1}}
+  <div v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
+    <div class="bar">
+      <div class="barItem" v-bind:style="{height: questionResultCounter[key].correctAnswers*10 + 'px'}">
+        <span> NY </span>
+      </div>
+      <br />
+      <br />
+
     </div>
+    <div class="bar">
+      <div class="barItem" v-bind:style="{height: questionResultCounter[key].wrongAnswers*10 + 'px'}">
+        <span> NY2 </span>
+      </div>
+
+    </div>
+    <!--
+    <div v-bind:style="{height: 5 + 'px'}">
+      <span> {{key+1}} </span>
+
+    </div>
+    <div  v-bind:style="{height: 100 + 'px'}">
+      <span> {{key+1}} </span>
+
+    </div>-->
+  
   </div>
-  </div>
+</div>
 </div>
 </template>
 
@@ -91,31 +109,28 @@ export default {
 span {
   color:var(--background-color);
 }
-.bar {
-  display: inline-block;
-  width: 50px;
-  vertical-align: bottom;
+
+.barArea {
+  display: flex;
+  background-color: gray;
+  border-bottom: 5px black solid;
+  border: 10px yellow dashed;
 }
 
+.bar {
+  width: 50px;
+}
 .bar span {
   position: relative;
   top: -1.2em;
 }
 .bar:nth-child(1) div:nth-child(1) {
-  background-color:red;
+  background-color:green;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:blue;
+  background-color:red;
 }
-.bar:nth-child(3) div:nth-child(1) {
-  background-color:teal;
-}
-.bar:nth-child(4) div:nth-child(1) {
-  background-color:purple;
-}
-.bar:nth-child(5) div:nth-child(1) {
-  background-color:yellow;
-}
+
 
 .wrapper {
   padding:3em;
