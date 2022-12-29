@@ -176,6 +176,9 @@ span {
 
 .wrapper {
   padding:3em;
+  background-color: rgb(255,255,240);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5vh;
 }
 </style>
 

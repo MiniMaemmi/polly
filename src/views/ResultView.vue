@@ -1,17 +1,16 @@
 <template>
-
+<body>
   <div class="resultHeader">
-    <h1> Resultat </h1>
+    <div class="resultBox">
+      <h1> Resultat 🎉 </h1>
+    </div>
   </div>
-   <div class="container"> 
+  <div class="container"> 
   <div class="topListContainer">
-    
     <topListComponent v-bind:topList="topList"/>
-    <br />
   </div>
   <div class="graphContainer">
     <div class="bellCurveContainer">
-      <h3>Bell Curve here</h3>
       <bellCurveComponent/>
     </div>
     <div class="barChartContainer">
@@ -35,6 +34,7 @@
   <button @click="getSortedTopList">
     Temporary GetTopList Button
   </button> 
+</body>
 
 </template>
 
@@ -169,38 +169,54 @@ export default {
 
   }
 
-  .container {
-  display: flex; /* or inline-flex */
+.container {
+  display: flex;
   
 }
 
 .resultHeader {
-  border: 2px black dotted;
+  display: flex;
   justify-content: center;
-  height: 20vh;
+  align-items: baseline;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 100vw;
+
 }
 
-  .topListContainer {
+.topListContainer {
   width: 50vw;
-  height: 100vh;
-  align-items: center;
+  height: 80vh;
 }
 
 .graphContainer {
   width: 50vw;
-  height: 100vh;
+  height: 80vh;
 
 }
 
 .bellCurveContainer{
   width: 100%;
   height: 50%;
+  margin-top: 5%;
+
 }
 
 
 .barChartContainer {
   width: 100%;
   height: 50%;
+  margin-top: 5%;
+
+}
+
+.resultBox{
+  background-color: rgb(255,255,240);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 3vh;
+  width: 40%;
+  height: 70%;
+
 
 }
 
