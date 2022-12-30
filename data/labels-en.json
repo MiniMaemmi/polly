@@ -24,9 +24,10 @@
 
 	"quizleaderStartView": "",
 	"joinQuiz":"Join with the Quiz id below:",
-	"playQuiz": "Let´s play the quiz",
+	"playQuiz": "Let's play the quiz",
 
-	"nextQuestion":"Next Question",	
+	"nextQuestion":"Next Question",
+	"time":"Time's up!",
 
 	"invite": "Invite participants with this link:",
 	

@@ -9,7 +9,7 @@
     <br />
 
 
-    Question:
+    {{ uiLabels.question }}:
     <QuestionComponent v-bind:question="questionObject"
               v-on:answer="logUserAnswer($event)"/>
               <!--
@@ -26,19 +26,16 @@
     {{userObject.answers}}
     <br />
   </div>
-  <button  v-on:click =countDown()>COUNTDOWN</button> 
-
-    <div> 
-        <div id="countdown" ></div>
-    
-      </div>
+    <p v-if="countdown > 0"> {{ countdown }}</p>
+    <p v-if="countdown === 0">{{uiLabels.time}}</p>
 
 
 
 
 
-    <button v-if="this.lastQuestionReached===false" @click="getQuestionFromArray()">
-      Nästa fråga
+
+    <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
+      {{uiLabels.nextQuestion}}
     </button>
     <!--<button v-else> 
       {{uiLabels.showResults}}
@@ -47,7 +44,7 @@
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
       custom
       v-slot="{ navigate }" v-else>-->
-      <button v-else @click="submitAnswer();navigate()" role="link">
+      <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
         {{uiLabels.showResults}}
       </button>
     <!-- </router-link> -->
@@ -71,6 +68,7 @@ export default {
   data: function () {
     return {
       uiLabels: {},
+      countdown: 10,
       question: {
         q: "",
         a: []
@@ -87,6 +85,7 @@ export default {
       pollLength: 0,
       pollQuestionIterator:0,
       lastQuestionReached: false,
+      showResultButton: false,
       userObject: 
                 {
                     username: '',
@@ -158,60 +157,35 @@ export default {
     )
     
 
-
-
-
-
-
-
   },
 
-
+//man behöver klicka en extra gång på next innan 
+// visa resultat visas, vet inte exakt hur vi fixar det.
+// Bör man även försöka koppla ihop tiderna här och i quizleaderPollView
+// Nu är det begge bara statiska.
   methods: {
     //nedräkningsfunktion
-    countDown: function()
-    {
-
-      
-        // Nedräkning i sekunder
-        var countdownDuration = 10;
-        var intervalId;
-
-
-        intervalId = setInterval(function() 
-        {
-  
-          countdownDuration--;
-          console.log(countdownDuration)
-          // Uppdaterar div:en med id:et "countdown"
-          document.getElementById("countdown").innerHTML = countdownDuration;
-
-  
-          if (countdownDuration == 0) 
-          {
-
-            clearInterval(intervalId);
-            document.getElementById("countdown").innerHTML = "Time is up!";
-          }
-        }, 1000);//millisecind mellan ticks i setInterval
-      },
+    updateCountdown(){
+        this.countdown--;
+        if (this.countdown > 0) {
+            setTimeout(this.updateCountdown,1000);
+        } else {
+            this.showButton = true;
+            // visa rätt svar
+            
+        }
+    },
     
-
-
-
-
-
-
-
-
-
     //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
   
 
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
+      this.showButton = false;
       console.log("-----i getQuestionFromArray()----")
       if (typeof questionObject !== 'undefined') {
+        this.countdown = 10;
+
         this.questionObject = questionObject
         
         this.question.q = questionObject.label
@@ -220,11 +194,15 @@ export default {
             this.question.a.push(answer.label);
         })
         this.pollQuestionIterator += 1
+        this.updateCountdown();
+
+
 
       }
       else if (typeof questionObject === 'undefined'){
         //Delete "Next fråga button"
         this.lastQuestionReached = true
+        this.showResultButton = true
       }
       
     },
