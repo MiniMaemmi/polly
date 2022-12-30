@@ -239,3 +239,95 @@ module.exports = Data;
 
 
 
+
+
+
+
+
+
+
+
+Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants) {
+      console.log("----- i data.js assignScoreValueToEachAnswer()---- ")
+      console.log("början på assignScoreValueToEachAnswer", pollParticipants);
+      const poll=this.polls[pollId];
+      pollParticipants.forEach(pollParticipantObject => {
+
+        pollParticipantObject.answers.forEach(questionAnswered => {
+          poll.questions.forEach(questionObject => {
+
+        if (questionObject.id === questionAnswered.questionID) {
+
+          questionObject.answers.forEach(answerObject => {
+            if (answerObject.id === questionAnswered.answerId) {
+              questionAnswered.score = answerObject.score
+              pollParticipantObject.totalScore += answerObject.score
+            }
+
+          })
+        }
+
+      })
+
+
+
+
+        })
+
+      })
+          console.log("slutet på assignScoreValueToEachAnswer", pollParticipants);
+      return pollParticipants;
+
+    }
+
+    Data.prototype.getSortedTopList= function(pollParticipants, topList) {
+      pollParticipants.forEach(pollParticipantObject => {
+        topList.push({username: pollParticipantObject.username, totalScore: pollParticipantObject.totalScore})
+      })
+      topList.sort((a, b) => (a.totalScore < b.totalScore) ? 1 : -1)
+
+      return topList
+
+    }
+    Data.prototype.checkQuestions= function () {
+      console.log("eyy")
+      console.log("this.data", this.data)
+      this.data.poll.questions.forEach(question => {
+        let correctAnswers=0;
+        let wrongAnswers=0;
+
+        this.data.pollParticipants.forEach(participant=>{
+          this.totalNumberParticipants += 1
+          participant.answers.forEach(answer=>{
+            if ((question.id===answer.questionID)&&(answer.correct)){
+              correctAnswers+=1
+            }
+            else if((question.id===answer.questionID)&&(!answer.correct)){
+              wrongAnswers+=1
+            }
+            console.log(answer)
+
+
+          })
+          console.log(participant)
+
+
+        })
+      console.log(question)
+
+      this.questionResultCounter.push({questionID:question.id, correctAnswers,wrongAnswers})
+
+
+
+      })
+
+
+
+
+
+    }
+
+
+
+
+

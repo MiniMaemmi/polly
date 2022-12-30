@@ -91,17 +91,32 @@ export default {
 
     socket.emit("getPollParticipants", this.pollId) 
       socket.on("getPollParticipants", update => {
-        console.log("getPollParticipants log")
-        this.pollParticipants = update;
         
+        this.pollParticipants = update;
+
+        
+        socket.emit("assignScoreForUser", this.pollId, this.pollParticipants)
+        socket.on('assignScoreForUser', update =>{
+          this.pollParticipants= update;
+
+          
+          socket.emit("getSortedTopList", this.pollParticipants, this.topList)
+          socket.on('getSortedTopList', update =>{
+          
+          this.topList=update;
+          console.log("toplist", this.topList)
+        });
+        });
       
     });
 
 
+      
+
 
 
   },
-  methods: {
+  methods: {/*
     assignScoreValueToEachAnswer: function() {
       console.log("----- i ResultView assignScoreValueToEachAnswer()---- ")
       this.pollParticipants.forEach(pollParticipantObject => {
@@ -145,6 +160,7 @@ export default {
 
 
 
+  */
   }
 }
 </script>

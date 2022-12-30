@@ -84,6 +84,19 @@ function sockets(io, socket, data) {
     //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
 
+  socket.on('assignScoreForUser', function(pollId, pollParticipants){
+    console.log("-----sockets.js in assignScoreForUser-------");
+    socket.emit("assignScoreForUser",data.assignScoreValueToEachAnswer(pollId, pollParticipants));
+
+  });
+
+  socket.on('getSortedTopList', function(pollParticipants, topList){
+    console.log("-----sockets.js in getSortedTopList-------");
+    socket.emit("getSortedTopList",data.getSortedTopList(pollParticipants, topList));
+
+
+  });
+
 /*
   //mikaels orginal
   socket.on('submitAnswer', function(d) {
