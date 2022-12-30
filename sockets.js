@@ -97,6 +97,14 @@ function sockets(io, socket, data) {
 
   });
 
+  socket.on('checkQuestions', function(pollId, pollParticipants, questionResultCounter){
+    console.log("-----sockets.js in checkQuestions-------AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    socket.emit("checkQuestions",data.checkQuestions(pollId, pollParticipants, questionResultCounter));
+
+
+  });
+
+
 /*
   //mikaels orginal
   socket.on('submitAnswer', function(d) {

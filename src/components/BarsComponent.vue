@@ -1,22 +1,20 @@
 <template>
 <div class="wrapper">
   <h3>Resultat per fråga</h3>
-  <button @click="checkQuestions">
-    Check
-  </button>  
+    
 
   <div class="barArea">
-  <div class="questionBarWrapper" v-for="(questionResultObject, key) in questionResultCounter" v-bind:key="key">
+  <div class="questionBarWrapper" v-for="(questionResultObject, key) in data.questionResultCounter" v-bind:key="key">
     <div class="questionBarsOnly">
     <div class="bar">
-      <div v-bind:style="{height: questionResultCounter[key].correctAnswers*30 + 'px'}">
-        <span v-if="questionResultCounter[key].correctAnswers>0"> {{questionResultCounter[key].correctAnswers}} </span>
+      <div v-bind:style="{height: data.questionResultCounter[key].correctAnswers*30 + 'px'}">
+        <span v-if="data.questionResultCounter[key].correctAnswers>0"> {{data.questionResultCounter[key].correctAnswers}} </span>
         
       </div>
     </div>
     <div class="bar">
-      <div v-bind:style="{height: questionResultCounter[key].wrongAnswers*30 + 'px'}">
-        <span v-if="questionResultCounter[key].wrongAnswers>0"> {{questionResultCounter[key].wrongAnswers}} </span>
+      <div v-bind:style="{height: data.questionResultCounter[key].wrongAnswers*30 + 'px'}">
+        <span v-if="data.questionResultCounter[key].wrongAnswers>0"> {{data.questionResultCounter[key].wrongAnswers}} </span>
       </div>
 
     </div>
@@ -44,13 +42,7 @@ export default {
   props: {
     data: Object,
    },
-  data: function () {
-    return {
 
-      questionResultCounter:[],
-      totalNumberParticipants:0,
-    }
-  },
   created: function () { 
     //this.checkQuestions()
 
@@ -61,43 +53,7 @@ export default {
   
 
     methods: {
-    checkQuestions: function () {
-      console.log("eyy")
-      console.log("this.data", this.data)
-      this.data.poll.questions.forEach(question => {
-        let correctAnswers=0;
-        let wrongAnswers=0;
-
-        this.data.pollParticipants.forEach(participant=>{
-          this.totalNumberParticipants += 1
-          participant.answers.forEach(answer=>{
-            if ((question.id===answer.questionID)&&(answer.correct)){
-              correctAnswers+=1
-            }
-            else if((question.id===answer.questionID)&&(!answer.correct)){
-              wrongAnswers+=1
-            }
-            console.log(answer)
-
-
-          })
-          console.log(participant)
-
-
-        })
-      console.log(question)
-
-      this.questionResultCounter.push({questionID:question.id, correctAnswers,wrongAnswers})
-
-
-
-      })
-
-
-
-
-
-    }
+    
 
 
 
@@ -167,10 +123,15 @@ span {
   
 }
 .bar:nth-child(1) div:nth-child(1) {
-  background-color:green;
+  background-color: #1CC970
+ /*rätt*/
+;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:red;
+  background-color: #F30B6A
+
+
+  ;
 }
 
 

@@ -289,15 +289,16 @@ Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants)
       return topList
 
     }
-    Data.prototype.checkQuestions= function () {
+    Data.prototype.checkQuestions= function (pollId, pollParticipants, questionResultCounter) {
       console.log("eyy")
-      console.log("this.data", this.data)
-      this.data.poll.questions.forEach(question => {
+      
+      const poll=this.polls[pollId];
+
+      poll.questions.forEach(question => {
         let correctAnswers=0;
         let wrongAnswers=0;
 
-        this.data.pollParticipants.forEach(participant=>{
-          this.totalNumberParticipants += 1
+        pollParticipants.forEach(participant=>{
           participant.answers.forEach(answer=>{
             if ((question.id===answer.questionID)&&(answer.correct)){
               correctAnswers+=1
@@ -314,15 +315,16 @@ Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants)
 
         })
       console.log(question)
+        console.log("questionResultCounter loop", questionResultCounter)
+      questionResultCounter.push({questionID:question.id, correctAnswers, wrongAnswers})
 
-      this.questionResultCounter.push({questionID:question.id, correctAnswers,wrongAnswers})
-
+         
 
 
       })
 
-
-
+      console.log("questionResultCounter return", questionResultCounter)
+    return questionResultCounter
 
 
     }

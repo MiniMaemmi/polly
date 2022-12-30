@@ -5,12 +5,6 @@
       <h1> Resultat 🎉 </h1>
     </div>
   </div>
-  <button @click="assignScoreValueToEachAnswer">
-    Temporary Assign Score Button
-  </button>  
-  <button @click="getSortedTopList">
-    Temporary GetTopList Button
-  </button>
   <div class="container"> 
   <div class="topListContainer">
     <topListComponent v-bind:topListAndUsername="{topList, username}"/>
@@ -20,20 +14,11 @@
       <bellCurveComponent/>
     </div>
     <div class="barChartContainer">
-      <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants}"/>
+      <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
     </div>
   </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
 </body>
 
 </template>
@@ -63,6 +48,8 @@ export default {
       pollParticipants:[],
       poll: {},
       topList: [],
+      questionResultCounter:[],
+    
 
 
 
@@ -94,18 +81,36 @@ export default {
         
         this.pollParticipants = update;
 
+        console.log("this.pollParticipants",this.pollParticipants)
+        console.log("this.questionResultCounter",this.questionResultCounter)
+
+        socket.emit("checkQuestions", this.pollId, this.pollParticipants, this.questionResultCounter)
+          socket.on('checkQuestions', update =>{
+          
+          this.questionResultCounter=update;
+          console.log("Checkqustions i Resultview, questionResultCounter", this.questionResultCounter)
+        
+        });
+
+
+
+
         
         socket.emit("assignScoreForUser", this.pollId, this.pollParticipants)
         socket.on('assignScoreForUser', update =>{
           this.pollParticipants= update;
-
+          });
           
           socket.emit("getSortedTopList", this.pollParticipants, this.topList)
           socket.on('getSortedTopList', update =>{
           
           this.topList=update;
           console.log("toplist", this.topList)
-        });
+       
+
+
+
+
         });
       
     });
@@ -173,6 +178,7 @@ export default {
     background: rgb(254,81,154);
     background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
     font-family: 1em Inter 400 black;
+
   }
 
   h1 {
