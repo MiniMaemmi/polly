@@ -33,7 +33,8 @@
 
 
 
-
+<!--den att ta nästa fråga borde inte finnas för de som kör men 
+behöver fixa att quizleaderView och pollView fungerar -->
     <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
       {{uiLabels.nextQuestion}}
     </button>
@@ -350,9 +351,12 @@ export default {
 
 <style>
 
-#countdown{
-  font-size:80px;
+body{
+    background: rgb(254,81,154);
+    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
+    font-family: 1em Inter 400 black;
 
-}
+  }
+
 
 </style>
