@@ -38,6 +38,14 @@ Data.prototype.createPoll = function(pollId, lang="en", questionsObjectArray) {
   //console.log("poll created pollId: ", pollId)
   return this.polls[pollId];
 }
+Data.prototype.gameStart=function(gameStarted){
+  console.log("Data.js gameStart")
+  if (gameStarted === true){
+  console.log("gameStart")
+  
+  //gameStarted=true
+  return gameStarted}
+}
 
 
 //mikaels orginal

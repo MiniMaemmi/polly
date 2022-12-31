@@ -21,7 +21,8 @@
           custom
           v-slot="{navigate}">
           <button
-          @click="navigate"
+          @click = navigate(),sendStart()
+          
           role="link">
             {{ uiLabels.playQuiz }}
           </button>
@@ -64,6 +65,7 @@ export default {
   },
   data: function () {
     return {
+      gameStarted: false,
       uiLabels: {},
       id: "",
       lang: "",
@@ -83,6 +85,11 @@ export default {
     console.log("i quizleaderStartView")
   },
   methods: {
+    sendStart: function(){
+      console.log("sendstart klrd i quizzleaderstartview")
+      this.gameStarted= true
+      socket.emit("sendStart",this.gameStarted )
+    },
 
 
   }

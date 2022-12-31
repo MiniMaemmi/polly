@@ -14,6 +14,10 @@ function sockets(io, socket, data) {
     console.log("i sockets.js createPoll()")
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.questionsObjectArray));
   });
+  socket.on("sendStart", function(gameStarted){
+    console.log("sendStart Socket")
+    socket.emit("start", data.gameStart(gameStarted))
+  })
 
 
 //mikaels orginal

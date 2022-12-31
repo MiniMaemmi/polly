@@ -9,6 +9,7 @@
     <h2>Matchen börjar strax</h2>
     <!--Här ska de ju va en wordlcloudsdaw-->
     {{this.username}}
+    
 </div>
 
 
@@ -28,6 +29,7 @@ export default {
   },
   data: function () {
     return {
+      
       uiLabels: {},
       id: "",
       lang: "en",
@@ -35,18 +37,20 @@ export default {
       username: ""
     }
   },
+  
+  
+  
+  
   created: function () {
     socket.on("init", (labels) => {
       this.uiLabels = labels
       
     })
-    //den här funkar inte jag blir lack
-    //socket.on("createUser",this.username => {
-      //this.username=username
-      //console.log("hej")
-    //})
 
-    
+    socket.on("start", (data) => {
+        console.log("HEJEHEJHEJE")
+          this.data=data
+    } )
     
     
   },
@@ -66,8 +70,14 @@ export default {
       console.log("------- i createUser StartView.vue ------ ") 
       console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
-    }*/
+    }
+    
+    
+    
+    
+    */
   }
+ 
 }
 
 

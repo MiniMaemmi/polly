@@ -74,6 +74,7 @@ export default {
   name: 'ConnectView',
   data: function () {
     return {
+      
       uiLabels: {},
       id: "",
       lang: "",
@@ -112,6 +113,11 @@ export default {
     },*/
 
   methods: {
+    
+
+
+
+
     //this one, createUser is added
     createUser: function() {
       //console.log("------- i createUser StartView.vue ------ ") 
