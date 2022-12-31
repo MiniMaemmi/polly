@@ -570,10 +570,12 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
-  button {
+
+
+  button{
   border-radius: 1em;
   margin: 0px 10px 0px 10px;
   width: 10vw;
@@ -582,16 +584,17 @@ export default {
   min-width: 40px; 
   font: 1vw Inter;
   background: #D7D7D7;
-}
+  }
 
-.upDownbutton{
-color: #C3C3C3;
-}
+  .upDownbutton{
+    color: #C3C3C3;
+  }
 
   .quizbody {
     width: 50vw;
     height: 100%;
     margin-left: 25%;
+   
   }
 
   .answerCorrect {
@@ -605,42 +608,42 @@ color: #C3C3C3;
     height: 200px;
     right: 120px;
     top: 120px;
-}
+  }
 
-.addNewQuestionArea {
-  margin: 20px;
-}
+  .addNewQuestionArea {
+    margin: 20px;
+  }
 
 
-.questionAnswer{
-  background: #ECECEC;
-  padding-bottom: 5%;
+  .questionAnswer{
+    background: #ECECEC;
+    padding-bottom: 5%;
 
-}
+  }
 
-input[type=text] {
-  width: 50%;
-  height: 8vh;
-  /* padding: 12px 20px;
-  margin: 8px 0;*/
-  font: 1.5vw Inter;
-  border: 0px;
-  /* box-sizing: border-box;*/
-  background: white;
-}
+  input[type=text] {
+    width: 50%;
+    height: 8vh;
+    /* padding: 12px 20px;
+    margin: 8px 0;*/
+    font: 1.5vw Inter;
+    border: 0px;
+    /* box-sizing: border-box;*/
+    background: white;
+  }
 
-.answerSettings {
-  background: #D7D7D7;
-  height: 4vh;
-  width: 4vh;
+  .answerSettings {
+    background: #D7D7D7;
+    height: 4vh;
+    width: 4vh;
 
-}
+  }
 
-.nameQuizSectionWrapper {
-  height: 100%;
-  width: 100%;
+  .nameQuizSectionWrapper {
+    height: 100%;
+    width: 100%;
 
-}
+  }
 
 #Quizname
 {

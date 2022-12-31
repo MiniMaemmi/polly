@@ -31,6 +31,8 @@
                 </router-link>
             </div>
 
+
+
           </label>
         <br />
         
@@ -50,6 +52,11 @@
               </button>
               </router-link>
           </div>
+
+          <h1>För att komma till PollView just nu</h1>
+            <button v-on:click="createUser">
+              <router-link v-bind:to="'/poll/'+id+'/'+ lang + '/' +username">{{uiLabels.participatePoll}}</router-link>
+            </button>
     </div>
 
         
