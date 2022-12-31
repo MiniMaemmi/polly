@@ -17,6 +17,7 @@
 	"answer":"Answer",
 	"addAnswer":"Add Answer",
 	"addQuestion":"Add Question",
+	"removeQuestion":"Remove Question",
 	"saveQuiz":"Save Quiz",
 	"startQuiz":"Start Quiz",
 	"saveAsJson":"Save Quiz as Json file",

@@ -17,6 +17,7 @@
 	"answer":"Svar",
 	"addAnswer":"Lägg till svar",
 	"addQuestion":"Lägg till fråga",
+	"removeQuestion":"Ta bort fråga",
 	"saveQuiz":"Spara Quiz",
 	"startQuiz":"Starta Quiz",
 	"saveAsJson":"Spara  Quiz som en Json file",

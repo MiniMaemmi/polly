@@ -29,9 +29,9 @@
 
 
             <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
-            <div>
-              <button @click="removeQuestion(question.id)">Ta bort fråga</button>
-            </div>
+          
+            <button @click="removeQuestion(question.id)">{{uiLabels.removeQuestion}}</button>
+            
 
             
 
