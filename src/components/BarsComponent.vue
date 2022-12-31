@@ -42,24 +42,6 @@ export default {
   props: {
     data: Object,
    },
-
-  created: function () { 
-    //this.checkQuestions()
-
-
-  },
-
-
-  
-
-    methods: {
-    
-
-
-
-    },
-
-
   }
 
 

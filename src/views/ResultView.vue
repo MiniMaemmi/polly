@@ -11,7 +11,7 @@
   </div>
   <div class="graphContainer">
     <div class="bellCurveContainer">
-      <bellCurveComponent/>
+      <bellCurveComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
     </div>
     <div class="barChartContainer">
       <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
@@ -49,7 +49,7 @@ export default {
       poll: {},
       topList: [],
       questionResultCounter:[],
-    
+      scoreCounter: [],
 
 
 
@@ -106,7 +106,9 @@ export default {
           
           this.topList=update;
           console.log("toplist", this.topList)
-       
+          
+          socket.emit("createScoreCounter", this.topList)
+
 
 
 

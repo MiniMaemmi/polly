@@ -30,7 +30,7 @@
 
             <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
           
-            <button @click="removeQuestion(question.id)">{{uiLabels.removeQuestion}}</button>
+            <button @click="removeQuestion(question.id)">x{{uiLabels.removeQuestion}}</button>
             
 
             
