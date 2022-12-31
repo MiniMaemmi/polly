@@ -29,8 +29,11 @@
 
 
             <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
+            <div>
+              <button @click="removeQuestion(question.id)">Ta bort fråga</button>
+            </div>
 
-            <!--<button class="Xbutton" @click.prevent="removeQuestion(questionId)">X</button>-->
+            
 
             <div id="app">
                 <input id="fileinput" type="file" @change="onFileChange" />
@@ -65,6 +68,7 @@
             <button @click.prevent="addAnswer(question.id)">
               {{uiLabels.addAnswer}}
             </button>
+
         </div>
     
         <div>
@@ -74,12 +78,7 @@
             </button>
         </div>
 
-        <div>
-            <button @click="removeQuestion">
-                <!--remove question-->
-                remove last question
-            </button>
-        </div>
+
     
         <div>
             {{ data }}
@@ -359,10 +358,6 @@ export default {
       
     },
 
-        removeQuestion(){
-        
-        },
-
 
         /*
         newQuestion: function () {
@@ -380,13 +375,14 @@ export default {
 
         addQuestion() {
             this.questions.push({
-                id: this.questions.length + 1,
+                id: this.createId(),
                 label: '',
                 answers: [
                     { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
                     //{ id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
                 ],
             })
+
         },
         saveQuestionsAsJson() {
           var filename=this.quizName;
@@ -431,7 +427,6 @@ export default {
 
             this.questions.forEach(question => {
                 if (question.id === questionId) {
-                  
 
                     question.answers.forEach(answer => {
                         if (answer.id === answerId) {
@@ -446,6 +441,8 @@ export default {
                 })
         },
 
+
+
         // ID:na måste ändras! Nu är de statiska!!!
         addAnswer: function (questionId) {
 
@@ -459,9 +456,18 @@ export default {
               }
           }) 
         },  
-        changeQuestionIndexUp: function (questionId) {
-                 
 
+        removeQuestion(questionId){
+          var arrayQ=this.questions
+          arrayQ.forEach(question =>{
+            if (question.id === questionId){
+              const i = arrayQ.indexOf(question)
+              arrayQ.splice(i,1)
+            }
+          })    
+        },
+
+        changeQuestionIndexUp: function (questionId) {
                  var array=this.questions
                  array.forEach(question => {
               if (question.id === questionId) { 
