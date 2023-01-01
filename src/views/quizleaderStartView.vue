@@ -22,7 +22,7 @@
           v-slot="{navigate}">
           <button
           @click = navigate(),sendStart()
-          
+        
           role="link">
             {{ uiLabels.playQuiz }}
           </button>
@@ -98,7 +98,8 @@ export default {
 
 
 <style scoped>
-  
+  @import '@/assets/css/style.css';
+  h1 { margin: 0 0 10px; }
 
   button {
   border-radius: 1em;

@@ -349,14 +349,9 @@ export default {
 </script>
 
 
-<style>
-
-body{
-    background: rgb(254,81,154);
-    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
-    font-family: 1em Inter 400 black;
-
-  }
+<style scoped>
+@import '@/assets/css/style.css';
+ 
 
 
 </style>

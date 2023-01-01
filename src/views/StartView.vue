@@ -44,7 +44,8 @@
 
       <!-- byta spåråk funktion-->
       <br />
-      <button style="font-size:15px; position:absolute; top:0; right:0; margin:5px;"  v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+      <button 
+      style="font-size:15px; position:absolute; top:0; right:0; margin:5px;"  v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
 
     </div>
   </div>
@@ -100,10 +101,16 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
   body{
-    background-color:#CBE896 ;
+    background: rgb(254,81,154);
+    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
+    font-family: 1em Inter 400 black;
+    /* För https://www.freecodecamp.org/news/html-page-width-height/*/
+    min-height: 100vh;
+    
   }
 
   /*Har inte scoped nu så blir konstigt på alla andra sidor behöver fixa!!! */
@@ -124,7 +131,7 @@ export default {
 
   background: #D7D7D7;
 }  
-
+h1 { margin: 0 0 10px; }
 
 /*@media screen and (max-width:50em) {
   .logo {
@@ -142,7 +149,14 @@ export default {
   .hide {
     left:-12em;
   }
-  =
+  =Data.prototype.gameStart=function(gameStarted){
+  console.log("Data.js gameStart")
+  if (gameStarted === true){
+  console.log("gameStart")
+  
+  //gameStarted=true
+  return gameStarted}
+}
 */
 
 

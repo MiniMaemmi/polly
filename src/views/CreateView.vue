@@ -570,11 +570,11 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
-
-
-
+  @import '@/assets/css/style.css';
+ 
+  
   button{
   border-radius: 1em;
   margin: 0px 10px 0px 10px;
@@ -584,10 +584,21 @@ export default {
   min-width: 40px; 
   font: 1vw Inter;
   background: #D7D7D7;
+  transition-duration: 0.4s;
+
+  }
+  .button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
   }
 
   .upDownbutton{
     color: #C3C3C3;
+    transition-duration: 0.4s;
+  }
+  .upDownbutton:hover{
+    background-color: #4CAF50; /* Green */
+    color: white;
   }
 
   .quizbody {
@@ -599,6 +610,12 @@ export default {
 
   .answerCorrect {
     background-color: green;
+    transition-duration: 0.4s;
+  }
+  /* denna funkar endast när knappen är grön??? */
+  .answerCorrect:hover{
+    background-color: #4CAF50; /* Green */
+    color: white;
   }
 
   .box2 {

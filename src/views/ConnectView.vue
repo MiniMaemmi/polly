@@ -1,4 +1,5 @@
 <template>
+  <body>
 <div>
     <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
     
@@ -69,7 +70,7 @@
 </div>
 
 
-
+</body>
 </template>
 
 
@@ -144,7 +145,7 @@ export default {
 </script>
 
 <style scoped>
-
+@import '@/assets/css/style.css';
 #nameAndID{
     margin:50px;
     font-size:20px;
@@ -152,6 +153,8 @@ export default {
     
 
 }
+h1 { margin: 0 0 10px; }
+
 
 
 
