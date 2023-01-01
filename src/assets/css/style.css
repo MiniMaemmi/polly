@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
 body{
-    background: rgb(254,81,154);
-    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
+    /*background: rgb(254,81,154);
+    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);*/
+    background: rgb(203,232,150);
+    background: linear-gradient(288deg, rgba(203,232,150,1) 75%, rgba(254,247,151,1) 100%);
+
     font-family: 1em Inter 400 black;
     /* För https://www.freecodecamp.org/news/html-page-width-height/*/
     min-height: 100vh;
@@ -41,6 +44,22 @@ body{
   animation: pulse 1.5s; /* Animate for 1.5 seconds on hover */
 }
 
+
+.custom-btn-quadratic {
+    color: black;
+    background: white;
+    cursor: pointer;
+    border-radius: 1em;
+    height: 100%;
+    align-self: center;
+    border: none;
+    margin-left: 1vh;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+
+}
+
 /*
 h1 {
     font-size:80px;
@@ -64,6 +83,14 @@ h1{
 
 }
 
+.lightYellowBox{ /* byt namn? */
+   background-color: rgb(255,255,240);
+   /* background: transparent; */
+}
+
+.shadowIt{
+    box-shadow: rgba(0, 0, 0, 0.24) 1vh 1vh 1vh;
+}
 
   /* 16 */
 .btn-16 {

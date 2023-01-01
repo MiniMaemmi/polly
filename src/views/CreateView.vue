@@ -3,38 +3,33 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
   <body>
+    <div class="quizbody shadowIt">
+        <div class="nameQuizSectionWrapper lightYellowBox">  
+          <div id="Quizname" >
+            <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
 
-    <div class="quizbody">
-        <div class="nameQuizSectionWrapper">  
-          <div id="Quizname">
-
-            <input v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
-
-            <button>
+            <button class="custom-btn-quadratic">
               <img class="answerSettings" src="../../img/settings.png"/>
             </button>
           </div>
       </div>
-
     <div class="addNewQuestionArea">
-      
-        <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question" >
-          
-          <button :disabled="question.id === this.questions[0].id" class="upDownbutton" @click="changeQuestionOrder(question.id, true)">
-               <img src="../../img/Up.png">
-            </button>
-            <button :disabled="question.id === this.getArrayLastElementId(this.questions)" class="upDownButton" @click="changeQuestionOrder(question.id, false)">
-                <img src="../../img/down.png">
-            </button>
 
-
-            <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
-          
-            <button @click="removeQuestion(question.id)" >x{{uiLabels.removeQuestion}}</button >
-            
-
-            
-
+        <div class="questionAnswer lightYellowBox" v-for="question in questions" v-bind:key="'question'+question" >
+          <div class="questionOperations">
+            <div class="upDownButtonPair">
+              <button :disabled="question.id === this.questions[0].id" class="upDownButton" @click="changeQuestionOrder(question.id, true)">
+                  <img src="../../img/Up.png">
+                </button>
+                <button :disabled="question.id === this.getArrayLastElementId(this.questions)" class="upDownButton" @click="changeQuestionOrder(question.id, false)">
+                  <img src="../../img/down.png">
+                </button>
+            </div>
+            <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
+            <button class="custom-btn-quadratic" @click="removeQuestion(question.id)" >
+              x{{uiLabels.removeQuestion}}
+            </button >
+          </div>
             <div id="app">
                 <input id="fileinput" type="file" @change="onFileChange" />
                 <button v-on:click="removePicture">X</button>
@@ -42,86 +37,65 @@
                   <img v-if="url" :src="url" />
                 </div>
             </div>
-            <br /> 
-
-            <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)"   
+            <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)"   
             >
               <!--<div class="box2">
                 <p> "Pop-up" box </p>
                 
               </div>-->
  
-                <div id="inputAnswerbox">
-                    <button 
+                <div class="answerBox lightYellowBox" id="inputAnswerbox">
+                    <button class="custom-btn-quadratic"
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
-                       @click="markAsCorrect(question.id, answer.id)"
-                     >✔️</button>
-
-                      
-
-                        <input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
+                       @click="markAsCorrect(question.id, answer.id)">
+                      <img src="../../img/checkmark.png">
+                   </button>
+                        <input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
+                        <!--<input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
                         :key="answer" 
-                        >
-                      
+                        >-->
 
                     <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
-                    <button>
+                    <button class="custom-btn-quadratic">
                       <img class="answerSettings" src="../../img/settings.png"/>
                     </button>
                 </div>
             </div>
-            <button @click.prevent="addAnswer(question.id)">
+            <button class="custom-btn"  @click.prevent="addAnswer(question.id)">
               {{uiLabels.addAnswer}}
             </button>
 
         </div>
     
         <div>
-            <button @click="addQuestion">
+            <button class="custom-btn"  @click="addQuestion">
                 <!--Add question-->
                 {{ uiLabels.addQuestion }}
             </button>
         </div>
-
-
-    
-        <div>
-            {{ data }}
-        </div>
-        
-          <button @click="saveQuiz">
-                <!--Save Quiz (förut Start Quiz)-->
-                {{uiLabels.saveQuiz}}
-            </button>
-            <br />
-            <br />
                 <router-link
                   v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName"
                   custom
                   v-slot="{ navigate }">
-                <button  
-                @click="navigate"
+                <button class="custom-btn"   
+                @click="saveQuiz(), navigate()"
                 role="link"
                 :disabled="!quizName.length"
                 >
-                <!--Start quiz!-->
                 {{uiLabels.startQuiz}}
             </button>
                 </router-link>
-                <br />
-                <br />
-
         <div>
-            <button @click="saveQuestionsAsJson"> 
+            <button class="custom-btn"  @click="saveQuestionsAsJson"> 
               {{uiLabels.saveAsJson}}
             </button>
         </div>
 
               
         <div>
-            <button @click="loadJson">
+            <button class="custom-btn"  @click="loadJson">
               {{uiLabels.loadAJson}}
             </button>
         </div>
@@ -130,7 +104,7 @@
                 v-bind:to="'/'+ lang"
                 custom
                 v-slot="{ navigate }">
-                <button  
+                <button class="custom-btn" style="position:absolute; top:0; left:0; margin:5px; width: 5vw"
             
               @click="navigate"
               role="link"
@@ -145,103 +119,6 @@
   </div>  
 
   </body>
-
-   <!-- 
-      <div class="addNewQuestionArea" v-for="(_, i) in addNewQuestionArea" :key="i">
-        <div class="questionAnswer">
-  
-          
-          -->
-
-            <!-- 
-             mikaels
-            <input placeholder="One answer" v-for="(_, i) in answers" 
-                   v-model="answers[i]" 
-                   v-bind:key="'answer'+i"> 
-            <br />  -->
-
-            <!--
-
-             <div class="Answerbox" v-for="(_, k) in answerAlternative[i]"  :key="k">
-              <button>✔</button>
-               <input class="answerAlt" v-model="answerAlternative[i][k]" placeholder="Works now?" type="text"/>
-               <button class="Xbutton" v-on:click="removeAnswer(k)">X</button>
-               <button>
-                  <img class="answerSettings" src="../../img/settings.png"/>
-               </button>
-               <br /> 
-               <br />
-             </div>
-            <br />
-            <button v-on:click="addAnswer">
-              {{uiLabels.addAnswer}}
-            </button>
-            <br />
-          </div>
-        </div>
-      </div>  
-    
-        <div id="addQuestion">
-          <button id="addQuestionButton" v-on:click="addQuestion">
-            Add question
-          </button>
-          <br />
-
-          {{data}}
-          <br />
-
-
-          <button id="addQuestionButton" v-on:click="saveQuestion">
-            Save question
-          </button>
-          <br />
-        </div>
-    </div>
-
-    <div class = "endOfQuizBody">
-    -->
-
-      <!-- 
-      <button v-on:click="createPoll">
-        Create/Save Quiz
-      </button>
-      -->
-
-      <!-- SLUTKOMMENTAR
-
-
-
-      <br />
-
-      <button v-on:click="runQuestion">
-          STARTA & DELA POLL
-        </button>
-        <br />
-
-        <br />
-        <br />
-
-      <button> 
-          <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
-        </button>
-    </div> 
-
-
-    <div>
-              <router-link
-                v-bind:to="'/quizleaderStartView/'+lang"
-                custom
-                v-slot="{ navigate }">
-              <button  
-            
-              @click="navigate"
-              role="link"
-               >
-            STARTA QUIZ
-          </button>
-              </router-link>
-    </div>   
-  </body>-->
 </template>
 
 <script>
@@ -624,8 +501,21 @@ export default {
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
+
+  .questionInput {
+    width: 100%;
+    height: 8vh;
+    /* padding: 12px 20px;
+    margin: 8px 0;*/
+    font: 1.5vw Inter;
+    border: 0px;
+    /* box-sizing: border-box;*/
+    background: white;
+    align-self: flex-center;
+
+  }
  
-  
+  /*
   button{
   border-radius: 1em;
   margin: 0px 10px 0px 10px;
@@ -637,25 +527,54 @@ export default {
   background: #D7D7D7;
   transition-duration: 0.4s;
 
-  }
+  }*/
   .button:hover {
     background-color: #4CAF50; /* Green */
     color: white;
   }
 
-  .upDownbutton{
+  .upDownButton{
     color: #C3C3C3;
     transition-duration: 0.4s;
+    color: black;
+    background: white;
+    border-radius: 1em;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
   }
+
+   .upDownButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+   }
+
+   .upDownButtonPair {
+    padding-right: 1vw;
+    align-self: center;
+
+   }
+
+
+
+  /*
   .upDownbutton:hover{
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     color: white;
   }
+  */
 
   .quizbody {
     width: 50vw;
     height: 100%;
     margin-left: 25%;
+    margin-top: 2%;
    
   }
 
@@ -679,13 +598,19 @@ export default {
   }
 
   .addNewQuestionArea {
-    margin: 20px;
+    /*margin: 20px;*/
+    width: 100%;
   }
 
 
   .questionAnswer{
-    background: #ECECEC;
+    /* background: #ECECEC;*/
+    /*background-color: rgb(255,255,240);*/
     padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
   }
 
@@ -700,17 +625,49 @@ export default {
     background: white;
   }
 
+  .custom-btn-quadratic .answerSettings {
+    width: 100%;
+    height: 50%;
+    padding-top: 20%;
+    padding-bottom: 20%;
+
+  }
+/*
   .answerSettings {
-    background: #D7D7D7;
-    height: 4vh;
-    width: 4vh;
+    background: transparent;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+    height: 50%;
+    padding-top: 20%;
+    padding-bottom: 20%;
+  }*/
+
+  .nameQuizSectionWrapper {
+    padding: 3vh;
+  }
+
+  .answerBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 
   }
 
-  .nameQuizSectionWrapper {
-    height: 100%;
+  .answerBox input {
     width: 100%;
+  }
 
+  .answerBox .custom-btn-quadratic {
+    margin-right: 1vw;
+  }
+
+  .answerBox img {
+    width: 50%;
+    height: 50%;
+    padding-top: 20%;
+    padding-bottom: 20%;
   }
 
 #Quizname
@@ -718,8 +675,12 @@ export default {
   color:black;
   font: 3vw Inter;
   /* position: relative; */
-  background: #ECECEC;
-  margin-bottom: 3vh;
+  /* background: #ECECEC;*/
+  height: 100%;
+  width:  100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 
   
 }
@@ -736,11 +697,7 @@ export default {
   max-height: 500px;
   background-color: #ECECEC ;
 }
-
-.answerbox{
-background-color: #ECECEC;  
-}
-
+/*
 .Xbutton{
 width: 30px;
 height: 30px;
@@ -749,6 +706,12 @@ margin-left: -3.15%;
 margin-top: 0.25%;
 padding-bottom: 0;
   padding-right: 0;
+}*/
+
+.questionOperations {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
 }
 
 
@@ -757,23 +720,22 @@ padding-bottom: 0;
 {
   color:black;
   font: 3vw Inter;
-  background: #ECECEC;
   text-align: center;
   margin: 3 vh;
 }
 
-#Quizname > button
+/* #Quizname > button
 {
   width: 6em;
   height: 6em;
   margin: 1em;
-}
-
+}*/
+/*
 #Quizname > button > img {
-  background: #D7D7D7;
+  background: transparent;
   height: 4vh;
   width: 4vh;
-}
+}*/
 
 @media screen and (max-width:760px) {
   body{background-color: black;}
