@@ -18,7 +18,7 @@
 
     <div class="addNewQuestionArea">
       
-        <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question">
+        <div class="questionAnswer" v-for="question in questions" v-bind:key="'question'+question" >
           
           <button :disabled="question.id === this.questions[0].id" class="upDownbutton" @click="changeQuestionOrder(question.id, true)">
                <img src="../../img/Up.png">
@@ -28,9 +28,9 @@
             </button>
 
 
-            <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
+            <input v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
           
-            <button @click="removeQuestion(question.id)">x{{uiLabels.removeQuestion}}</button>
+            <button @click="removeQuestion(question.id)" >x{{uiLabels.removeQuestion}}</button >
             
 
             
@@ -44,13 +44,14 @@
             </div>
             <br /> 
 
-            <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer">
+            <div class="answerbox" v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)"   
+            >
               <!--<div class="box2">
                 <p> "Pop-up" box </p>
                 
               </div>-->
  
-                <div>
+                <div id="inputAnswerbox">
                     <button 
                       :class="{
                           'answerCorrect': answer.correct,
@@ -58,7 +59,13 @@
                        @click="markAsCorrect(question.id, answer.id)"
                      >✔️</button>
 
-                    <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label">
+                      
+
+                        <input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
+                        :key="answer" 
+                        >
+                      
+
                     <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
                     <button>
                       <img class="answerSettings" src="../../img/settings.png"/>
@@ -303,7 +310,51 @@ export default {
       /*this.items.push(this.right_answer);*/
     },
     methods: {
+      //de här var ungefär 100 gånger jobbigare än jag trodde de skulle vara. 
+      focusNext: function(ev){
+        console.log("ev.target",ev.target)
+      
+        var parents=document.querySelectorAll("#inputAnswerbox")
+      
+        for (let i = 0; i < parents.length;i++)
+         {
+            var child = parents[i].children[1];
+            if (child === ev.target){
+              parents[i+1].children[1].focus()
+              break;
+           
+            } else{
+              console.log("den va slut")
+            }
+            
+                                                }
+                                          
 
+        
+      
+
+        
+        
+
+        /* if (ev.target.nextElementSibling != null){
+          let nextSibling=ev.target.nextElementSibling;
+          console.log(nextSibling)
+          let next2Sibling=nextSibling.nextElementSibling;
+          console.log(next2Sibling)
+
+          let next3Sibling=next2Sibling.nextSibling
+          console.log("tredje syskonet",next3Sibling)
+          console.log("kom in i if")
+          let next4Sibling=next3Sibling.nextSibling
+          console.log("tredje syskonet",next4Sibling)
+          let next5Sibling=next4Sibling.nextSibling
+          console.log("tredje syskonet",next5Sibling)
+          let next6Sibling=next5Sibling.nextSibling
+          console.log("tredje syskonet",next6Sibling)
+          
+          ev.target.nextElementSibling.focus();}
+        else ev.target.parentElement.firstElementChild.focus(); */
+      },
       
 
       //egenskrivet
