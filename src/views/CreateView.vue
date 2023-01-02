@@ -15,7 +15,7 @@
             <div id="myModal" class="modal">
              
               <div class="modal-content custom-btn-quadratic">
-                <p>A few Options</p>
+                <p>{{uiLabels.modalText}}</p>
                     <button id="xCloseModal"  
                     
                     @click="closeModal()">&times;</button>
@@ -163,7 +163,7 @@ export default {
           baselineScore: 5,
           activeColor: 'green',
             questions: [
-                {
+                {   url:null,
                     id: 1,
                     label: '',
                     answers: [
