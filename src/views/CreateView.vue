@@ -60,18 +60,22 @@
             </button >
             </div>
             <div id="app">
-                <input id="fileinput" type="file" @change="onFileChange" />
+              <!-- fråga mig inte hur den funkar, jag har inget svar-->
+                <input id="fileinput" type="file" @change="onFileChange($event, question)" />
                 <button v-on:click="removePicture">X</button>
                 <div id="preview">
-                  <img v-if="url" :src="url" />
+                  <div v-for="url in question" v-bind:key="url">
+                    <img v-if="question.url" :src="url" >
+
+                  </div>
+                  
+
+                 
                 </div>
             </div>
             <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)"   
             >
-              <!--<div class="box2">
-                <p> "Pop-up" box </p>
-                
-              </div>-->
+              
  
                 <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
                     <button class="custom-btn-quadratic tooltipclass"
@@ -167,8 +171,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 0, label: '', correct: false, score:0, feedback:'du är fel', answerImage: ''},
-                        { id:1, label: '', correct: false, score:0, feedback:'rätt som en plätt', answerImage: ''},
+                        { id: 0, label: '', correct: false, score:0, feedback:'du är fel', },
+                        { id:1, label: '', correct: false, score:0, feedback:'rätt som en plätt'},
                     ],
                 },
               
@@ -325,11 +329,12 @@ export default {
 
         addQuestion() {
             this.questions.push({
+                url:null,
                 id: this.createId(),
                 label: '',
                 answers: [
-                    { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
-                    //{ id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''},
+                    { id: this.createId(), label: '', correct: false, score:0, feedback:''}
+                   
                 ],
             })
 
@@ -362,9 +367,25 @@ export default {
             
             this.questions = JSON.parse(data);
         },
-        onFileChange(e) {
+        onFileChange(e, question) {
+          
+          var questionId=question.id
+          //console.log(question)
+          
           const file = e.target.files[0];
           this.url = URL.createObjectURL(file);
+          console.log(this.url)
+          this.questions.forEach(question => {
+              if (question.id === questionId) { 
+                question.url=this.url
+                console.log(question)
+                 
+
+              }
+          }) 
+
+
+
         },
         removePicture: function(){
           this.url=null;
@@ -399,7 +420,7 @@ export default {
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: this.createId(), label: '', correct: false, score:0, feedback:'', answerImage: ''}
+                  { id: this.createId(), label: '', correct: false, score:0, feedback:''}
 
                 )
 
