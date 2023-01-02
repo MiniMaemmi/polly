@@ -9,7 +9,7 @@
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
 
             <button class="custom-btn-quadratic">
-              <img class="answerSettings" src="../../img/settings.png"/>
+              <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
           </div>
       </div>
@@ -52,15 +52,17 @@
                        @click="markAsCorrect(question.id, answer.id)">
                       <img src="../../img/checkmark.png">
                    </button>
-                        <input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
+                        <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
                         <!--<input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
                         :key="answer" 
                         >-->
 
-                    <button class="Xbutton" @click.prevent="removeAnswer(question.id, answer.id)">X</button>
-                    <button class="custom-btn-quadratic">
-                      <img class="answerSettings" src="../../img/settings.png"/>
+                    <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
+                      <img src="../../img/x.png">
                     </button>
+                    <!-- <button class="custom-btn-quadratic">
+                      <img class="answerSettings" src="../../img/settings.png"/>
+                    </button>-->
                 </div>
             </div>
             <button class="custom-btn"  @click.prevent="addAnswer(question.id)">
@@ -625,11 +627,11 @@ export default {
     background: white;
   }
 
-  .custom-btn-quadratic .answerSettings {
-    width: 100%;
+  .custom-btn-quadratic .questionSettings {
+    width: 50%;
     height: 50%;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    padding-top: 10%;
+    padding-bottom: 10%;
 
   }
 /*
@@ -697,16 +699,24 @@ export default {
   max-height: 500px;
   background-color: #ECECEC ;
 }
-/*
+
 .Xbutton{
-width: 30px;
-height: 30px;
-position: absolute;
-margin-left: -3.15%;
-margin-top: 0.25%;
-padding-bottom: 0;
-  padding-right: 0;
-}*/
+width: 5%;
+height: 5%;
+margin-left: -5%;
+margin-top: -10%;
+/* border: 0.5px black solid; */
+margin-right: 0%;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+
+
+.Xbutton img {
+  width: 100%;
+  height: 100%;
+}
 
 .questionOperations {
   display: flex;
