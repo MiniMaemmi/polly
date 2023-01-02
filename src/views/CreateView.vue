@@ -3,19 +3,19 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
   <body>
-    <div class="quizbody shadowIt">
-        <div class="nameQuizSectionWrapper lightYellowBox">  
+    <div class="quizbody">
+        <div class="nameQuizSectionWrapper lightYellowBox shadowIt">  
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
-
+              <!--KUGGHJULET-->
             <button class="custom-btn-quadratic">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
           </div>
       </div>
-    <div class="addNewQuestionArea">
+    <div class="addNewQuestionArea ">
 
-        <div class="questionAnswer lightYellowBox" v-for="question in questions" v-bind:key="'question'+question" >
+        <div class="questionAnswer lightYellowBox shadowIt" style="margin-bottom:25px; margin-top:25px;" v-for="question in questions" v-bind:key="'question'+question" >
           <div class="questionOperations">
             <div class="upDownButtonPair">
               <button :disabled="question.id === this.questions[0].id" class="upDownButton" @click="changeQuestionOrder(question.id, true)">
@@ -44,19 +44,19 @@
                 
               </div>-->
  
-                <div class="answerBox lightYellowBox" id="inputAnswerbox">
-                    <button class="custom-btn-quadratic"
+                <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
+                    <button class="custom-btn-quadratic tooltipclass"
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
-                       @click="markAsCorrect(question.id, answer.id)">
+                       @click="markAsCorrect(question.id, answer.id)"> <span class="tooltiptext">Mark as 1231231231232131212332131221321331212</span>
                       <img src="../../img/checkmark.png">
                    </button>
                         <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
                         <!--<input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
                         :key="answer" 
                         >-->
-
+                          
                     <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
                       <img src="../../img/x.png">
                     </button>
@@ -81,7 +81,7 @@
                   v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName"
                   custom
                   v-slot="{ navigate }">
-                <button class="custom-btn"   
+                <button class="custom-btn" style="position:fixed; bottom:0; right:0; height:150px; width:150px; "   
                 @click="saveQuiz(), navigate()"
                 role="link"
                 :disabled="!quizName.length"
@@ -106,7 +106,7 @@
                 v-bind:to="'/'+ lang"
                 custom
                 v-slot="{ navigate }">
-                <button class="custom-btn" style="position:absolute; top:0; left:0; margin:5px; width: 5vw"
+                <button class="custom-btn" style="position:fixed; top:0; left:0; margin:5px; width: 5vw"
             
               @click="navigate"
               role="link"
@@ -206,33 +206,8 @@ export default {
               console.log("den va slut")
             }
             
-                                                }
-                                          
-
-        
-      
-
-        
-        
-
-        /* if (ev.target.nextElementSibling != null){
-          let nextSibling=ev.target.nextElementSibling;
-          console.log(nextSibling)
-          let next2Sibling=nextSibling.nextElementSibling;
-          console.log(next2Sibling)
-
-          let next3Sibling=next2Sibling.nextSibling
-          console.log("tredje syskonet",next3Sibling)
-          console.log("kom in i if")
-          let next4Sibling=next3Sibling.nextSibling
-          console.log("tredje syskonet",next4Sibling)
-          let next5Sibling=next4Sibling.nextSibling
-          console.log("tredje syskonet",next5Sibling)
-          let next6Sibling=next5Sibling.nextSibling
-          console.log("tredje syskonet",next6Sibling)
-          
-          ev.target.nextElementSibling.focus();}
-        else ev.target.parentElement.firstElementChild.focus(); */
+            }
+                                        
       },
       
 
@@ -504,6 +479,24 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
 
+  .tooltip{
+    flex:none;
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;}
+  .tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
   .questionInput {
     width: 100%;
     height: 8vh;
@@ -562,15 +555,6 @@ export default {
     align-self: center;
 
    }
-
-
-
-  /*
-  .upDownbutton:hover{
-    background-color: #4CAF50;
-    color: white;
-  }
-  */
 
   .quizbody {
     width: 50vw;
@@ -634,16 +618,7 @@ export default {
     padding-bottom: 10%;
 
   }
-/*
-  .answerSettings {
-    background: transparent;
-    height: auto;
-    max-width: 100%;
-    width: 100%;
-    height: 50%;
-    padding-top: 20%;
-    padding-bottom: 20%;
-  }*/
+
 
   .nameQuizSectionWrapper {
     padding: 3vh;
@@ -734,18 +709,7 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin: 3 vh;
 }
 
-/* #Quizname > button
-{
-  width: 6em;
-  height: 6em;
-  margin: 1em;
-}*/
-/*
-#Quizname > button > img {
-  background: transparent;
-  height: 4vh;
-  width: 4vh;
-}*/
+
 
 @media screen and (max-width:760px) {
   body{background-color: black;}
