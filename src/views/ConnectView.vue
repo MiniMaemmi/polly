@@ -1,22 +1,57 @@
 <template>
   <body>
 <div class="wrapper">
+  <div class="goBackButtonDiv">
+    <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
+      <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
+        {{uiLabels.back}}
+      </button>
+    </router-link>
+  </div>
+
   <div class="contentArea lightYellowBox shadowIt">
-    <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
+    <div class="header">
+    <h1>{{uiLabels.connectTitel}}</h1>
+    </div>
   
     <div>
-      <div id="nameAndID">
-        <label>
-          {{uiLabels.quizid}}: 
-          <!-- <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Ex: 123">-->
-          <input type="text" v-model="id" placeholder="Ex: 123">
-        </label>
-        <label>
-          {{uiLabels.username}}:
-            <!-- <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ex: Ben Dover">-->
-            <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
-        </label>
-      </div>    
+        <div class="testArea">
+          <div class="labelAndInputArea">
+            <div class="labelAndInput">
+              <label> 
+              {{uiLabels.quizid}}: 
+            </label>
+            </div>
+            <div class="labelAndInput">
+              <input type="text" v-model="id" placeholder="123">
+            </div>
+          </div>
+          <div class="labelAndInputArea">
+            <div class="labelAndInput">
+               <label>
+                {{uiLabels.username}}:
+              </label>
+            </div>
+            <div class="labelAndInput">
+              <input type="text" v-model="username"  placeholder="Anna Andersson">
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- 
+        <div class="labelArea">
+            
+             <label>
+              {{uiLabels.username}}:
+            </label>
+        </div>
+        <div class="labelArea">
+           <input type="text" v-model="id" placeholder="Ex: 123">
+           <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
+        </div>-->
             <div>
                 <router-link
                 
@@ -36,20 +71,7 @@
 
 
           
-        <div>
-              <router-link
-                v-bind:to="'/'+ lang"
-                custom
-                v-slot="{ navigate }">
-                <button class="custom-btn goBackButtonPosition" 
-            
-              @click="navigate"
-              role="link"
-                >
-                {{uiLabels.back}}
-              </button>
-              </router-link>
-          </div>
+        
 
           <h3>För att komma till PollView just nu</h3>
             <button class="custom-btn" v-on:click="createUser">
@@ -143,36 +165,202 @@ export default {
 
 <style scoped>
 @import '@/assets/css/style.css';
-#nameAndID{
-  /*
-    margin:50px;
-    font-size:20px;
-    display:grid;*/
-    display: flex;
-    flex-direction: column;
-    
 
-}
 h1 { margin: 0 0 10px; }
 
-.wrapper {
+.goBackButtonDiv {
   width: 100%;
-  padding: 3vh;
+  height: 11vh;
+  display: inline;
+}
+
+.labelAndInputArea label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 2em;
+  margin: 3%;
+}
+
+.labelArea {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-
+  align-items: center;
 }
 
-.contentArea {
-  margin-left: 20%;
-  margin-right: 20%;
+.labelArea input{
+  width: 100%;
+}
+
+.labelArea div {
+  background-color: coral;
+  width: 100%;
+  height: 50%;
+  margin: 5%;
+}
+
+.testArea {
+  width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.labelAndInputArea {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.labelAndInput {
+  width: 50%;
+  align-self: center;
+  margin: 1%;
+  display: flex;
+  justify-content: flex-end;
+
+
+}
+
+.labelAndInput input {
+  width: 100%;
+}
+
+.labelAndInput label {
+  align-self: flex-end;
+}
+
+.custom-btn {
+  width: 50%;
+  margin: 10%;
 }
 
 
 
+
+/* 1050 bryts knapparna.
+900 bli större vit ruta. Bör ha vit padding
+726 bryts knapparna igen
+500 ha helt vit ruta
+
+*/
+
+@media screen and (max-width:1100px) {
+
+    .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 20% !important
+    }
+
+    .goBackButtonDiv {
+      margin-bottom: 5%;
+    }
+
+    .contentArea {
+        margin-left: 10%;
+        margin-right: 10%;
+        flex:  flex-wrap;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .contentArea {
+        margin-left: 5%;
+        margin-right: 5%;
+        flex:  flex-wrap;
+    }
+
+    .custom-btn {
+        width: 70%;
+        margin-top: 15%;
+
+    }
+
+    .goBackButtonDiv {
+      margin-bottom: 5%;
+    }
+
+
+
+}
+
+
+@media screen and (min-width:300px) and (max-width: 450px) {
+
+    .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 30% !important;
+    }
+    h1 {
+        font-size: 3em;
+    }
+
+    .labelAndInputArea {
+        /*display: inline !important;*/
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .labelAndInput{
+      justify-content: center !important;
+      width: 80%;
+    }
+
+    input {
+      font: 1.5em Inter;
+    }
+}
+
+@media screen and (min-width:200px) and (max-width: 310px) {
+
+    .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 50% !important;
+    }
+    h1 {
+        font-size: 3em;
+    }
+
+    .contentArea {
+        margin-left: 0%;
+        margin-right: 0%;
+        flex:  none !important;
+        display: inline;
+    }
+
+    .testArea {
+        display: inline;
+    }
+
+    .labelAndInputArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+
+    .labelAndInput{
+      justify-content: center !important;
+      width: 80%;
+    }
+
+    input {
+      font: 1.5em Inter;
+    }
+
+
+}
 
 
 

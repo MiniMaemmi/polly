@@ -1,70 +1,81 @@
 <!-- Kopplat till pollvyn som deltagare ser -->
 
 <template>
-  <div class="wrapper">
-    <div class="header contentArea lightYellowBox shadowIt">
-        Pollname: {{poll.label}}
-        PollID: {{pollId}}
-        Username: {{username}}
-      <div>
-              <router-link
-                v-bind:to="'/'+ lang"
-                custom
-                v-slot="{ navigate }">
-                <button class="custom-btn goBackButtonPosition"
+
+    <template v-if="username === 'undefined'">
+      <div class="wrapper">
+        <div class="header contentArea lightYellowBox shadowIt">
+          <p>Hello Quiz leader!</p>
+          PollID: {{pollId}}
+          <br />
+
+          {{ uiLabels.question }}:
+          <QuestionComponent v-bind:question="questionObject" />
+
+          <p v-if="countdown > 0"> {{ countdown }}</p>
+          <p v-if="countdown === 0">{{uiLabels.time}}</p>
+        
+          <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+            {{uiLabels.nextQuestion}}
+          </button>
+
+          <button v-else-if="showResultButton"> 
+            {{uiLabels.showResults}}
+          </button>
+        </div>
+      </div>
+    </template>
+
+
+    <template v-else>
+      <div class="wrapper">
+        <div class="header contentArea lightYellowBox shadowIt">
+          
+          <p>Hello player!</p>
+                  Pollname: {{poll.label}}
+                PollID: {{pollId}}
+                    Username: {{username}}
+
+                <div>
+                      <router-link
+                        v-bind:to="'/'+ lang"
+                        custom
+                        v-slot="{ navigate }">
+                          <button class="custom-btn goBackButtonPosition"
+                                  @click="navigate"
+                      role="link"
+                        >
+                        {{uiLabels.back}}
+                      </button>
+                      </router-link>
+                  </div>
             
-              @click="navigate"
-              role="link"
-                >
-                {{uiLabels.back}}
-              </button>
-              </router-link>
+
+            {{ uiLabels.question }}:
+            <QuestionComponent v-bind:question="questionObject"
+                      v-on:answer="logUserAnswer($event)"/>
+          
+            <br />
+            <br />
+            Answers given:
+            {{userObject.answers}}
+            <br />
+          
+            <p v-if="countdown > 0"> {{ countdown }}</p>
+            <p v-if="countdown === 0">{{uiLabels.time}}</p>
+
+            <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
+              {{uiLabels.nextQuestion}}
+            </button>
+
+            <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
+              {{uiLabels.showResults}}
+            </button>
           </div>
-    </div>
+      </div>
 
-    <div class="contentArea lightYellowBox shadowIt">
-      {{ uiLabels.question }}:
-      <QuestionComponent v-bind:question="questionObject"
-                v-on:answer="logUserAnswer($event)"/>
-                <!--
-                v-on:answer="submitAnswer($event)"/>
-                <br />
-                Submitted Answers:
-                <span>{{submittedAnswers}}</span>-->
-                <!-- <br />
-                <br />-->
-      <!-- <button v-on:click="updateData">Update data button </button>   -->        
-      <!--Answers given:
-      {{userObject.answers}}-->
-    </div>
-  </div>
-    <p v-if="countdown > 0"> {{ countdown }}</p>
-    <p v-if="countdown === 0">{{uiLabels.time}}</p>
-    
+    </template>
 
-
-
-
-
-<!--den att ta nästa fråga borde inte finnas för de som kör men 
-behöver fixa att quizleaderView och pollView fungerar -->
-    <button class="custom-btn" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
-      {{uiLabels.nextQuestion}}
-    </button>
-    <!--<button v-else> 
-      {{uiLabels.showResults}}
-    </button>-->
-    <!-- <router-link
-      v-bind:to="'/result/'+this.pollId+ '/' + lang"
-      custom
-      v-slot="{ navigate }" v-else>-->
-      <button class="custom-btn" v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
-        {{uiLabels.showResults}}
-      </button>
-    <!-- </router-link> -->
-    <!--<button @click="submitAnswer">
-      Submit Answer
-    </button>-->
 </template>
 
 <script>

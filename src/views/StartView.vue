@@ -40,7 +40,7 @@
             </router-link>
           </div>
 
-          <!-- byta spåråk funktion-->
+          <!-- byta språk funktion-->
           <br />
           <button class="custom-btn" style="position:absolute; top:0; right:0; margin:5px;"  v-on:click="switchLanguage">
             {{uiLabels.changeLanguage}}
