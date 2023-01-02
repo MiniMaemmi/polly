@@ -12,8 +12,9 @@
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
           </div>
-      </div>
-    <div class="addNewQuestionArea">
+        </div>
+
+      <div class="addNewQuestionArea">
 
         <div class="questionAnswer lightYellowBox" v-for="question in questions" v-bind:key="'question'+question" >
           <div class="questionOperations">
@@ -25,11 +26,13 @@
                   <img src="../../img/down.png">
                 </button>
             </div>
+
             <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
+
             <button class="custom-btn-quadratic" @click="removeQuestion(question.id)" >
-              x{{uiLabels.removeQuestion}}
+              {{uiLabels.removeQuestion}}
             </button >
-          </div>
+            </div>
             <div id="app">
                 <input id="fileinput" type="file" @change="onFileChange" />
                 <button v-on:click="removePicture">X</button>
@@ -53,9 +56,7 @@
                       <img src="../../img/checkmark.png">
                    </button>
                         <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
-                        <!--<input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
-                        :key="answer" 
-                        >-->
+
 
                     <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
                       <img src="../../img/x.png">

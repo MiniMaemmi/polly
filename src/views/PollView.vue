@@ -2,56 +2,70 @@
 
 <template>
   <div>
-    PollID: {{pollId}}
-    <br />
-    Username: {{username}}
-    <br />
-    <br />
+    <template v-if="username === 'undefined'">
 
+      <p>Hello Quiz leader!</p>
+      PollID: {{pollId}}
+      <br />
 
-    {{ uiLabels.question }}:
-    <QuestionComponent v-bind:question="questionObject"
-              v-on:answer="logUserAnswer($event)"/>
-              <!--
-              v-on:answer="submitAnswer($event)"/>
-              <br />
-              Submitted Answers:
-              <span>{{submittedAnswers}}</span>-->
-              <!-- <br />
-              <br />-->
-    <!-- <button v-on:click="updateData">Update data button </button>   -->        
-    <br />
-    <br />
-    Answers given:
-    {{userObject.answers}}
-    <br />
-  </div>
-    <p v-if="countdown > 0"> {{ countdown }}</p>
-    <p v-if="countdown === 0">{{uiLabels.time}}</p>
+      {{ uiLabels.question }}:
+      <QuestionComponent v-bind:question="questionObject" />
 
+      <p v-if="countdown > 0"> {{ countdown }}</p>
+      <p v-if="countdown === 0">{{uiLabels.time}}</p>
+    
+      <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+        {{uiLabels.nextQuestion}}
+      </button>
 
-
-
-
-<!--den att ta nästa fråga borde inte finnas för de som kör men 
-behöver fixa att quizleaderView och pollView fungerar -->
-    <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
-      {{uiLabels.nextQuestion}}
-    </button>
-    <!--<button v-else> 
-      {{uiLabels.showResults}}
-    </button>-->
-    <!-- <router-link
-      v-bind:to="'/result/'+this.pollId+ '/' + lang"
-      custom
-      v-slot="{ navigate }" v-else>-->
-      <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
+      <button v-else-if="showResultButton"> 
         {{uiLabels.showResults}}
       </button>
-    <!-- </router-link> -->
-    <!--<button @click="submitAnswer">
-      Submit Answer
-    </button>-->
+    </template>
+
+
+    <template v-else>
+
+    <p>Hello player!</p>
+      PollID: {{pollId}}
+      <br />
+      Username: {{username}}
+      <br />
+      <br />
+
+      {{ uiLabels.question }}:
+      <QuestionComponent v-bind:question="questionObject"
+                v-on:answer="logUserAnswer($event)"/>
+                <!--
+                v-on:answer="submitAnswer($event)"/>
+                <br />
+                Submitted Answers:
+                <span>{{submittedAnswers}}</span>-->
+                <!-- <br />
+                <br />-->
+      <!-- <button v-on:click="updateData">Update data button </button>   -->        
+      <br />
+      <br />
+      Answers given:
+      {{userObject.answers}}
+      <br />
+    
+      <p v-if="countdown > 0"> {{ countdown }}</p>
+      <p v-if="countdown === 0">{{uiLabels.time}}</p>
+
+      <!--den att ta nästa fråga borde inte finnas för de som kör men 
+      behöver fixa att quizleaderView och pollView fungerar 
+      <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
+        {{uiLabels.nextQuestion}}
+      </button>-->
+
+      <button v-if="showResultButton" @click="submitAnswer();navigate()" role="link">
+        {{uiLabels.showResults}}
+      </button>
+
+
+    </template>
+  </div>
 </template>
 
 <script>
