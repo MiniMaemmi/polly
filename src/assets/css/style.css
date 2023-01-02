@@ -102,6 +102,15 @@ input[type=text] {
 
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 100%;
+}
+
 .wrapper {
   width: 100%;
   padding: 3vh;
@@ -116,7 +125,9 @@ input[type=text] {
   margin-left: 20%;
   margin-right: 20%;
   height: 100%;
-  padding: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
   margin-top: 5%;
 }
 
