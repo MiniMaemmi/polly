@@ -106,7 +106,7 @@
                 v-bind:to="'/'+ lang"
                 custom
                 v-slot="{ navigate }">
-                <button class="custom-btn" style="position:fixed; top:0; left:0; margin:5px; width: 5vw"
+                <button class="custom-btn goBackButtonPosition"
             
               @click="navigate"
               role="link"
@@ -599,17 +599,14 @@ export default {
     width: 100%;
 
   }
-
+/*
   input[type=text] {
     width: 50%;
     height: 8vh;
-    /* padding: 12px 20px;
-    margin: 8px 0;*/
     font: 1.5vw Inter;
     border: 0px;
-    /* box-sizing: border-box;*/
     background: white;
-  }
+  }*/
 
   .custom-btn-quadratic .questionSettings {
     width: 50%;

@@ -1,6 +1,6 @@
 <template>
-<p>{{question.label}}</p>
-<button v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject">
+<h3>{{question.label}}</h3>
+<button class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject">
   {{answerObject.label}}
 </button>
 </template>
@@ -20,6 +20,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  @import '@/assets/css/style.css';
+</style>
 
 <!--
 <script>

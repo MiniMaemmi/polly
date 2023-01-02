@@ -1,33 +1,46 @@
 <!-- Kopplat till pollvyn som deltagare ser -->
 
 <template>
-  <div>
-    PollID: {{pollId}}
-    <br />
-    Username: {{username}}
-    <br />
-    <br />
+  <div class="wrapper">
+    <div class="header contentArea lightYellowBox shadowIt">
+        Pollname: {{poll.label}}
+        PollID: {{pollId}}
+        Username: {{username}}
+      <div>
+              <router-link
+                v-bind:to="'/'+ lang"
+                custom
+                v-slot="{ navigate }">
+                <button class="custom-btn goBackButtonPosition"
+            
+              @click="navigate"
+              role="link"
+                >
+                {{uiLabels.back}}
+              </button>
+              </router-link>
+          </div>
+    </div>
 
-
-    {{ uiLabels.question }}:
-    <QuestionComponent v-bind:question="questionObject"
-              v-on:answer="logUserAnswer($event)"/>
-              <!--
-              v-on:answer="submitAnswer($event)"/>
-              <br />
-              Submitted Answers:
-              <span>{{submittedAnswers}}</span>-->
-              <!-- <br />
-              <br />-->
-    <!-- <button v-on:click="updateData">Update data button </button>   -->        
-    <br />
-    <br />
-    Answers given:
-    {{userObject.answers}}
-    <br />
+    <div class="contentArea lightYellowBox shadowIt">
+      {{ uiLabels.question }}:
+      <QuestionComponent v-bind:question="questionObject"
+                v-on:answer="logUserAnswer($event)"/>
+                <!--
+                v-on:answer="submitAnswer($event)"/>
+                <br />
+                Submitted Answers:
+                <span>{{submittedAnswers}}</span>-->
+                <!-- <br />
+                <br />-->
+      <!-- <button v-on:click="updateData">Update data button </button>   -->        
+      <!--Answers given:
+      {{userObject.answers}}-->
+    </div>
   </div>
     <p v-if="countdown > 0"> {{ countdown }}</p>
     <p v-if="countdown === 0">{{uiLabels.time}}</p>
+    
 
 
 
@@ -35,7 +48,7 @@
 
 <!--den att ta nästa fråga borde inte finnas för de som kör men 
 behöver fixa att quizleaderView och pollView fungerar -->
-    <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
+    <button class="custom-btn" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
       {{uiLabels.nextQuestion}}
     </button>
     <!--<button v-else> 
@@ -45,7 +58,7 @@ behöver fixa att quizleaderView och pollView fungerar -->
       v-bind:to="'/result/'+this.pollId+ '/' + lang"
       custom
       v-slot="{ navigate }" v-else>-->
-      <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
+      <button class="custom-btn" v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
         {{uiLabels.showResults}}
       </button>
     <!-- </router-link> -->
@@ -110,6 +123,9 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    socket.on("init", (labels) => {
+        this.uiLabels = labels
+      })
     console.log("------ in PollView created function ------ ")
     console.log("username in pollview created func: ", this.username)
     this.userObject.username = this.username
@@ -351,6 +367,15 @@ export default {
 
 <style scoped>
 @import '@/assets/css/style.css';
+
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 60%;
+}
  
 
 
