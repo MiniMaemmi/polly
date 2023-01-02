@@ -1,21 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import StartView from '../views/StartView.vue'
-//På något sätt måste vi kunna ta in språkvalet
 
 const routes = [
   {
-    //path '/'Start/:lang',
-    //fungerar om man skriver http://localhost:8080/#/en *--- 
     path: '/:lang?',
     name: 'Start',
     component: StartView
   },
   
-    {
+  {
     path: '/poll/:id/:lang/:username',
     name: 'PollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
   },
+
   {
     path: '/create/:lang',
     name: 'CreateView',
@@ -24,6 +22,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/CreateView.vue')
   },
+
   {
     path: '/result/:id/:lang/:username',
     name: 'ResultView',
@@ -32,12 +31,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ResultView.vue')
   },
+
   {
     path: '/connect/:lang',
     name: 'ConnectView',
     component: () => import(/* webpackChunkName: "about" */ '../views/ConnectView.vue')
     // ska leda till pollView så smånignom. Är mellansteget
   },
+  
   {
     path: '/waiting/:id',
     name: 'WaitingView',
@@ -51,7 +52,7 @@ const routes = [
   },
 
   {
-    path:'/quizleaderPollView/:lang/:pollId/:quizName',
+    path:'/poll/:pollID/:lang/:quizName',
     name:'quizleaderPollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderPollView.vue')
   }

@@ -14,12 +14,12 @@
         {{pollId}}
       </h1>
       <br />
-
-      <div> <!--enkel knapp nu, men ska leda till quizleaderPollview -->
+      
+      <div> <!--vill att om username är undefined blir man quizleader eller nåt-->
         <router-link
-          v-bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"
+          v-bind:to="'/poll/'+pollId+'/'+ lang + '/' +username"
           custom
-          v-slot="{navigate}">
+          v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
           <button
           @click = navigate(),sendStart()
         
