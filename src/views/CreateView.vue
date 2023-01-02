@@ -49,7 +49,7 @@
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
-                       @click="markAsCorrect(question.id, answer.id)"> <span class="tooltiptext">Mark as 1231231231232131212332131221321331212</span>
+                       @click="markAsCorrect(question.id, answer.id)"> <span class="tooltiptext">{{uiLabels.tooltip}}</span>
                       <img src="../../img/checkmark.png">
                    </button>
                         <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
@@ -491,10 +491,18 @@ export default {
   color: #fff;
   text-align: center;
   padding: 5px 0;
-  border-radius: 6px;}
+  border-radius: 6px;
+  z-index: 1;
+  bottom: 100%;
+  left: 30%;
+  margin-left: -60px;
+  position:absolute;
+  
+}
   .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+  
 }
 
   .questionInput {

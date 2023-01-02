@@ -22,6 +22,7 @@
 	"startQuiz":"Starta Quiz",
 	"saveAsJson":"Spara  Quiz som en Json file",
 	"loadAJson": "Ladda upp en Json file",
+	"tooltip":"Markera som rätt",
 
 	"quizleaderStartView": "",
 	"joinQuiz":"Gå med Quiz id nedan:",
