@@ -2,15 +2,41 @@
   <head>
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
-  <body>
+  <body @click="IfModalOpen($event)">
     <div class="quizbody">
         <div class="nameQuizSectionWrapper lightYellowBox shadowIt">  
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
               <!--KUGGHJULET-->
-            <button class="custom-btn-quadratic">
+            <button class="custom-btn-quadratic" @click="modalPopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
+            
+            <div id="myModal" class="modal">
+             
+              <div class="modal-content custom-btn-quadratic">
+                <p>A few Options</p>
+                    <button id="xCloseModal"  
+                    
+                    @click="closeModal()">&times;</button>
+                    <div>
+                        <button class="custom-btn-quadratic " style="height:10vh; margin-bottom:15px;" @click="saveQuestionsAsJson"> 
+                          {{uiLabels.saveAsJson}}
+                        </button>
+                      </div>
+
+                      <div>
+                          <button class="custom-btn-quadratic" style="height:10vh;" @click="loadJson">
+                            {{uiLabels.loadAJson}}
+                          </button>
+                        </div>
+                      
+                       
+                  
+                  
+              </div>
+
+</div>
           </div>
       </div>
     <div class="addNewQuestionArea ">
@@ -89,18 +115,8 @@
                 {{uiLabels.startQuiz}}
             </button>
                 </router-link>
-        <div>
-            <button class="custom-btn"  @click="saveQuestionsAsJson"> 
-              {{uiLabels.saveAsJson}}
-            </button>
-        </div>
+       
 
-              
-        <div>
-            <button class="custom-btn"  @click="loadJson">
-              {{uiLabels.loadAJson}}
-            </button>
-        </div>
         <div>
               <router-link
                 v-bind:to="'/'+ lang"
@@ -135,6 +151,7 @@ export default {
     },
     data() {
         return {
+          
           quizName: "",
           iterator: 2,
           url: null,
@@ -172,6 +189,7 @@ export default {
 
 
     created: function () {
+      
       this.lang = this.$route.params.lang;
       //this.DataQuestionBodyArray = [];
       this.pollId = Math.round((Math.random().toFixed(5)*1000000));
@@ -209,6 +227,30 @@ export default {
             }
                                         
       },
+      modalPopUpfunction: function(){
+        console.log("popup körd")
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        
+        
+      },
+      closeModal: function(){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+      },
+
+      IfModalOpen: function(event){
+        if(event.target == document.getElementById("myModal")  ){
+          var modal= document.getElementById("myModal")
+          modal.style.display = "none";
+        
+        }
+        
+
+        
+      },
+      
+
       
 
       //egenskrivet
@@ -478,7 +520,61 @@ export default {
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
+  #xCloseModal{
+    position:absolute;
+    top:0; 
+    right:0;
+    margin:10px;
+    height:10%; 
+    width:3%;
+  }
+ 
+  .buttonInModal{
+    position:relative;
 
+    width:20%;
+    height:20%;
+   
+  }
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  height:40%;
+  position:relative;
+  font-size:55%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
   .tooltip{
     flex:none;
     position: relative;
