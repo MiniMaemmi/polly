@@ -90,7 +90,7 @@ h1{
 }
 
 .shadowIt{
-    box-shadow: rgba(0, 0, 0, 0.24) 1vh 1vh 1vh;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 input[type=text] {
