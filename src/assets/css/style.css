@@ -53,6 +53,7 @@ body{
     border-radius: 1em;
     height: 100%;
     align-self: center;
+    position:relative;
     border: none;
     margin-left: 1vh;
     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),

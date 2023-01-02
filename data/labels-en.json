@@ -22,6 +22,7 @@
 	"startQuiz":"Start Quiz",
 	"saveAsJson":"Save Quiz as Json file",
 	"loadAJson": "Load a Json file",
+	"tooltip":"Mark as Correct",
 
 	"quizleaderStartView": "",
 	"joinQuiz":"Join with the Quiz id below:",
