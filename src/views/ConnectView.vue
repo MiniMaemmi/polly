@@ -2,20 +2,28 @@
   <body>
 <div class="wrapper">
   <div class="contentArea lightYellowBox shadowIt">
-    <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
+    <div class="header">
+    <h1>{{uiLabels.connectTitel}}</h1>
+    </div>
   
     <div>
       <div id="nameAndID">
+        <div class="labelAndInputArea">
         <label>
-          {{uiLabels.quizid}}: 
+          {{uiLabels.quizid}}:
           <!-- <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Ex: 123">-->
+          </label>
           <input type="text" v-model="id" placeholder="Ex: 123">
-        </label>
-        <label>
-          {{uiLabels.username}}:
+        
+      </div>
+        <div class="labelAndInputArea">
+          <label>
+            {{uiLabels.username}}:
+          </label>
             <!-- <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ex: Ben Dover">-->
             <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
-        </label>
+        
+        </div>
       </div>    
             <div>
                 <router-link
@@ -170,6 +178,27 @@ h1 { margin: 0 0 10px; }
   margin-right: 20%;
   height: 100%;
 }
+
+.labelAndInputArea {
+  padding: 3%;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.labelAndInputArea label {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 2em;
+  margin: 3%;
+}
+
+
+
 
 
 
