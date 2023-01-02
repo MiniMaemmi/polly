@@ -73,7 +73,7 @@ h1 {
 h1{
     font-family: Inter;
     font-weight: 100;
-    font-size: 8em;
+    font-size: 5em;
 }
 
 .headerTextWhiteBox {
@@ -116,7 +116,10 @@ input[type=text] {
   margin-left: 20%;
   margin-right: 20%;
   height: 100%;
+  padding: 5%;
+  margin-top: 5%;
 }
+
 
 .goBackButtonPosition {
     position:absolute; 

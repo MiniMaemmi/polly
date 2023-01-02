@@ -2,12 +2,12 @@
   <body>
 <div class="wrapper">
   <div class="contentArea lightYellowBox shadowIt">
-    <h1 style="font-size:50px">{{uiLabels.connectTitel}}</h1>
+    <h1>{{uiLabels.connectTitel}}</h1>
   
     <div>
       <div id="nameAndID">
         <label>
-          {{uiLabels.quizid}}: 
+          {{uiLabels.quizid}}:
           <!-- <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Ex: 123">-->
           <input type="text" v-model="id" placeholder="Ex: 123">
         </label>
