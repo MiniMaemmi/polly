@@ -8,23 +8,44 @@
   
     <div>
       <div id="nameAndID">
-        <div class="labelAndInputArea">
-        <label>
-          {{uiLabels.quizid}}:
-          <!-- <input type="text" style="height:50px; font-size:20px; " v-model="id" placeholder="Ex: 123">-->
-          </label>
-          <input type="text" v-model="id" placeholder="Ex: 123">
-        
-      </div>
-        <div class="labelAndInputArea">
-          <label>
-            {{uiLabels.username}}:
-          </label>
-            <!-- <input type="text" style="height:50px; font-size:20px; margin-top:15px; margin-bottom:15px"  v-model="username"  placeholder="Ex: Ben Dover">-->
-            <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
-        
+        <div class="testArea">
+          <div class="labelAndInputArea">
+            <div class="labelAndInput">
+              <label> 
+              {{uiLabels.quizid}}: 
+            </label>
+            </div>
+            <div class="labelAndInput">
+              <input type="text" v-model="id" placeholder="123">
+            </div>
+          </div>
+          <div class="labelAndInputArea">
+            <div class="labelAndInput">
+               <label>
+                {{uiLabels.username}}:
+              </label>
+            </div>
+            <div class="labelAndInput">
+              <input type="text" v-model="username"  placeholder="Anna Andersson">
+            </div>
+          </div>
         </div>
-      </div>    
+
+
+
+
+        <!-- 
+        <div class="labelArea">
+            
+             <label>
+              {{uiLabels.username}}:
+            </label>
+        </div>
+        <div class="labelArea">
+           <input type="text" v-model="id" placeholder="Ex: 123">
+           <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
+        </div>-->
+      </div>  
             <div>
                 <router-link
                 
@@ -155,11 +176,10 @@ export default {
   /*
     margin:50px;
     font-size:20px;
-    display:grid;*/
+    display:grid;
     display: flex;
-    flex-direction: column;
-    
-
+    flex-direction: row;*/
+  
 }
 h1 { margin: 0 0 10px; }
 
@@ -179,17 +199,6 @@ h1 { margin: 0 0 10px; }
   height: 100%;
 }
 
-.labelAndInputArea {
-  padding: 3%;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-}
-
 .labelAndInputArea label {
   font-family: Inter;
   font-weight: 400;
@@ -197,12 +206,63 @@ h1 { margin: 0 0 10px; }
   margin: 3%;
 }
 
+.labelArea {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.labelArea input{
+  width: 100%;
+}
+
+.labelArea div {
+  background-color: coral;
+  width: 100%;
+  height: 50%;
+  margin: 5%;
+}
+
+.testArea {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.labelAndInputArea {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.labelAndInput {
+  width: 50%;
+  align-self: center;
+  margin: 1%;
+  display: flex;
+  justify-content: flex-end;
+
+
+}
+
+.labelAndInput input {
+  width: 100%;
+}
+
+.labelAndInput label {
+  align-self: flex-end;
+}
 
 
 
 
+/* 955 bryts knapparna. Här bör vita rutan bli större
 
-
+*/
 
 
 
