@@ -62,7 +62,7 @@
             <div id="app">
               <!-- fråga mig inte hur den funkar, jag har inget svar-->
                 <input id="fileinput" type="file" @change="onFileChange($event, question)" />
-                <button v-on:click="removePicture">X</button>
+                <button v-on:click="removePicture(question)">X</button>
                 <div id="preview">
                   <div v-for="url in question" v-bind:key="url">
                     <img v-if="question.url" :src="url" >
@@ -387,8 +387,8 @@ export default {
 
 
         },
-        removePicture: function(){
-          this.url=null;
+        removePicture: function(question){
+          question.url=null;
 
         },
 
