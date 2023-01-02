@@ -97,7 +97,7 @@ h1{
 input[type=text] {
     width: 50%;
     height: 8vh;
-    font: 1.5vw Inter;
+    font: 1.5em Inter;
     border: 0px;
     background: white;
 
@@ -114,7 +114,6 @@ input[type=text] {
 
 .wrapper {
   width: 100%;
-  padding: 3vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -129,15 +128,14 @@ input[type=text] {
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 5%;
-  margin-top: 5%;
 }
 
 
 .goBackButtonPosition {
     position:absolute; 
     top:0; left:0; 
-    margin:5px; 
-    width: 5vw;
+    margin:0.5vw !important; 
+    width: 5vw !important;
 }
 
 
@@ -168,3 +166,4 @@ input[type=text] {
     box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
   }
 }
+
