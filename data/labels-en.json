@@ -1,8 +1,8 @@
 {	"StartView":"",
-	"createPoll": "Create a quiz",
-	"connectPoll": "Connect to a quiz",
+	"createQuiz": "Create a quiz",
+	"connectQuiz": "Connect to a quiz",
 	"changeLanguage": "Byt till svenska",
-	"showResults": "Show results",
+	
 
 	"ConnectView":"",
 	"connectTitel": "Connect to Quiz!",
@@ -18,21 +18,20 @@
 	"addAnswer":"Add Answer",
 	"addQuestion":"Add Question",
 	"removeQuestion":"Remove Question",
-	"saveQuiz":"Save Quiz",
 	"startQuiz":"Start Quiz",
 	"saveAsJson":"Save Quiz as Json file",
 	"loadAJson": "Load a Json file",
 	"tooltip":"Mark as Correct",
 
 	"quizleaderStartView": "",
-	"joinQuiz":"Join with the Quiz id below:",
-	"playQuiz": "Let's play the quiz",
+	"joinQuiz":"With the Quiz id below:",
+	"playQuiz": "Let's play!",
 
 	"nextQuestion":"Next Question",
 	"time":"Time's up!",
 
 	"invite": "Invite participants with this link:",
-	
+	"showResults": "Show results",
 	"participatePoll": "Participate in a quiz"
 	
 	

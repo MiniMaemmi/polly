@@ -127,10 +127,6 @@ export default {
 
   methods: {
     
-
-
-
-
     //this one, createUser is added
     createUser: function() {
       //console.log("------- i createUser StartView.vue ------ ") 

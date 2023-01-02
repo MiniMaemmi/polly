@@ -1,8 +1,8 @@
 {	"StartView":"",
-	"createPoll": "Skapa quiz",
-	"connectPoll": "Anslut till ett quiz",
+	"createQuiz": "Skapa quiz",
+	"connectQuiz": "Anslut till ett quiz",
 	"changeLanguage": "Change to English",
-	"showResults": "Visa resultat",
+	
 
 	"ConnectView":"",
 	"connectTitel": "Anslut till Quiz!",
@@ -18,21 +18,20 @@
 	"addAnswer":"Lägg till svar",
 	"addQuestion":"Lägg till fråga",
 	"removeQuestion":"Ta bort fråga",
-	"saveQuiz":"Spara Quiz",
 	"startQuiz":"Starta Quiz",
 	"saveAsJson":"Spara  Quiz som en Json file",
 	"loadAJson": "Ladda upp en Json file",
 	"tooltip":"Markera som rätt",
 
 	"quizleaderStartView": "",
-	"joinQuiz":"Gå med Quiz id nedan:",
-	"playQuiz": "Låt oss spela Quizet",
+	"joinQuiz":"Med Quiz id nedan:",
+	"playQuiz": "Nu kör vi!",
 
 	"nextQuestion":"Nästa fråga",
 	"time":"Tiden är slut!",	
 
 	"invite": "Bjud in deltagare med den här länken:",
-	
+	"showResults": "Visa resultat",
 	"participatePoll": "Delta i quiz"
 	
 	

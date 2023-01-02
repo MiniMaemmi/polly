@@ -2,10 +2,13 @@
 
 <template>
 
-    <template v-if="username === 'undefined'">
+    <!--Om vi har två view så kör vi på detta -->
+      
+      <template v-if="username === 'undefined'">
       <div class="wrapper">
         <div class="header contentArea lightYellowBox shadowIt">
           <p>Hello Quiz leader!</p>
+          <br />
           PollID: {{pollId}}
           <br />
 
@@ -31,11 +34,12 @@
       <div class="wrapper">
         <div class="header contentArea lightYellowBox shadowIt">
           
-          <p>Hello player!</p>
                   Pollname: {{poll.label}}
-                PollID: {{pollId}}
-                    Username: {{username}}
-
+                  <br />
+                  PollID: {{pollId}}
+                  <br />
+                  Username: {{username}}
+                  <br />
                 <div>
                       <router-link
                         v-bind:to="'/'+ lang"
@@ -48,7 +52,7 @@
                         {{uiLabels.back}}
                       </button>
                       </router-link>
-                  </div>
+                </div>
             
 
             {{ uiLabels.question }}:
@@ -64,13 +68,15 @@
             <p v-if="countdown > 0"> {{ countdown }}</p>
             <p v-if="countdown === 0">{{uiLabels.time}}</p>
 
+        <!--Bara quiz leader ska kunna klicka på nästa fråga-->
             <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
               {{uiLabels.nextQuestion}}
             </button>
-
+        <!--Alla ska kunna klicka på Show results-->
             <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
               {{uiLabels.showResults}}
             </button>
+
           </div>
       </div>
 
@@ -106,7 +112,7 @@ export default {
       username: "",
       poll: {},
       lang: "",
-      //pollLength: this.getQuestionFromArray(this.poll),
+
       pollLength: 0,
       pollQuestionIterator:0,
       lastQuestionReached: false,
@@ -115,15 +121,9 @@ export default {
                 {
                     username: '',
                     totalScore: 0,
-                    answers: [
-                        /* { questionID: 0, answerId: 0, score: 0, correct: answer.correct}*/
-                    ],
+                    answers: [],
                 },
       AllPollParticipants: [],
-              
-            
-
-
 
       //username: document.getElementById(appDivId).__vue__,
 
@@ -211,6 +211,7 @@ export default {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
       this.showButton = false;
       console.log("-----i getQuestionFromArray()----")
+
       if (typeof questionObject !== 'undefined') {
         this.countdown = 10;
 

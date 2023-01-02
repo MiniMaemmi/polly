@@ -17,7 +17,7 @@
                 @click="navigate"
                 role="link">
 
-                {{uiLabels.createPoll}}
+                {{uiLabels.createQuiz}}
               </button>
             </router-link>
           </div>
@@ -34,7 +34,7 @@
                 @click="navigate"
                 role="link">
 
-                {{uiLabels.connectPoll}}
+                {{uiLabels.connectQuiz}}
 
               </button>
             </router-link>
