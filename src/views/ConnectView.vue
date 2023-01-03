@@ -55,7 +55,7 @@
             <div>
                 <router-link
                 
-                v-bind:to="'/waiting/'+ id"
+                v-bind:to="'/waiting/'+ id+'/'+lang"
                 custom
                 v-slot="{ navigate }">
                 <button class="custom-btn" v-on:click="createUser" :disabled="!username.length||!id.length" 

@@ -10,6 +10,8 @@
 	"username":"Username",
 	"displayJoinPoll": "Join Quiz",
 	"back":"Go back",
+	"waitingRoom":"Waiting Room!",
+	"theQuiz":"The Quiz will start soon",
 
 	"CreateView":"",
 	"quizName":"Name of Quiz",

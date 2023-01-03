@@ -1,34 +1,30 @@
 <template>
-  <body >
-    <div      
-      @mousemove="onMousemove"
+  
+  <div class="wrapper">
+    <div @mousemove="onMousemove"
       :style="{backgroundColor: `hsl(${x}, 100%, 50%)` }"
       class="movearea">
 
-      <h1>Väntrum</h1>
-      <h2>Matchen börjar strax</h2>
-      flytta runt pekaren, Det blir kul!
-      {{this.username}}
-    
+      <div class="goBackButtonDiv">
+        <router-link v-bind:to="'/connect/'+lang" custom v-slot="{ navigate }">
+          <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
+            {{uiLabels.back}}
+          </button>
+        </router-link>
+      </div>
+
+      <div class="contentArea lightYellowBox shadowIt">
+        <div class="header">
+          <h1>
+            {{ uiLabels.waitingRoom }}
+            <br/>
+            {{ uiLabels.theQuiz }}
+          </h1>
+        </div>
+      </div>
+
     </div>
-  </body>
-
-
-
-<div
-@mousemove="onMousemove"
-:style="{backgroundColor: `hsl(${x}, 100%, 50%)` }"
-class="movearea"
->
-  <h1>Väntrum</h1>
-  <h2>Matchen börjar strax</h2>
-  flytta runt pekaren, Det blir kul!
-    <!--Här ska de ju va en wordlcloudsdaw-->
-  {{this.username}}
-    
-</div>
-
-
+  </div>
 </template>
 
 <script>
@@ -45,15 +41,12 @@ export default {
       
       uiLabels: {},
       id: "",
-      lang: "en",
+      lang: "",
       hideNav: true,
       username: "",
       x:0
     }
   },
-  
-  
-  
   
   created: function () {
     this.lang = this.$route.params.lang;
@@ -92,8 +85,8 @@ export default {
 <style scoped>
 @import '@/assets/css/style.css';
 
-
 .movearea{
   transition: 0.5s background-color ease;
+  min-height: 100vh;
   }
 </style>

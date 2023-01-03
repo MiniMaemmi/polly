@@ -10,6 +10,8 @@
 	"username":"Användarnamn",
 	"displayJoinPoll": "Gå med i Quizet",
 	"back":"Gå tillbaka",
+	"waitingRoom":"Väntrum!",
+	"theQuiz":"Quizet börjar strax",
 
 	"CreateView":"",
 	"quizName":"Namn på Quiz",

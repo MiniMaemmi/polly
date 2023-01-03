@@ -1,23 +1,32 @@
 <!-- Kopplat till pollvyn som deltagare ser -->
 
 <template>
-
     <!--Om vi har två view så kör vi på detta -->
-      
       <template v-if="username === 'undefined'">
       <div class="wrapper">
+        <div class="goBackButtonDiv">
+          <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
+            <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
+              {{uiLabels.back}}
+            </button>
+          </router-link>
+        </div>
+
+        <p>Hello Quiz leader!</p>          
+        <br />
+        PollID: {{pollId}}
+        <br />
+
         <div class="header contentArea lightYellowBox shadowIt">
-          <p>Hello Quiz leader!</p>
-          <br />
-          PollID: {{pollId}}
-          <br />
 
           {{ uiLabels.question }}:
-          <QuestionComponent v-bind:question="questionObject" />
+          <QuestionComponent v-bind:question="questionObject"/>
 
+          <br />
           <p v-if="countdown > 0"> {{ countdown }}</p>
           <p v-if="countdown === 0">{{uiLabels.time}}</p>
-        
+          
+          <br />
           <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}
           </button>

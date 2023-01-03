@@ -17,8 +17,8 @@
             {{uiLabels.displayJoinPoll}}:
             <br/>
             <div class="boldtext">
-            {{quizName}}
-          </div>
+              {{quizName}}
+            </div>
           </h1>
         </div>
 
@@ -36,7 +36,7 @@
             custom
             v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
               <button class="custom-btn" style="position:fixed; bottom:0; right:0; height:150px; width:150px; "   
-               @click = navigate(),sendStart() role="link">
+               @click = "navigate()" v-on:click="sendStart()" role="link">
                 {{ uiLabels.playQuiz }}
               </button>
             </router-link>

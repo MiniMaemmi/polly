@@ -138,6 +138,12 @@ input[type=text] {
     width: 5vw !important;
 }
 
+.goBackButtonDiv {
+  width: 100%;
+  height: 11vh;
+  display: inline;
+}
+
 
 @keyframes animate{
     0% {
