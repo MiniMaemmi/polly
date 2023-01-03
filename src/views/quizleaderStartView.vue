@@ -1,52 +1,48 @@
 <template>
   <body>
-    <div>
-      <h1 style="font-size:50px">
-        {{uiLabels.displayJoinPoll}}:
-        <br/>
-        {{quizName}}
-      </h1>
-    
-      <!--Här ska vi bygga mera där vi drar in quizname och quizId. -->
-      <h1 style="font-size:50px">
-       {{uiLabels.joinQuiz}}
-        <br/>
-        {{pollId}}
-      </h1>
-      <br />
-      
-      <div> <!--vill att om username är undefined blir man quizleader eller nåt-->
-        <router-link
-          v-bind:to="'/poll/'+pollId+'/'+ lang + '/' +username"
-          custom
-          v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
-          <button
-          @click = navigate(),sendStart()
-        
-          role="link">
-            {{ uiLabels.playQuiz }}
-          </button>
-        </router-link>
-      </div>
+    <div class="wrapper">
 
-      <div> <!--Tillbaka knapp till StartView nu-->
-        <router-link
-         v-bind:to="'/'+ lang"
-          custom
-          v-slot="{ navigate }">
-          <button  
-            @click="navigate"
-            role="link">
+      <!--Tillbaka knapp till StartView nu-->
+      <div class="goBackButtonDiv">
+        <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
+          <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
             {{uiLabels.back}}
           </button>
         </router-link>
       </div>
 
+      <div class="contentArea lightYellowBox shadowIt">
+        <div class="header">
+          <h1>
+            {{uiLabels.displayJoinPoll}}:
+            <br/>
+            <div class="boldtext">
+            {{quizName}}
+          </div>
+          </h1>
+        </div>
 
-
-
-    </div>
-
+          <h1>
+            {{uiLabels.joinQuiz}}
+            <br/>
+            <div class="boldtext">
+              {{pollId}}
+            </div>
+          </h1>
+        
+          <div> <!--vill att om username är undefined blir man quizleader eller nåt-->
+            <router-link
+            v-bind:to="'/poll/'+pollId+'/'+ lang + '/' +username"
+            custom
+            v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
+              <button class="custom-btn" style="position:fixed; bottom:0; right:0; height:150px; width:150px; "   
+               @click = navigate(),sendStart() role="link">
+                {{ uiLabels.playQuiz }}
+              </button>
+            </router-link>
+          </div>
+      </div>
+    </div> 
 
   </body>
     
@@ -99,43 +95,21 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
+  
   h1 { margin: 0 0 10px; }
+ 
 
-  button {
-  border-radius: 1em;
-  margin: 0px 10px 0px 10px;
-  width: 10em;
-  height: 6em;
-  font: 16px Inter;
+.goBackButtonDiv {
+  width: 100%;
+  height: 11vh;
+  display: inline;
+}
 
-  background: #D7D7D7;
-}  
-
-
-
+.boldtext{
+  font-weight: bold;
+}
 
 
-
-  
-  
-/*@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
-  =
-*/
 
 
 </style>

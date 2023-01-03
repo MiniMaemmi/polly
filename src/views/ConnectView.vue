@@ -11,7 +11,7 @@
 
   <div class="contentArea lightYellowBox shadowIt">
     <div class="header">
-    <h1>{{uiLabels.connectTitel}}</h1>
+      <h1>{{uiLabels.connectTitel}}</h1>
     </div>
   
     <div>

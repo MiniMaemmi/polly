@@ -106,6 +106,7 @@
                 {{ uiLabels.addQuestion }}
             </button>
         </div>
+
                 <router-link
                   v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName"
                   custom
