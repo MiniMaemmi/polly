@@ -2,6 +2,9 @@
 <h3>{{question.label}}</h3>
 <button class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject">
   {{answerObject.label}}
+
+
+                  
 </button>
 </template>
 <script>

@@ -66,12 +66,7 @@ export default {
   },
   methods: {
 
-    //this one, createUser is added behöver nog inte
-    /*createUser: function() {
-      console.log("------- i createUser StartView.vue ------ ") 
-      console.log("Username: ", this.username)
-      socket.emit("createUser", this.username)
-    }*/
+  
 
     onMousemove(e){
       this.x = e.clientX
@@ -89,4 +84,11 @@ export default {
   transition: 0.5s background-color ease;
   min-height: 100vh;
   }
+
+
+
+  h1{
+  font-size:10vh
+  }
 </style>
+

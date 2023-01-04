@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body class="animationGradient">
     <div class="wrapper">
 
       <!--Tillbaka knapp till StartView nu-->

@@ -1,6 +1,7 @@
 <!-- Kopplat till pollvyn som deltagare ser -->
 
 <template>
+  <body class="animationGradient" style="animation:  animate 25s ease infinite;">
     <!--Om vi har två view så kör vi på detta -->
       <template v-if="username === 'undefined'">
       <div class="wrapper">
@@ -16,12 +17,12 @@
         <br />
         PollID: {{pollId}}
         <br />
-
+        
         <div class="header contentArea lightYellowBox shadowIt">
 
           {{ uiLabels.question }}:
           <QuestionComponent v-bind:question="questionObject"/>
-
+          
           <br />
           <p v-if="countdown > 0"> {{ countdown }}</p>
           <p v-if="countdown === 0">{{uiLabels.time}}</p>
@@ -90,7 +91,7 @@
       </div>
 
     </template>
-
+    </body>
 </template>
 
 <script>
@@ -111,7 +112,8 @@ export default {
       countdown: 10,
       question: {
         q: "",
-        a: []
+        a: [],
+        image:null
       },
 
       questionObject: {},
@@ -222,18 +224,25 @@ export default {
       console.log("-----i getQuestionFromArray()----")
 
       if (typeof questionObject !== 'undefined') {
+       
         this.countdown = 10;
-
         this.questionObject = questionObject
-        
         this.question.q = questionObject.label
         this.question.a = []
+
         questionObject.answers.forEach(answer => {
             this.question.a.push(answer.label);
         })
+
+        this.image=null,
+        questionObject.question.forEach(question => {
+          this.question.image.push(question.url)
+          })
+          
         this.pollQuestionIterator += 1
         this.updateCountdown();
-
+       
+        
 
 
       }
@@ -242,7 +251,6 @@ export default {
         this.lastQuestionReached = true
         this.showResultButton = true
       }
-      
     },
 
 //gammal

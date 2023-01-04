@@ -1,6 +1,6 @@
 <template>
 
-<body>
+<body class="animationGradient">
   <div class="background">
     <div class="wrapper">
       <div class="headerTextWhiteBox">
@@ -106,14 +106,7 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
 
-  body {
-    background: linear-gradient(-45deg, white, rgb(254,81,154), rgba(253,187,45,1), red);
-    background-size: 400% 400%;
-    font-family: 1em Inter 400 black;
-    /* För https://www.freecodecamp.org/news/html-page-width-height/*/
-    min-height: 100vh;
-    animation:  animate 7s ease infinite;
-  }
+ 
 
   /*body{
     background: rgb(254,81,154);
