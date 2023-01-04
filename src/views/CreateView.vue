@@ -8,7 +8,7 @@
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
               <!--KUGGHJULET-->
-            <button class="custom-btn-quadratic" @click="modalPopUpfunction()">
+            <button class="custom-btn-quadratic OptionsButton" @click="modalPopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             
@@ -55,7 +55,7 @@
 
             <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
 
-            <button class="custom-btn-quadratic" @click="removeQuestion(question.id)" >
+            <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)" >
               {{uiLabels.removeQuestion}}
             </button >
             </div>
@@ -520,6 +520,16 @@ export default {
     margin:10px;
     height:10%; 
     width:3%;
+  }
+  
+  .removeQuestionButton:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
+    
+  }
+  .OptionsButton:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
   }
  
   .buttonInModal{
