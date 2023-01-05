@@ -1,10 +1,15 @@
 <!-- Kopplat till pollvyn som deltagare ser -->
 
 <template>
-  <body class="animationGradient" style="animation:  animate 25s ease infinite;">
-    <!--Om vi har två view så kör vi på detta -->
-      <template v-if="username === 'undefined'">
-      <div class="wrapper">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+   
+    <body class="animationGradient" style="animation:  animate 25s ease infinite; margin-top:0vh;">
+        <h1 style="margin-top:0vh" v-if="username==='undefined'">Hello Quiz leader!</h1>
+  
+      <div class="wrapper" style="margin-top:0vh;">
+        
         <div class="goBackButtonDiv">
           <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
             <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
@@ -13,93 +18,41 @@
           </router-link>
         </div>
 
-        <p>Hello Quiz leader!</p>          
-        <br />
-        PollID: {{pollId}}
-        <br />
-        
-        <div class="header contentArea lightYellowBox shadowIt">
+               
+        <p1 v-if="username==='undefined'" > {{username}}</p1>
+        <p2 class="PollIdDisplay">PollID: {{pollId}}</p2>
+       
+        <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
 
-          {{ uiLabels.question }}:
+          <div style="position:absolute; font-size:5vh;">
+            {{ uiLabels.question }}: {{question.q}}
+          </div>
+       
           <QuestionComponent v-bind:question="questionObject"/>
+          
           
           <div v-for="url in question" v-bind:key="url">
                     <img v-if="question.url" :src="url" >
 
                   </div>
           <br />
-          <p v-if="countdown > 0"> {{ countdown }}</p>
-          <p v-if="countdown === 0">{{uiLabels.time}}</p>
+          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
+  
+          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown === 0">{{uiLabels.time}}</div>
           
-          <br />
-          <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+        <div v-if="username==='undefined'" >
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}
           </button>
 
-          <button v-else-if="showResultButton"> 
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-else-if="showResultButton"> 
             {{uiLabels.showResults}}
           </button>
         </div>
+        </div>
       </div>
-    </template>
-
-
-    <template v-else>
-      <div class="wrapper">
-        <div class="header contentArea lightYellowBox shadowIt">
-          
-                  Pollname: {{poll.label}}
-                  <br />
-                  PollID: {{pollId}}
-                  <br />
-                  Username: {{username}}
-                  <br />
-                <div>
-                      <router-link
-                        v-bind:to="'/'+ lang"
-                        custom
-                        v-slot="{ navigate }">
-                          <button class="custom-btn goBackButtonPosition"
-                                  @click="navigate"
-                      role="link"
-                        >
-                        {{uiLabels.back}}
-                      </button>
-                      </router-link>
-                </div>
-            
-
-            {{ uiLabels.question }}:
-            <QuestionComponent v-bind:question="questionObject"
-                      v-on:answer="logUserAnswer($event)"/>
-
-                  <div v-for="url in question" v-bind:key="url">
-                    <img v-if="question.url" :src="url" >
-
-                  </div>
-            <br />
-            <br />
-            Answers given:
-            {{userObject.answers}}
-            <br />
-          
-            <p v-if="countdown > 0"> {{ countdown }}</p>
-            <p v-if="countdown === 0">{{uiLabels.time}}</p>
-
-        <!--Bara quiz leader ska kunna klicka på nästa fråga-->
-            <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()">
-              {{uiLabels.nextQuestion}}
-            </button>
-        <!--Alla ska kunna klicka på Show results-->
-            <button v-else-if="showResultButton" @click="submitAnswer();navigate()" role="link">
-              {{uiLabels.showResults}}
-            </button>
-
-          </div>
-      </div>
-
-    </template>
-    </body>
+      </body>
+  
 </template>
 
 <script>
@@ -409,13 +362,61 @@ export default {
 <style scoped>
 @import '@/assets/css/style.css';
 
+.PollIdDisplay{
+  position:absolute;
+  right:0;
+  top:0;
+}
+.wrapper{
+  display:flex;
+  max-height: 100%;
+
+}
+
+
+p1{
+  font-size:3vh;
+  position:absolute;  
+  right:0%;
+  top:5%;
+  margin:1vh;
+  
+}
+
+p2{
+  font-size:3vh;
+  position:relative;  
+  right:50%;
+  margin:1vh;
+  
+}
+
+.p3{
+  font-size:150px;
+  position:relative;  
+  right:50%;
+  margin:1vh;
+
+}
+
+
+.nextQuestionButton{
+  position:fixed; 
+  bottom:0; 
+  right:0;
+
+}
 .header{
+  min-width:100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: baseline;
   margin-top: 5vh;
   margin-bottom: 5vh;
   width: 60%;
+  margin-right:55%;
+  margin-left:25%;
 }
  
 
