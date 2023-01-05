@@ -7,7 +7,7 @@
         <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >  
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
-              <!--KUGGHJULET-->
+
             <button class="custom-btn-quadratic OptionsButton" @click="modalPopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
@@ -86,16 +86,12 @@
                       <img src="../../img/checkmark.png">
                    </button>
                         <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
-                        <!--<input id="inpuut" v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" 
-                        :key="answer" 
-                        >-->
+
 
                     <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
                       <img src="../../img/x.png">
                     </button>
-                    <!-- <button class="custom-btn-quadratic">
-                      <img class="answerSettings" src="../../img/settings.png"/>
-                    </button>-->
+
                 </div>
             </div>
             <button class="custom-btn"  @click.prevent="addAnswer(question.id)">
@@ -106,7 +102,6 @@
     
         <div>
             <button class="custom-btn"  @click="addQuestion">
-                <!--Add question-->
                 {{ uiLabels.addQuestion }}
             </button>
         </div>
@@ -179,8 +174,6 @@ export default {
               
             ],
 
-
-            /*till svar?*/
             answers: [
                 {
                     questionId: 1,
@@ -199,7 +192,7 @@ export default {
     created: function () {
       
       this.lang = this.$route.params.lang;
-      //this.DataQuestionBodyArray = [];
+
       this.pollId = Math.round((Math.random().toFixed(5)*1000000));
 
       socket.emit("pageLoaded", this.lang);
@@ -212,10 +205,10 @@ export default {
       socket.on("pollCreated", (data) =>
         this.data = data)
 
-      /*this.items.push(this.right_answer);*/
+
     },
     methods: {
-      //de här var ungefär 100 gånger jobbigare än jag trodde de skulle vara. 
+ 
       focusNext: function(ev){
         console.log("ev.target",ev.target)
       
@@ -259,22 +252,11 @@ export default {
       },
       
 
-      
-
-      //egenskrivet
       createPoll: function () {
         console.log("i CreateView createPoll()")
         console.log("skickat till socket: ", this.pollId, this.lang, this.questions )
         socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
       },
-
-      //mikaels orginal?
-      /*
-      createPoll: function () {
-        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang})
-      },*/
-
-
 
         markAsCorrect(questionId, answerId) {
             this.questions.forEach(question => {
@@ -290,9 +272,8 @@ export default {
                               answer.correct = true;
                               answer.score = this.baselineScore
                             }   
-                        } //else {
-                           //answer.correct = false;
-                        //}
+                        } 
+
                     });
                 }
             })
@@ -380,7 +361,7 @@ export default {
 
         },
 
-        //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
+
         removeAnswer: function(questionId, answerId){
 
 
@@ -401,8 +382,6 @@ export default {
         },
 
 
-
-        // ID:na måste ändras! Nu är de statiska!!!
         addAnswer: function (questionId) {
 
           this.questions.forEach(question => {
@@ -433,7 +412,6 @@ export default {
                 const index= array.indexOf(question)
                 console.log(this.questions[index])
                 console.log("id+1",this.questions[index-1])
-                /*this.questions.splice(index, 2, this.question, this.questions[index+1]);*/
                 var tmp = this.questions[index];
                     this.questions[index] = this.questions[index-1];
                     this.questions[index-1] = tmp;
@@ -464,17 +442,13 @@ export default {
 
         changeQuestionIndexDown: function (questionId){
                  var array=this.questions
-
                 array.every(question => {
                   if (question.id === questionId) { 
                     const index= array.indexOf(question)
-                    //console.log(this.questions[index])
-                    //console.log("id+1",this.questions[index-1])
+ 
                     this.questions.splice(index, 2, this.questions[index+1], this.questions[index]);
                     return false
-                    //var tmp = this.questions[index];
-                     //   this.questions[index] = this.questions[index-1];
-                     //   this.questions[index-1] = tmp;
+
 
                    } 
                    return true
@@ -498,7 +472,7 @@ export default {
             },
             saveQuiz(){
                 this.createPoll();
-                /*this.newQuestion();*/
+
             },
 
 
@@ -513,6 +487,7 @@ export default {
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
+ 
   #xCloseModal{
     position:absolute;
     top:0; 
