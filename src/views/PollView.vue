@@ -23,6 +23,10 @@
           {{ uiLabels.question }}:
           <QuestionComponent v-bind:question="questionObject"/>
           
+          <div v-for="url in question" v-bind:key="url">
+                    <img v-if="question.url" :src="url" >
+
+                  </div>
           <br />
           <p v-if="countdown > 0"> {{ countdown }}</p>
           <p v-if="countdown === 0">{{uiLabels.time}}</p>
@@ -68,7 +72,11 @@
             {{ uiLabels.question }}:
             <QuestionComponent v-bind:question="questionObject"
                       v-on:answer="logUserAnswer($event)"/>
-          
+
+                  <div v-for="url in question" v-bind:key="url">
+                    <img v-if="question.url" :src="url" >
+
+                  </div>
             <br />
             <br />
             Answers given:
@@ -142,6 +150,7 @@ export default {
     }
   },
   created: function () {
+    console.log("I POLLVIEW")
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
@@ -208,6 +217,7 @@ export default {
         this.countdown--;
         if (this.countdown > 0) {
             setTimeout(this.updateCountdown,1000);
+            console.log(this.countdown)
         } else {
             this.showButton = true;
             // visa rätt svar
@@ -234,12 +244,14 @@ export default {
             this.question.a.push(answer.label);
         })
 
-        this.image=null,
-        questionObject.question.forEach(question => {
-          this.question.image.push(question.url)
-          })
+        
+
+
+       
           
+        console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
+        
         this.updateCountdown();
        
         
