@@ -1,6 +1,7 @@
 <template>
   
   <div class="wrapper">
+    
     <div @mousemove="onMousemove"
       :style="{backgroundColor: `hsl(${x}, 100%, 50%)` }"
       class="movearea">
@@ -14,14 +15,15 @@
       </div>
       
 
-      <div class="contentArea lightYellowBox shadowIt">
-        <div class="header">
+      <div class="headerTextWhiteBox">
+        
           <h1>
             {{ uiLabels.waitingRoom }}
             <br/>
             {{ uiLabels.theQuiz }}
           </h1>
-        </div>
+
+        
       </div>
 
     </div>
@@ -33,7 +35,7 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'StartView',
+  name: 'WaitingView',
   components: {
     
   },
@@ -43,7 +45,6 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
-      hideNav: true,
       username: "",
       x:0
     }
@@ -66,9 +67,6 @@ export default {
     
   },
   methods: {
-
-  
-
     onMousemove(e){
       this.x = e.clientX
     }
@@ -81,15 +79,65 @@ export default {
 <style scoped>
 @import '@/assets/css/style.css';
 
-.movearea{
-  transition: 0.5s background-color ease;
-  min-height: 100vh;
+.headerTextWhiteBox {
+  margin-top: 30vh;
+}
+
+  .movearea{
+    transition: 0.5s background-color ease;
+    min-height: 100vh;
   }
 
 
 
-  h1{
-  font-size:10vh
+  @media screen and (max-width:950px) {
+    .goBackButtonPosition{
+      display: inline;
+      flex: none;
+      position: absolute;
+      width: 20% !important
+    }
+  
+  }
+
+
+
+  @media screen and (max-width:740px) {
+    h1{
+      font-size: 4em;
+    }
+  }
+
+  @media screen and (max-width:590px) {
+    h1{
+      font-size: 3em;
+    }
+
+    .goBackButtonPosition{
+      display: inline;
+      flex: none;
+      position: absolute;
+      width: 40% !important
+    }
+  
+  }
+
+
+  @media screen and (max-width:400px) {
+    h1{
+      font-size: 2em;
+    }
+  
+  }
+
+  @media screen and (max-width:290px) and (min-width:200px) {
+
+    .goBackButtonPosition{
+      display: inline;
+      flex: none;
+      position: absolute;
+      width: 60% !important
+    }
   }
 </style>
 

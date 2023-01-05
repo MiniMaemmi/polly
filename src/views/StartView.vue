@@ -47,7 +47,7 @@
           </button>
       </div>
 
-    </div>
+      </div>
     </div>
   </div>
 </body>
@@ -67,7 +67,6 @@ export default {
       uiLabels: {},
       id: "",
       lang: "en",
-      hideNav: true,
       username: ""
     }
   },
