@@ -42,7 +42,7 @@
 
           <!-- byta språk funktion-->
           <br />
-          <button class="custom-btn" style="position:absolute; top:0; right:0; margin:5px;"  v-on:click="switchLanguage">
+          <button class="custom-btn goBackButtonPosition"  v-on:click="switchLanguage">
             {{uiLabels.changeLanguage}}
           </button>
       </div>
@@ -105,20 +105,7 @@ export default {
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
-
- 
-
-  /*body{
-    background: rgb(254,81,154);
-    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
-    font-family: 1em Inter 400 black;
-    /* För https://www.freecodecamp.org/news/html-page-width-height/
-    min-height: 100vh;
-    
-  }*/
-
-  /*Har inte scoped nu så blir konstigt på alla andra sidor behöver fixa!!! */
-
+  
   .wrapper{
     display: flex;
     flex-direction: column;
@@ -126,52 +113,116 @@ export default {
     width: 100%;
     text-align: center;
     height: 100vh;
-
-
   }
 
-  .headerTextWhiteBox {
-    height: 40vh;
-  }
-/*
-  button {
-  border-radius: 1em;
-  margin: 0px 10px 0px 10px;
-  width: 10em;
-  height: 6em;
-  font: 16px Inter;
-  font-size:20px;
 
-  background: #D7D7D7;
-}  */
+
 h1 { margin: 0 0 10px; }
 
-/*@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
-  =Data.prototype.gameStart=function(gameStarted){
-  console.log("Data.js gameStart")
-  if (gameStarted === true){
-  console.log("gameStart")
-  
-  //gameStarted=true
-  return gameStarted}
+
+@media screen and (max-width:1200px) {
+  .custom-btn {
+        width: 40%;
+        
+    }
 }
-*/
 
 
 
+@media screen and (max-width:1040px) {
+  
+  .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 20% !important
+    }
+}
+
+@media screen and (max-width:900px) {
+  
+  .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 30% !important
+    }
+  .custom-btn {
+        width: 60%;
+        
+    }
+}
+
+@media screen and (max-width:600px) {
+  
+  .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 40% !important
+    }
+
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+  h1 {
+        font-size: 4em;
+    }
+  .custom-btn {
+      width: 80%;
+        
+    }
+  .goBackButtonPosition {
+    display: inline;
+        flex: none;
+        position: absolute;
+        width: 40% !important
+    }
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 3em;
+    }
+  .custom-btn {
+      width: 100%;
+        
+    }
+    .goBackButtonPosition {
+      display: inline;
+        flex: none;
+        position: absolute;
+        width: 60% !important
+    }
+}
+
+@media screen and (max-width: 300px) {
+  .headerTextWhiteBox{
+    padding: 2vh;
+  }
+
+    .goBackButtonPosition {
+      display: inline;
+        flex: none;
+        position: absolute;
+        width: 80% !important
+    }
+}
+
+
+@media screen and (min-width: 220px) and (max-width:270px) {
+  h1 {
+    font-size: 2em;
+    }
+
+  .goBackButtonPosition {
+      display: inline;
+        flex: none;
+        position: absolute;
+        width: 80% !important
+    }
+}
 </style>

@@ -323,6 +323,7 @@ h1 { margin: 0 0 10px; }
         position: absolute;
         width: 50% !important;
     }
+    
     h1 {
         font-size: 3em;
     }
