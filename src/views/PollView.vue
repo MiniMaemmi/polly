@@ -12,9 +12,13 @@
           </router-link>
         </div>
 
+        <div class="pollId">
+          PollID: {{pollId}}
+        </div>
+
         <p>Hello Quiz leader!</p>          
         <br />
-        PollID: {{pollId}}
+        
         <br />
 
         <div class="header contentArea lightYellowBox shadowIt">
@@ -25,7 +29,7 @@
           <br />
           <p v-if="countdown > 0"> {{ countdown }}</p>
           <p v-if="countdown === 0">{{uiLabels.time}}</p>
-          
+
           <br />
           <button v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}
@@ -397,7 +401,31 @@ export default {
   margin-bottom: 5vh;
   width: 60%;
 }
- 
+
+.pollId{
+  color:black;
+  background: white;
+  position: fixed;
+  top:0; right: 0;
+  margin:0.5vw !important; 
+  width: 5vw !important;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  border-radius: 1em;
+  border: none;
+  margin: 0.5vw;
+  width: 10vw;
+  height: 6vh;
+  font-family: Inter;
+  font-size:1.5em;
+  padding: 1vh;
+  font-weight: 400;
+  min-width: 10vw;
+  min-height: 10vh;
+}
 
 
 </style>
