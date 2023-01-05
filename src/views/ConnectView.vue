@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body class="animationGradient">
 <div class="wrapper">
   <div class="goBackButtonDiv">
     <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">

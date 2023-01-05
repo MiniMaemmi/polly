@@ -2,13 +2,13 @@
   <head>
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
-  <body @click="IfModalOpen($event)">
-    <div class="quizbody">
-        <div class="nameQuizSectionWrapper lightYellowBox shadowIt">  
+  <body class ="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfModalOpen($event)" >
+    <div class="quizbody" style="margin-top:0vh">
+        <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >  
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
               <!--KUGGHJULET-->
-            <button class="custom-btn-quadratic" @click="modalPopUpfunction()">
+            <button class="custom-btn-quadratic OptionsButton" @click="modalPopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             
@@ -55,7 +55,7 @@
 
             <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
 
-            <button class="custom-btn-quadratic" @click="removeQuestion(question.id)" >
+            <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)" >
               {{uiLabels.removeQuestion}}
             </button >
             </div>
@@ -78,7 +78,7 @@
               
  
                 <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
-                    <button class="custom-btn-quadratic tooltipclass"
+                    <button class="custom-btn-quadratic tooltipclass" 
                       :class="{
                           'answerCorrect': answer.correct,
                       }"
@@ -314,19 +314,6 @@ export default {
     },
 
 
-        /*
-        newQuestion: function () {
-          console.log("i CreateView newQuestion(). ")
-         this.questions.forEach(question => {
-              var answerLabels=[]
-              question.answers.forEach(answer => {
-                  answerLabels.push(answer.label);
-              })              
-      })
-      
-    },*/
-
-
 
         addQuestion() {
             this.questions.push({
@@ -494,26 +481,7 @@ export default {
                  })
 
 
-                 /*let hasRun = false;
-
-                const keys = Object.keys(array);
-
-                keys.forEach((key, index) => {
-                    console.log("index:", index)
-
-                    key = parseInt(key)
-
-                    let question = array[key];
-
-                    if (question.id === questionId && !hasRun) { 
-                      let newIndex = parseInt(key)+1
-                      var tmp = JSON.parse(JSON.stringify(this.questions[key]))
-                      this.questions[key] = JSON.parse(JSON.stringify(this.questions[newIndex]))
-                      this.questions[newIndex] = tmp;
-                      hasRun = true 
-
-                    }
-                });*/  
+                 
             },
 
 
@@ -552,6 +520,16 @@ export default {
     margin:10px;
     height:10%; 
     width:3%;
+  }
+  
+  .removeQuestionButton:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
+    
+  }
+  .OptionsButton:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
   }
  
   .buttonInModal{
@@ -639,19 +617,7 @@ export default {
 
   }
  
-  /*
-  button{
-  border-radius: 1em;
-  margin: 0px 10px 0px 10px;
-  width: 10vw;
-  height: 60px;
-  max-width: 70px;
-  min-width: 40px; 
-  font: 1vw Inter;
-  background: #D7D7D7;
-  transition-duration: 0.4s;
-
-  }*/
+  
   .button:hover {
     background-color: #4CAF50; /* Green */
     color: white;
@@ -684,8 +650,21 @@ export default {
     align-self: center;
 
    }
+   .upDownButton:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
+    color: white;
+   }
+   /*Eftersom klassen answerCorrect först tilldelas när knappen är "korrekt". Tydlighetsmässigt inte den bästa lösningen men men. Delayen gör att 
+   man slipper att knappen får spasmer då man hovrar precis vid kanten av den */
+   .tooltipclass:hover{
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
+    color: white;
+   }
 
   .quizbody {
+    margin-top:0vh;
     width: 50vw;
     height: 100%;
     margin-left: 25%;
@@ -696,11 +675,13 @@ export default {
   .answerCorrect {
     background-color: green;
     transition-duration: 0.4s;
+    
   }
   /* denna funkar endast när knappen är grön??? */
   .answerCorrect:hover{
-    background-color: #4CAF50; /* Green */
-    color: white;
+    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation-delay:0.5ms ;
+    
   }
 
   .box2 {
@@ -728,14 +709,7 @@ export default {
     width: 100%;
 
   }
-/*
-  input[type=text] {
-    width: 50%;
-    height: 8vh;
-    font: 1.5vw Inter;
-    border: 0px;
-    background: white;
-  }*/
+
 
   .custom-btn-quadratic .questionSettings {
     width: 50%;
@@ -897,245 +871,3 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 </style>
 
-<!--
-<script>
-import io from 'socket.io-client';
-const socket = io();
-
-export default {
-  name: 'CreateView',
-
-
-  
-  data: function () {
-    return {
-      lang: "",
-      pollId: "",
-      question: [],
-      url: null,
-      questionNumberCounter: "",
-      quizName: "",
-
-
-      DataQuestionBodyArray: [],
-      questionId: 0,
-
-
-      //mikaels
-      //answerAlternative: ["", ""],
-
-      answerAlternative: {
-        0: ["", ""],
-        1: ["", ""],
-      },
-
-
-      addNewQuestionArea: [""],
-
-      items: [],
-      questionNumber: [],
-      data: {},
-      uiLabels: {},
-
-    }
-  },
-  created: function () {
-    this.lang = this.$route.params.lang;
-    //this.DataQuestionBodyArray = [];
-    this.pollId = (Math.random().toFixed(5)*1000000);
-
-    socket.emit("pageLoaded", this.lang);
-    socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-    socket.on("dataUpdate", (data) =>
-      this.data = data
-    )
-    socket.on("pollCreated", (data) =>
-      this.data = data)
-
-    /*this.items.push(this.right_answer);*/
-  },
-  methods: {
-    createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-    },
-
-    saveQuestion: function () { //kallades förut addQuestion
-      console.log("In Createview. Saving question")
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answerAlternative } )
-
-    },
-
-    //mikaels
-    /* 
-    addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answerAlternative } )
-    },*/
-
-    addQuestion: function() {
-      this.addNewQuestionArea.push("");
-      //this.questionId = this.DataQuestionBodyArray.length+1;
-      this.questionId = this.DataQuestionBodyArray.length;
-
-      console.log("QuestionID: ", this.questionId)
-      this.DataQuestionBodyArray.push({question: this.question[this.questionId], answerAlternative: this.answerAlternative[this.questionId], questionId: this.questionId});
-
-      console.log(" addQuestion() DataQuestionBodyArray:", this.DataQuestionBodyArray[this.questionId]);
-
-
-
-
-    },
-
-    onFileChange(e) {
-      const file = e.target.files[0];
-      this.url = URL.createObjectURL(file);
-    },
-
-    //egenskrivet 
-
-    addMarkAsRightAnswer: function () {
-      //this.right_answer = ['</br><input type="text"/>','<input type="text"/></br>'];
-
-      this.right_answer = ['<button class="rightAnswer">Right answer</button>', '<input placeholder="One answer" type="text"/>'];
-      this.items.push(this.right_answer);
-
-
-    },
-
-
-
-    //mikaels
-    addAnswer: function () {
-      this.answerAlternative.push("");
-      //this.answerAlternative[this.questionId].push("");
-    },
-
-    //Den här skall vid tillfälle skrivas om så att den funkar för att ta bort ett specifikt svar.
-    removeAnswer: function(i){
-      if (this.answerAlternative.length > 1){
-        this.answerAlternative.splice(i,1);
-        console.log("jag pop")
-      }
-      else {
-        console.log("nejnej aja baja")
-      }
-    },
-
-
-//Mikael
- /*removeAnswer: function(){
-      if (this.answerAlternative.length > 1){
-        this.answerAlternative.pop("");
-        console.log("jag pop")
-      }
-      else {
-        console.log("nejnej aja baja")
-      }
-    },
-*/
-
-
-
-
-
-    runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    }
-  }
-}
-</script>
-
-
-
-<style>
-
-
-
-.endOfQuizBody{
-  padding-top: 10px;
-
-}
-
-
-#OverallStructure
-{
-
-
-}
-
-#addQuestion{
-  /*margin:30px;*/
-}
-
-
-
-.answerAlt {
-  background: #ECECEC;
-
-}
-
-p {
-  display:inline;
-  background: #ECECEC;
-  font: 2vw Inter;
-}
-
-
-answerAlt {
-  font: 2em Inter;
-
-}
-
-
-
-
-
-#addQuestionButton {
-    margin: 20px;
-
-}
-
-
-#app{
-background-color: #ECECEC;
-
-}
-
-#fileinput{
-background-color: #ECECEC;
-
-
-}
-
-
-
-
-
-
-::-webkit-input-placeholder-shown /* Chrome/Opera/Safari */
-{
-  color:grey;
-  font-family: 'Inter', sans-serif;
-  font: 24px Inter;
-  text-align: center;
-}
-
-::-webkit-input-placeholder /* Chrome/Opera/Safari */
-{
-  color:grey;
-  font-family: 'Inter', sans-serif;
-  font: 24px Inter;
-  text-align: center;
-}
-
-
-
-* {background-color: #CBE896}
-
-
-
-
-</style>
--->
