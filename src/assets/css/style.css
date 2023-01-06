@@ -145,6 +145,13 @@ input[type=text] {
     width: 5vw !important;
 }
 
+.playButtonPosition{
+  position:fixed; 
+  bottom:0; right:0; 
+  margin:0.5vw !important; 
+  width: 5vw !important;
+}
+
 .goBackButtonDiv {
   width: 30vh;
   height: 11vh;
