@@ -66,7 +66,6 @@
                 <div id="preview">
                   <div v-for="url in question" v-bind:key="url">
                     <img v-if="question.url" :src="url" >
-
                   </div>
                   
 
@@ -110,7 +109,7 @@
                   v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName"
                   custom
                   v-slot="{ navigate }">
-                <button class="custom-btn" style="position:fixed; bottom:0; right:0; height:150px; width:150px; "   
+                <button class="custom-btn playButtonPosition"   
                 @click="saveQuiz(), navigate()"
                 role="link"
                 :disabled="!quizName.length"
@@ -786,63 +785,6 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 
 
-@media screen and (max-width:760px) {
-  body{background-color: black;}
-
-
-  button {
-    border-radius: 1em;
-    margin: 0px 10px 0px 10px;
-    width: 20vw;
-    height: 60px;
-    max-width: 500px;
-    min-width: 40px; 
-
-
-    font: 1vw Inter;
-    
-
-    background: #D7D7D7;
-  }  
-
-  .quizbody {
-    width: 100%;
-    height: 100%;
-    margin: 0%;
-    background: #CBE896;
-  }
-
-  
-  }
-
-  @media screen and (max-width:450px) {
-    body{background-color: black;}
-
-
-    button {
-      border-radius: 1em;
-      margin: 0px 10px 0px 10px;
-      width: 20vw;
-      height: 60px;
-      max-width: 500px;
-      min-width: 40px; 
-
-
-      font: 1vw Inter;
-      
-
-      background: #D7D7D7;
-    }  
-
-    .quizbody {
-      width: 100%;
-      height: 100%;
-      margin: 0%;
-      background: #CBE896;
-    }
-
-    
-    }
 
 </style>
 

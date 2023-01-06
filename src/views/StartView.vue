@@ -102,7 +102,6 @@ export default {
 
 
 <style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
   @import '@/assets/css/style.css';
   
   .wrapper{

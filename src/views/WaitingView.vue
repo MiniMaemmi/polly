@@ -3,7 +3,7 @@
   <div class="wrapper">
     
     <div @mousemove="onMousemove"
-      :style="{backgroundColor: `hsl(${x}, 100%, 50%)` }"
+      :style="{backgroundColor: `hsl(${x}, 80%, 50%)` }"
       class="movearea">
 
       <div class="goBackButtonDiv">
