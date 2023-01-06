@@ -1,6 +1,6 @@
 <template>
-  <body>
-<h3>{{answer.label}}</h3>
+  <div class="questionComp">
+<h3 style="margin:10vh">{{answer.label}}</h3>
 <div v-for="answerObject in question.questions" v-bind:key="answerObject"> 
   
   <div>Picture:
@@ -10,19 +10,15 @@
 
   </div>
 </div>
-<div v-for="url in question" v-bind:key="url">
-                    <img v-if="question.url" :src="url" >
-
-                  </div>
+    <div style="margin:25px" v-for="url in question" v-bind:key="url">
+        <img v-if="question.url" :src="url" >
+      </div>
 
 <button class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
-  {{answerObject.label}}
-  {{answerObject.image}}
-
-
-                  
+  {{answerObject.label}}                  
 </button>
-</body>
+
+</div>
 </template>
 <script>
 export default {
@@ -43,8 +39,15 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
-  body{
-    display:grid 1fr 1fr 1fr
+  .questionComp{
+    
+    
+   
+    
+  }
+  img{
+    max-height: 80vh;
+    max-width: 80vh;
   }
 
 </style>
