@@ -12,7 +12,7 @@
       </div>
 
       <div class="contentArea lightYellowBox shadowIt">
-        <div class="header">
+        
           <h1>
             {{uiLabels.displayJoinPoll}}:
             <br/>
@@ -20,7 +20,7 @@
               {{quizName}}
             </div>
           </h1>
-        </div>
+        
 
           <h1>
             {{uiLabels.joinQuiz}}
@@ -30,12 +30,12 @@
             </div>
           </h1>
         
-          <div> <!--vill att om username är undefined blir man quizleader eller nåt-->
+          <div class="goBackButtonDiv"> <!--vill att om username är undefined blir man quizleader eller nåt-->
             <router-link
             v-bind:to="'/poll/'+pollId+'/'+ lang + '/' +username"
             custom
             v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
-              <button class="custom-btn" style="position:fixed; bottom:0; right:0; height:150px; width:150px; "   
+              <button class="custom-btn playButtonPosition"   
                @click = "navigate()" v-on:click="sendStart()" role="link">
                 {{ uiLabels.playQuiz }}
               </button>
@@ -65,7 +65,7 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
-      hideNav: true
+      
     }
   },
   created: function () {
@@ -97,17 +97,84 @@ export default {
 <style scoped>
   @import '@/assets/css/style.css';
   
-  h1 { margin: 0 0 10px; }
+  h1 { 
+    margin: 0 0 10px;
+  }
  
-
-.goBackButtonDiv {
-  width: 100%;
-  height: 11vh;
-  display: inline;
-}
-
 .boldtext{
   font-weight: bold;
+}
+
+
+@media screen and (max-width:985px) {
+  h1{
+    font-size:4em;
+  }
+  .contentArea{
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+@media screen and (max-width:820px) {
+  h1{
+    font-size:3.5em;
+  }
+
+    .custom-btn{
+      display: inline;
+      flex: none;
+      position: absolute;
+      width:20% !important
+    }
+
+
+}
+
+@media screen and (max-width:689px) {
+
+  h1{
+    font-size:3em;
+  }
+  .custom-btn{
+      display: inline;
+      flex: none;
+      position: absolute;
+      width:40% !important
+    }
+ 
+}
+
+@media screen and (max-width:590px) {
+  h1{
+    font-size: 2.5em;
+  }
+
+
+    .contentArea{
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+@media screen and (max-width:440px) {
+  h1{
+    font-size: 2em;
+  }
+
+}
+
+@media screen and (max-width:320px) and (min-width:220px) {
+  h1{
+    font-size: 1.5em;
+  }
+
+  .custom-btn{
+    display: inline;
+      flex: none;
+      position: absolute;
+      width:60% !important
+  }
 }
 
 

@@ -47,15 +47,22 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
-  .questionComp{
-    
-    
-   
-    
-  }
+
   img{
     max-height: 80vh;
     max-width: 80vh;
+  }
+
+  .questionImage {
+    background-color: white;
+    border: 0.1px solid grey;
+
+  }
+
+  .questionComp button {
+    justify-content: space-evenly;
+    margin: 10%;
+
   }
 
 </style>
