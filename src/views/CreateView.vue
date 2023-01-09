@@ -120,9 +120,9 @@
         </router-link>
 
     
-    </div>
+      </div>
 
-  </div>  
+    </div>  
 
   </body>
 </template>
@@ -470,11 +470,11 @@ export default {
   @import '@/assets/css/style.css';
  
   .quizbody {
-    width: 50vw;
+    width: 50%;
     height: 100%;
     margin-left: 25%;
-    margin-top: 10%;
   }
+
   .nameQuizSectionWrapper {
     padding: 3vh;
   }
@@ -482,7 +482,6 @@ export default {
   #Quizname{
     color:black;
     font: 3vw Inter;
-    height: 100%;
     width:  100%;
     display: flex;
     justify-content: center;
@@ -602,8 +601,8 @@ export default {
    }
 
    .arrow{
-    width: 2vh;
-    height: 2vh;
+    width: 3vh;
+    height: 3vh;
    }
 
 
@@ -681,13 +680,12 @@ export default {
 
   }
 
-  .answerBox img {
-    width: 2vh;
-    height: 2vh;
+  .answerBox .checkmark {
+    width: 5vh;
+    height: 5vh;
     padding-top: 20%;
     padding-bottom: 20%;
   }
-
 
 
 .preview {
@@ -704,8 +702,8 @@ export default {
 }
 
 .Xbutton{
-width: 5%;
-height: 5%;
+width: 4vh;
+height: 4vh;
 margin-left: -5%;
 margin-top: -10%;
 margin-right: 0%;
@@ -722,13 +720,18 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 
-/* 1150 knappar på add question
-
+/* 
+vid 950 att det blir en stor förändring med allt 
 
 
 */ 
 
-@media screen and (max-width:1150px) {
+@media screen and (max-width:950px) {
+ 
+  .quizbody{
+    width: 60%;
+    margin-left: 20%;
+  }
 
 }
 
