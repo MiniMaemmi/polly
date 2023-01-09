@@ -19,6 +19,11 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("start",quizName)
   })
 
+  socket.on('nextQuestion', function(pollId){
+    console.log("nextQuestion i Sockets")
+    io.to(pollId).emit("nextQuestion")
+  })
+
 
 //mikaels orginal
 /*
@@ -80,8 +85,7 @@ function sockets(io, socket, data) {
   //egenskriven
   
   socket.on('submitAnswer', function(d) {
-   
-
+    console.log("---- i sockets.js submitAnswer()----")
     data.submitAnswer(d.pollId, d.userObject);
     //data.submitAnswer(d.pollId, d.question, d.answer, d.username);
     //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));

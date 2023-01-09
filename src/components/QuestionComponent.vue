@@ -1,19 +1,15 @@
 <template>
   <div class="questionComp">
+
+    {{countdown}}
+
+    {{username}}
 <h3 style="margin:10vh">{{answer.label}}</h3>
-
-
-    <!--<div class="imgDiv" style="margin:5vh" v-for="url in question" v-bind:key="url" >
-      Scuffed lösning men-->
         <div v-if="question.url">
           <img :src="question.url">
         </div>        
       
-      
-
-  
-
-<button 
+<button :disabled="countdown === 0"
 class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
   {{answerObject.label}}                  
 </button>
@@ -24,8 +20,22 @@ class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(a
 export default {
   name: 'QuestionComponent',
   props: {
-    question: Object
+    question: Object,
   },
+  data: function() {
+    return {
+      countdown: 0,
+    }
+
+  },
+
+  created: function () {
+    this.countdown = 10;
+    console.log("new question")
+
+    this.updateCountdown()
+
+  }, 
   emits: ["answer"],
   methods: {
     answer: function (answer) {
@@ -41,6 +51,21 @@ export default {
         return(true)
       }
 
+    },
+
+    //nedräkningsfunktion
+    updateCountdown(){
+        
+        this.countdown--;
+        if (this.countdown > 0) {
+            setTimeout(this.updateCountdown,1000);
+            
+        } else {
+            //this.showButton = true;
+            // visa rätt svar
+            console.log("Time is up, emitta här")
+            
+        }
     },
    
   }

@@ -53,6 +53,7 @@ export default {
   created: function () {
     this.pollId=this.$route.params.pollId
     this.lang = this.$route.params.lang;
+    this.username = this.$route.params.username;
     
     socket.emit("pageLoaded", this.lang);
 
@@ -69,7 +70,7 @@ export default {
       console.log(this.quizName)
       
   
-      this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.quizName)
+      this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.quizName + '/' + this.username)
      
     });
     

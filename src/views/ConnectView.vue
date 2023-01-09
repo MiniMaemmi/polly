@@ -38,24 +38,9 @@
           </div>
         </div>
 
-
-
-
-        <!-- 
-        <div class="labelArea">
-            
-             <label>
-              {{uiLabels.username}}:
-            </label>
-        </div>
-        <div class="labelArea">
-           <input type="text" v-model="id" placeholder="Ex: 123">
-           <input type="text" v-model="username"  placeholder="Ex: Ben Dover">
-        </div>-->
             <div>
                 <router-link
-                
-                v-bind:to="'/waiting/'+ id+'/'+lang"
+                v-bind:to="'/waiting/'+ id+'/'+lang + '/' + username"
                 custom
                 v-slot="{ navigate }">
                 <button class="custom-btn" v-on:click="createUser" :disabled="!username.length||!id.length" 
@@ -69,19 +54,7 @@
             </div>
 
 
-
-          
         
-
-          <h3>För att komma till PollView just nu</h3>
-            <button class="custom-btn" v-on:click="createUser">
-              <router-link v-bind:to="'/poll/'+id+'/'+ lang + '/' +username">{{uiLabels.participatePoll}}</router-link>
-            </button>
-
-
-        
-
-            <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->
           
 </div>
 
@@ -115,7 +88,6 @@ export default {
     this.lang = this.$route.params.lang;
 
       socket.emit("pageLoaded", this.lang);
-
       socket.on("init", (labels) => {
         this.uiLabels = labels
       })

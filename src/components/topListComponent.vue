@@ -50,17 +50,9 @@ export default {
       username: this.topListAndUsername.username,
     }
   },
-  //emits: ["answer"],
-  //methods: {
-    /*answer: function (answer) {
-      console.log("----i QuestionComponent----")
-      console.log("answer: ", answer)
-      this.$emit("answer", answer);
-    }*/
-  //}
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 

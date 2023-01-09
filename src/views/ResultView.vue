@@ -10,9 +10,9 @@
     <topListComponent v-bind:topListAndUsername="{topList, username}"/>
   </div>
   <div class="graphContainer">
-    <div class="bellCurveContainer">
+    <!-- <div class="bellCurveContainer">
       <bellCurveComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
-    </div>
+    </div>-->
     <div class="barChartContainer">
       <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
     </div>
@@ -27,7 +27,7 @@
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
 import topListComponent from '@/components/topListComponent.vue';
-import bellCurveComponent from '@/components/bellCurveComponent.vue';
+//import bellCurveComponent from '@/components/bellCurveComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
 
@@ -36,7 +36,7 @@ export default {
   components: {
     BarsComponent,
     topListComponent,
-    bellCurveComponent
+    //bellCurveComponent
   },
   data: function () {
     return {
@@ -99,15 +99,16 @@ export default {
         socket.emit("assignScoreForUser", this.pollId, this.pollParticipants)
         socket.on('assignScoreForUser', update =>{
           this.pollParticipants= update;
-          });
-          
           socket.emit("getSortedTopList", this.pollParticipants, this.topList)
           socket.on('getSortedTopList', update =>{
           
           this.topList=update;
-          console.log("toplist", this.topList)
+          console.log("toplist: ", this.topList)
           
           socket.emit("createScoreCounter", this.topList)
+          });
+          
+          
 
 
 

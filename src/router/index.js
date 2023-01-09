@@ -9,7 +9,7 @@ const routes = [
   },
   
   {
-    path: '/poll/:id/:lang/:username',
+    path: '/poll/:id/:lang/:quizName/:username',
     name: 'PollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
   },
@@ -40,7 +40,7 @@ const routes = [
   },
   
   {
-    path: '/waiting/:pollId/:lang',
+    path: '/waiting/:pollId/:lang/:username',
     name: 'WaitingView',
     component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
   },
@@ -51,12 +51,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderStartView.vue')
   },
 
-  {
-    path:'/poll/:pollID/:lang/:quizName',
-    name:'quizleaderPollView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderPollView.vue')
-  }
-  
 ]
 
 const router = createRouter({
