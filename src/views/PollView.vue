@@ -4,7 +4,7 @@
   </head>
    
     <body class="animationGradient" style="animation:  animate 25s ease infinite; margin-top:0vh;">
-        <h1 style="margin-top:0vh" v-if="username==='undefined'">Hello Quiz leader!</h1>
+        
   
       <div class="wrapper" style="margin-top:0vh;">
         <div class="goBackButtonDiv">
@@ -116,6 +116,7 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
         this.uiLabels = labels
       })
