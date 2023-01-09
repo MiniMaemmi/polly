@@ -14,8 +14,8 @@
             </button>
           </router-link>
         </div>   
-        <p1 v-if="username!=='undefined'" > {{username}}</p1>
-        <p2 class="PollIdDisplay">PollID: {{pollId}}</p2>
+        <div class="p1" v-if="username!=='undefined'" > {{username}}</div>
+        <div class= "p1 PollIdDisplay">PollID: {{pollId}}</div>
        
         <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
 
@@ -32,7 +32,7 @@
   
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
           
-        <div v-if="username==='undefined'" >
+        <div v-if="username ==='undefined'" >
           <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}   
           </button>

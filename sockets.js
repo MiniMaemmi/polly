@@ -14,9 +14,9 @@ function sockets(io, socket, data) {
     console.log("i sockets.js createPoll()")
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.questionsObjectArray));
   });
-  socket.on("sendStart", function(pollId){
+  socket.on("sendStart", function(pollId,quizName){
     console.log("sendStart Socket")
-    io.to(pollId).emit("start")
+    io.to(pollId).emit("start",quizName)
   })
 
 

@@ -41,7 +41,7 @@ export default {
   },
   data: function () {
     return {
-      
+      quizName:"",
       uiLabels: {},
       id: "",
       lang: "",
@@ -52,8 +52,8 @@ export default {
   
   created: function () {
     this.pollId=this.$route.params.pollId
-    
     this.lang = this.$route.params.lang;
+    
     socket.emit("pageLoaded", this.lang);
 
     socket.on("init", (labels) => {
@@ -63,8 +63,14 @@ export default {
 
     socket.emit("joinPoll", (this.pollId));  
     
-    socket.on("start",()  => {
+    socket.on("start",(data)  => {
       console.log("start mottogs")
+      this.quizName=data
+      console.log(this.quizName)
+      
+  
+      this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.quizName)
+     
     });
     
     

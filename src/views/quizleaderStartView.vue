@@ -71,6 +71,8 @@ export default {
   created: function () {
     this.lang = this.$route.params.lang;
     this.pollId=this.$route.params.pollId
+    this.quizName=this.$route.params.quizName
+
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -85,7 +87,7 @@ export default {
     sendStart: function(){
       console.log("sendstart klrd i quizzleaderstartview")
       console.log(this.pollId )
-      socket.emit("sendStart",this.pollId )
+      socket.emit("sendStart",this.pollId,this.quizName )
     },
 
 
