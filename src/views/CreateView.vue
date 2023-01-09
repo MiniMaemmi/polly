@@ -4,7 +4,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
 
-  <body class ="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfModalOpen($event)" >
+  <body class ="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfPopOpen($event)" >
 
     <div class="quizbody" style="margin-top:0vh">
 
@@ -13,27 +13,27 @@
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
           
 
-            <button class="custom-btn-quadratic OptionsButton" @click="modalPopUpfunction()">
+            <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             
-            <div id="myModal" class="modal">
+            <div id="myPop" class="pop">
              
-              <div class="modal-content custom-btn-quadratic">
-                {{uiLabels.modalText}}
+              <div class="pop-content custom-btn-quadratic">
+                <h1>{{uiLabels.modalText}}</h1>
                 
-                <button id="xCloseModal" @click="closeModal()">
+                <button id="xClosePop" @click="closePop()">
                     &times;
                 </button>
 
                     <div>
-                      <button class="custom-btn-quadratic " style="height:10vh; margin-bottom:15px;" @click="saveQuestionsAsJson"> 
+                      <button class="custom-btn-quadratic" style="height:10vh; margin:2vh;" @click="saveQuestionsAsJson"> 
                           {{uiLabels.saveAsJson}}
                       </button>
                     </div>
 
                     <div>
-                      <button class="custom-btn-quadratic" style="height:10vh;" @click="loadJson">
+                      <button class="custom-btn-quadratic" style="height:10vh; margin-bottom: 2vh;" @click="loadJson">
                         {{uiLabels.loadAJson}}
                       </button>
                     </div>
@@ -64,9 +64,10 @@
           </div>
 
           <div>
-            <input type="file" @change="onFileChange($event, question)"/>
-            <button v-on:click="removePicture(question)">X</button>
-              
+            <input class="addFile" type="file" @change="onFileChange($event, question)"/>
+            <button class="Xbutton custom-btn-quadratic" v-on:click="removePicture(question)">
+                <img src="../../img/x.png">
+            </button>
             <div class="preview">     
                 <div v-if="question.url">
                   <img :src="question.url" >
@@ -213,21 +214,21 @@ export default {
             }
                                         
       },
-      modalPopUpfunction: function(){
-        var modal = document.getElementById("myModal");
-        modal.style.display = "block";
+      PopUpfunction: function(){
+        var pop = document.getElementById("myPop");
+        pop.style.display = "block";
         
         
       },
-      closeModal: function(){
-        var modal = document.getElementById("myModal");
-        modal.style.display = "none";
+      closePop: function(){
+        var pop = document.getElementById("myPop");
+        pop.style.display = "none";
       },
 
-      IfModalOpen: function(event){
-        if(event.target == document.getElementById("myModal")  ){
-          var modal= document.getElementById("myModal")
-          modal.style.display = "none";
+      IfPopOpen: function(event){
+        if(event.target == document.getElementById("myPop")  ){
+          var pop= document.getElementById("myPop")
+          pop.style.display = "none";
         
         }
         
@@ -480,9 +481,6 @@ export default {
   }
 
   #Quizname{
-    color:black;
-    font: 3vw Inter;
-    width:  100%;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -492,7 +490,16 @@ export default {
     color:black;
     font: 3vw Inter;
     text-align: center;
-    margin: 3 vh;
+    width: 100%;
+
+  }
+
+  .custom-btn-quadratic .questionSettings {
+    width: 5vh;
+    height: 5vh;
+    padding-top: 10%;
+    padding-bottom: 10%;
+
   }
 
   /* Popup*/
@@ -501,31 +508,31 @@ export default {
     animation-delay:0.5ms ;
   }
 
-  .modal {
+  .pop {
     display: none; 
     position: fixed; 
     z-index: 1; 
     left: 0;
-    top: 0;
-    width: 100%; 
+    top: 0; 
     height: 100%; 
+    width: 100%;
     overflow: auto; 
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
   }
 
-  .modal-content {
+  .pop-content {
     background-color: #fefefe;
     margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 70%; 
     height:40%;
     position:relative;
     font-size:55%;
   }
 
-  #xCloseModal{
+  #xClosePop{
     position:absolute;
     top:0; 
     right:0;
@@ -547,25 +554,37 @@ export default {
     width: 100%;
   }
   
+  /*Ändra fråge rutan */ 
   .questionInput {
     width: 100%;
-    height: 8vh;
+    height: 10vh;
     font: 1.5vw Inter;
     border: 0px;
     background: white;
     align-self: flex-center;
-    margin: 1vh 1vh 1vh 0vh;
+    margin: 2vh 0vh 2vh 0vh;
   }
   .questionOperations {
     display: flex;
     flex-direction: row;
     width: 80%;
   }
+
+  .removeQuestionButton{
+    width: 20vh;
+    height: 7vh;
+    font-size: 1.5vh;
+  }
   
   .removeQuestionButton:hover{
     animation: pulse 2s;
     animation-delay:0.5ms ;
   }
+
+  .addFile{
+    width: 100%;
+  }
+  
   
   .upDownButtonPair {
     padding-right: 1vw;
@@ -614,7 +633,7 @@ export default {
 
   .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 10vh;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -633,10 +652,8 @@ export default {
   
 }
 
-   /*Eftersom klassen answerCorrect först tilldelas när knappen är "korrekt". Tydlighetsmässigt inte den bästa lösningen men men. Delayen gör att 
-   man slipper att knappen får spasmer då man hovrar precis vid kanten av den */
    .tooltipclass:hover{
-    animation: pulse 2s; /* Animate for 1.5 seconds on hover */
+    animation: pulse 2s; 
     animation-delay:0.5ms ;
     color: white;
    }
@@ -654,24 +671,13 @@ export default {
   }
 
 
-
-  .custom-btn-quadratic .questionSettings {
-    width: 5vh;
-    height: 5vh;
-    padding-top: 10%;
-    padding-bottom: 10%;
-
-  }
-
   .answerBox {
-    width: 100%;
     font: 1vw Inter;
     display: flex;
-    margin: 1vh 0vh 0.5vh 0vh;
-
+    margin: 2vh 0vh 0.5vh 0vh;
   }
 
-  .answerBox input {
+  .answerBox > input {
     width: 100%;
   }
 
@@ -726,20 +732,26 @@ vid 950 att det blir en stor förändring med allt
 
 */ 
 
-@media screen and (max-width:900px) {
+@media screen and (max-width:1080px) {
   .goBackButtonPosition {
         display: inline;
         flex: none;
         position: absolute;
-        width: 20% !important
+        width: 15% !important
     }
 
   .playButtonPosition{
     display: inline;
     flex: none;
     position: absolute;
-    width: 20% !important
+    width: 15% !important
   }
+
+  .quizbody{
+    width: 60%;
+    margin-left: 20%;
+  }
+
 
 }
 
