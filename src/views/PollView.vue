@@ -33,14 +33,10 @@
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
           
         <div v-if="username ==='undefined'" >
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray(), sendNextQuestion()"> 
             {{uiLabels.nextQuestion}}   
           </button>
-          <!--
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-else-if="showResultButton"> 
-            {{uiLabels.showResults}}
-          </button>
-          -->
+         
 
 
 
@@ -116,6 +112,9 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    
+     
+    socket.emit("joinPoll", (this.pollId));  
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
         this.uiLabels = labels
@@ -161,8 +160,12 @@ export default {
     }
       
     )
+    socket.on("nextQuestion",() => {
+      
+      this.getQuestionFromArray()
+    }
     
-
+    )
   },
 
 //man behöver klicka en extra gång på next innan 
@@ -223,6 +226,13 @@ export default {
         this.showResultButton = true
       }
     },
+    sendNextQuestion: function(){
+      console.log("sendNextQuestion")
+      socket.emit("nextQuestion", (this.pollId))
+    },
+    
+
+   
 
 
 

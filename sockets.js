@@ -19,6 +19,11 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("start",quizName)
   })
 
+  socket.on('nextQuestion', function(pollId){
+    console.log("nextQuestion i Sockets")
+    io.to(pollId).emit("nextQuestion")
+  })
+
 
 //mikaels orginal
 /*

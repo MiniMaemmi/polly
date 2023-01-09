@@ -85,8 +85,8 @@ export default {
   },
   methods: {
     sendStart: function(){
-      console.log("sendstart klrd i quizzleaderstartview")
-      console.log(this.pollId )
+      //console.log("sendstart klrd i quizzleaderstartview")
+      //console.log(this.pollId )
       socket.emit("sendStart",this.pollId,this.quizName )
     },
 
