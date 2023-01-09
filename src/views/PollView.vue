@@ -2,20 +2,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-   
     <body class="animationGradient" style="animation:  animate 25s ease infinite; margin-top:0vh;">
-        <h1 style="margin-top:0vh" v-if="username==='undefined'">Hello Quiz leader!</h1>
+        
   
       <div class="wrapper" style="margin-top:0vh;">
         <div class="goBackButtonDiv">
           <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
-            <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
+            <button class="custom-btn goBackButtonPosition" @click="navigate()" role="link">
               {{uiLabels.back}}
             </button>
           </router-link>
         </div>   
-        <p1 v-if="username!=='undefined'" > {{username}}</p1>
-        <p2 class="PollIdDisplay">PollID: {{pollId}}</p2>
+        <div class="p1" v-if="username!=='undefined'" > {{username}}</div>
+        <div class= "p1 PollIdDisplay">PollID: {{pollId}}</div>
        
         <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
 
@@ -32,8 +31,8 @@
   
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
           
-        <div v-if="username==='undefined'" >
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+        <div v-if="username ==='undefined'" >
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}   
           </button>
           <!--
@@ -50,7 +49,7 @@
                   custom
                   v-slot="{ navigate }">
                 <button style="height:10%" class="nextQuestionButton custom-btn-quadratic"  
-                @click="navigate()"
+                @click="sendShowResult(), navigate()"
                 role="link"
                 
                 >
@@ -99,7 +98,6 @@ export default {
 
       pollLength: 0,
       pollQuestionIterator:0,
-      lastQuestionReached: false,
       showResultButton: false,
       userObject: 
                 {
@@ -116,6 +114,7 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
         this.uiLabels = labels
       })
@@ -125,6 +124,7 @@ export default {
 
     //socket.emit('joinPoll', this.pollId)
     socket.emit('getPoll', this.pollId)
+
     socket.on('sendQuestion', poll => 
     {
       this.poll = poll
@@ -133,11 +133,13 @@ export default {
       }
     )
 
-
+socket.emit("joinPoll", (this.pollId)); 
 
     socket.on("newQuestion", q =>
       this.question = q
     )
+
+  
 
     socket.on("dataUpdate", data  => {
       console.log("pollview dataupdate")
@@ -160,6 +162,18 @@ export default {
     }
       
     )
+
+
+
+    socket.on("recieveShowResult",(data)  => {
+    console.log("mottaget sendShowResuls")
+      this.quizName=data
+      console.log(this.quizName)
+      
+        
+      this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
+     
+    });
     
 
   },
@@ -201,26 +215,20 @@ export default {
         questionObject.answers.forEach(answer => {
             this.question.a.push(answer.label);
         })
-
-        
-
-
-       
-          
         //console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
-        
         this.updateCountdown();
-       
-        
-
 
       }
-      else if (typeof questionObject === 'undefined'){
+      if (this.poll.questions.length === this.pollQuestionIterator-1) {
+        this.showResultButton = true
+
+      }
+      /*else if (typeof questionObject === 'undefined'){
         //Delete "Next fråga button"
         this.lastQuestionReached = true
         this.showResultButton = true
-      }
+      }*/
     },
 
 
@@ -283,6 +291,11 @@ export default {
 
     navigate: function() {
       this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
+    },
+
+    sendShowResult: function() {
+      console.log("sendShowResult körs")
+      socket.emit("sendShowResult",this.pollId,this.quizName)
     },
 
 
