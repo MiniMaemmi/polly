@@ -11,11 +11,11 @@ function sockets(io, socket, data) {
 
 //egenskrivet
   socket.on('createPoll', function(d) {
-    console.log("i sockets.js createPoll()")
+   
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.questionsObjectArray));
   });
   socket.on("sendStart", function(pollId,quizName){
-    console.log("sendStart Socket")
+   
     io.to(pollId).emit("start",quizName)
   })
 
@@ -29,8 +29,7 @@ function sockets(io, socket, data) {
 
   //this is for user creation egenskrivet
   socket.on('createUser', function(username) {
-  console.log("------- i socket createUser ------ ") 
-  console.log("This is my username:", username);
+ 
   socket.emit('dataUpdate', {answers: data.getAnswers(data.pollId), username: username});
   data.createUser(data.pollId, username);
    
@@ -39,7 +38,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    console.log("Är i socket addQuestion()")
+
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
   });
@@ -55,7 +54,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('joinPoll', function(pollId) {
-    console.log("joinPoll i sockets, pollid:", pollId)
+  
     socket.join(pollId);
     
   });
@@ -67,13 +66,13 @@ function sockets(io, socket, data) {
 
 
   socket.on('getQuestion', function(pollId, questionId) {
-    console.log('i sockets.js getQuestion()')
+  
     socket.emit('getQuestion', data.getQuestion(pollId, questionId))
   });
 
   //egenskriven
   socket.on('getPollParticipants', function(pollId) {
-    console.log('------i sockets.js getPollParticipants()---------')
+    
     socket.emit('getPollParticipants', data.getPollParticipants(pollId))
   });
 
@@ -81,44 +80,41 @@ function sockets(io, socket, data) {
   //egenskriven
   
   socket.on('submitAnswer', function(d) {
-    console.log("-----sockets.js in submitAnswer()-------");
-    console.log("Variables:", d.pollId, d.answerObject);
+   
+
     data.submitAnswer(d.pollId, d.userObject);
     //data.submitAnswer(d.pollId, d.question, d.answer, d.username);
     //io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
 
   socket.on('assignScoreForUser', function(pollId, pollParticipants){
-    console.log("-----sockets.js in assignScoreForUser-------");
+
     socket.emit("assignScoreForUser",data.assignScoreValueToEachAnswer(pollId, pollParticipants));
 
   });
 
   socket.on('getSortedTopList', function(pollParticipants, topList){
-    console.log("-----sockets.js in getSortedTopList-------");
+
     socket.emit("getSortedTopList",data.getSortedTopList(pollParticipants, topList));
 
 
   });
 
   socket.on('checkQuestions', function(pollId, pollParticipants, questionResultCounter){
-    console.log("-----sockets.js in checkQuestions-------AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
     socket.emit("checkQuestions",data.checkQuestions(pollId, pollParticipants, questionResultCounter));
 
 
   });
+ 
+
+   socket.on("sendShowResult", function(pollId,quizName){
+    console.log("i socket sendShowResult AAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    io.to(pollId).emit("recieveShowResult", quizName)
+  })
 
 
-/*
-  //mikaels orginal
-  socket.on('submitAnswer', function(d) {
-    console.log("----- i sockets.js submitAnswer() -----")
-    console.log("-----d.pollId-------", d.pollId)
-    console.log("data d:,", d)
-    console.log("-----d.answer-------", d.answer)
-    data.submitAnswer(d.pollId, d.answer);
-    io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
-  });*/
+
   
 
   socket.on('resetAll', () => {
