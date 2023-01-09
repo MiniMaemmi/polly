@@ -163,7 +163,11 @@ socket.emit("joinPoll", (this.pollId));
     socket.on("nextQuestion",() => {
       console.log("-----i PollView nextQuestion()----")
       this.$refs.questionComponent.resetCountdown()
-      this.getQuestionFromArray()
+      //här ska de vara en if så inte ledaren får hoopa två steg i arrayen.
+      if (this.username != "undefined"){
+        this.getQuestionFromArray()
+      }
+      
     })
 
     socket.on("recieveShowResult",(data)  => {
