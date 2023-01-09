@@ -2,7 +2,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-   
     <body class="animationGradient" style="animation:  animate 25s ease infinite; margin-top:0vh;">
         <h1 style="margin-top:0vh" v-if="username==='undefined'">Hello Quiz leader!</h1>
   
@@ -33,7 +32,7 @@
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
           
         <div v-if="username ==='undefined'" >
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton" @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}   
           </button>
           <!--
@@ -99,7 +98,6 @@ export default {
 
       pollLength: 0,
       pollQuestionIterator:0,
-      lastQuestionReached: false,
       showResultButton: false,
       userObject: 
                 {
@@ -201,26 +199,20 @@ export default {
         questionObject.answers.forEach(answer => {
             this.question.a.push(answer.label);
         })
-
-        
-
-
-       
-          
         //console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
-        
         this.updateCountdown();
-       
-        
-
 
       }
-      else if (typeof questionObject === 'undefined'){
+      if (this.poll.questions.length === this.pollQuestionIterator-1) {
+        this.showResultButton = true
+
+      }
+      /*else if (typeof questionObject === 'undefined'){
         //Delete "Next fråga button"
         this.lastQuestionReached = true
         this.showResultButton = true
-      }
+      }*/
     },
 
 
