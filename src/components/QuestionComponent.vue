@@ -1,11 +1,13 @@
 <template>
   <div class="questionComp">
+
+    {{countdown}}
 <h3 style="margin:10vh">{{answer.label}}</h3>
         <div v-if="question.url">
           <img :src="question.url">
         </div>        
       
-<button 
+<button :disabled="countdown === 0"
 class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
   {{answerObject.label}}                  
 </button>

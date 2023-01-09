@@ -32,7 +32,7 @@
         
           <div class="goBackButtonDiv"> <!--vill att om username är undefined blir man quizleader eller nåt-->
             <router-link
-            v-bind:to="'/poll/'+pollId+'/'+ lang + '/' +username"
+            v-bind:to="'/poll/'+pollId+'/'+ lang + '/' + quizName + '/' +username"
             custom
             v-slot="{navigate}"> <!--v:bind:to="'/quizleaderPollView/'+lang+'/'+this.pollId+'/'+this.quizName"-->
               <button class="custom-btn playButtonPosition"   

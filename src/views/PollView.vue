@@ -37,7 +37,7 @@
           <!-- <div v-else-if="showResultButton"> -->
             <div v-if="showResultButton">
           <router-link
-                  v-bind:to="'/result/'+this.pollId+ '/' + lang +'/' + username"
+                  v-bind:to="'/result/'+this.pollId+ '/' + lang +'/' + this.quizName +  '/' + username"
                   custom
                   v-slot="{ navigate }">
                 <button style="height:10%" class="nextQuestionButton custom-btn-quadratic"  
@@ -107,6 +107,7 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    this.quizName = this.$route.params.quizName
     
      
     socket.emit("joinPoll", (this.pollId));  
@@ -167,7 +168,7 @@ socket.emit("joinPoll", (this.pollId));
     )
 
     socket.on("recieveShowResult",(data)  => {
-    console.log("mottaget sendShowResuls")
+      this.submitAnswer()
       this.quizName=data
       console.log(this.quizName)
       

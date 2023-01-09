@@ -86,7 +86,6 @@ export default {
 
         socket.emit("checkQuestions", this.pollId, this.pollParticipants, this.questionResultCounter)
           socket.on('checkQuestions', update =>{
-          
           this.questionResultCounter=update;
           console.log("Checkqustions i Resultview, questionResultCounter", this.questionResultCounter)
         
