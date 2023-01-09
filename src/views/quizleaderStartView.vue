@@ -61,7 +61,7 @@ export default {
   },
   data: function () {
     return {
-      gameStarted: false,
+      
       uiLabels: {},
       id: "",
       lang: "",
@@ -70,6 +70,7 @@ export default {
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    this.pollId=this.$route.params.pollId
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -83,8 +84,8 @@ export default {
   methods: {
     sendStart: function(){
       console.log("sendstart klrd i quizzleaderstartview")
-      this.gameStarted= true
-      socket.emit("sendStart",this.gameStarted )
+      console.log(this.pollId )
+      socket.emit("sendStart",this.pollId )
     },
 
 

@@ -14,9 +14,9 @@ function sockets(io, socket, data) {
     console.log("i sockets.js createPoll()")
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.questionsObjectArray));
   });
-  socket.on("sendStart", function(gameStarted){
+  socket.on("sendStart", function(pollId){
     console.log("sendStart Socket")
-    socket.emit("start", data.gameStart(gameStarted))
+    io.to(pollId).emit("start")
   })
 
 
@@ -55,9 +55,9 @@ function sockets(io, socket, data) {
   });
 
   socket.on('joinPoll', function(pollId) {
+    console.log("joinPoll i sockets, pollid:", pollId)
     socket.join(pollId);
-    socket.emit('newQuestion', data.getQuestion(pollId))
-    socket.emit('dataUpdate', data.getAnswers(pollId));
+    
   });
 
   socket.on('runQuestion', function(d) {

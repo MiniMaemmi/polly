@@ -50,18 +50,22 @@ export default {
   },
   
   created: function () {
+    this.pollId=this.$route.params.pollId
+    
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
 
     socket.on("init", (labels) => {
       this.uiLabels = labels
       
-    })
+    }),
 
-    socket.on("start", (data) => {
-        console.log("HEJEHEJHEJE")
-          this.data=data
-    } )
+    socket.emit("joinPoll", (this.pollId));  
+    
+    socket.on("start",()  => {
+      console.log("start mottogs")
+    });
+    
     
     
   },

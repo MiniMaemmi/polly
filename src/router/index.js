@@ -40,7 +40,7 @@ const routes = [
   },
   
   {
-    path: '/waiting/:id/:lang',
+    path: '/waiting/:pollId/:lang',
     name: 'WaitingView',
     component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
   },

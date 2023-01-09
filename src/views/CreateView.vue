@@ -59,15 +59,18 @@
               {{uiLabels.removeQuestion}}
             </button >
             </div>
-            <div id="app">
+            <div>
               <!-- fråga mig inte hur den funkar, jag har inget svar-->
-                <input id="fileinput" type="file" @change="onFileChange($event, question)" />
+                <input type="file" @change="onFileChange($event, question)" />
                 <button v-on:click="removePicture(question)">X</button>
-                <div id="preview">
-                  <div v-for="url in question" v-bind:key="url">
-                    <img v-if="question.url" :src="url" >
+                <div class="preview">
+                    
+                    <div v-if="question.url">
+                      <img :src="question.url" >
+                    </div>
+                  
 
-                  </div>
+                  
                   
 
                  
@@ -737,14 +740,14 @@ export default {
   
 }
 
-#preview {
+.preview {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ECECEC;
 }
 
-#preview img {
+.preview img {
   max-width: 100%;
   max-height: 500px;
   background-color: #ECECEC ;

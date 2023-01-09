@@ -1,18 +1,17 @@
 <template>
   <div class="questionComp">
 <h3 style="margin:10vh">{{answer.label}}</h3>
-<div v-for="answerObject in question.questions" v-bind:key="answerObject"> 
-  
-  <div>Picture:
 
-    <img v-if="question.url" :src="answerObject.image" >
-  
 
-  </div>
-</div>
-    <div style="margin:25px" v-for="url in question" v-bind:key="url">
-        <img v-if="question.url" :src="url" >
+    <div class="imgDiv" style="margin:5vh" v-for="url in question" v-bind:key="url" >
+      <!--Scuffed lösning men-->
+        <div v-if="url.length>30">
+          <img :src="url">
+        </div>        
+      
       </div>
+
+  
 
 <button class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
   {{answerObject.label}}                  
@@ -32,6 +31,15 @@ export default {
       console.log("----i QuestionComponent----")
       console.log("answer: ", answer)
       this.$emit("answer", answer);
+    },
+    checkUrl:function(url){
+      console.log("checkurl")
+      
+      if (url.includes("blob")){
+        console.log("blob")
+        return(true)
+      }
+
     }
   }
 }

@@ -1,5 +1,3 @@
-<!-- Kopplat till pollvyn som deltagare ser -->
-
 <template>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +20,7 @@
         <p1 v-if="username==='undefined'" > {{username}}</p1>
         <p2 class="PollIdDisplay">PollID: {{pollId}}</p2>
        
-        <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
+        <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
 
           <div style="position:absolute; font-size:5vh;">
             {{ uiLabels.question }}: {{question.q}}
@@ -31,23 +29,41 @@
           <QuestionComponent v-bind:question="questionObject"/>
           
           
-          <div v-for="url in question" v-bind:key="url">
-                    <img v-if="question.url" :src="url" >
-
-                  </div>
+          
           <br />
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
   
-          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown === 0">{{uiLabels.time}}</div>
+          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
           
         <div v-if="username==='undefined'" >
           <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton && this.lastQuestionReached===false" @click="getQuestionFromArray()"> 
-            {{uiLabels.nextQuestion}}
+            {{uiLabels.nextQuestion}}   
           </button>
-
+          <!--
           <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-else-if="showResultButton"> 
             {{uiLabels.showResults}}
           </button>
+          -->
+
+
+
+          <div v-else-if="showResultButton">
+          <router-link
+                  v-bind:to="'/result/'+this.pollId+ '/' + lang +'/' + username"
+                  custom
+                  v-slot="{ navigate }">
+                <button style="height:10%" class="nextQuestionButton custom-btn-quadratic"  
+                @click="navigate()"
+                role="link"
+                
+                >
+                {{uiLabels.showResults}}
+            </button>
+                </router-link>
+
+              </div>
+
+
         </div>
         </div>
       </div>
@@ -103,15 +119,15 @@ export default {
     }
   },
   created: function () {
-    console.log("I POLLVIEW")
+    
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
     socket.on("init", (labels) => {
         this.uiLabels = labels
       })
-    console.log("------ in PollView created function ------ ")
-    console.log("username in pollview created func: ", this.username)
+    //console.log("------ in PollView created function ------ ")
+    //console.log("username in pollview created func: ", this.username)
     this.userObject.username = this.username
 
     //socket.emit('joinPoll', this.pollId)
@@ -151,8 +167,8 @@ export default {
     {
       this.username = username
       this.userObject.username = username
-      console.log("------- i PollView createdUser() --------")
-      console.log("this.userObject ", this.userObject)
+      //console.log("------- i PollView createdUser() --------")
+      //console.log("this.userObject ", this.userObject)
     }
       
     )
@@ -167,10 +183,11 @@ export default {
   methods: {
     //nedräkningsfunktion
     updateCountdown(){
+        
         this.countdown--;
         if (this.countdown > 0) {
             setTimeout(this.updateCountdown,1000);
-            console.log(this.countdown)
+            
         } else {
             this.showButton = true;
             // visa rätt svar
@@ -184,7 +201,7 @@ export default {
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
       this.showButton = false;
-      console.log("-----i getQuestionFromArray()----")
+      //console.log("-----i getQuestionFromArray()----")
 
       if (typeof questionObject !== 'undefined') {
        
@@ -202,7 +219,7 @@ export default {
 
        
           
-        console.log("questionObject",questionObject)
+        //console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
         
         this.updateCountdown();
@@ -218,50 +235,7 @@ export default {
       }
     },
 
-//gammal
-/*
-    getQuestionFromArray: function() {
-      let questionObject = this.poll.questions[this.pollQuestionIterator]
-      this.question.q = questionObject.label
-      this.question.a = []
-      questionObject.answers.forEach(answer => {
-          this.question.a.push(answer.label);
-      })
-      this.pollQuestionIterator += 1
-    },*/
 
-
-
-/*getQuestionFromArray: function(poll) {
-      console.log("this.poll.questions.length:", this.poll.questions.length)
-      if (poll === {}){
-        this.pollLength=0
-
-      }
-      else {
-        this.pollLength = this.poll.questions.length
-
-      }
-
-
-    },*/
-
-    //egenskriven
-    /*
-    submitAnswer: function (answer) {
-      console.log("------in PollView submitAnswer() -----")
-      //console.log("Question?: ", this.question.q)
-      socket.emit("submitAnswer", {pollId: this.pollId, question: this.question.q, answer: answer, username: this.username})
-    },*/
-
-
-
-    //mikaels orginal
-  /*
-    submitAnswer: function (answer) {
-      console.log("i PollView submitAnswer där answer är: ", answer)
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-    },*/
 
     submitAnswer: function () {
       console.log("------i PollView submitAnswer------")
@@ -362,6 +336,18 @@ export default {
 <style scoped>
 @import '@/assets/css/style.css';
 
+body {
+    
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow: hidden;
+}
+
+
+
+
 .PollIdDisplay{
   position:absolute;
   right:0;
@@ -385,15 +371,15 @@ p1{
 
 p2{
   font-size:3vh;
-  position:relative;  
+  position:ab;  
   right:50%;
   margin:1vh;
   
 }
 
 .p3{
-  font-size:150px;
-  position:relative;  
+  font-size:10vh;
+  position:absolute;  
   right:50%;
   margin:1vh;
 
