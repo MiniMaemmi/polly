@@ -3,7 +3,6 @@
 
     {{countdown}}
 
-    {{username}}
 <h3 style="margin:10vh">{{answer.label}}</h3>
         <div v-if="question.url">
           <img :src="question.url">
@@ -17,6 +16,7 @@ class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(a
 </div>
 </template>
 <script>
+
 export default {
   name: 'QuestionComponent',
   props: {
@@ -35,37 +35,38 @@ export default {
 
     this.updateCountdown()
 
+    /*socket.on("resetTimer",() => {
+      console.log("-----i QuestionComponent resetTimer()----")
+      this.updateCountdown()
+    })*/
+
   }, 
   emits: ["answer"],
   methods: {
     answer: function (answer) {
-      //console.log("----i QuestionComponent----")
-      //console.log("answer: ", answer)
       this.$emit("answer", answer);
     },
-    checkUrl:function(url){
-      console.log("checkurl")
-      
-      if (url.includes("blob")){
-        //console.log("blob")
-        return(true)
-      }
+
+    resetCountdown() {
+      console.log("------i QuestionComponent resetCountDown()-----")
+      this.countdown = 10;
+      this.updateCountdown()
 
     },
 
     //nedräkningsfunktion
     updateCountdown(){
-        
         this.countdown--;
         if (this.countdown > 0) {
             setTimeout(this.updateCountdown,1000);
-            
-        } else {
-            //this.showButton = true;
-            // visa rätt svar
-            console.log("Time is up, emitta här")
-            
         }
+
+        if (this.countdown === -1) {
+          this.countdown = 10;
+          setTimeout(this.updateCountdown,1000);
+        }  
+
+
     },
    
   }

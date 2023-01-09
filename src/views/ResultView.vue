@@ -1,23 +1,31 @@
 <template>
-<body>
-  <div class="resultHeader">
-    <div class="resultBox">
-      <h1> Resultat 🎉 </h1>
+<body class="animationGradient">
+  <div class="wrapper">
+    <div class="resultHeader">
+      <div class="resultBox">
+        <h1> Resultat 🎉 </h1>
+      </div>
     </div>
-  </div>
-  <div class="container"> 
-  <div class="topListContainer">
-    <topListComponent v-bind:topListAndUsername="{topList, username}"/>
-  </div>
-  <div class="graphContainer">
-    <!-- <div class="bellCurveContainer">
-      <bellCurveComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
-    </div>-->
-    <div class="barChartContainer">
-      <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
+
+    <div class="container"> 
+      <div class="topListContainer">
+        <TopListComponent v-bind:topListAndUsername="{topList, username}"/>
+      </div>
+      <div class="graphContainer">
+        <!-- <div class="bellCurveContainer">
+          <bellCurveComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
+        </div>-->
+        <div class="barChartContainer">
+          <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
+        </div>
+      </div>
     </div>
+
   </div>
-</div>
+
+
+  
+
 
 </body>
 
@@ -26,7 +34,7 @@
 <script>
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
-import topListComponent from '@/components/topListComponent.vue';
+import TopListComponent from '@/components/TopListComponent.vue';
 //import bellCurveComponent from '@/components/bellCurveComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
@@ -35,7 +43,7 @@ export default {
   name: 'ResultView',
   components: {
     BarsComponent,
-    topListComponent,
+    TopListComponent,
     //bellCurveComponent
   },
   data: function () {
@@ -124,52 +132,7 @@ export default {
 
 
   },
-  methods: {/*
-    assignScoreValueToEachAnswer: function() {
-      console.log("----- i ResultView assignScoreValueToEachAnswer()---- ")
-      this.pollParticipants.forEach(pollParticipantObject => {
 
-        pollParticipantObject.answers.forEach(questionAnswered => {
-            this.setQuestionAnswerScore(questionAnswered, pollParticipantObject)
-        })
-
-      })
-      
-
-    },
-
-    setQuestionAnswerScore: function(questionAnswered, pollParticipantObject) {
-      console.log("----- i ResultView getQuestionAnswerScore()---- ")
-
-      this.poll.questions.forEach(questionObject => {
-
-        if (questionObject.id === questionAnswered.questionID) {
-
-          questionObject.answers.forEach(answerObject => {
-            if (answerObject.id === questionAnswered.answerId) {
-              questionAnswered.score = answerObject.score
-              pollParticipantObject.totalScore += answerObject.score
-            }
-
-          })
-        }
-
-      })
-
-    },
-
-    getSortedTopList: function() {
-      this.pollParticipants.forEach(pollParticipantObject => {
-        this.topList.push({username: pollParticipantObject.username, totalScore: pollParticipantObject.totalScore})
-      })
-      this.topList.sort((a, b) => (a.totalScore < b.totalScore) ? 1 : -1)
-    },
-
-
-
-
-  */
-  }
 }
 </script>
 
@@ -177,12 +140,12 @@ export default {
 
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
-  body{
+  /*body{
     background: rgb(254,81,154);
     background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
     font-family: 1em Inter 400 black;
 
-  }
+  }*/
 
   h1 {
     font: 3em Inter;
@@ -201,15 +164,7 @@ export default {
   
 }
 
-.resultHeader {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-  width: 100vw;
 
-}
 
 .topListContainer {
   width: 50vw;
@@ -231,8 +186,11 @@ export default {
 
 
 .barChartContainer {
-  width: 100%;
+  /*width: 100%;
   height: 50%;
+  margin-top: 5%;*/
+  width: 100%;
+  height: 100%;
   margin-top: 5%;
 
 }
@@ -242,8 +200,45 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 3vh;
   width: 40%;
-  height: 70%;
+  height: 70%; 
+  min-width: 50%; 
 
+
+
+
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 100vw;
+}
+
+@media screen and (max-width: 800px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .topListContainer {
+    width: 100%;
+  }
+
+  .graphContainer {
+    width: 100%;
+  }
+
+  .resultBox {
+    min-width: 80%;
+  }
+
+  h1 {
+    font: 2em Inter;
+    font-weight: 700;
+  }
 
 }
 

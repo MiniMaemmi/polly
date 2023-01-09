@@ -24,6 +24,11 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("nextQuestion")
   })
 
+  socket.on("resetTimer", function(pollId) {
+    console.log("-----i sockets.js resetTimer()----")
+    io.to(pollId).emit("resetTimer")
+  })
+
 
 //mikaels orginal
 /*
@@ -59,7 +64,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('joinPoll', function(pollId) {
-  
     socket.join(pollId);
     
   });

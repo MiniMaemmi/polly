@@ -1,8 +1,8 @@
 <template>
 <div class="wrapper">
-  <h3>Resultat per fråga</h3>
-    
-
+  <div class="header">
+   <h3>Resultat per fråga</h3>
+  </div>
   <div class="barArea">
   <div class="questionBarWrapper" v-for="(questionResultObject, key) in data.questionResultCounter" v-bind:key="key">
     <div class="questionBarsOnly">
@@ -53,13 +53,19 @@ export default {
 
 span {
   color: black;
+  font: 1.5em Inter;
+  font-weight: 100;
 
+}
+
+h3 {
+  display: inline;
+  font: 3em Inter;
+  font-weight: 400;
 }
 
 .barArea {
   display: flex;
-  /*background-color: gray;*/
-  /*border: 1px yellow dashed;*/
   flex-direction: row;
   font: 1.5vw Inter;
   padding: 2%;
@@ -70,7 +76,6 @@ span {
 .questionBarWrapper {
   width: 15%;
   height: 20vh;
-  /*border: 3px purple dotted;*/
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -81,7 +86,7 @@ span {
 
 .questionNumber {
   color: black;
-  font: Inter;
+  font: 1.5em Inter;
   font-weight: 700;
 }
 
@@ -118,74 +123,48 @@ span {
 
 
 .wrapper {
-  padding:3em;
   background-color: rgb(255,255,240);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 5vh;
+  height: 90%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 400px) {
+
+  .header h3 {
+    display: inline;
+    font: 2em Inter;
+    font-weight: 400;
+  }
+
+  .questionNumber{
+    font: 3em Inter;
+
+  }
+
+
+}
+
+@media screen and (max-width: 800px) {
+
+  .questionBarWrapper{
+      width: 20%;
+  }
+
+  span {
+    font: 2em Inter;
+  }
+
+
+
 }
 </style>
 
 
 
-
-
-
-<!-- mikaels orginal
-<template>
-<div class="wrapper">
-  <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px'}">
-      <span> {{item}} </span>
-    </div>
-    <div> 
-      {{key}}
-    </div>
-  </div>
-</div>
-</template>
-
-<script>
-export default {
-  name: 'BarsComponent',
-  props: {
-    data: Object
-  }
-}
-</script>-->
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!-- <style scoped>
-
-span {
-  color:var(--background-color);
-}
-.bar {
-  display: inline-block;
-  width: 50px;
-  vertical-align: bottom;
-}
-
-.bar span {
-  position: relative;
-  top: -1.2em;
-}
-.bar:nth-child(1) div:nth-child(1) {
-  background-color:red;
-}
-.bar:nth-child(2) div:nth-child(1) {
-  background-color:blue;
-}
-.bar:nth-child(3) div:nth-child(1) {
-  background-color:teal;
-}
-.bar:nth-child(4) div:nth-child(1) {
-  background-color:purple;
-}
-.bar:nth-child(5) div:nth-child(1) {
-  background-color:yellow;
-}
-
-.wrapper {
-  padding:3em;
-}
-</style>-->

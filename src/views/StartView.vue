@@ -1,7 +1,7 @@
 <template>
 
 <body class="animationGradient">
-  <div class="background">
+  <!--<div class="background">-->
     <div class="wrapper">
       <div class="headerTextWhiteBox">
         <h1 >QuizTime!</h1>
@@ -49,7 +49,7 @@
 
       </div>
     </div>
-  </div>
+  <!--</div>-->
 </body>
 </template>
 

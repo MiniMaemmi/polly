@@ -34,7 +34,7 @@
 </template>
 <script>
 export default {
-  name: 'topListComponent',
+  name: 'TopListComponent',
   props: {
     topListAndUsername: {
       topList: [],
@@ -61,7 +61,6 @@ table {
   width: 100%;
   display: flex;
   font-weight: 100;
-  margin-top: 10%;
 
 }  
 
@@ -73,6 +72,7 @@ table {
 
 .wrapper {
   height: 90%;
+  width: 90%;
   background-color: rgb(255,255,240);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 5%;
@@ -80,11 +80,8 @@ table {
   margin-right: 5%;
   margin-top: 5%;
   margin-bottom: 5%;
-  padding: 10%;
-  
-
-
-  
+  /*padding: 10%;*/
+    
 }
 
 .usernameContainer, .scoreContainer{
@@ -97,8 +94,9 @@ table {
 
 .usernameContainer tr,  .scoreContainer tr{
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   border-bottom: 1px black dashed;
+  justify-content: space-evenly;
 }
 
 .usernameContainer th, .scoreContainer th{
@@ -114,6 +112,33 @@ table {
   font-weight: 100;
   align-self: flex-start;
 
+
+}
+
+@media screen and (max-width: 400px) {
+
+  .header h3 {
+    display: inline;
+    font: 2em Inter;
+    font-weight: 400;
+  }
+
+  .usernameContainer th, .scoreContainer th{
+    align-self: center;
+    font: 1em Inter;
+    font-weight: 400;
+    margin-bottom: 5%;
+    margin-left: 5%;
+
+  }
+
+  .usernameContainer td, .scoreContainer td {
+    font: 1em Inter;
+    font-weight: 100;
+    align-self: flex-start;
+
+
+  }
 
 }
 
