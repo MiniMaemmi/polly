@@ -14,10 +14,7 @@
   
 
 <button 
-class="custom-btn" 
-:class="{ active: isActive }"
-
-v-for="answerObject in question.answers" v-on:click="answer(answerObject),ChosenAnswer(this.answer)" v-bind:key="answerObject" style="margin:50px">
+class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
   {{answerObject.label}}                  
 </button>
 
@@ -45,27 +42,20 @@ export default {
       }
 
     },
-    ChosenAnswer: function(){
-      console.log("changed answer")
-      this.isActive=false
-    }
-  },
-  data(){
-    return {
-    isActive: true,
-    
+   
   }
-  }
+
 }
 </script>
 
 <style scoped>
   @import '@/assets/css/style.css';
 
-  .active{
+  .custom-btn:focus{
     background-color: green;
     transition-duration: 0.4s;
   }
+  
 
   img{
     max-height: 80vh;
