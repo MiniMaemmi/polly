@@ -55,7 +55,7 @@
 
             <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question"  >
 
-            <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)" >
+            <button :disabled="question.label === ''" class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)" >
               {{uiLabels.removeQuestion}}
             </button >
             </div>
@@ -616,7 +616,6 @@ export default {
    .upDownButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-
    }
 
    .upDownButtonPair {

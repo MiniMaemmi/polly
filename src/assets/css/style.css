@@ -22,11 +22,7 @@ body{
   } 
 
   .custom-btn {
-  /*width: 130px;
-  height: 40px;*/
   color: black;
-  /*font-family: 'Lato', sans-serif;
-  font-weight: 500;*/
   background: white;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -47,11 +43,15 @@ body{
   font-weight: 400;
   min-width: 10vw;
   min-height: 10vh;
-
-  /*background: #D7D7D7;*/
 }
 .custom-btn:hover {
   animation: pulse 1.5s; /* Animate for 1.5 seconds on hover */
+}
+
+.custom-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
 }
 
 
@@ -71,12 +71,12 @@ body{
 
 }
 
-/*
-h1 {
-    font-size:80px;
-    font-size: 4vw;
-    font-family: Inter;
-}*/
+.custom-btn-quadratic:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+
+}
 
 @font-face { font-family: Inter; 
 src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap'); } 
@@ -157,6 +157,8 @@ input[type=text] {
   height: 11vh;
   display: inline;
 }
+
+
 
 
 @keyframes animate{

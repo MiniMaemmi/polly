@@ -9,17 +9,14 @@
         <h1 style="margin-top:0vh" v-if="username==='undefined'">Hello Quiz leader!</h1>
   
       <div class="wrapper" style="margin-top:0vh;">
-        
         <div class="goBackButtonDiv">
           <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
             <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
               {{uiLabels.back}}
             </button>
           </router-link>
-        </div>
-
-               
-        <p1 v-if="username==='undefined'" > {{username}}</p1>
+        </div>   
+        <p1 v-if="username!=='undefined'" > {{username}}</p1>
         <p2 class="PollIdDisplay">PollID: {{pollId}}</p2>
        
         <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
@@ -31,11 +28,10 @@
           <QuestionComponent v-bind:question="questionObject"/>
           
           
-          <div v-for="url in question" v-bind:key="url">
-                    <img v-if="question.url" :src="url" >
-
-                  </div>
-          <br />
+          <!--<div v-for="url in question" v-bind:key="url">
+            <img v-if="question.url" :src="url" >
+          </div>
+        -->
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
   
           <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown === 0">{{uiLabels.time}}</div>
@@ -60,7 +56,6 @@
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
-//const appDivId = 'app'
 
 export default {
   name: 'PollView',
@@ -97,9 +92,6 @@ export default {
                 },
       AllPollParticipants: [],
 
-      //username: document.getElementById(appDivId).__vue__,
-
-      //answers = [ {user: this.username, question: this.question.q, answer: this.question.a}]
     }
   },
   created: function () {
@@ -135,12 +127,7 @@ export default {
       //Vi har märkt att denna ej funkar men den behövs också inte
       this.submittedAnswers = data.answers
 
-    }
-      
-      //egenskrivet
-      //this.username = data.username
-      
-    )
+    })
 
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -218,50 +205,6 @@ export default {
       }
     },
 
-//gammal
-/*
-    getQuestionFromArray: function() {
-      let questionObject = this.poll.questions[this.pollQuestionIterator]
-      this.question.q = questionObject.label
-      this.question.a = []
-      questionObject.answers.forEach(answer => {
-          this.question.a.push(answer.label);
-      })
-      this.pollQuestionIterator += 1
-    },*/
-
-
-
-/*getQuestionFromArray: function(poll) {
-      console.log("this.poll.questions.length:", this.poll.questions.length)
-      if (poll === {}){
-        this.pollLength=0
-
-      }
-      else {
-        this.pollLength = this.poll.questions.length
-
-      }
-
-
-    },*/
-
-    //egenskriven
-    /*
-    submitAnswer: function (answer) {
-      console.log("------in PollView submitAnswer() -----")
-      //console.log("Question?: ", this.question.q)
-      socket.emit("submitAnswer", {pollId: this.pollId, question: this.question.q, answer: answer, username: this.username})
-    },*/
-
-
-
-    //mikaels orginal
-  /*
-    submitAnswer: function (answer) {
-      console.log("i PollView submitAnswer där answer är: ", answer)
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-    },*/
 
     submitAnswer: function () {
       console.log("------i PollView submitAnswer------")
@@ -317,24 +260,6 @@ export default {
         i += 1
       }
     },
-
-    /*
-
-    checkIfQuestionIsAnswered: function (answerId) {
-      console.log("---- i checkIfQuestionIsAnswered() -----")
-      console.log("answerId", answerId)
-
-      this.userObject.answers.forEach(answerObject => {
-        if (answerObject.answerId === answerId) {
-          console.log("i for-loop i if")
-          //return questionAnswered 
-          return true
-        }
-        else {
-          console.log("continue to loop")
-        }
-      })
-    },*/
 
 
     navigate: function() {
