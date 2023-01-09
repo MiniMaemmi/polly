@@ -21,7 +21,7 @@
             {{ uiLabels.question }}: {{question.q}}
           </div>
        
-          <QuestionComponent v-bind:question="questionObject"/>
+          <QuestionComponent v-bind:question="questionObject" v-on:answer="logUserAnswer($event)"/>
           
           <!-- <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
   
@@ -168,11 +168,14 @@ socket.emit("joinPoll", (this.pollId));
     )
 
     socket.on("recieveShowResult",(data)  => {
-      this.submitAnswer()
+      console.log("--- i PollView recieveShowResult() -----")
+      if (this.userObject.username !== 'undefined') {
+        this.submitAnswer()
+
+      }
       this.quizName=data
       console.log(this.quizName)
       
-        
       this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
      
     });
@@ -263,6 +266,7 @@ socket.emit("joinPoll", (this.pollId));
     //egenskriven
     logUserAnswer: function (answer) {
       console.log("----i PollView logUserAnswer---- ")
+      console.log("answer: ", answer)
       let questionAnswered  = false
       questionAnswered = this.checkIfQuestionIsAnswered(this.questionObject.id)
       

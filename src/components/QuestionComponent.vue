@@ -2,6 +2,8 @@
   <div class="questionComp">
 
     {{countdown}}
+
+    {{username}}
 <h3 style="margin:10vh">{{answer.label}}</h3>
         <div v-if="question.url">
           <img :src="question.url">
@@ -18,7 +20,7 @@ class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(a
 export default {
   name: 'QuestionComponent',
   props: {
-    question: Object
+    question: Object,
   },
   data: function() {
     return {
