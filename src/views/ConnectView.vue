@@ -69,16 +69,6 @@
             </div>
 
 
-
-          
-        
-
-          <h3>För att komma till PollView just nu</h3>
-            <button class="custom-btn" v-on:click="createUser">
-              <router-link v-bind:to="'/poll/'+id+'/'+ lang + '/' +username">{{uiLabels.participatePoll}}</router-link>
-            </button>
-
-
         
 
             <!--button v-on:click="createUser"><router-link v-bind:to="'/waiting/'+username">Connect to quizz</router-link></button-->

@@ -17,33 +17,24 @@
         <div class= "p1 PollIdDisplay">PollID: {{pollId}}</div>
        
         <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
-
-          <div style="position:absolute; font-size:5vh;">
+          <div style="align-self: center; font-size:5vh; margin-top: 10%">  
             {{ uiLabels.question }}: {{question.q}}
           </div>
        
           <QuestionComponent v-bind:question="questionObject"/>
           
-          
-          
-          <br />
-          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
+          <!-- <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
   
-          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>
+          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>-->
           
         <div v-if="username ==='undefined'" >
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showButton" @click="getQuestionFromArray()"> 
+          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showNextQuestionButton" 
+          @click="getQuestionFromArray()"> 
             {{uiLabels.nextQuestion}}   
           </button>
-          <!--
-          <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-else-if="showResultButton"> 
-            {{uiLabels.showResults}}
-          </button>
-          -->
 
-
-
-          <div v-else-if="showResultButton">
+          <!-- <div v-else-if="showResultButton"> -->
+            <div v-if="showResultButton">
           <router-link
                   v-bind:to="'/result/'+this.pollId+ '/' + lang +'/' + username"
                   custom
@@ -54,10 +45,10 @@
                 
                 >
                 {{uiLabels.showResults}}
-            </button>
-                </router-link>
+                </button>
+            </router-link>
 
-              </div>
+          </div>
 
 
         </div>
@@ -99,6 +90,7 @@ export default {
       pollLength: 0,
       pollQuestionIterator:0,
       showResultButton: false,
+      showNextQuestionButton: false,
       userObject: 
                 {
                     username: '',
@@ -128,6 +120,7 @@ export default {
     {
       this.poll = poll
       this.pollLength = this.poll.questions.length
+      this.showNextQuestionButton = true
       this.getQuestionFromArray()
       }
     )
@@ -169,7 +162,7 @@ export default {
 // Nu är det begge bara statiska.
   methods: {
     //nedräkningsfunktion
-    updateCountdown(){
+    /*updateCountdown(){
         
         this.countdown--;
         if (this.countdown > 0) {
@@ -180,15 +173,15 @@ export default {
             // visa rätt svar
             
         }
-    },
+    },*/
     
     //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
   
 
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
-      this.showButton = false;
-      //console.log("-----i getQuestionFromArray()----")
+      //this.showNextQuestionButton = false;
+      console.log("-----i getQuestionFromArray()----")
 
       if (typeof questionObject !== 'undefined') {
        
@@ -196,18 +189,24 @@ export default {
         this.questionObject = questionObject
         this.question.q = questionObject.label
         this.question.a = []
+        //this.showNextQuestionButton = true
 
         questionObject.answers.forEach(answer => {
             this.question.a.push(answer.label);
         })
         //console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
-        this.updateCountdown();
+        //this.updateCountdown();
+
+        console.log("this.poll.questions.length:", this.poll.questions.length)
+        console.log("this.pollQuestionIterator-1:", this.pollQuestionIterator-1)
 
       }
-      if (this.poll.questions.length === this.pollQuestionIterator-1) {
+      
+      if (this.poll.questions.length === this.pollQuestionIterator) {
+        console.log("är i 2nd if-sats")
+        this.showNextQuestionButton = false
         this.showResultButton = true
-
       }
       /*else if (typeof questionObject === 'undefined'){
         //Delete "Next fråga button"
