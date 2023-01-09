@@ -726,11 +726,19 @@ vid 950 att det blir en stor förändring med allt
 
 */ 
 
-@media screen and (max-width:950px) {
- 
-  .quizbody{
-    width: 60%;
-    margin-left: 20%;
+@media screen and (max-width:900px) {
+  .goBackButtonPosition {
+        display: inline;
+        flex: none;
+        position: absolute;
+        width: 20% !important
+    }
+
+  .playButtonPosition{
+    display: inline;
+    flex: none;
+    position: absolute;
+    width: 20% !important
   }
 
 }
