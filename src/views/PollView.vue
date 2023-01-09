@@ -8,7 +8,7 @@
       <div class="wrapper" style="margin-top:0vh;">
         <div class="goBackButtonDiv">
           <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
-            <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
+            <button class="custom-btn goBackButtonPosition" @click="navigate()" role="link">
               {{uiLabels.back}}
             </button>
           </router-link>
@@ -40,7 +40,7 @@
                   custom
                   v-slot="{ navigate }">
                 <button style="height:10%" class="nextQuestionButton custom-btn-quadratic"  
-                @click="navigate()"
+                @click="sendShowResult(), navigate()"
                 role="link"
                 
                 >
@@ -116,6 +116,7 @@ export default {
 
     //socket.emit('joinPoll', this.pollId)
     socket.emit('getPoll', this.pollId)
+
     socket.on('sendQuestion', poll => 
     {
       this.poll = poll
@@ -125,11 +126,13 @@ export default {
       }
     )
 
-
+socket.emit("joinPoll", (this.pollId)); 
 
     socket.on("newQuestion", q =>
       this.question = q
     )
+
+  
 
     socket.on("dataUpdate", data  => {
       console.log("pollview dataupdate")
@@ -152,6 +155,18 @@ export default {
     }
       
     )
+
+
+
+    socket.on("recieveShowResult",(data)  => {
+    console.log("mottaget sendShowResuls")
+      this.quizName=data
+      console.log(this.quizName)
+      
+        
+      this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
+     
+    });
     
 
   },
@@ -275,6 +290,11 @@ export default {
 
     navigate: function() {
       this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
+    },
+
+    sendShowResult: function() {
+      console.log("sendShowResult körs")
+      socket.emit("sendShowResult",this.pollId,this.quizName)
     },
 
 

@@ -11,17 +11,11 @@
 }
 
 
-
-
-
-
 body{
     min-height: 100vh;
-    
-    
   } 
 
-  .custom-btn {
+.custom-btn {
   color: black;
   background: white;
   cursor: pointer;
@@ -44,6 +38,7 @@ body{
   min-width: 10vw;
   min-height: 10vh;
 }
+
 .custom-btn:hover {
   animation: pulse 1.5s; /* Animate for 1.5 seconds on hover */
 }
