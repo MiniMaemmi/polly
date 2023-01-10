@@ -9,7 +9,7 @@
         <div class="goBackButtonDiv">
           <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
             <button class="custom-btn goBackButtonPosition" @click="navigate()" role="link">
-              {{uiLabels.back}}
+              {{uiLabels.backToStart}}
             </button>
           </router-link>
         </div>   
