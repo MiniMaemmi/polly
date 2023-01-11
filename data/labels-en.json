@@ -24,7 +24,7 @@
 	"loadAJson": "Load a Json file",
 	"tooltip":"Mark as Correct",
 	"modalText":"Some Options",
-	"startButtonTooltip":"Give the quiz a name! ",
+	"startButtonTooltip":"Give the quiz a name!",
 
 	"inviteToQuiz":"Invite others to join Quiz:",
 	"joinQuiz":"With the Quiz id below:",
@@ -34,6 +34,7 @@
 	"timer":"Time's up!",
 
 	"showResults": "Show results",
+	"endResults":"Results",
 	"participatePoll": "Participate in a quiz"
 
 	

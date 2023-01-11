@@ -2,13 +2,9 @@
 	"createQuiz": "Skapa Quiz",
 	"connectQuiz": "Anslut till ett Quiz",
 	"changeLanguage": "Change to English",
-<<<<<<< HEAD
+
 	"subtitle": "10 sekunder tills det smäller!",
 	"quizEmpty": "Quizzet du har gjort är tomt på frågor & svar. Gå tillbaka och gör om.",
-=======
-	"subtitle": "Quizet som gör att du svarar i tid",
-	"quizEmpty": "Quizet du har gjort är tomt på frågor & svar. Gå tillbaka och gör om.",
->>>>>>> 8f5f5a33bb92b61a31b15e8abdfaa902fff72956
 	
 	"connectTitel": "Anslut till Quiz!",
 	"quizid":"Quiz id",
@@ -29,7 +25,7 @@
 	"loadAJson": "Ladda upp en Json file",
 	"tooltip":"Markera som rätt",
 	"modalText":"Lite alternativ",
-	"startButtonTooltip":"ge quiz:et ett namn!!!!!",
+	"startButtonTooltip":"Ge quizet ett namn!",
 
 	"inviteToQuiz":"Bjud in andra till Quiz:",
 	"joinQuiz":"Med Quiz id nedan:",
@@ -38,8 +34,8 @@
 	"nextQuestion":"Nästa fråga",
 	"timer":"Tiden är slut!",	
 
-	"invite": "Bjud in deltagare med den här länken:",
 	"showResults": "Visa resultat",
+	"endResults":"Resultat",
 	"participatePoll": "Delta i quiz"
 	
 	

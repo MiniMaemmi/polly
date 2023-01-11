@@ -3,7 +3,7 @@
   <div class="wrapper">
     <div class="resultHeader">
       <div class="resultBox">
-        <h1> Resultat 🎉 </h1>
+        <h1> {{uiLabels.endResults}}🎉 </h1>
       </div>
     </div>
 
@@ -51,6 +51,7 @@ export default {
   },
   data: function () {
     return {
+      uiLabels:{},
       question: "",
       lang: "",
       username: "",
@@ -61,7 +62,7 @@ export default {
       topList: [],
       questionResultCounter:[],
       scoreCounter: [],
-      //pollLength: 0,
+      
       bellCurveBucketsResult: {}
 
 
@@ -70,8 +71,11 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id
-    this.lang = this.$route.params.lang
     this.username = this.$route.params.username
+    this.lang = this.$route.params.lang
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
     socket.emit('joinPoll', this.pollId)
 
     socket.emit('getPoll', this.pollId)
@@ -195,22 +199,22 @@ export default {
 
 
 .topListContainer {
-  width: 50vw;
+  width: 100%;
   height: 80vh;
 }
 
 .graphContainer {
-  width: 50vw;
+  width: 100%;
   height: 80vh;
 
 }
 
-.bellCurveContainer{
+/*.bellCurveContainer{
   width: 100%;
   height: 50%;
   margin-top: 5%;
 
-}
+}*/
 
 
 .barChartContainer {
