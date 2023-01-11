@@ -2,6 +2,7 @@
 <body class="animationGradient">
   <div class="wrapper">
     <div class="resultHeader">
+      <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+ this.lang)">{{uiLabels.backToStart}}</button>
       <div class="resultBox">
         <h1> {{uiLabels.endResults}}🎉 </h1>
       </div>
@@ -248,9 +249,22 @@ export default {
   margin-bottom: 5vh;
   width: 100vw;
 }
-
+@media screen and (max-width: 1250px) {
+  .custom-btn{
+        display: inline;
+        flex: none;
+        position: absolute;
+        width:10% !important;
+        font-size: 1em;
+      }
+}
 @media screen and (max-width: 800px) {
 
+  .custom-btn{
+
+        width:20% !important;
+
+      }
   .container {
     flex-direction: column;
   }
