@@ -13,7 +13,7 @@
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             <div id="myPop" class="pop">
-              <div class="pop-content custom-btn-quadratic">
+              <div class="pop-content">
                 <h1>{{uiLabels.modalText}}</h1>
                 
                 <button id="xClosePop" @click="closePop()">
@@ -408,7 +408,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .pop-content {
-  background-color: #fefefe;
+  background-color: lightyellow;
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
@@ -459,7 +459,7 @@ background-color: rgba(0,0,0,0.4);
 .removeQuestionButton{
   width: 20vh;
   height: 7vh;
-  font-size: 1.5vh;
+  font: 1.5vh inter;
 }
 
 .removeQuestionButton:hover{
@@ -506,7 +506,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .arrow{
-  width: 3vh;
+  width: 2vh;
   height: 3vh;
 }
 

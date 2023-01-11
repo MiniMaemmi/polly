@@ -11,14 +11,17 @@
       <div class="topListContainer">
         <TopListComponent v-bind:topListAndUsername="{topList, username}"/>
       </div>
-      <div class="graphContainer">
+      <!--<div class="graphContainer">
         <div class="bellCurveContainer">
           <bellCurveComponent v-bind:data="{pollLength: pollLength, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter }"/>
-        </div>
+        </div>-->
+        
+        
+        
         <div class="barChartContainer">
           <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
         </div>
-      </div>
+      <!--</div>-->
     </div>
 
   </div>
@@ -35,7 +38,7 @@
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
 import TopListComponent from '@/components/TopListComponent.vue';
-import bellCurveComponent from '@/components/bellCurveComponent.vue';
+//import bellCurveComponent from '@/components/bellCurveComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
 
@@ -44,7 +47,7 @@ export default {
   components: {
     BarsComponent,
     TopListComponent,
-    bellCurveComponent
+    //bellCurveComponent
   },
   data: function () {
     return {
@@ -213,7 +216,7 @@ export default {
 .barChartContainer {
   width: 100%;
   height: 50%;
-  margin-top: 5%;
+  margin-top: 0%;
   /*width: 100%;
   height: 100%;
   margin-top: 5%;*/
@@ -263,6 +266,10 @@ export default {
   h1 {
     font: 2em Inter;
     font-weight: 700;
+  }
+  .barChartContainer {
+    padding-top: 200px;
+
   }
 
 }
