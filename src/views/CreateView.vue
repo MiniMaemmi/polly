@@ -552,7 +552,7 @@ background-color: rgba(0,0,0,0.4);
 
 
 .answerCorrect {
-  background-color: green;
+  background-color: #1CC970;
   transition-duration: 0.4s;
 }
 
@@ -627,7 +627,6 @@ background-color: rgba(0,0,0,0.4);
 
   .quizbody{
     width: 90%;
-    height: 100vh;
     margin-left: 5%;
     margin-right: 5%;
     padding-top: 10%;
@@ -662,7 +661,6 @@ background-color: rgba(0,0,0,0.4);
 
   .quizbody{
     width: 90%;
-    height: 100vh;
     margin-left: 5%;
     margin-right: 5%;
     padding-top: 13%;
