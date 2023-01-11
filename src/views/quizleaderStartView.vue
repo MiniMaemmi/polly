@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="headerTextWhiteBox">
         <h1>
-          {{uiLabels.displayJoinPoll}}:
+          {{uiLabels.inviteToQuiz}}
           <br/>
           <div class="boldtext">
             {{quizName}}
@@ -127,7 +127,7 @@ export default {
 
   @media screen and (max-width:500px) and (min-width: 200px) {
     h1{
-      font-size: 2.5em;
+      font-size: 2em;
     }
     .custom-btn{
       width:80% !important;
