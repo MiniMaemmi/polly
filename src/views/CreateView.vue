@@ -74,14 +74,11 @@
             @click="markAsCorrect(question.id, answer.id)"> 
             <span class="tooltiptext">{{uiLabels.tooltip}}</span>
             <img class="checkmark" src="../../img/checkmark.png">
-          </button>
-
-              <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
-
-
-          <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
-            <img src="../../img/x.png">
-          </button>
+            </button>
+            <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
+            <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
+              <img src="../../img/x.png">
+            </button>
         </div>
       </div>
 
@@ -105,11 +102,9 @@
 
       <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
 
-        
       </div>
 
 </div>  
-
 </body>
 </template>
 
