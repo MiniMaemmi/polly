@@ -98,7 +98,7 @@
         </div>
         
         <div class="tooltip">
-          <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
+          <button class="custom-btn playButtonPosition " @click="createPoll()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
           </button>
         </div>

@@ -13,12 +13,9 @@
   
         <div class="contentArea lightYellowBox shadowIt">
             <h1>
-                {{quizName}}
+                {{uiLabels.quizEmpty}}
             </h1>
-        
-            <h1>
-                {{pollId}}
-            </h1>
+    
           
             <div class="goBackButtonDiv"> <!--vill att om username är undefined blir man quizleader eller nåt-->
               <router-link
