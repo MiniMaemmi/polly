@@ -195,22 +195,22 @@ export default {
 
 
 .topListContainer {
-  width: 50vw;
+  width: 100%;
   height: 80vh;
 }
 
 .graphContainer {
-  width: 50vw;
+  width: 100%;
   height: 80vh;
 
 }
 
-.bellCurveContainer{
+/*.bellCurveContainer{
   width: 100%;
   height: 50%;
   margin-top: 5%;
 
-}
+}*/
 
 
 .barChartContainer {

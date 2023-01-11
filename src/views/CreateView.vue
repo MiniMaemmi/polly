@@ -362,7 +362,7 @@
     height: 100%;
     margin-left: 25%;
     margin-top:0vh;
-    padding-top: %
+    padding-top: 10%
   }
 
   .nameQuizSectionWrapper {
