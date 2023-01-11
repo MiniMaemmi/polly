@@ -169,9 +169,6 @@ input[type=text] {
   display: inline;
 }
 
-
-
-
 @keyframes animate{
     0% {
         background-position: 0 50%;

@@ -2,10 +2,11 @@
   <head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
-  <body class ="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfPopOpen($event)" >
-    <div class="quizbody" style="margin-top:0vh">
-
-        <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >  
+  <body class="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfPopOpen($event)" >
+    
+    <div class="quizbody">
+      <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
+        <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
           
@@ -55,10 +56,12 @@
         </div>
 
         <div>
-          <input class="addFile" type="file" @change="onFileChange($event, question)"/>
-          <button class="Xbutton custom-btn-quadratic" v-on:click="removePicture(question)">
-            <img src="../../img/x.png">
-          </button>
+          <div style="display: flex;">
+            <input class="addFile" type="file" @change="onFileChange($event, question)"/>
+            <button class="Xbutton custom-btn-quadratic" v-on:click="removePicture(question)">
+              <img src="../../img/x.png">
+            </button>
+          </div>
           <div class="preview">     
             <div v-if="question.url">
               <img :src="question.url" >
@@ -100,7 +103,7 @@
           </button>
         </div>
 
-      <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
+
 
       </div>
 
@@ -360,6 +363,7 @@
     width: 50%;
     height: 100%;
     margin-left: 25%;
+    margin-top:0vh;
   }
 
   .nameQuizSectionWrapper {
@@ -596,11 +600,7 @@ background-color: rgba(0,0,0,0.4);
 .Xbutton{
   width: 4vh;
   height: 4vh;
-  margin-left: -5%;
-  margin-top: -10%;
-  margin-right: 0%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 }
 
 .Xbutton img {
@@ -611,7 +611,8 @@ background-color: rgba(0,0,0,0.4);
   font-size: 2vh;
 }
 
-@media screen and (max-width:1080px) {
+
+@media screen and (max-width:550px) {
   .goBackButtonPosition {
     display: inline;
     flex: none;
@@ -627,7 +628,7 @@ background-color: rgba(0,0,0,0.4);
   }
 
   .quizbody{
-    width: 60%;
+    width: 80%;
     margin-left: 20%;
   }
 
