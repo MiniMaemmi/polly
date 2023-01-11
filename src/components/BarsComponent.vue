@@ -1,7 +1,8 @@
 <template>
 <div class="wrapper">
   <div class="header">
-   <h3>Resultat per fråga</h3>
+   <h3 v-if="this.lang === 'sv'">Resultat per fråga</h3>
+   <h3 v-if="this.lang === 'en'">Result per question</h3>
   </div>
   <div class="barArea">
   <div class="questionBarWrapper" v-for="(questionResultObject, key) in data.questionResultCounter" v-bind:key="key">
@@ -32,6 +33,14 @@ export default {
   props: {
     data: Object,
    },
+   data:function(){
+    return{
+      lang:""
+    }
+   },
+   created: function() {
+    this.lang = this.$route.params.lang;
+  }
   }
 
 
