@@ -14,7 +14,7 @@
             <div id="myPop" class="pop">
               <div class="pop-content">
                 <h1>{{uiLabels.modalText}}</h1>
-                <button id="xClosePop" @click="closePop()">
+                <button id="xClosePop" class="Xbutton custom-btn-quadratic" @click="closePop()">
                   &times; <!-- Unix for x -->
                 </button>
             <div>
@@ -418,16 +418,21 @@ background-color: rgba(0,0,0,0.4);
   width: 70%; 
   height:40%;
   position:relative;
-  font-size:55%;
+  font:0.5em Inter;
+
 }
 
 #xClosePop{
   position:absolute;
   top:0; 
   right:0;
+  
+  /*height:10%; 
   margin:10px;
-  height:10%; 
-  width:3%;
+  width:3%;*/
+  height: 4vh;
+  margin:2%;
+  
 }
 
 /* Frågor och svar rutan */
@@ -692,6 +697,10 @@ background-color: rgba(0,0,0,0.4);
   height: 7vh;
   border-radius: 5vh;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#xClosePop {
+  width: 10vw;
 }
 
 
