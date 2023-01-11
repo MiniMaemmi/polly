@@ -5,7 +5,7 @@
 
 <h3 style="margin:10vh; font: inter">{{answer.label}}</h3>
         <div v-if="question.url">
-          <img :src="question.url">
+          <img :src="question.url" style>
         </div>        
       
 <button :disabled="countdown === 0 || this.username ==='undefined'"
@@ -15,9 +15,9 @@ class="custom-btn"
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
-<div v-if="this.countdown >0">{{countdown}}</div>
+<div style="margin:5vh" v-if="this.countdown >0">{{countdown}}</div>
  <div v-if="this.countdown ===0">
-  <img src="../../img/clock.png">
+  <img class="clockImage" src="../../img/clock.png">
 </div>
 
 </div>
@@ -97,14 +97,18 @@ export default {
   
 
   img{
-    max-height: 50vh;
-    max-width: 50vh;
+    max-height: 25vh;
+    max-width: 25vh;
+
+  }
+  .clockImage{
+    max-height:10vh;
+    max-width:10vh;
   }
 
-  .questionImage {
-    background-color: white;
-    border: 0.1px solid grey;
 
+  .questionComp{
+    max-height: 70vh;
   }
 
   .questionComp button {
@@ -117,9 +121,7 @@ export default {
   {
     font: 5vh inter;
   }
-  .leaderDisable{
-    
-  }
+  
 
 </style>
 
