@@ -6,10 +6,9 @@
         
   
       <div class="wrapper" style="margin-top:0vh;">
-        <div class="goBackButtonDiv">
+        
+        <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+ this.lang)">{{uiLabels.backToStart}}</button>
           
-          <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+ this.lang)">{{uiLabels.backToStart}}</button>
-        </div>   
 
         <div class="UsernameDisplay" v-if="username!=='undefined'" > {{username}}</div>
         <div class= "PollIdDisplay">PollID: {{pollId}}</div>
@@ -359,6 +358,14 @@ body {
   display:flex;
   max-height: 100%;
 
+}
+/*extends goBackButtonPosition in style.css*/
+
+
+
+.goBackButtonPosition{
+  font-size:2vh;
+  height:10%
 }
 
 
