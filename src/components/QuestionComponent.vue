@@ -15,10 +15,10 @@ class="custom-btn"
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
-  {{countdown}}
- 
-  
-  
+<div v-if="this.countdown >0">{{countdown}}</div>
+ <div v-if="this.countdown ===0">
+  <img src="../../img/clock.png">
+</div>
 
 </div>
 
