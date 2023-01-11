@@ -27,44 +27,33 @@
         </div>
       </div>
     </div> 
-
-  </body>
-    
-    
+  </body> 
 </template>
 
 <script>
-
 import io from 'socket.io-client';
 const socket = io();
 
 export default {
   name: 'quizleaderStartView',
-
   data: function () {
     return {
-      
       uiLabels: {},
       id: "",
-      lang: "",
-      
+      lang: ""
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
-    this.pollId=this.$route.params.pollId
-    this.quizName=this.$route.params.quizName
+    this.pollId=this.$route.params.pollId;
+    this.quizName=this.$route.params.quizName;
 
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     });
-
-    this.pollId = this.$route.params.pollId;
-    this.quizName = this.$route.params.quizName;
-
-    console.log("i quizleaderStartView")
   },
+
   methods: {
     sendStart: function(){
       socket.emit("sendStart",this.pollId,this.quizName)
@@ -77,10 +66,6 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
-  .wrapper{
-    height: 100vh;
-  }
-
   h1 { 
     margin: 0 0 10px;
   }
@@ -89,13 +74,11 @@ export default {
     font-weight: bold;
   }
 
-
   @media screen and (max-width:1100px) {
     h1{
       font-size:4em;
     }
-
-
+    
     .custom-btn{
         display: inline;
         flex: none;

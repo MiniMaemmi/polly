@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
 
-
 .animationGradient{
   background: linear-gradient(-45deg, white, rgb(254,81,154), rgba(253,187,45,1), red);
     background-size: 400% 400%;
@@ -12,14 +11,14 @@
 
 
 body{
-    min-height: 100vh;
-    font-family: 1em Inter 400 black;
-  } 
+  min-height: 100vh;
+  font-family: 1em Inter 400 black;
+} 
 
 h4 {
-    font-family: Inter;
-    font-size:1em;
-    font-weight: 100;
+  font-family: Inter;
+  font-size:1em;
+  font-weight: 100;
 }  
 
 
@@ -56,9 +55,7 @@ h4 {
 .custom-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-
 }
-
 
 .custom-btn-quadratic {
     color: black;
@@ -75,26 +72,23 @@ h4 {
    4px 4px 5px 0px rgba(0,0,0,.1);
 
 }
+
 .custom-btn-quadratic:hover{
-  
-    animation: pulse 2s;
-    animation-delay:0.5ms ;
-  
+  animation: pulse 2s;
+  animation-delay:0.5ms ;
 }
 
 .custom-btn-quadratic:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-
-
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @font-face { font-family: Inter; 
 src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap'); } 
 h1{
-    font-family: Inter;
-    font-weight: 100;
-    font-size: 5em;
+  font-family: Inter;
+  font-weight: 100;
+  font-size: 5em;
 }
 
 .headerTextWhiteBox {
@@ -104,21 +98,21 @@ h1{
   padding: 5vh;
 }
 
-.lightYellowBox{ /* byt namn? */
-   background-color: rgb(255,255,240);
-   /* background: transparent; */
+.lightYellowBox{ 
+  background-color: rgb(255,255,240);
+   
 }
 
 .shadowIt{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 input[type=text] {
-    width: 50%;
-    height: 8vh;
-    font: 1.5em Inter;
-    border: 0px;
-    background: white;
+  width: 50%;
+  height: 8vh;
+  font: 1.5em Inter;
+  border: 0px;
+  background: white;
 
 }
 
@@ -150,17 +144,17 @@ input[type=text] {
 
 
 .goBackButtonPosition {
-    position:fixed; 
-    top:0; left:0; 
-    margin:0.5vw !important; 
-    width: 5vw !important;
+  position:fixed; 
+  top:0; left:0; 
+  margin:0.5vw !important; 
+  width: 5vw !important;
 }
 
 .playButtonPosition{
   position:fixed; 
   bottom:0; right:0; 
   margin:0.5vw !important; 
-  width: 5vw !important;
+  width: 10vw !important;
 }
 
 .goBackButtonDiv {
@@ -168,9 +162,6 @@ input[type=text] {
   height: 11vh;
   display: inline;
 }
-
-
-
 
 @keyframes animate{
     0% {
