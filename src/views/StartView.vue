@@ -54,10 +54,6 @@
 
 <style scoped>
   @import '@/assets/css/style.css';
-  .wrapper{
-    height: 100vh;
-  }
-
   h1 { margin: 0 0 10px; }
 
   h4 {

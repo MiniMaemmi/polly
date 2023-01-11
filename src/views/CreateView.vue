@@ -12,7 +12,7 @@
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             <div id="myPop" class="pop">
-              <div class="pop-content custom-btn-quadratic">
+              <div class="pop-content">
                 <h1>{{uiLabels.modalText}}</h1>
                 <button id="xClosePop" @click="closePop()">
                   &times; <!-- Unix for x -->
@@ -511,7 +511,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .arrow{
-  width: 3vh;
+  width: 2vh;
   height: 3vh;
 }
 
