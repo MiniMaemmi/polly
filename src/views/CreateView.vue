@@ -5,21 +5,18 @@
   <body class="animationGradient">
     <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button> 
     <div class="quizbody">
-
-        <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >
-          <div id="Quizname" >
-            <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
-          
+      <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >
+        <div id="Quizname" >
+          <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
             <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             <div id="myPop" class="pop">
               <div class="pop-content custom-btn-quadratic">
                 <h1>{{uiLabels.modalText}}</h1>
-                
                 <button id="xClosePop" @click="closePop()">
-              &times;
-            </button>
+                  &times; <!-- Unix for x -->
+                </button>
             <div>
               <button class="custom-btn-quadratic" style="height:10vh; margin:2vh;" @click="saveQuestionsAsJson"> 
                 {{uiLabels.saveAsJson}}
@@ -56,8 +53,8 @@
         <div>
           <div style="display: flex;">
             <input class="addFile" type="file" @change="onFileChange($event, question)"/>
-            <button class="Xbutton custom-btn-quadratic" v-on:click="removePicture(question)">
-              <img src="../../img/x.png">
+            <button class="Xbutton custom-btn-quadratic">
+              &times;
             </button>
           </div>
           <div class="preview">     
@@ -79,7 +76,7 @@
                 </button>
                 <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
                 <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
-                  <img src="../../img/x.png">
+                  &times;
                 </button>
               </div>
           
@@ -416,7 +413,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .pop-content {
-  background-color: lightyellow;
+  background-color: #fefefe;
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
@@ -555,7 +552,7 @@ background-color: rgba(0,0,0,0.4);
 
 
 .answerCorrect {
-  background-color: #1CC970;
+  background-color: green;
   transition-duration: 0.4s;
 }
 
@@ -646,17 +643,22 @@ background-color: rgba(0,0,0,0.4);
   margin-right:10%;
 }
 
+#Quizname input {
+  font: 2em Inter;
+
+}
+
 .questionInput {
   font: 2em Inter;
 }
 
 .answerBox input {
-  font: 2em Inter;
+  font: 2.5em Inter;
 }
 
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:400px) {
 
   .quizbody{
     width: 90%;
@@ -674,6 +676,26 @@ background-color: rgba(0,0,0,0.4);
     position:relative !important;
     margin:0.5vw !important; 
     width: 30vw !important;
+}
+
+.questionInput {
+  font: 1.5em Inter;
+}
+
+.answerBox input {
+  font: 4em Inter;
+}
+
+#Quizname input {
+  font: 1.5em Inter;
+
+}
+
+.Xbutton{
+  width: 10vh;
+  height: 7vh;
+  border-radius: 5vh;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 
