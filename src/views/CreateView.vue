@@ -12,7 +12,6 @@
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
           
-
             <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
@@ -112,14 +111,11 @@
           </button>
         </router-link>
        
-
-
         <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
           <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
             {{uiLabels.back}}
           </button>
         </router-link>
-
     
       </div>
 
@@ -154,8 +150,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 0, label: '', correct: false, score:0, feedback:'du är fel', },
-                        { id:1, label: '', correct: false, score:0, feedback:'rätt som en plätt'},
+                        { id: 0, label: '', correct: false, score:0,},
+                        { id:1, label: '', correct: false, score:0,},
                     ],
                 },
               
@@ -365,14 +361,12 @@ export default {
                 })
         },
 
-
         addAnswer: function (questionId) {
-
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: this.createId(), label: '', correct: false, score:0, feedback:''}
-
+                  { id: this.createId(), label: '', correct: false, score:0}
+                  { id: this.createId(), label: '', correct: false, score:0}
                 )
 
               }
@@ -399,7 +393,6 @@ export default {
                 var tmp = this.questions[index];
                     this.questions[index] = this.questions[index-1];
                     this.questions[index-1] = tmp;
-
                }
              })
            },
@@ -423,7 +416,6 @@ export default {
                     })
                  },
 
-
         changeQuestionIndexDown: function (questionId){
                  var array=this.questions
                 array.every(question => {
@@ -432,17 +424,10 @@ export default {
  
                     this.questions.splice(index, 2, this.questions[index+1], this.questions[index]);
                     return false
-
-
                    } 
                    return true
                  })
-
-
-                 
             },
-
-
 
             createId: function (){
               var id=this.iterator;
@@ -457,14 +442,9 @@ export default {
             saveQuiz(){
                 this.createPoll();
 
-            },
-
-
-         
-}
-
-
-}
+            },        
+        }
+  }
 </script>
 
 <style scoped>
@@ -724,13 +704,6 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 .add{
   font-size: 2vh;
 }
-
-
-/* 
-vid 950 att det blir en stor förändring med allt 
-
-
-*/ 
 
 @media screen and (max-width:1080px) {
   .goBackButtonPosition {
