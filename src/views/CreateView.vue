@@ -11,8 +11,6 @@
         <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >  
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
-          
-
             <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>

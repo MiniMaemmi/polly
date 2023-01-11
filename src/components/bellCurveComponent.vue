@@ -1,43 +1,14 @@
 <template>
-  <!--<div class="wrapper">
-    <h3>Bell curve:</h3>
-    <div class="bellCurveArea"> 
-      Här kommer graf
-    </div> 
-  </div> -->
 
 
   <div class="wrapper">
-  <h3>Resultat per fråga</h3>
-    
-<!--Så vi vill ta hur många som har fått x antal poäng, totalpoäng, och sedan rita upp en graf, där höjden är antal som fått dessa poäng, vi brhöver alltså, hur många som röstat på varje fråga, hur många frågor som finns-->
+  <h3>"Bell Curve"</h3>
   <div class="barArea">
-  <div class="questionBarWrapper" v-for="(questionResultObject, key) in data.topList" v-bind:key="key">
+  <div class="questionBarWrapper" v-for="(questionResultObject, key) in data.poll" v-bind:key="key">
     <div class="questionBarsOnly">
-    <div class="bar">
-      <div v-if="data.topList[key]===data.topList[key+1]" v-bind:style="{height: (data.topList[key])*30 + 'px'}">
-        <span v-if="data.topList[key]>0"> {{data.topList[key]}} </span>
-        
-      </div>
-    </div>
-    <div class="bar">
-      <div v-bind:style="{height: data.questionResultCounter[key].wrongAnswers*30 + 'px'}">
-        <span v-if="data.questionResultCounter[key].wrongAnswers>0"> {{data.questionResultCounter[key].wrongAnswers}} </span>
-      </div>
+
 
     </div>
-    </div>
-    <span class="questionNumber">{{key+1}} </span>
-    <!--
-    <div v-bind:style="{height: 5 + 'px'}">
-      <span> {{key+1}} </span>
-
-    </div>
-    <div  v-bind:style="{height: 100 + 'px'}">
-      <span> {{key+1}} </span>
-
-    </div>-->
-  
   </div>
 
 </div>
