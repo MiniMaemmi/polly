@@ -29,7 +29,6 @@
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -63,8 +62,6 @@
         </div>
         <div class="answerArea">
           <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
-            
-
               <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
                 <button class="custom-btn-quadratic tooltipclass" 
                 :class="{'answerCorrect': answer.correct}"
@@ -72,19 +69,16 @@
                 <span class="tooltiptext">{{uiLabels.tooltip}}</span>
                 <img class="checkmark" src="../../img/checkmark.png">
                 </button>
-                <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
+                <input v-bind:placeholder="uiLabels.answer" maxlength="40"  type="text" v-model="answer.label" :key="answer">
                 <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
                   &times;
                 </button>
               </div>
-          
         </div>
     </div>
-
       <button class="custom-btn add"  @click.prevent="addAnswer(question.id)">
         {{uiLabels.addAnswer}}
       </button>
-
     </div>
     
         <div>

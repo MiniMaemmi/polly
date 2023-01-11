@@ -11,7 +11,7 @@
 <button :disabled="countdown === 0 || this.username ==='undefined'"
 class="custom-btn"
 
- v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font: 2em inter">
+ v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" >
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
@@ -89,6 +89,35 @@ export default {
 <style scoped>
   @import '@/assets/css/style.css';
   
+ 
+  .custom-btn{
+    margin:5vh; 
+    font: 1em inter;
+    overflow-wrap:break-word;
+    
+
+  }
+  @media screen and (max-width: 1000px){
+    .custom-btn{
+      font: 0.7em inter;
+      
+      
+  }
+  
+
+  }
+  @media screen and (max-width: 700px){
+    .custom-btn{
+      font-size: 0.5em;
+      
+      
+  }
+  
+  
+
+  }
+
+
   .custom-btn:focus{
     background-color: #1CC970;
     transition-duration: 0.4s;
@@ -115,7 +144,7 @@ export default {
     justify-content: space-evenly;
     margin: 10%;
     font-family: inter;
-
+    
   }
   .CountDown
   {
