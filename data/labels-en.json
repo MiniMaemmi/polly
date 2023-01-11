@@ -1,12 +1,10 @@
-{	"StartView":"",
+{	
 	"createQuiz": "Create a quiz",
 	"connectQuiz": "Connect to a quiz",
 	"changeLanguage": "Byt till svenska",
 	"subtitle": "The quiz that makes you answer on time ",
 	"quizEmpty": "The quiz you created is empty in questions & answers. Go back & re-do.",
 	
-
-	"ConnectView":"",
 	"connectTitel": "Connect to Quiz!",
 	"quizid":"Quiz id",
 	"username":"Username",
@@ -15,7 +13,6 @@
 	"waitingRoom":"Waiting Room!",
 	"theQuiz":"The Quiz will start soon",
 
-	"CreateView":"",
 	"quizName":"Name of Quiz",
 	"question":"Question",
 	"answer":"Answer",
@@ -29,14 +26,13 @@
 	"modalText":"Some Options",
 	"startButtonTooltip":"Give the quiz a name! ",
 
-	"quizleaderStartView": "",
+	"inviteToQuiz":"Invite others to join Quiz:",
 	"joinQuiz":"With the Quiz id below:",
 	"playQuiz": "Let's play!",
 	"backToStart":"Go back to start",
 	"nextQuestion":"Next Question",
 	"timer":"Time's up!",
 
-	"invite": "Invite participants with this link:",
 	"showResults": "Show results",
 	"participatePoll": "Participate in a quiz"
 

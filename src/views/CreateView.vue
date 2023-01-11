@@ -416,7 +416,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .pop-content {
-  background-color: #fefefe;
+  background-color: lightyellow;
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
@@ -555,7 +555,7 @@ background-color: rgba(0,0,0,0.4);
 
 
 .answerCorrect {
-  background-color: green;
+  background-color: #1CC970;
   transition-duration: 0.4s;
 }
 
