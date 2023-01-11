@@ -2,6 +2,7 @@
 	"createQuiz": "Create a quiz",
 	"connectQuiz": "Connect to a quiz",
 	"changeLanguage": "Byt till svenska",
+	"subtitle": "The quiz that makes you answer on time ",
 	
 
 	"ConnectView":"",
@@ -37,6 +38,7 @@
 	"invite": "Invite participants with this link:",
 	"showResults": "Show results",
 	"participatePoll": "Participate in a quiz"
+
 	
 	
 	
