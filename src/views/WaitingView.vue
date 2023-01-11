@@ -7,8 +7,7 @@
       class="movearea">
 
       <div class="goBackButtonDiv">
-        
-        <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/connect/'+lang)">{{uiLabels.back}}</button>
+       <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/connect/'+lang)">{{uiLabels.back}}</button>
       </div>
       
 
@@ -88,11 +87,11 @@ export default {
 @import '@/assets/css/style.css';
 
 .headerTextWhiteBox {
-  margin-top: 30vh;
+  margin-top: 20vh;
 }
 
   .movearea{
-    transition: 0.5s background-color ease;
+    transition: 0.2s background-color ease;
     min-height: 100vh;
   }
 
@@ -105,16 +104,12 @@ export default {
       position: absolute;
       width: 20% !important
     }
-  
-  }
 
-
-
-  @media screen and (max-width:740px) {
     h1{
       font-size: 4em;
     }
   }
+
 
   @media screen and (max-width:590px) {
     h1{

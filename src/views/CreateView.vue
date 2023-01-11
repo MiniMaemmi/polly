@@ -96,16 +96,12 @@
                 {{ uiLabels.addQuestion }}
             </button>
         </div>
-        <div class="tooltip">
         
-          <button class="custom-btn playButtonPosition " @click="createPoll()" :disabled="!quizName.length">
+        <div class="tooltip">
+          <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
           </button>
-      
-       
-      </div>
-    
-
+        </div>
 
       <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
 

@@ -4,25 +4,16 @@
       <div class="headerTextWhiteBox">
         <h1>QuizTime!</h1>
         <h4>{{uiLabels.subtitle}} </h4>
-        <div>
-          
-          <div>
-            <button class="custom-btn" @click="this.$router.push('/create/'+this.lang)">{{uiLabels.createQuiz}}</button>
-          </div>
-         
-          <div>
-
-          <button class="custom-btn" @click="this.$router.push('/connect/'+this.lang)">{{uiLabels.connectQuiz}}</button>
-
-          </div>
-          <button class="custom-btn goBackButtonPosition"  v-on:click="switchLanguage">
-            {{uiLabels.changeLanguage}}
-          </button>
-        </div>
+        <div><button class="custom-btn" @click="this.$router.push('/create/'+this.lang)">{{uiLabels.createQuiz}}</button></div>
+        <div><button class="custom-btn" @click="this.$router.push('/connect/'+this.lang)">{{uiLabels.connectQuiz}}</button></div>
+        <button class="custom-btn goBackButtonPosition"  v-on:click="switchLanguage">
+          {{uiLabels.changeLanguage}}
+        </button>
       </div>
     </div>
   </body>
 </template>
+
 <script>
   import io from 'socket.io-client';
   const socket = io();
@@ -32,7 +23,7 @@
       return {
         uiLabels: {},
         id: "",
-        lang: "en",
+        lang: "",
         username: ""
       }
     },
