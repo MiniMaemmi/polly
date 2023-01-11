@@ -84,8 +84,8 @@ export default {
   
 
   img{
-    max-height: 80vh;
-    max-width: 80vh;
+    max-height: 50vh;
+    max-width: 50vh;
   }
 
   .questionImage {
