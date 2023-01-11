@@ -13,7 +13,16 @@
 
 body{
     min-height: 100vh;
+    font-family: 1em Inter 400 black;
   } 
+
+h4 {
+    font-family: Inter;
+    font-size:1em;
+    font-weight: 100;
+}  
+
+
 
 .custom-btn {
   color: black;
@@ -86,7 +95,6 @@ h1{
   box-shadow: rgba(0, 0, 0, 0.24) 4em 4em 8em;
   align-self: center;
   padding: 5vh;
-
 }
 
 .lightYellowBox{ /* byt namn? */
