@@ -5,22 +5,15 @@
         <h1>QuizTime!</h1>
         <h4>{{uiLabels.subtitle}} </h4>
         <div>
+          
           <div>
-            <router-link v-bind:to="'/create/'+lang" custom v-slot="{ navigate }">
-              <button class="custom-btn" @click="navigate" role="link">
-                {{uiLabels.createQuiz}}
-              </button>
-            </router-link>
+            <button class="custom-btn" @click="this.$router.push('/create/'+this.lang)">{{uiLabels.createQuiz}}</button>
           </div>
+         
           <div>
-            <router-link
-              v-bind:to="'/connect/'+lang"
-              custom
-              v-slot="{ navigate }">
-              <button class="custom-btn" @click="navigate" role="link">
-                {{uiLabels.connectQuiz}}
-              </button>
-            </router-link>
+
+          <button class="custom-btn" @click="this.$router.push('/connect/'+this.lang)">{{uiLabels.connectQuiz}}</button>
+
           </div>
           <button class="custom-btn goBackButtonPosition"  v-on:click="switchLanguage">
             {{uiLabels.changeLanguage}}

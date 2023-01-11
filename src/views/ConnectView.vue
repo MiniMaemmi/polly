@@ -33,24 +33,14 @@
               </label>
             </div>
             <div class="labelAndInput">
-              <input type="text" v-model="username"  placeholder="Anna Andersson">
+              <input type="text" v-model="username" maxlength="15" placeholder="Anna Andersson">
             </div>
           </div>
         </div>
 
             <div>
-                <router-link
-                v-bind:to="'/waiting/'+ id+'/'+lang + '/' + username"
-                custom
-                v-slot="{ navigate }">
-                <button class="custom-btn" v-on:click="createUser" :disabled="!username.length||!id.length" 
-            
-                @click="navigate"
-                role="link"
-                >
-                {{uiLabels.displayJoinPoll}}
-                </button>
-                </router-link>
+
+              <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser() "> {{uiLabels.displayJoinPoll}}</button>
             </div>
 
 
@@ -86,7 +76,7 @@ export default {
   
   created: function () {
     this.lang = this.$route.params.lang;
-
+    
       socket.emit("pageLoaded", this.lang);
       socket.on("init", (labels) => {
         this.uiLabels = labels
@@ -118,7 +108,8 @@ export default {
       //console.log("------- i createUser StartView.vue ------ ") 
       //console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
-      console.log("Username: ", this.username)
+      //console.log("Username: ", this.username)
+      this.$router.push('/waiting/'+ this.id+'/'+this.lang + '/' + this.username)
 
     },
     isFormFilled: function(){

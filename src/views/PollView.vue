@@ -7,25 +7,23 @@
   
       <div class="wrapper" style="margin-top:0vh;">
         <div class="goBackButtonDiv">
-          <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
-            <button class="custom-btn goBackButtonPosition" @click="navigate()" role="link">
-              {{uiLabels.backToStart}}
-            </button>
-          </router-link>
+          
+          <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+ this.lang)">{{uiLabels.backToStart}}</button>
         </div>   
-        <div class="p1" v-if="username!=='undefined'" > {{username}}</div>
-        <div class= "p1 PollIdDisplay">PollID: {{pollId}}</div>
+
+        <div class="UsernameDisplay" v-if="username!=='undefined'" > {{username}}</div>
+        <div class= "PollIdDisplay">PollID: {{pollId}}</div>
        
         <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
           <div style="align-self: center; font-size:5vh; margin-top: 10%">  
-            {{ uiLabels.question }}: {{question.q}}
+             {{question.q}}
           </div>
        
-          <QuestionComponent ref="questionComponent" v-bind:question="questionObject" v-on:answer="logUserAnswer($event)"/>
+          <QuestionComponent ref="questionComponent" v-bind:question="questionObject"  v-on:answer="logUserAnswer($event)"/>
           
-          <!-- <div class="p3" style="position:absolute; bottom:0; right:50%;" v-if="countdown > 0"> {{ countdown }}</div>
+          
   
-          <div class="p3" style="position:absolute; bottom:0; right:50%;" v-else-if="countdown === 0">{{uiLabels.time}}</div>-->
+          
           
         <div v-if="username ==='undefined'" >
           <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showNextQuestionButton" 
@@ -36,18 +34,14 @@
 
           <!-- <div v-else-if="showResultButton"> -->
             <div v-if="showResultButton">
-          <router-link
-                  v-bind:to="'/result/'+this.pollId+ '/' + lang +'/' + this.quizName +  '/' + username"
-                  custom
-                  v-slot="{ navigate }">
+         
+                 
                 <button style="height:10%" class="nextQuestionButton custom-btn-quadratic"  
-                @click="sendShowResult(), navigate()"
-                role="link"
-                
-                >
+                @click="sendShowResult()" >
+            
                 {{uiLabels.showResults}}
                 </button>
-            </router-link>
+           
 
           </div>
 
@@ -311,13 +305,12 @@ socket.emit("joinPoll", (this.pollId));
     },
 
 
-    navigate: function() {
-      this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
-    },
+   
 
     sendShowResult: function() {
       console.log("sendShowResult körs")
       socket.emit("sendShowResult",this.pollId,this.quizName)
+      this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
     },
 
 
@@ -351,12 +344,20 @@ body {
 }
 
 
-
+.UsernameDisplay{
+  font-size:2vh;
+  position:absolute;
+  right:0;
+  top:3vh;
+  margin:2vh;
+}
 
 .PollIdDisplay{
+  font-size:2vh;
   position:absolute;
   right:0;
   top:0;
+  margin:2vh;
 }
 .wrapper{
   display:flex;

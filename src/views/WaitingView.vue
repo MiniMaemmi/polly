@@ -7,11 +7,8 @@
       class="movearea">
 
       <div class="goBackButtonDiv">
-        <router-link v-bind:to="'/connect/'+lang" custom v-slot="{ navigate }">
-          <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
-            {{uiLabels.back}}
-          </button>
-        </router-link>
+        
+        <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/connect/'+lang)">{{uiLabels.back}}</button>
       </div>
       
 
