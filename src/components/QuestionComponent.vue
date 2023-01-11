@@ -8,8 +8,10 @@
           <img :src="question.url">
         </div>        
       
-<button :disabled="countdown === 0"
-class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font-size: 1vh">
+<button :disabled="countdown === 0 || this.username ==='undefined'"
+class="custom-btn"
+
+ v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font-size: 1vh">
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
@@ -33,12 +35,14 @@ export default {
   data: function() {
     return {
       countdown: 0,
+      
     }
 
   },
 
   created: function () {
     this.countdown = 11;
+    this.username=this.$route.params.username;
     //console.log("new question")
 
     this.updateCountdown()
@@ -110,6 +114,9 @@ export default {
   .CountDown
   {
     font-size:5vh
+  }
+  .leaderDisable{
+    
   }
 
 </style>
