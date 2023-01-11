@@ -51,11 +51,9 @@
           </button >
         </div>
         <div>
-          <div style="display: flex;">
+          <div style="display: flex; margin-left:10%; margin-right:10%">
             <input class="addFile" type="file" @change="onFileChange($event, question)"/>
-            <button class="Xbutton custom-btn-quadratic">
-              &times;
-            </button>
+            <button class="Xbutton custom-btn-quadratic">&times;</button>
           </div>
           <div class="preview">     
             <div v-if="question.url">
@@ -362,7 +360,7 @@
     height: 100%;
     margin-left: 25%;
     margin-top:0vh;
-    padding-top: %
+    padding-top: 10%
   }
 
   .nameQuizSectionWrapper {
