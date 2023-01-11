@@ -3,7 +3,7 @@
 
    
 
-<h3 style="margin:10vh">{{answer.label}}</h3>
+<h3 style="margin:10vh; font: inter">{{answer.label}}</h3>
         <div v-if="question.url">
           <img :src="question.url">
         </div>        
@@ -11,7 +11,7 @@
 <button :disabled="countdown === 0 || this.username ==='undefined'"
 class="custom-btn"
 
- v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font-size: 1vh">
+ v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font: 2em inter">
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
@@ -88,10 +88,11 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
-
+  
   .custom-btn:focus{
-    background-color: green;
+    background-color: #1CC970;
     transition-duration: 0.4s;
+    
   }
   
 
@@ -109,11 +110,12 @@ export default {
   .questionComp button {
     justify-content: space-evenly;
     margin: 10%;
+    font-family: inter;
 
   }
   .CountDown
   {
-    font-size:5vh
+    font: 5vh inter;
   }
   .leaderDisable{
     

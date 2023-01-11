@@ -547,7 +547,7 @@ background-color: rgba(0,0,0,0.4);
 
 
 .answerCorrect {
-  background-color: green;
+  background-color: #1CC970;
   transition-duration: 0.4s;
 }
 
