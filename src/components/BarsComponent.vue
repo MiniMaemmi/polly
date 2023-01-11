@@ -20,16 +20,6 @@
     </div>
     </div>
     <span class="questionNumber">{{key+1}} </span>
-    <!--
-    <div v-bind:style="{height: 5 + 'px'}">
-      <span> {{key+1}} </span>
-
-    </div>
-    <div  v-bind:style="{height: 100 + 'px'}">
-      <span> {{key+1}} </span>
-
-    </div>-->
-  
   </div>
 
 </div>
@@ -165,6 +155,3 @@ h3 {
 
 }
 </style>
-
-
-

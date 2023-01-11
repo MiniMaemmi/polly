@@ -12,8 +12,7 @@
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
           
-
-            <button class="custom-btn-quadratic " @click="PopUpfunction()">
+            <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             
@@ -58,7 +57,7 @@
 
             <input class="questionInput" maxlength="70" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
 
-            <button class="custom-btn-quadratic " @click="removeQuestion(question.id)">
+            <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)">
               {{uiLabels.removeQuestion}}
             </button >
           </div>
@@ -78,7 +77,7 @@
           <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
 
             <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
-              <button class="custom-btn-quadratic" 
+              <button class="custom-btn-quadratic tooltipclass" 
                       :class="{'answerCorrect': answer.correct}"
                        @click="markAsCorrect(question.id, answer.id)"> 
                         <span class="tooltiptext">{{uiLabels.tooltip}}</span>
@@ -109,8 +108,8 @@
         
           <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
-            <span class="tooltiptext">{{uiLabels.startButtonTooltip}}</span>
           </button>
+        </router-link>
        
       </div>
 
@@ -150,8 +149,8 @@ export default {
                     id: 1,
                     label: '',
                     answers: [
-                        { id: 0, label: '', correct: false, score:0, feedback:'du är fel', },
-                        { id:1, label: '', correct: false, score:0, feedback:'rätt som en plätt'},
+                        { id: 0, label: '', correct: false, score:0,},
+                        { id:1, label: '', correct: false, score:0,},
                     ],
                 },
               
@@ -175,6 +174,7 @@ export default {
     created: function () {
       
       this.lang = this.$route.params.lang;
+
       this.pollId = Math.round((Math.random().toFixed(5)*1000000));
 
       socket.emit("pageLoaded", this.lang);
@@ -352,7 +352,6 @@ export default {
           question.url=null;
 
         },
-        
 
 
         removeAnswer: function(questionId, answerId){
@@ -374,14 +373,12 @@ export default {
                 })
         },
 
-
         addAnswer: function (questionId) {
-
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: this.createId(), label: '', correct: false, score:0, feedback:''}
-
+                  { id: this.createId(), label: '', correct: false, score:0},
+                  { id: this.createId(), label: '', correct: false, score:0}
                 )
 
               }
@@ -408,7 +405,6 @@ export default {
                 var tmp = this.questions[index];
                     this.questions[index] = this.questions[index-1];
                     this.questions[index-1] = tmp;
-
                }
              })
            },
@@ -432,7 +428,6 @@ export default {
                     })
                  },
 
-
         changeQuestionIndexDown: function (questionId){
                  var array=this.questions
                 array.every(question => {
@@ -441,17 +436,10 @@ export default {
  
                     this.questions.splice(index, 2, this.questions[index+1], this.questions[index]);
                     return false
-
-
                    } 
                    return true
                  })
-
-
-                 
             },
-
-
 
             createId: function (){
               var id=this.iterator;
@@ -466,14 +454,9 @@ export default {
             saveQuiz(){
                 this.createPoll();
 
-            },
-
-
-         
-}
-
-
-}
+            },        
+        }
+  }
 </script>
 
 <style scoped>
@@ -512,7 +495,10 @@ export default {
   }
 
   /* Popup*/
-  
+  .OptionsButton:hover{
+    animation: pulse 2s;
+    animation-delay:0.5ms ;
+  }
 
   .pop {
     display: none; 
@@ -576,7 +562,16 @@ export default {
     width: 80%;
   }
 
- 
+  .removeQuestionButton{
+    width: 20vh;
+    height: 7vh;
+    font-size: 1.5vh;
+  }
+  
+  .removeQuestionButton:hover{
+    animation: pulse 2s;
+    animation-delay:0.5ms ;
+  }
 
   .addFile{
     width: 100%;
@@ -649,7 +644,14 @@ export default {
   opacity: 1;
   
 }
-  
+
+   .tooltipclass:hover{
+    animation: pulse 2s; 
+    animation-delay:0.5ms ;
+    color: white;
+   }
+
+
 
   .answerCorrect {
     background-color: green;
@@ -716,8 +718,6 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 .add{
   font-size: 2vh;
 }
-
-
 
 @media screen and (max-width:1080px) {
   .goBackButtonPosition {

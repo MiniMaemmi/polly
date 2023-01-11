@@ -23,9 +23,7 @@
     </div>
   </body>
 </template>
-
 <script>
-
   import io from 'socket.io-client';
   const socket = io();
   export default {
@@ -63,20 +61,11 @@
   }
 </script>
 
-
 <style scoped>
   @import '@/assets/css/style.css';
-  
   .wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
     height: 100vh;
   }
-
-
 
   h1 { margin: 0 0 10px; }
 
@@ -86,7 +75,6 @@
   }
 
   @media screen and (max-width:1200px) {
-
     .goBackButtonPosition {
       display: inline;
       flex: none;
@@ -94,11 +82,10 @@
       width: 10% !important;
       font-size: 1em;
     }
-    
+
     .custom-btn {
       width: 80%;
       margin-top: 5%;
-
     }
   }
 
@@ -110,8 +97,7 @@
       position: absolute;
       width: 20% !important;
       font-size: 1em;
-    }
-    
+    } 
   }
 
 

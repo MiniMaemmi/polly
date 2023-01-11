@@ -46,24 +46,6 @@ Data.prototype.gameStart=function(gameStarted){
   //gameStarted=true
   return gameStarted}
 }
-
-
-//mikaels orginal
-/*
-Data.prototype.createPoll = function(pollId, lang="en") {
-  if (typeof this.polls[pollId] === "undefined") {
-    let poll = {};
-    poll.lang = lang;  
-    poll.questions = [];
-    poll.answers = [];
-    poll.currentQuestion = 0;              
-    this.polls[pollId] = poll;
-    console.log("i Data.js createPoll()")
-    console.log("poll created pollId: ", pollId, poll);
-  }
-  return this.polls[pollId];
-}*/
-
 Data.prototype.addQuestion = function(pollId, questionObject) {
   console.log("i Data.js addQuestion()")
   const poll = this.polls[pollId];
@@ -73,18 +55,6 @@ Data.prototype.addQuestion = function(pollId, questionObject) {
   console.log("poll efter pushat object: ", poll)
   }
 }
-
-//mikaels orginal
-/*
-Data.prototype.addQuestion = function(pollId, q) {
-  console.log("i Data.js addQuestion()")
-  const poll = this.polls[pollId];
-  console.log("q: ", q)
-  console.log("question added to pollId with questionId: ", pollId, q);
-  if (typeof poll !== 'undefined') {
-    poll.questions.push(q);
-  }
-}*/
 
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   const poll = this.polls[pollId];
@@ -97,28 +67,7 @@ Data.prototype.getQuestion = function(pollId) {
   const poll = this.polls[pollId];
   console.log("i Data.js getQuestion(): question requested for pollId:", pollId);
   return poll
-  /* if (typeof poll !== 'undefined') {
-    if (qId !== null) {
-      poll.currentQuestion = qId;
-    }
-    return poll.questions[qId]
-  }*/
 }
-
-//mikaels orginal
-/*
-Data.prototype.getQuestion = function(pollId, qId=null) {
-  const poll = this.polls[pollId];
-  console.log("question requested for pollId with questionId:", pollId, qId);
-  if (typeof poll !== 'undefined') {
-    if (qId !== null) {
-      poll.currentQuestion = qId;
-    }
-    return poll.questions[poll.currentQuestion];
-
-  }
-  return []
-}*/
 
 //egenskrivet
 Data.prototype.getPollParticipants = function(pollId) {
@@ -126,12 +75,7 @@ Data.prototype.getPollParticipants = function(pollId) {
   console.log("-------i Data.js getPollParticipants----");
   console.log("pollParticipantsObjects", this.polls[pollId].pollParticipantsObjects);
   return this.polls[pollId].pollParticipantsObjects
-  /* if (typeof poll !== 'undefined') {
-    if (qId !== null) {
-      poll.currentQuestion = qId;
-    }
-    return poll.questions[qId]
-  }*/
+
 }
 
 //egenskrivet
@@ -140,40 +84,6 @@ Data.prototype.createUser = function(pollId, username) {
   console.log("Användarnamn: ", username)
   console.log("pollId ", pollId)
 }
-
-//egenmodifierad
-/*
-Data.prototype.submitAnswer = function(pollId, question, answer, username) {
-  console.log("--------- Data.js submitAnswer()---------")
-  const poll = this.polls[pollId];
-
-  console.log("This should be inside data_for_statistics array: ", {pollId: pollId, question: question, answer: answer, username: username})
-  
-  this.answers_for_statistics.push({pollId: pollId, question: question, answer: answer, username: username});
-
-  console.log("Data_for_statistics object after added data: ", this.answers_for_statistics);
-
-
-
-  //const dataaArrayForStatistics = this.answers_for_statistics.push({pollId, answer, username})
-  //console.log("answer submitted for ", pollId, answer, username);
-  
-  /*
-  if (typeof poll !== 'undefined') {
-    let answers = poll.answers[poll.currentQuestion];
-    if (typeof answers !== 'object') {
-      answers = {};
-      answers[answer] = 1;
-      poll.answers.push(answers);
-    }
-    else if (typeof answers[answer] === 'undefined')
-      answers[answer] = 1;
-    else
-      answers[answer] += 1
-    console.log("answers looks like ", answers, typeof answers);
-
-  }
-}*/
 
 //egenskriven
 Data.prototype.submitAnswer = function(pollId, userObject) {
@@ -191,44 +101,6 @@ Data.prototype.submitAnswer = function(pollId, userObject) {
 }
 
 
-//mikaels orginal
-/*
-Data.prototype.submitAnswer = function(pollId, answer) {
-  console.log("------ i Data.js submitAnswer ------")
-  const poll = this.polls[pollId];
-  console.log("answer submitted for ", pollId, answer);
-  if (typeof poll !== 'undefined') {
-    let answers = poll.answers[poll.currentQuestion];
-    console.log("answers:",answers)
-    if (typeof answers !== 'object') {
-      answers = {};
-      answers[answer] = 1;
-      poll.answers.push(answers);
-      console.log("Answer: ", answers)
-
-    }
-    else if (typeof answers[answer] === 'undefined')
-      answers[answer] = 1;
-    else
-      answers[answer] += 1
-    console.log("answers looks like ", answers, typeof answers);
-  }
-}*/
-
-//mikaels orginal
-/*
-Data.prototype.getAnswers = function(pollId) {
-  const poll = this.polls[pollId];
-  if (typeof poll !== 'undefined') {
-    const answers = poll.answers[poll.currentQuestion];
-    if (typeof poll.questions[poll.currentQuestion] !== 'undefined') {
-      return {q: poll.questions[poll.currentQuestion].q, a: answers};
-    }
-  }
-  return {}
-}*/
-
-
 
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
@@ -243,17 +115,6 @@ Data.prototype.getAnswers = function(pollId) {
   return {}
 }
 module.exports = Data;
-
-
-
-
-
-
-
-
-
-
-
 
 Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants) {
       console.log("----- i data.js assignScoreValueToEachAnswer()---- ")
@@ -276,10 +137,6 @@ Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants)
         }
 
       })
-
-
-
-
         })
 
       })
@@ -315,29 +172,14 @@ Data.prototype.assignScoreValueToEachAnswer = function(pollId, pollParticipants)
               wrongAnswers+=1
             }
             console.log(answer)
-
-
           })
           console.log(participant)
-
-
         })
       console.log(question)
         console.log("questionResultCounter loop", questionResultCounter)
       questionResultCounter.push({questionID:question.id, correctAnswers, wrongAnswers})
-
-         
-
-
       })
 
       console.log("questionResultCounter return", questionResultCounter)
     return questionResultCounter
-
-
     }
-
-
-
-
-

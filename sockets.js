@@ -29,15 +29,6 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("resetTimer")
   })
 
-
-//mikaels orginal
-/*
-  socket.on('createPoll', function(d) {
-    console.log("i sockets.js createPoll()")
-    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang));
-  });*/
-
-  //this is for user creation egenskrivet
   socket.on('createUser', function(username) {
  
   socket.emit('dataUpdate', {answers: data.getAnswers(data.pollId), username: username});
@@ -84,9 +75,6 @@ function sockets(io, socket, data) {
     
     socket.emit('getPollParticipants', data.getPollParticipants(pollId))
   });
-
-
-  //egenskriven
   
   socket.on('submitAnswer', function(d) {
     console.log("---- i sockets.js submitAnswer()----")
@@ -98,38 +86,27 @@ function sockets(io, socket, data) {
   socket.on('assignScoreForUser', function(pollId, pollParticipants){
 
     socket.emit("assignScoreForUser",data.assignScoreValueToEachAnswer(pollId, pollParticipants));
-
   });
 
   socket.on('getSortedTopList', function(pollParticipants, topList){
 
     socket.emit("getSortedTopList",data.getSortedTopList(pollParticipants, topList));
 
-
   });
 
   socket.on('checkQuestions', function(pollId, pollParticipants, questionResultCounter){
 
     socket.emit("checkQuestions",data.checkQuestions(pollId, pollParticipants, questionResultCounter));
-
-
   });
- 
-
    socket.on("sendShowResult", function(pollId,quizName){
     console.log("i socket sendShowResult AAAAAAAAAAAAAAAAAAAAAAAAAAA")
     io.to(pollId).emit("recieveShowResult", quizName)
   })
-
-
-
-  
-
-  socket.on('resetAll', () => {
+    socket.on('resetAll', () => {
     data = new Data();
     data.initializeData();
   })
- 
+
 }
 
 module.exports = sockets;
