@@ -13,7 +13,7 @@
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
           
 
-            <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
+            <button class="custom-btn-quadratic " @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             
@@ -58,7 +58,7 @@
 
             <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
 
-            <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)">
+            <button class="custom-btn-quadratic " @click="removeQuestion(question.id)">
               {{uiLabels.removeQuestion}}
             </button >
           </div>
@@ -78,7 +78,7 @@
           <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
 
             <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
-              <button class="custom-btn-quadratic tooltipclass" 
+              <button class="custom-btn-quadratic" 
                       :class="{'answerCorrect': answer.correct}"
                        @click="markAsCorrect(question.id, answer.id)"> 
                         <span class="tooltiptext">{{uiLabels.tooltip}}</span>
@@ -105,13 +105,14 @@
                 {{ uiLabels.addQuestion }}
             </button>
         </div>
-
-        <router-link v-bind:to="'/quizleaderStartView/'+lang+'/'+this.pollId+'/'+this.quizName" custom v-slot="{ navigate }">
-          <button class="custom-btn playButtonPosition" @click="saveQuiz(), navigate()" role="link" :disabled="!quizName.length">
+        <div class="tooltip">
+        
+          <button class="custom-btn playButtonPosition " @click="saveQuiz(),navigate()" role="link" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
+            <span class="tooltiptext">{{uiLabels.startButtonTooltip}}</span>
           </button>
-        </router-link>
        
+      </div>
 
 
         <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
@@ -179,7 +180,6 @@ export default {
     created: function () {
       
       this.lang = this.$route.params.lang;
-
       this.pollId = Math.round((Math.random().toFixed(5)*1000000));
 
       socket.emit("pageLoaded", this.lang);
@@ -238,9 +238,22 @@ export default {
       
 
       createPoll: function () {
-        console.log("i CreateView createPoll()")
-        console.log("skickat till socket: ", this.pollId, this.lang, this.questions )
-        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
+       
+  //temporät bugg finns ifall du inte har någon fråga
+        this.questions.forEach(question => {
+            if (question.label === ""){
+              const index=this.questions.indexOf(question)
+              this.questions.splice(index,1)
+
+    
+      }
+            socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
+              this.$router.push('/quizleaderStartView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
+
+        })
+
+          
+          
       },
 
         markAsCorrect(questionId, answerId) {
@@ -344,6 +357,7 @@ export default {
           question.url=null;
 
         },
+        
 
 
         removeAnswer: function(questionId, answerId){
@@ -503,10 +517,7 @@ export default {
   }
 
   /* Popup*/
-  .OptionsButton:hover{
-    animation: pulse 2s;
-    animation-delay:0.5ms ;
-  }
+  
 
   .pop {
     display: none; 
@@ -570,16 +581,7 @@ export default {
     width: 80%;
   }
 
-  .removeQuestionButton{
-    width: 20vh;
-    height: 7vh;
-    font-size: 1.5vh;
-  }
-  
-  .removeQuestionButton:hover{
-    animation: pulse 2s;
-    animation-delay:0.5ms ;
-  }
+ 
 
   .addFile{
     width: 100%;
@@ -651,14 +653,7 @@ export default {
   opacity: 1;
   
 }
-
-   .tooltipclass:hover{
-    animation: pulse 2s; 
-    animation-delay:0.5ms ;
-    color: white;
-   }
-
-
+  
 
   .answerCorrect {
     background-color: green;
@@ -726,11 +721,6 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 
-/* 
-vid 950 att det blir en stor förändring med allt 
-
-
-*/ 
 
 @media screen and (max-width:1080px) {
   .goBackButtonPosition {

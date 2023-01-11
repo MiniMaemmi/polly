@@ -25,6 +25,7 @@
 	"loadAJson": "Load a Json file",
 	"tooltip":"Mark as Correct",
 	"modalText":"Some Options",
+	"startButtonTooltip":"Give the quiz a name! ",
 
 	"quizleaderStartView": "",
 	"joinQuiz":"With the Quiz id below:",

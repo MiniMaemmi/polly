@@ -24,6 +24,7 @@
 	"loadAJson": "Ladda upp en Json file",
 	"tooltip":"Markera som rätt",
 	"modalText":"Lite alternativ",
+	"startButtonTooltip":"ge quiz:et ett namn!!!!!",
 
 	"quizleaderStartView": "",
 	"joinQuiz":"Med Quiz id nedan:",
