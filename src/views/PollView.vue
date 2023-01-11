@@ -19,7 +19,7 @@
              {{question.q}}
           </div>
        
-          <QuestionComponent ref="questionComponent" v-bind:question="questionObject" v-on:answer="logUserAnswer($event)"/>
+          <QuestionComponent ref="questionComponent" v-bind:question="questionObject"  v-on:answer="logUserAnswer($event)"/>
           
           
   
