@@ -2,11 +2,7 @@
   <body class="animationGradient">
 <div class="wrapper">
   <div class="goBackButtonDiv">
-    <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
-      <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
-        {{uiLabels.back}}
-      </button>
-    </router-link>
+    <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
   </div>
 
   <div class="contentArea lightYellowBox shadowIt">
@@ -37,17 +33,13 @@
             </div>
           </div>
         </div>
-
-            <div>
-
-              <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser() "> {{uiLabels.displayJoinPoll}}</button>
+        <div>
+          <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser() "> {{uiLabels.displayJoinPoll}}</button>
             </div>
 
 
         
-          
-</div>
-
+      </div>
 </div>
 </div>
 
@@ -81,40 +73,16 @@ export default {
       socket.on("init", (labels) => {
         this.uiLabels = labels
       })
-
-
     },
 
-   /*socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-  },
-  methods: {
-    switchLanguage: function() {
-      if (this.lang === "en")
-        this.lang = "sv"
-      else
-        this.lang = "en"
-      socket.emit("switchLanguage", this.lang)
-    },
-    toggleNav: function () {
-      this.hideNav = ! this.hideNav;
-    },*/
+
 
   methods: {
-    
-    //this one, createUser is added
     createUser: function() {
-      //console.log("------- i createUser StartView.vue ------ ") 
-      //console.log("Username: ", this.username)
       socket.emit("createUser", this.username)
-      //console.log("Username: ", this.username)
       this.$router.push('/waiting/'+ this.id+'/'+this.lang + '/' + this.username)
-
-    },
-    isFormFilled: function(){
-      //console.log("hej")
     }
+
   }
   
   
