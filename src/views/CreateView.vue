@@ -2,10 +2,10 @@
   <head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   </head>
-  <body class="animationGradient" style="animation:  animate 25s ease infinite;" @click="IfPopOpen($event)" >
-    
+  <body class="animationGradient">
+    <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button> 
     <div class="quizbody">
-      <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
+
         <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >
           <div id="Quizname" >
             <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
@@ -14,7 +14,7 @@
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
             <div id="myPop" class="pop">
-              <div class="pop-content">
+              <div class="pop-content custom-btn-quadratic">
                 <h1>{{uiLabels.modalText}}</h1>
                 
                 <button id="xClosePop" @click="closePop()">
@@ -39,7 +39,6 @@
 
     <div class="addNewQuestionArea">
       <div class="questionAnswer lightYellowBox shadowIt" style="margin-bottom:1vh; margin-top:1vh;" v-for="question in questions" v-bind:key="'question'+question" >
-
         <div class="questionOperations">
           <div class="upDownButtonPair">
             <button :disabled="question.id === this.questions[0].id" class="upDownButton" @click="changeQuestionOrder(question.id, true)">
@@ -49,12 +48,11 @@
               <img class="arrow" src="../../img/down.png">
             </button>
           </div>
-            <input class="questionInput" maxlength="70" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
+          <input class="questionInput" maxlength="70" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
           <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)">
             {{uiLabels.removeQuestion}}
           </button >
         </div>
-
         <div>
           <div style="display: flex;">
             <input class="addFile" type="file" @change="onFileChange($event, question)"/>
@@ -68,22 +66,25 @@
             </div> 
           </div>
         </div>
+        <div class="answerArea">
+          <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
+            
 
-        <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
-
-          <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
-            <button class="custom-btn-quadratic tooltipclass" 
-            :class="{'answerCorrect': answer.correct}"
-            @click="markAsCorrect(question.id, answer.id)"> 
-            <span class="tooltiptext">{{uiLabels.tooltip}}</span>
-            <img class="checkmark" src="../../img/checkmark.png">
-            </button>
-            <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
-            <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
-              <img src="../../img/x.png">
-            </button>
+              <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
+                <button class="custom-btn-quadratic tooltipclass" 
+                :class="{'answerCorrect': answer.correct}"
+                @click="markAsCorrect(question.id, answer.id)"> 
+                <span class="tooltiptext">{{uiLabels.tooltip}}</span>
+                <img class="checkmark" src="../../img/checkmark.png">
+                </button>
+                <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
+                <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
+                  <img src="../../img/x.png">
+                </button>
+              </div>
+          
         </div>
-      </div>
+    </div>
 
       <button class="custom-btn add"  @click.prevent="addAnswer(question.id)">
         {{uiLabels.addAnswer}}
@@ -105,7 +106,7 @@
 
 
 
-      </div>
+    </div>
 
 </div>  
 </body>
@@ -364,6 +365,7 @@
     height: 100%;
     margin-left: 25%;
     margin-top:0vh;
+    padding-top: %
   }
 
   .nameQuizSectionWrapper {
@@ -383,6 +385,8 @@
     width: 100%;
 
   }
+
+
 
   .custom-btn-quadratic .questionSettings {
     width: 5vh;
@@ -463,7 +467,7 @@ background-color: rgba(0,0,0,0.4);
 .removeQuestionButton{
   width: 20vh;
   height: 7vh;
-  font: 1.5vh inter;
+  font-size: 1.5vh;
 }
 
 .removeQuestionButton:hover{
@@ -510,7 +514,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .arrow{
-  width: 2vh;
+  width: 3vh;
   height: 3vh;
 }
 
@@ -611,26 +615,68 @@ background-color: rgba(0,0,0,0.4);
   font-size: 2vh;
 }
 
+@media screen and (max-width:800px) {
 
-@media screen and (max-width:550px) {
   .goBackButtonPosition {
     display: inline;
     flex: none;
     position: absolute;
-    width: 15% !important
-  }
-
-  .playButtonPosition{
-    display: inline;
-    flex: none;
-    position: absolute;
-    width: 15% !important
+    width: 10vw !important;
+    height: 5vh !important;
+    min-width: 5vw !important;
+    min-height: 5vh !important;
+    font: 1em Inter;
   }
 
   .quizbody{
-    width: 80%;
-    margin-left: 20%;
+    width: 90%;
+    height: 100vh;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 10%;
   }
+
+  .custom-btn {
+    width: 20vw !important;
+  }
+
+  .answerArea {
+  align-self: stretch;
+  margin-left: 10%;
+  margin-right:10%;
+}
+
+.questionInput {
+  font: 2em Inter;
+}
+
+.answerBox input {
+  font: 2em Inter;
+}
+
+}
+
+@media screen and (max-width:500px) {
+
+  .quizbody{
+    width: 90%;
+    height: 100vh;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 13%;
+  }
+
+  .custom-btn {
+    width: 30vw !important;
+  }
+
+  .playButtonPosition { 
+    position:relative !important;
+    margin:0.5vw !important; 
+    width: 30vw !important;
+}
+
+
 
 
 }
