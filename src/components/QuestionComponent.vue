@@ -1,7 +1,7 @@
 <template>
   <div class="questionComp">
 
-    {{countdown}}
+   
 
 <h3 style="margin:10vh">{{answer.label}}</h3>
         <div v-if="question.url">
@@ -9,9 +9,17 @@
         </div>        
       
 <button :disabled="countdown === 0"
-class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:50px">
+class="custom-btn" v-for="answerObject in question.answers" v-on:click="answer(answerObject)" v-bind:key="answerObject" style="margin:5vh; font-size: 1vh">
   {{answerObject.label}}                  
 </button>
+<div class="CountDown">
+  {{countdown}}
+ 
+  
+  
+
+</div>
+
 
 </div>
 </template>
@@ -30,8 +38,8 @@ export default {
   },
 
   created: function () {
-    this.countdown = 10;
-    console.log("new question")
+    this.countdown = 11;
+    //console.log("new question")
 
     this.updateCountdown()
 
@@ -98,6 +106,10 @@ export default {
     justify-content: space-evenly;
     margin: 10%;
 
+  }
+  .CountDown
+  {
+    font-size:5vh
   }
 
 </style>

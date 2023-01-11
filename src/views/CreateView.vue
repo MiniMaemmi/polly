@@ -10,7 +10,7 @@
 
         <div class="nameQuizSectionWrapper lightYellowBox shadowIt" >  
           <div id="Quizname" >
-            <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName">
+            <input  v-bind:placeholder="uiLabels.quizName" type="text" v-model="quizName" maxlength="25">
           
 
             <button class="custom-btn-quadratic " @click="PopUpfunction()">
@@ -56,7 +56,7 @@
               </button>
             </div>
 
-            <input class="questionInput" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
+            <input class="questionInput" maxlength="70" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
 
             <button class="custom-btn-quadratic " @click="removeQuestion(question.id)">
               {{uiLabels.removeQuestion}}
@@ -85,7 +85,7 @@
                         <img class="checkmark" src="../../img/checkmark.png">
               </button>
 
-              <input v-bind:placeholder="uiLabels.answer" type="text" v-model="answer.label" :key="answer">
+              <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
 
 
               <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
@@ -107,21 +107,16 @@
         </div>
         <div class="tooltip">
         
-          <button class="custom-btn playButtonPosition " @click="saveQuiz(),navigate()" role="link" :disabled="!quizName.length">
+          <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
             <span class="tooltiptext">{{uiLabels.startButtonTooltip}}</span>
           </button>
        
       </div>
 
+      <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
 
-        <router-link v-bind:to="'/'+ lang" custom v-slot="{ navigate }">
-          <button class="custom-btn goBackButtonPosition" @click="navigate" role="link">
-            {{uiLabels.back}}
-          </button>
-        </router-link>
-
-    
+        
       </div>
 
     </div>  
@@ -248,7 +243,7 @@ export default {
     
       }
             socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
-              this.$router.push('/quizleaderStartView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
+            this.$router.push('/quizleaderStartView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
 
         })
 
@@ -632,7 +627,8 @@ export default {
     position: relative;
     display: inline-block;
   }
-
+  
+  
   .tooltip .tooltiptext {
   visibility: hidden;
   width: 10vh;
@@ -667,6 +663,7 @@ export default {
 
 
   .answerBox {
+    
     font: 1vw Inter;
     display: flex;
     margin: 2vh 0vh 0.5vh 0vh;
