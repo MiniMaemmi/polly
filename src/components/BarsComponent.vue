@@ -105,10 +105,7 @@ h3 {
 ;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color: #F30B6A
-
-
-  ;
+  background-color: #F30B6A;
 }
 
 
@@ -120,7 +117,6 @@ h3 {
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 2.5%;
   margin-bottom: 2.5%;
   justify-content: flex-start;
 }

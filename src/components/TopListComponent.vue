@@ -1,12 +1,14 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <h3> Topplista </h3>
+      <h3 v-if="this.lang === 'sv'"> Topplista </h3>
+      <h3 v-if="this.lang === 'en'"> Highscore </h3>
     </div>
     <table>
       <div class="usernameContainer">
         <tr>
-          <th>Username</th>
+          <th v-if="this.lang === 'sv'">Användarnamn</th>
+          <th v-if="this.lang === 'en'">Username</th>
         </tr>
         <div v-for="(topListObject,key) in topListAndUsername.topList" v-bind:key="topListObject"> 
           <div v-if="(key<maxNumberInTopList) || (this.username !== '')">
@@ -18,7 +20,8 @@
       </div>
         <div class="scoreContainer">
         <tr>
-          <th>Score</th>
+          <th v-if="this.lang === 'sv'">Poäng</th>
+          <th v-if="this.lang === 'en'">Score</th>
         </tr>
       <div v-for="(topListObject,key) in topListAndUsername.topList" v-bind:key="topListObject">
         <div v-if="key<maxNumberInTopList || (this.username !== '')">  
@@ -38,7 +41,7 @@ export default {
   props: {
     topListAndUsername: {
       topList: [],
-      username:"",
+      username:""
     }
     /*topList: [],
     username:"",*/
@@ -48,8 +51,13 @@ export default {
       uiLabels: {},
       maxNumberInTopList:7,
       username: this.topListAndUsername.username,
+      lang: ''
+
     }
   },
+  created: function() {
+    this.lang = this.$route.params.lang;
+  }
 }
 </script>
 
@@ -78,7 +86,6 @@ table {
   border-radius: 50px;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 5%;
   margin-bottom: 5%;
   /*padding: 10%;*/
     
