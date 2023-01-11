@@ -506,7 +506,7 @@ background-color: rgba(0,0,0,0.4);
 }
 
 .arrow{
-  width: 3vh;
+  width: 2vh;
   height: 3vh;
 }
 
