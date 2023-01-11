@@ -7,7 +7,7 @@
     <table>
       <div class="usernameContainer">
         <tr>
-          <th v-if="this.lang === 'sv'">Användarnamn</th>
+          <th v-if="this.lang === 'sv'">Namn</th>
           <th v-if="this.lang === 'en'">Username</th>
         </tr>
         <div v-for="(topListObject,key) in topListAndUsername.topList" v-bind:key="topListObject"> 

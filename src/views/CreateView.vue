@@ -52,7 +52,7 @@
         <div>
           <div style="display: flex; margin-left:10%; margin-right:10%">
             <input class="addFile" type="file" @change="onFileChange($event, question)"/>
-            <button class="Xbutton custom-btn-quadratic">&times;</button>
+            <button class="Xbutton custom-btn-quadratic"  @click="removePicture(question)">&times;</button>
           </div>
           <div class="preview">     
             <div v-if="question.url">
@@ -76,7 +76,7 @@
               </div>
         </div>
     </div>
-      <button class="custom-btn add"  @click.prevent="addAnswer(question.id)">
+      <button :disabled="question.answers.length > 3" class="custom-btn add"  @click.prevent="addAnswer(question.id)">
         {{uiLabels.addAnswer}}
       </button>
     </div>

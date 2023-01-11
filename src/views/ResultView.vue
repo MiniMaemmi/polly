@@ -52,7 +52,6 @@ export default {
       topList: [],
       questionResultCounter:[],
       scoreCounter: [],
-      
       bellCurveBucketsResult: {}
     }
   },
@@ -60,6 +59,7 @@ export default {
     this.pollId = this.$route.params.id
     this.username = this.$route.params.username
     this.lang = this.$route.params.lang
+    socket.emit("pageLoaded" ,this.lang)
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })

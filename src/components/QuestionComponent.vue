@@ -15,14 +15,11 @@ class="custom-btn"
   {{answerObject.label}}                  
 </button>
 <div class="CountDown">
-<div style="margin:5vh" v-if="this.countdown >0">{{countdown}}</div>
+<div style="margin:3vh" v-if="this.countdown >0">{{countdown}}</div>
  <div v-if="this.countdown ===0">
   <img class="clockImage" src="../../img/clock.png">
 </div>
-
 </div>
-
-
 </div>
 </template>
 <script>
@@ -91,7 +88,7 @@ export default {
   
  
   .custom-btn{
-    margin:5vh; 
+    /*margin:5vh; */
     font: 1em inter;
     overflow-wrap:break-word;
     
