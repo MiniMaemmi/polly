@@ -1,46 +1,40 @@
 <template>
   <body class="animationGradient">
-<div class="wrapper">
-  <div class="goBackButtonDiv">
-    <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
-  </div>
+    <div class="wrapper">
+      <div class="goBackButtonDiv">
+        <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
+      </div>
 
-  <div class="contentArea lightYellowBox shadowIt">
-    <div class="header">
-      <h1>{{uiLabels.connectTitel}}</h1>
-    </div>
-  
-    <div>
-        <div class="testArea">
-          <div class="labelAndInputArea">
-            <div class="labelAndInput">
-              <label> 
-              {{uiLabels.quizid}}: 
-            </label>
-            </div>
-            <div class="labelAndInput">
-              <input type="text" v-model="id" placeholder="123">
-            </div>
+      <div class="contentArea lightYellowBox shadowIt">
+        <div class="header">
+          <h1>{{uiLabels.connectTitel}}</h1>
+        </div>
+        
+        
+        <div class="labelAndInputArea">
+          <div class="labelAndInput">
+            <label>{{uiLabels.quizid}}:</label>
           </div>
-          <div class="labelAndInputArea">
-            <div class="labelAndInput">
-               <label>
-                {{uiLabels.username}}:
-              </label>
-            </div>
-            <div class="labelAndInput">
-              <input type="text" v-model="username" maxlength="15" placeholder="Anna Andersson">
-            </div>
+
+          <div class="labelAndInput">
+            <input type="text" v-model="id" placeholder="123">
           </div>
         </div>
-        <div>
-          <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser() "> {{uiLabels.displayJoinPoll}}</button>
-            </div>
 
+        <div class="labelAndInputArea">
+          <div class="labelAndInput">
+            <label>{{uiLabels.username}}:</label>
+          </div>
 
+          <div class="labelAndInput">
+            <input type="text" v-model="username" maxlength="15" placeholder="Anna Andersson">
+          </div>
+        </div>
         
-      </div>
-</div>
+        <div>
+          <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser()"> {{uiLabels.displayJoinPoll}}</button>
+        </div>
+    </div>
 </div>
 
 
@@ -56,26 +50,20 @@ export default {
   name: 'ConnectView',
   data: function () {
     return {
-      
       uiLabels: {},
       id: "",
       lang: "",
-      hideNav: true,
       username: ""
     }
   },
-
   
   created: function () {
     this.lang = this.$route.params.lang;
-    
-      socket.emit("pageLoaded", this.lang);
-      socket.on("init", (labels) => {
-        this.uiLabels = labels
-      })
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
     },
-
-
 
   methods: {
     createUser: function() {
@@ -84,7 +72,6 @@ export default {
     }
 
   }
-  
   
 }
 
@@ -106,31 +93,6 @@ h1 { margin: 0 0 10px; }
   font-weight: 400;
   font-size: 2em;
   margin: 3%;
-}
-
-.labelArea {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.labelArea input{
-  width: 100%;
-}
-
-.labelArea div {
-  background-color: coral;
-  width: 100%;
-  height: 50%;
-  margin: 5%;
-}
-
-.testArea {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .labelAndInputArea {
@@ -164,15 +126,6 @@ h1 { margin: 0 0 10px; }
   margin: 10%;
 }
 
-
-
-
-/* 1050 bryts knapparna.
-900 bli större vit ruta. Bör ha vit padding
-726 bryts knapparna igen
-500 ha helt vit ruta
-
-*/
 
 @media screen and (max-width:1100px) {
 
@@ -224,16 +177,15 @@ h1 { margin: 0 0 10px; }
         position: absolute;
         width: 30% !important;
     }
+
     h1 {
         font-size: 3em;
     }
 
     .labelAndInputArea {
-        /*display: inline !important;*/
         display: flex;
         flex-direction: column;
         justify-content: center;
-
     }
 
     .labelAndInput{
@@ -266,17 +218,11 @@ h1 { margin: 0 0 10px; }
         display: inline;
     }
 
-    .testArea {
-        display: inline;
-    }
-
     .labelAndInputArea {
         display: flex;
         flex-direction: column;
         justify-content: center;
-
     }
-
 
     .labelAndInput{
       justify-content: center !important;
@@ -287,10 +233,6 @@ h1 { margin: 0 0 10px; }
       font: 1.5em Inter;
     }
 
-
 }
-
-
-
 
 </style>
