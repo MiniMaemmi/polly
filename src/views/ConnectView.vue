@@ -10,32 +10,30 @@
           <h1>{{uiLabels.connectTitel}}</h1>
         </div>
         
-        <div class="testArea">
-          <div class="labelAndInputArea">
-            <div class="labelAndInput">
-                <label>{{uiLabels.quizid}}:</label>
-            </div>
-
-            <div class="labelAndInput">
-              <input type="text" v-model="id" placeholder="123">
-            </div>
+        
+        <div class="labelAndInputArea">
+          <div class="labelAndInput">
+            <label>{{uiLabels.quizid}}:</label>
           </div>
 
-          <div class="labelAndInputArea">
-            <div class="labelAndInput">
-              <label>{{uiLabels.username}}:</label>
-            </div>
-
-            <div class="labelAndInput">
-              <input type="text" v-model="username" maxlength="15" placeholder="Anna Andersson">
-            </div>
+          <div class="labelAndInput">
+            <input type="text" v-model="id" placeholder="123">
           </div>
         </div>
 
+        <div class="labelAndInputArea">
+          <div class="labelAndInput">
+            <label>{{uiLabels.username}}:</label>
+          </div>
+
+          <div class="labelAndInput">
+            <input type="text" v-model="username" maxlength="15" placeholder="Anna Andersson">
+          </div>
+        </div>
+        
         <div>
           <button class="custom-btn" :disabled="!username.length||!id.length" @click="createUser()"> {{uiLabels.displayJoinPoll}}</button>
         </div>
-  
     </div>
 </div>
 
@@ -95,14 +93,6 @@ h1 { margin: 0 0 10px; }
   font-weight: 400;
   font-size: 2em;
   margin: 3%;
-}
-
-
-.testArea {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .labelAndInputArea {
@@ -228,17 +218,11 @@ h1 { margin: 0 0 10px; }
         display: inline;
     }
 
-    .testArea {
-        display: inline;
-    }
-
     .labelAndInputArea {
         display: flex;
         flex-direction: column;
         justify-content: center;
-
     }
-
 
     .labelAndInput{
       justify-content: center !important;
