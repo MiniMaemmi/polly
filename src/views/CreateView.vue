@@ -29,7 +29,6 @@
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -63,8 +62,6 @@
         </div>
         <div class="answerArea">
           <div v-for="answer in question.answers" v-bind:key="'answer'+answer" v-on:keyup.enter="focusNext($event)">
-            
-
               <div class="answerBox lightYellowBox tooltip" id="inputAnswerbox">
                 <button class="custom-btn-quadratic tooltipclass" 
                 :class="{'answerCorrect': answer.correct}"
@@ -77,14 +74,11 @@
                   &times;
                 </button>
               </div>
-          
         </div>
     </div>
-
       <button class="custom-btn add"  @click.prevent="addAnswer(question.id)">
         {{uiLabels.addAnswer}}
       </button>
-
     </div>
     
         <div>

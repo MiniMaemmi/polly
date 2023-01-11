@@ -6,7 +6,6 @@
         <h1> Resultat 🎉 </h1>
       </div>
     </div>
-
     <div class="container"> 
       <div class="topListContainer">
         <TopListComponent v-bind:topListAndUsername="{topList, username}"/>
@@ -15,23 +14,13 @@
         <div class="bellCurveContainer">
           <bellCurveComponent v-bind:data="{pollLength: pollLength, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter }"/>
         </div>-->
-        
-        
-        
         <div class="barChartContainer">
           <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
         </div>
       <!--</div>-->
     </div>
-
   </div>
-
-
-  
-
-
 </body>
-
 </template>
 
 <script>
@@ -63,9 +52,6 @@ export default {
       scoreCounter: [],
       //pollLength: 0,
       bellCurveBucketsResult: {}
-
-
-
     }
   },
   created: function () {
@@ -79,7 +65,6 @@ export default {
       this.poll = poll
     );
 
-
     socket.on("dataUpdate", (update) => {
       this.submittedAnswers = update.a;
       this.question = update.questionsArrayObject;
@@ -91,89 +76,44 @@ export default {
 
     socket.emit("getPollParticipants", this.pollId) 
       socket.on("getPollParticipants", update => {
-        
         this.pollParticipants = update;
-
-        console.log("this.pollParticipants",this.pollParticipants)
-        console.log("this.questionResultCounter",this.questionResultCounter)
-
         socket.emit("checkQuestions", this.pollId, this.pollParticipants, this.questionResultCounter)
           socket.on('checkQuestions', update =>{
-          
           this.questionResultCounter=update;
-          console.log("Checkqustions i Resultview, questionResultCounter", this.questionResultCounter)
-        
         });
 
-
-
-
-        
         socket.emit("assignScoreForUser", this.pollId, this.pollParticipants)
         socket.on('assignScoreForUser', update =>{
           this.pollParticipants= update;
           socket.emit("getSortedTopList", this.pollParticipants, this.topList)
           socket.on('getSortedTopList', update =>{
-          
           this.topList=update;
-          console.log("toplist: ", this.topList)
-          
           socket.emit("createScoreCounter", this.topList)
-
           //this.pollLength = this.poll.questions.length()
           this.calculateBellCurveBuckets()
-          console.log("bellCurveBucketsResult efter metod körd: ", this.bellCurveBucketsResult)
-
-
           });
-          
-          
-          
-
-
-
-
-
         });
-      
     });
-
-
-      
-
-
-
   },
 
   methods: {
     calculateBellCurveBuckets: function() {
-      console.log("------i ResultView calculateBellCurveBuckets()-----")
       var reversedTopList = this.topList.sort((a, b) => (a.totalScore > b.totalScore) ? 1 : -1)
-      console.log("reversedTopList:",reversedTopList)
       reversedTopList.forEach(user => {
         var newString = user.totalScore + "p"
           if (!this.bellCurveBucketsResult[newString]) {
-            console.log("Property didn't exist, adding property: ", newString)
             this.bellCurveBucketsResult[newString]= 0
           }
           this.bellCurveBucketsResult[newString] = this.bellCurveBucketsResult[newString] + 1
       })
     },
   }
-
 }
 </script>
 
 <style scoped>
 
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap');
-
-  /*body{
-    background: rgb(254,81,154);
-    background: linear-gradient(288deg, rgba(254,81,154,1) 0%, rgba(253,187,45,1) 100%);
-    font-family: 1em Inter 400 black;
-
-  }*/
 
   h1 {
     font: 3em Inter;
@@ -191,7 +131,6 @@ export default {
   display: flex;
   
 }
-
 
 
 .topListContainer {
@@ -220,7 +159,6 @@ export default {
   /*width: 100%;
   height: 100%;
   margin-top: 5%;*/
-
 }
 
 .resultBox{
@@ -230,10 +168,6 @@ export default {
   width: 40%;
   height: 70%; 
   min-width: 50%; 
-
-
-
-
 }
 
 .resultHeader {

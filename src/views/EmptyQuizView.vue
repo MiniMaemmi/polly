@@ -3,61 +3,37 @@
         <div class="goBackButtonDiv">
             <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
         </div>
-      <div class="wrapper">
-        
-        <div class="contentArea lightYellowBox shadowIt">
-            <h1> {{uiLabels.quizEmpty}} </h1>
-        </div>
-      </div> 
+        <div class="wrapper">
+            <div class="contentArea lightYellowBox shadowIt">
+                <h1> {{uiLabels.quizEmpty}} </h1>
+            </div>
+        </div> 
     </body>
   </template>
-  
   <script>
-  //import ResponsiveNav from '@/components/ResponsiveNav.vue';
   import io from 'socket.io-client';
   const socket = io();
   
   export default {
-    name: 'quizleaderStartView',
-    components: {
-      //ResponsiveNav
-    },
+    name: 'EmptyQuizView',
     data: function () {
       return {
-        
         uiLabels: {},
         id: "",
         lang: "",
-        
       }
     },
     created: function () {
       this.lang = this.$route.params.lang;
-      this.pollId=this.$route.params.pollId
-      this.quizName=this.$route.params.quizName
   
       socket.emit("pageLoaded", this.lang);
       socket.on("init", (labels) => {
         this.uiLabels = labels
       });
-  
-      this.pollId = this.$route.params.pollId;
-      this.quizName = this.$route.params.quizName;
-  
-      console.log("i quizleaderStartView")
+
     },
-    methods: {
-      sendStart: function(){
-        //console.log("sendstart klrd i quizzleaderstartview")
-        //console.log(this.pollId )
-        socket.emit("sendStart",this.pollId,this.quizName )
-      },
-  
-  
-    }
   }
   </script>
-  
   
   <style scoped>
     @import '@/assets/css/style.css';
@@ -122,8 +98,6 @@
     h1{
       font-size: 2em;
     }
-  
-  
       .contentArea{
       margin-top: 5%;
       margin-bottom: 5%;
@@ -134,7 +108,6 @@
     h1{
       font-size: 2em;
     }
-  
   }
   
   @media screen and (max-width:415px) {
@@ -155,9 +128,6 @@
         margin-right: 5%
     }
   }
-  
-  
-  
   
   </style>
   

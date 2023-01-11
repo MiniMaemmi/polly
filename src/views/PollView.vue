@@ -3,21 +3,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
     <body class="animationGradient" style="animation:  animate 25s ease infinite; margin-top:0vh;">
-        
-  
       <div class="wrapper" style="margin-top:0vh;">
-        
         <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+ this.lang)">{{uiLabels.backToStart}}</button>
-          
-
         <div class="UsernameDisplay" v-if="username!=='undefined'" > {{username}}</div>
         <div class= "PollIdDisplay">PollID: {{pollId}}</div>
-       
         <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
           <div style="align-self: center; font-size:5vh; margin-top: 10%">  
              {{question.q}}
           </div>
-       
           <QuestionComponent ref="questionComponent" v-bind:question="questionObject"  v-on:answer="logUserAnswer($event)"/>
 
         <div v-if="username ==='undefined'" >
@@ -104,11 +97,7 @@ export default {
     socket.on("init", (labels) => {
         this.uiLabels = labels
       })
-    //console.log("------ in PollView created function ------ ")
-    //console.log("username in pollview created func: ", this.username)
     this.userObject.username = this.username
-
-    //socket.emit('joinPoll', this.pollId)
     socket.emit('getPoll', this.pollId)
 
     socket.on('sendQuestion', poll => 
@@ -121,52 +110,30 @@ export default {
     )
 
 socket.emit("joinPoll", (this.pollId)); 
-
     socket.on("newQuestion", q =>
       this.question = q
     )
-
-  
-
-    socket.on("dataUpdate", data  => {
-      console.log("pollview dataupdate")
-      //Vi har märkt att denna ej funkar men den behövs också inte
-      this.submittedAnswers = data.answers
-
-    })
-
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-    
-    //egenskrivet
-    socket.on("createdUser", username => 
-    {
+    socket.on("createdUser", username => {
       this.username = username
       this.userObject.username = username
-      //console.log("------- i PollView createdUser() --------")
-      //console.log("this.userObject ", this.userObject)
-    }
-      
-    )
+    })
+
     socket.on("nextQuestion",() => {
-      console.log("-----i PollView nextQuestion()----")
       this.$refs.questionComponent.resetCountdown()
       //här ska de vara en if så inte ledaren får hoopa två steg i arrayen.
       if (this.username != "undefined"){
         this.getQuestionFromArray()
       }
-      
     })
 
     socket.on("recieveShowResult",(data)  => {
-      console.log("--- i PollView recieveShowResult() -----")
       if (this.userObject.username !== 'undefined') {
         this.submitAnswer()
-
       }
       this.quizName=data
-      console.log(this.quizName)
       
       this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
      
@@ -175,106 +142,42 @@ socket.emit("joinPoll", (this.pollId));
 
   },
 
-//man behöver klicka en extra gång på next innan 
-// visa resultat visas, vet inte exakt hur vi fixar det.
-// Bör man även försöka koppla ihop tiderna här och i quizleaderPollView
-// Nu är det begge bara statiska.
   methods: {
-    //nedräkningsfunktion
-    /*updateCountdown(){
-        
-        this.countdown--;
-        if (this.countdown > 0) {
-            setTimeout(this.updateCountdown,1000);
-            
-        } else {
-            this.showButton = true;
-            // visa rätt svar
-            
-        }
-    },*/
-    
-    //denna bör nog egentligen vara på resultView, så att vi där tar in alla pollParticipants och räknar fram resultatet på created-delen av ResultView
-  
-
     getQuestionFromArray: function() {
       let questionObject = this.poll.questions[this.pollQuestionIterator]
-      //this.showNextQuestionButton = false;
-      console.log("-----i getQuestionFromArray()----")
-
       if (typeof questionObject !== 'undefined') {
-       
         this.countdown = 10;
         this.questionObject = questionObject
         this.question.q = questionObject.label
         this.question.a = []
-        //this.showNextQuestionButton = true
 
         questionObject.answers.forEach(answer => {
             this.question.a.push(answer.label);
         })
-        //console.log("questionObject",questionObject)
         this.pollQuestionIterator += 1
-        //this.updateCountdown();
-
-        console.log("this.poll.questions.length:", this.poll.questions.length)
-        console.log("this.pollQuestionIterator-1:", this.pollQuestionIterator-1)
-
       }
-      
       if (this.poll.questions.length === this.pollQuestionIterator) {
-        console.log("är i 2nd if-sats")
         this.showNextQuestionButton = false
         this.showResultButton = true
       }
-      /*else if (typeof questionObject === 'undefined'){
-        //Delete "Next fråga button"
-        this.lastQuestionReached = true
-        this.showResultButton = true
-      }*/
     },
     sendNextQuestion: function(){
-      console.log("sendNextQuestion")
       socket.emit("nextQuestion", (this.pollId))
     },
-    
-
-   
-
-
-
     submitAnswer: function () {
-      console.log("------i PollView submitAnswer------")
-      //socket.emit("submitAnswer", {pollId: this.pollId, questionId: this.userObject.answers.questionID )
-
-      //let lastAnswerGiven = this.userObject.answers[this.userObject.answers.length - 1]  
-      //console.log("lastElementOfArray: ", lastAnswerGiven)
-      //min tanke är att skicka hela userobjektet, så att vi sparar det i data och sedan kan loopa igenom det
-      //en idé är att också skicka vid varje svar, så att quizleaderview vet att 18/20 har svarat på den frågan. Detta kan göras från QuestionComponent
-      console.log("answer submitted:", {pollId: this.pollId, userObject: this.userObject})
       socket.emit("submitAnswer", {pollId: this.pollId, userObject: this.userObject} )
     },
 
-    //egenskriven
     logUserAnswer: function (answer) {
-      console.log("----i PollView logUserAnswer---- ")
-      console.log("answer: ", answer)
       let questionAnswered  = false
       questionAnswered = this.checkIfQuestionIsAnswered(this.questionObject.id)
-      
       if (questionAnswered===false) {
         this.userObject.answers.push({ questionID: this.questionObject.id, answerId: answer.id, score: answer.score, correct: answer.correct})
-        console.log("Answer added")
-
       }
       else if (questionAnswered===true){
-        console.log("Question & answer has already been added, replacing")
-        //här borde man ha så att man kollar om det är samma svar som redan blivit tillagt. Hade varit
-        //mer effektivt än att bara replace:a oavsett
         let indexToReplace = this.replacePreviousAnswerOnQuestion(this.questionObject.id)
         this.userObject.answers[indexToReplace] = {questionID: this.questionObject.id, answerId: answer.id, score: answer.score, correct: answer.correct}
       }
-      
       else {
         console.log("Error in adding answer")
       }
@@ -299,28 +202,10 @@ socket.emit("joinPoll", (this.pollId));
       }
     },
 
-
-   
-
     sendShowResult: function() {
-      console.log("sendShowResult körs")
       socket.emit("sendShowResult",this.pollId,this.quizName)
       this.$router.push('/result/'+this.pollId+'/'+this.lang+'/'+this.username)
     },
-
-
-
-
-    /*updateData: function () {
-      console.log("----- i pollView updateData() ------")
-      console.log("username: ", this. username)
-      console.log("pollID: ", this.pollId)
-
-      socket.emit('dataUpdate', {pollId: this.pollId, username: this.username} )
-
-
-    }*/
-
   }
 }
 </script>
