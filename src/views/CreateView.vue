@@ -365,7 +365,7 @@ export default {
           this.questions.forEach(question => {
               if (question.id === questionId) { 
                 question.answers.push(
-                  { id: this.createId(), label: '', correct: false, score:0}
+                  { id: this.createId(), label: '', correct: false, score:0},
                   { id: this.createId(), label: '', correct: false, score:0}
                 )
 
