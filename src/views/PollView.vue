@@ -14,17 +14,13 @@
         <div class="UsernameDisplay" v-if="username!=='undefined'" > {{username}}</div>
         <div class= "PollIdDisplay">PollID: {{pollId}}</div>
        
-        <div class="contentArea lightYellowBox shadowIt" style="position:relative; height:100%">
+        <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
           <div style="align-self: center; font-size:5vh; margin-top: 10%">  
              {{question.q}}
           </div>
        
           <QuestionComponent ref="questionComponent" v-bind:question="questionObject"  v-on:answer="logUserAnswer($event)"/>
-          
-          
-  
-          
-          
+
         <div v-if="username ==='undefined'" >
           <button style="height:10%" class="nextQuestionButton custom-btn-quadratic" v-if="showNextQuestionButton" 
           @click="getQuestionFromArray(), sendNextQuestion()"> 
