@@ -48,9 +48,7 @@
               <img class="arrow" src="../../img/down.png">
             </button>
           </div>
-
             <input class="questionInput" maxlength="70" v-bind:placeholder="uiLabels.question" v-model="question.label" v-bind:key="'question-label'+question">
-
           <button class="custom-btn-quadratic removeQuestionButton" @click="removeQuestion(question.id)">
             {{uiLabels.removeQuestion}}
           </button >
@@ -106,6 +104,8 @@
       
        
       </div>
+    
+
 
       <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/'+this.lang)">{{uiLabels.back}}</button>
 
@@ -318,6 +318,7 @@
           question.answers.forEach(answer => {
             if (answer.label === ''){
               this.removeAnswer(question.id, answer.id)
+              this.removeBlankAnswer()
             }
 
           })
@@ -326,21 +327,36 @@
 
     },
 
+
+    removeBlankQuestion: function() {
+      this.questions.forEach(question => {
+        if (question.label === ""){
+              this.removeQuestion(question.id)
+              this.removeBlankQuestion()
+            
+            }
+        
+      })
+      
+
+    },
+
     
     createPoll: function () {
       this.removeBlankAnswer()
-       
-       //temporät bugg finns ifall du inte har någon fråga
-             this.questions.forEach(question => {
-                 if (question.label === ""){
-                   const index=this.questions.indexOf(question)
-                   this.questions.splice(index,1)
-           }
-                 socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
+      this.removeBlankQuestion()
+            
+      if (this.questions.length===0){
+        this.$router.push('/EmptyQuizView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
+      }
+      else{
+        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
                  this.$router.push('/quizleaderStartView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
-             })
-               
-               
+            
+
+      }
+
+          
            },
   }
 }

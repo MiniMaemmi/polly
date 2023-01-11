@@ -3,6 +3,7 @@
 	"connectQuiz": "Connect to a quiz",
 	"changeLanguage": "Byt till svenska",
 	"subtitle": "The quiz that makes you answer on time ",
+	"quizEmpty": "The quiz you created is empty in questions & answers. Go back & re-do.",
 	
 
 	"ConnectView":"",

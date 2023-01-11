@@ -3,6 +3,7 @@
 	"connectQuiz": "Anslut till ett quiz",
 	"changeLanguage": "Change to English",
 	"subtitle": "Quizzet som gör att du svarar i tid",
+	"quizEmpty": "Quizzet du har gjort är tomt på frågor & svar. Gå tillbaka och gör om.",
 	
 	"ConnectView":"",
 	"connectTitel": "Anslut till Quiz!",
