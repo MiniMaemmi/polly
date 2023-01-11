@@ -1,11 +1,10 @@
-{	"StartView":"",
+{	
 	"createQuiz": "Skapa quiz",
 	"connectQuiz": "Anslut till ett quiz",
 	"changeLanguage": "Change to English",
 	"subtitle": "Quizzet som gör att du svarar i tid",
 	"quizEmpty": "Quizzet du har gjort är tomt på frågor & svar. Gå tillbaka och gör om.",
 	
-	"ConnectView":"",
 	"connectTitel": "Anslut till Quiz!",
 	"quizid":"Quiz id",
 	"username":"Användarnamn",
@@ -14,7 +13,6 @@
 	"waitingRoom":"Väntrum!",
 	"theQuiz":"Quizet börjar strax",
 
-	"CreateView":"",
 	"quizName":"Namn på Quiz",
 	"question":"Fråga",
 	"answer":"Svar",
@@ -28,7 +26,7 @@
 	"modalText":"Lite alternativ",
 	"startButtonTooltip":"ge quiz:et ett namn!!!!!",
 
-	"quizleaderStartView": "",
+	"inviteToQuiz":"Bjud in andra till Quiz:",
 	"joinQuiz":"Med Quiz id nedan:",
 	"playQuiz": "Nu kör vi!",
 	"backToStart":"Gå tillbaka till start",

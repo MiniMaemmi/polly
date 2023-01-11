@@ -11,50 +11,43 @@ const routes = [
   {
     path: '/poll/:id/:lang/:quizName/:username',
     name: 'PollView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
+    component: () => import('../views/PollView.vue')
   },
 
   {
     path: '/create/:lang',
     name: 'CreateView',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/CreateView.vue')
+    component: () => import('../views/CreateView.vue')
   },
 
   {
     path: '/result/:id/:lang/:username',
     name: 'ResultView',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ResultView.vue')
+    component: () => import('../views/ResultView.vue')
   },
 
   {
     path: '/connect/:lang',
     name: 'ConnectView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/ConnectView.vue')
-    // ska leda till pollView så smånignom. Är mellansteget
+    component: () => import('../views/ConnectView.vue')
   },
   
   {
     path: '/waiting/:pollId/:lang/:username',
     name: 'WaitingView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/WaitingView.vue')
+    component: () => import('../views/WaitingView.vue')
   },
 
   {
     path: '/quizleaderStartView/:lang/:pollId/:quizName',
     name: 'quizleaderStartView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/quizleaderStartView.vue')
+    component: () => import('../views/QuizleaderStartView.vue')
   },
 
   {
     path: '/EmptyQuizView/:lang/:pollId/:quizName',
     name: 'EmptyQuizView',
-    component: () => import(/* webpackChunkName: "about" */ '../views/EmptyQuizView.vue')
+    component: () => import('../views/EmptyQuizView.vue')
   },
 
 ]
