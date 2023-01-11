@@ -46,7 +46,7 @@ export default {
   data: function () {
     return {
       uiLabels: {},
-      maxNumberInTopList:3,
+      maxNumberInTopList:7,
       username: this.topListAndUsername.username,
     }
   },
@@ -75,7 +75,7 @@ table {
   width: 90%;
   background-color: rgb(255,255,240);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 5%;
+  border-radius: 50px;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 5%;

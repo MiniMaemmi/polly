@@ -154,7 +154,7 @@ input[type=text] {
   position:fixed; 
   bottom:0; right:0; 
   margin:0.5vw !important; 
-  width: 5vw !important;
+  width: 10vw !important;
 }
 
 .goBackButtonDiv {
@@ -162,9 +162,6 @@ input[type=text] {
   height: 11vh;
   display: inline;
 }
-
-
-
 
 @keyframes animate{
     0% {
