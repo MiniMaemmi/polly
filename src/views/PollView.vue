@@ -13,7 +13,7 @@
         <div class="UsernameDisplay" v-if="username!=='undefined'" > {{username}}</div>
         <div class= "PollIdDisplay">PollID: {{pollId}}</div>
        
-        <div class="contentArea lightYellowBox shadowIt" style="position:relative;">
+        <div class="contentArea lightYellowBox shadowIt" style="position:relative; overflow-wrap:break-word;">
           <div style="align-self: center; font-size:5vh; margin-top: 10%">  
              {{question.q}}
           </div>
@@ -367,6 +367,15 @@ body {
   font-size:2vh;
   height:10%
 }
+@media screen and (max-width: 400px){
+  .goBackButtonPosition{
+  font-size:1vh;
+  height:10%
+}
+  
+  
+
+  }
 
 
 p1{
