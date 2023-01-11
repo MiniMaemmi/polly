@@ -69,7 +69,7 @@
                 <span class="tooltiptext">{{uiLabels.tooltip}}</span>
                 <img class="checkmark" src="../../img/checkmark.png">
                 </button>
-                <input v-bind:placeholder="uiLabels.answer" maxlength="20"  type="text" v-model="answer.label" :key="answer">
+                <input v-bind:placeholder="uiLabels.answer" maxlength="40"  type="text" v-model="answer.label" :key="answer">
                 <button class="Xbutton custom-btn-quadratic" @click.prevent="removeAnswer(question.id, answer.id)">
                   &times;
                 </button>
