@@ -12,9 +12,7 @@
             <button class="custom-btn-quadratic OptionsButton" @click="PopUpfunction()">
               <img class="questionSettings" src="../../img/settings2.png"/>
             </button>
-            
             <div id="myPop" class="pop">
-             
               <div class="pop-content custom-btn-quadratic">
                 <h1>{{uiLabels.modalText}}</h1>
                 
@@ -102,7 +100,7 @@
         </div>
         <div class="tooltip">
         
-          <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
+          <button class="custom-btn playButtonPosition " @click="createPoll()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
           </button>
       
@@ -257,7 +255,6 @@
         question.url=null;
       },
 
-
       removeAnswer: function(questionId, answerId){
         this.loopFunction(this.questions, questionId)
         var questionObject = this.loopObject
@@ -317,13 +314,34 @@
     }, 
 
     removeBlankAnswer: function() {
+      this.questions.forEach(question => {
+          question.answers.forEach(answer => {
+            if (answer.label === ''){
+              this.removeAnswer(question.id, answer.id)
+            }
+
+          })
+      })
+      
+
     },
 
-    saveQuiz(){
+    
+    createPoll: function () {
       this.removeBlankAnswer()
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
-
-    },        
+       
+       //temporät bugg finns ifall du inte har någon fråga
+             this.questions.forEach(question => {
+                 if (question.label === ""){
+                   const index=this.questions.indexOf(question)
+                   this.questions.splice(index,1)
+           }
+                 socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, questionsObjectArray: this.questions})
+                 this.$router.push('/quizleaderStartView/'+this.lang+'/'+this.pollId+'/'+this.quizName)
+             })
+               
+               
+           },
   }
 }
 </script>
