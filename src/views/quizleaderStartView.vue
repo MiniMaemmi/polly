@@ -1,10 +1,7 @@
 <template>
   <body class="animationGradient">
     <div class="wrapper">
-      <div class="goBackButtonDiv">
-        <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
-      </div>
-      <div class="contentArea lightYellowBox shadowIt">
+      <div class="headerTextWhiteBox">
         <h1>
           {{uiLabels.displayJoinPoll}}:
           <br/>
@@ -22,9 +19,11 @@
         </h1>
         
         <div class="goBackButtonDiv">
-
           <button class="custom-btn playButtonPosition" @click="sendStart()">{{ uiLabels.playQuiz }}</button>
+        </div>
 
+        <div class="goBackButtonDiv">
+          <button class="custom-btn goBackButtonPosition" @click="this.$router.push('/' + this.lang)">{{uiLabels.back}}</button>
         </div>
       </div>
     </div> 
@@ -35,15 +34,13 @@
 </template>
 
 <script>
-//import ResponsiveNav from '@/components/ResponsiveNav.vue';
+
 import io from 'socket.io-client';
 const socket = io();
 
 export default {
   name: 'quizleaderStartView',
-  components: {
-    //ResponsiveNav
-  },
+
   data: function () {
     return {
       
@@ -72,9 +69,7 @@ export default {
     sendStart: function(){
       socket.emit("sendStart",this.pollId,this.quizName)
       this.$router.push('/poll/'+this.pollId+'/'+ this.lang + '/' + this.quizName + '/' + this.username)
-    },
-
-
+    }
   }
 }
 </script>
@@ -82,7 +77,10 @@ export default {
 
 <style scoped>
   @import '@/assets/css/style.css';
-  
+  .wrapper{
+    height: 100vh;
+  }
+
   h1 { 
     margin: 0 0 10px;
   }
@@ -92,60 +90,49 @@ export default {
   }
 
 
-@media screen and (max-width:985px) {
-  h1{
-    font-size:4em;
-  }
-  .contentArea{
-    margin-top: 4%;
-  }
-
-  .custom-btn{
-      display: inline;
-      flex: none;
-      position: absolute;
-      width:20% !important
+  @media screen and (max-width:1100px) {
+    h1{
+      font-size:4em;
     }
-}
 
 
-@media screen and (max-width:790px) {
-
-  h1{
-    font-size:3em;
+    .custom-btn{
+        display: inline;
+        flex: none;
+        position: absolute;
+        width:10% !important;
+        font-size: 1em;
+      }
   }
-  .custom-btn{
-      display: inline;
-      flex: none;
-      position: absolute;
-      width:30% !important
+
+  @media screen and (max-width:830px) {
+    h1{
+      font-size:3em;
     }
-    .contentArea{
-    margin-top: 10%;
-    
-  }
-}
-
-
-
-@media screen and (max-width:430px) {
-  h1{
-    font-size: 2.5em;
   }
 
-}
+  @media screen and (max-width:630px) {
+    h1{
+      font-size: 3em;
+    }
 
-@media screen and (max-width:290px) and (min-width: 200px) {
-  h1{
-    font-size: 1.8em;
+    .headerTextWhiteBox{
+        flex-direction: column;
+      }
+
+    .custom-btn{
+        width:20% !important;
+      }
   }
-  .custom-btn{
-    display: inline;
-      flex: none;
-      position: absolute;
-      width:60% !important
+
+  @media screen and (max-width:500px) and (min-width: 200px) {
+    h1{
+      font-size: 2.5em;
+    }
+    .custom-btn{
+      width:80% !important;
+    }
   }
-}
 
 
 
