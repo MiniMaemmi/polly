@@ -109,7 +109,7 @@
           <button class="custom-btn playButtonPosition " @click="saveQuiz()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}
           </button>
-        </router-link>
+      
        
       </div>
 
