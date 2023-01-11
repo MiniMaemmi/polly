@@ -12,9 +12,9 @@
         <TopListComponent v-bind:topListAndUsername="{topList, username}"/>
       </div>
       <div class="graphContainer">
-        <!-- <div class="bellCurveContainer">
-          <bellCurveComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
-        </div>-->
+        <div class="bellCurveContainer">
+          <bellCurveComponent v-bind:data="{pollLength: pollLength, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter }"/>
+        </div>
         <div class="barChartContainer">
           <BarsComponent v-bind:data="{poll: poll, pollParticipants:pollParticipants,questionResultCounter: questionResultCounter, }"/>
         </div>
@@ -35,7 +35,7 @@
 // @ is an alias to /src
 import BarsComponent from '@/components/BarsComponent.vue';
 import TopListComponent from '@/components/TopListComponent.vue';
-//import bellCurveComponent from '@/components/bellCurveComponent.vue';
+import bellCurveComponent from '@/components/bellCurveComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
 
@@ -44,7 +44,7 @@ export default {
   components: {
     BarsComponent,
     TopListComponent,
-    //bellCurveComponent
+    bellCurveComponent
   },
   data: function () {
     return {
@@ -58,6 +58,8 @@ export default {
       topList: [],
       questionResultCounter:[],
       scoreCounter: [],
+      //pollLength: 0,
+      bellCurveBucketsResult: {}
 
 
 
@@ -114,7 +116,14 @@ export default {
           console.log("toplist: ", this.topList)
           
           socket.emit("createScoreCounter", this.topList)
+
+          //this.pollLength = this.poll.questions.length()
+          this.calculateBellCurveBuckets()
+          console.log("bellCurveBucketsResult efter metod körd: ", this.bellCurveBucketsResult)
+
+
           });
+          
           
           
 
@@ -132,6 +141,22 @@ export default {
 
 
   },
+
+  methods: {
+    calculateBellCurveBuckets: function() {
+      console.log("------i ResultView calculateBellCurveBuckets()-----")
+      var reversedTopList = this.topList.sort((a, b) => (a.totalScore > b.totalScore) ? 1 : -1)
+      console.log("reversedTopList:",reversedTopList)
+      reversedTopList.forEach(user => {
+        var newString = user.totalScore + "p"
+          if (!this.bellCurveBucketsResult[newString]) {
+            console.log("Property didn't exist, adding property: ", newString)
+            this.bellCurveBucketsResult[newString]= 0
+          }
+          this.bellCurveBucketsResult[newString] = this.bellCurveBucketsResult[newString] + 1
+      })
+    },
+  }
 
 }
 </script>
@@ -186,12 +211,12 @@ export default {
 
 
 .barChartContainer {
-  /*width: 100%;
-  height: 50%;
-  margin-top: 5%;*/
   width: 100%;
-  height: 100%;
+  height: 50%;
   margin-top: 5%;
+  /*width: 100%;
+  height: 100%;
+  margin-top: 5%;*/
 
 }
 
