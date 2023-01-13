@@ -32,7 +32,6 @@
         </div>
       </div>
     </div>
-
     <div class="addNewQuestionArea">
       <div class="questionAnswer lightYellowBox shadowIt" style="margin-bottom:1vh; margin-top:1vh;" v-for="question in questions" v-bind:key="'question'+question" >
         <div class="questionOperations">
@@ -85,8 +84,7 @@
             <button class="custom-btn add"  @click="addQuestion">
                 {{ uiLabels.addQuestion }}
             </button>
-        </div>
-        
+        </div> 
         <div class="tooltip">
           <button class="custom-btn playButtonPosition " @click="createPoll()" :disabled="!quizName.length">
             {{uiLabels.startQuiz}}

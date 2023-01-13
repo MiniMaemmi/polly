@@ -95,7 +95,7 @@ export default {
           this.topList=update;
           socket.emit("createScoreCounter", this.topList)
           //this.pollLength = this.poll.questions.length()
-          this.calculateBellCurveBuckets()
+          //this.calculateBellCurveBuckets()
           });
         });
     });
